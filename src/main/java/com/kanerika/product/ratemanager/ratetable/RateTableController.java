@@ -18,8 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.kanerika.product.ratemanager.exception.ResourceNotFoundException;
 
-import jdk.nashorn.internal.runtime.FindProperty;
-
 @RestController
 @RequestMapping("/ratetable")
 public class RateTableController {
@@ -33,13 +31,13 @@ public class RateTableController {
 	@ResponseBody
 	public RateTable createRateTables(@RequestBody RateTable rateTable) {
 
-		LOGGER.info("ratetable invoked");
+		LOGGER.info("post rate table  invoked");
 		return rateTableService.create(rateTable);
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<RateTable> getRateTable(@PathVariable Long id) {
-		LOGGER.info("getRateRows invoked");
+		LOGGER.info("geRateTable invoked");
 		HttpStatus returnStatus = HttpStatus.OK;
 		try {
 			RateTable getAmendmentsDetail = rateTableService.getById(id);
@@ -62,16 +60,16 @@ public class RateTableController {
 	@RequestMapping(method = { RequestMethod.PUT, RequestMethod.PATCH })
 	public RateTable updateRateTable(@RequestBody RateTable rateRows) {
 
-		LOGGER.info("updateRateRows invoked");
+		LOGGER.info("update rate table invoked");
 		return rateTableService.update(rateRows);
 	}
 
-	/*
-	 * @DeleteMapping(value = "/{id}") public RateTable
-	 * deleteRateTable(@PathVariable Long id) {
-	 * 
-	 * LOGGER.info("deleteRateTable invoked"); return
-	 * rateTableService.delete(getRateTable(id)); }
-	 */
+	@DeleteMapping(value = "/{id}")
+	public RateTable deleteRateTable(@PathVariable Long id) {
+
+		LOGGER.info("deleteRateTable invoked");
+		return rateTableService.delete(rateTableService.getById(id));
+		
+	}
 
 }
