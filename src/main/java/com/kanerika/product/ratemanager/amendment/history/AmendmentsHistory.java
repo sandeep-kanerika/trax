@@ -41,19 +41,11 @@ public class AmendmentsHistory {
     private String ratesetName;
     private String region;
     private String mode;
-    private Long reviewedBy;
-    private Long createdBy;
-    private Long lastUpdatedBy;
-    private Long lastAssignedBy;
-    private String approvers;
-    private Long currentApprover;
-
 
     @JsonFormat(pattern = AppConstants.DEFAULT_DATE_FORMAT)
     private Date defaultEffectiveDateFrom;
     @JsonFormat(pattern = AppConstants.DEFAULT_DATE_FORMAT)
     private Date defaultEffectiveDateThru;
-
 
     @JsonFormat(pattern = AppConstants.DEFAULT_DATETIME_FORMAT)
     private Timestamp dateApproved;
@@ -69,7 +61,14 @@ public class AmendmentsHistory {
 
     @JsonFormat(pattern = AppConstants.DEFAULT_DATETIME_FORMAT)
     private Timestamp dateAssigned;
-
+    
+    private Long reviewedBy;
+    private Long createdBy;
+    private Long lastUpdatedBy;
+    private Long lastAssignedBy;
+    private String approvers;
+    private Long currentApprover;
+    
     public AmendmentsHistory() {
     }
 

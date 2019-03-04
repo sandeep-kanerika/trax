@@ -1,6 +1,6 @@
 package com.kanerika.product.ratemanager.raterow.history;
 
-import java.sql.Date;
+import java.util.Date;
 import java.sql.Timestamp;
 
 import javax.persistence.Entity;
@@ -14,7 +14,7 @@ import com.kanerika.product.ratemanager.config.AppConstants;
 
 @Entity
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class RateRowHistory {
+public class RateRowsHistory {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,13 +46,13 @@ public class RateRowHistory {
 	
 	private Integer status;
 	
-    @JsonFormat(pattern = AppConstants.DEFAULT_DATE_FORMAT)
+    @JsonFormat(pattern = AppConstants.DEFAULT_DATETIME_FORMAT)
     private Timestamp dateRecorded;
 
-    @JsonFormat(pattern = AppConstants.DEFAULT_DATE_FORMAT)
+    @JsonFormat(pattern = AppConstants.DEFAULT_DATETIME_FORMAT)
     private Timestamp dateCreated;
     
-    @JsonFormat(pattern = AppConstants.DEFAULT_DATE_FORMAT)
+    @JsonFormat(pattern = AppConstants.DEFAULT_DATETIME_FORMAT)
     private Timestamp dateUpdated;
 
 	private String keyValueHash;
@@ -61,13 +61,13 @@ public class RateRowHistory {
 	
 	private Boolean hasError;
 
-    @JsonFormat(pattern = AppConstants.DEFAULT_DATETIME_FORMAT)
+    @JsonFormat(pattern = AppConstants.DEFAULT_DATE_FORMAT)
     private Date effectiveDateFrom;
 
-    @JsonFormat(pattern = AppConstants.DEFAULT_DATETIME_FORMAT)
+    @JsonFormat(pattern = AppConstants.DEFAULT_DATE_FORMAT)
     private Date effectiveDateThru;
     
-    @JsonFormat(pattern = AppConstants.DEFAULT_DATETIME_FORMAT)
+    @JsonFormat(pattern = AppConstants.DEFAULT_DATE_FORMAT)
     private Date effectiveDate;
     
     private String originCountry;
@@ -183,8 +183,12 @@ public class RateRowHistory {
     private Integer transitTime;
     
     private String routeFrequency;
+    
+    public RateRowsHistory() {
+    	
+    }
 
-	public RateRowHistory(Long amendmentId, Integer amendmentType, String amendmentReferenceId,
+	public RateRowsHistory(Long amendmentId, Integer amendmentType, String amendmentReferenceId,
 			Long rootParentId, Long parentId, Integer version, Long buyerOrgId, Long sellerOrgId, String buyerOrgName,
 			Long ratesetId, Long raterowId, Long tableId, Integer status, Timestamp dateRecorded, Timestamp dateCreated,
 			Timestamp dateUpdated, String keyValueHash, String validationErrors, Boolean hasError,

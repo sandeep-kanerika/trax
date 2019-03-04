@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
+import com.kanerika.product.ratemanager.exception.ResourceNotFoundException;
 import com.kanerika.product.ratemanager.jpa.AbstractJpaRepository;
 import com.kanerika.product.ratemanager.jpa.AbstractJpaService;
 
-@Repository
+@Service
 public class RateRowsService extends AbstractJpaService<RateRows>{
 
 	@Autowired
@@ -23,7 +25,12 @@ public class RateRowsService extends AbstractJpaService<RateRows>{
 	@Override
 	protected RateRows update(RateRows _rateRows) {
 		// TODO Auto-generated method stub
-		return save(_rateRows);
+		RateRows rateRows = getById(_rateRows.getId());
+		if(rateRows != null)
+			return save(_rateRows);
+		else {
+			throw new ResourceNotFoundException("RateRows Id Doesn't Exists !");
+		}
 	}
 
 	@Override

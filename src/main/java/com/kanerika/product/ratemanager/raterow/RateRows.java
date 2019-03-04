@@ -26,8 +26,6 @@ public class RateRows {
 	
 	private String amendmentReferenceId;
 	
-	private Long rootParentId;
-	
 	private Long parentId;
 	
 	private Integer version;
@@ -185,7 +183,11 @@ public class RateRows {
     
     private String routeFrequency;
     
-    public RateRows(Long amendmentId, Integer amendmentType, String amendmentReferenceId, Long rootParentId,
+    public RateRows() {
+    	
+    }
+    
+    public RateRows(Long amendmentId, Integer amendmentType, String amendmentReferenceId,
 			Long parentId, Integer version, Long buyerOrgId, Long sellerOrgId, String buyerOrgName,
 			String sellerOrgName, Long ratesetId, Long tableId, Integer status, Timestamp dateCreated,
 			Timestamp dateUpdated, String keyValueHash, Long laneId, Long tableDefinition, String validationErrors,
@@ -207,7 +209,6 @@ public class RateRows {
 		this.amendmentId = amendmentId;
 		this.amendmentType = amendmentType;
 		this.amendmentReferenceId = amendmentReferenceId;
-		this.rootParentId = rootParentId;
 		this.parentId = parentId;
 		this.version = version;
 		this.buyerOrgId = buyerOrgId;
@@ -316,14 +317,6 @@ public class RateRows {
 
 	public void setAmendmentReferenceId(String amendmentReferenceId) {
 		this.amendmentReferenceId = amendmentReferenceId;
-	}
-	
-	public Long getRootParentId() {
-		return rootParentId;
-	}
-
-	public void setRootParentId(Long rootParentId) {
-		this.rootParentId = rootParentId;
 	}
 	
 	public Long getParentId() {
