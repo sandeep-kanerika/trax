@@ -42,7 +42,7 @@ public class RateTableService extends AbstractJpaService<RateTable> {
 	}
 
 	public RateTable getById(Long id) {
-		return getById(id);
+		return rateTablesRepository.getById(id);
 	}
 
 }
