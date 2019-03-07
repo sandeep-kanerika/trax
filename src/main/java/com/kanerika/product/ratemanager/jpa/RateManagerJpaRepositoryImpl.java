@@ -10,8 +10,7 @@ import java.io.Serializable;
 /**
  * Created by sudhakar.rao on 2/4/2019.
  */
-public class RateManagerJpaRepositoryImpl<T, ID extends Serializable> extends SimpleJpaRepository<T, ID>
-        implements AbstractJpaRepository<T, ID> {
+public class RateManagerJpaRepositoryImpl<T, ID extends Serializable> extends SimpleJpaRepository<T, ID> implements AbstractJpaRepository<T, ID> {
 
     private final EntityManager entityManager;
 

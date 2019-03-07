@@ -1,17 +1,14 @@
 package com.kanerika.product.ratemanager.jpa;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.data.jpa.domain.Specification;
-
-import com.kanerika.product.ratemanager.amendment.AmendmentsService;
+import java.util.Date;
+import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import java.util.Date;
-import java.util.List;
+
+import org.springframework.data.jpa.domain.Specification;
 
 /**
  * Created by sudhakar.rao on 2/4/2019.
@@ -23,22 +20,18 @@ public abstract class AbstractJpaService<T> extends BaseJpaService<T> {
         return new java.sql.Timestamp(today.getTime());
     }
 
-
     protected T save(T t) {
         T result = getRepository().saveAndFlush(t);
         getRepository().refresh(result);
         return result;
     }
 
-
     protected abstract T create(T t);
-
 
     protected abstract T update(T t);
 
-
     protected abstract T delete(T t);
-
+    
     protected abstract List<T> search(T t);
 
     protected List<T> searchBySpecification(Specification<T> specification) {
