@@ -4,12 +4,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class ColumnValidations {
 	
 	@Id
@@ -23,45 +31,5 @@ public class ColumnValidations {
 	private Long rateSetId;
 	
 	private String validation;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Long getTableId() {
-		return tableId;
-	}
-
-	public void setTableId(Long tableId) {
-		this.tableId = tableId;
-	}
-
-	public Long getColumnDefinitionId() {
-		return columnDefinitionId;
-	}
-
-	public void setColumnDefinitionId(Long columnDefinitionId) {
-		this.columnDefinitionId = columnDefinitionId;
-	}
-
-	public Long getRateSetId() {
-		return rateSetId;
-	}
-
-	public void setRateSetId(Long rateSetId) {
-		this.rateSetId = rateSetId;
-	}
-
-	public String getValidation() {
-		return validation;
-	}
-
-	public void setValidation(String validation) {
-		this.validation = validation;
-	}
 
 }

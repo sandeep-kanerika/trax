@@ -1,10 +1,8 @@
 package com.kanerika.product.ratemanager.amendment;
 
-import com.kanerika.product.ratemanager.jpa.AbstractJpaRepository;
-
-import java.math.BigInteger;
-
 import org.springframework.stereotype.Repository;
+
+import com.kanerika.product.ratemanager.jpa.AbstractJpaRepository;
 
 /**
  * Created by sudhakar.rao on 2/19/2019.
