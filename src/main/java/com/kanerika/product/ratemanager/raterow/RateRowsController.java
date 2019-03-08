@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kanerika.product.ratemanager.exception.ResourceNotFoundException;
@@ -28,15 +27,14 @@ public class RateRowsController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(RateRowsController.class);
 
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE}, produces = { MediaType.APPLICATION_JSON_VALUE})
-	@ResponseBody
 	public RateRows createRateRows(@RequestBody RateRows rateRows) {
 
-		LOGGER.info("addRateRows invoked");
+		LOGGER.info("addRateRows invoked---------------------->>>>>");
 		return rateRowsSer.create(rateRows);
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<RateRows> getRateRows(@PathVariable Long id) {
+	public ResponseEntity<RateRows> getRateRows(@PathVariable String id) {
 		LOGGER.info("getRateRows invoked");
 		HttpStatus returnStatus = HttpStatus.OK;
 		try {
@@ -64,7 +62,7 @@ public class RateRowsController {
 	}
 
 	@DeleteMapping(value = "/{id}")
-	public RateRows deleteRateRows(@PathVariable Long id) {
+	public RateRows deleteRateRows(@PathVariable String id) {
 
 		LOGGER.info("deleteRateRows invoked");
 		return null/* rateRowsSer.delete(id) */;

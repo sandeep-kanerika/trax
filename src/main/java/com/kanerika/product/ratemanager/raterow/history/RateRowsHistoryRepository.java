@@ -4,8 +4,8 @@ import java.math.BigInteger;
 
 import com.kanerika.product.ratemanager.jpa.AbstractJpaRepository;
 
-public interface RateRowsHistoryRepository extends AbstractJpaRepository<RateRowsHistory, Long> {
+public interface RateRowsHistoryRepository extends AbstractJpaRepository<RateRowsHistory, String> {
 	
-	RateRowsHistory getById(Long id);
+	RateRowsHistory getById(String id);
 
 }

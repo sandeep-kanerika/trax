@@ -36,7 +36,7 @@ public class ColumnValidationsController {
 	}
 
 	@RequestMapping("/{id}")
-	public ResponseEntity<ColumnValidations> getColumnValidations(@PathVariable Long id) {
+	public ResponseEntity<ColumnValidations> getColumnValidations(@PathVariable String id) {
 		LOGGER.info("getColumnValidations invoked");
 		HttpStatus returnStatus = HttpStatus.OK;
 		try {
@@ -64,7 +64,7 @@ public class ColumnValidationsController {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public ColumnValidations deleteColumnValidations(@PathVariable Long id) {
+	public ColumnValidations deleteColumnValidations(@PathVariable String id) {
 
 		LOGGER.info("deleteColumnValidations invoked");
 		return null/* ColumnValidationSer.delete(id) */;

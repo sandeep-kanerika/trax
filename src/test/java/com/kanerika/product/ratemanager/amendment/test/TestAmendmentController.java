@@ -160,7 +160,7 @@
 //
 //		when(amendmentServiceMock.getById(90L)).thenReturn(new Amendments());
 //		amendmentsTest = amendmentServiceMock.getById(90L);
-//		Long id = amendmentsTest.getId();
+//		String id = amendmentsTest.getId();
 //		try {
 //			assertEquals("Amendment Id not found",null,id);
 //		} catch (Throwable t) {

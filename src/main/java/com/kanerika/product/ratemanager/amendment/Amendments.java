@@ -30,15 +30,15 @@ public class Amendments {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 	private Integer status;
-    private Long referenceId;
+    private String referenceId;
     private Integer type;
     private String description;
-    private Long ratesetId;
-    private Long ratesetReferenceId;
-    private Long buyerOrgId;
-    private Long sellerOrgId;
+    private String ratesetId;
+    private String ratesetReferenceId;
+    private String buyerOrgId;
+    private String sellerOrgId;
     private String buyerOrgName;
     private String sellerOrgName;
     private String ratesetName;
@@ -50,10 +50,10 @@ public class Amendments {
     @JsonFormat(pattern = AppConstants.DEFAULT_DATE_FORMAT)
     private Date defaultEffectiveDateThru;
 
-    private Long reviewedBy;
-    private Long createdBy;
-    private Long lastUpdatedBy;
-    private Long lastAssignedBy;
+    private String reviewedBy;
+    private String createdBy;
+    private String lastUpdatedBy;
+    private String lastAssignedBy;
     private String approvers;
     private Long currentApprover;
 

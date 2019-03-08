@@ -36,7 +36,7 @@ public class RateRowsHistoryController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<RateRowsHistory> getRateRowsHistory(@PathVariable Long id) {
+	public ResponseEntity<RateRowsHistory> getRateRowsHistory(@PathVariable String id) {
 		LOGGER.info("getRateRowsHistory invoked");
 		HttpStatus returnStatus = HttpStatus.OK;
 		try {
@@ -64,7 +64,7 @@ public class RateRowsHistoryController {
 	}
 
 	@DeleteMapping(value = "/{id}")
-	public RateRowsHistory deleteRateRowsHistory(@PathVariable Long id) {
+	public RateRowsHistory deleteRateRowsHistory(@PathVariable String id) {
 
 		LOGGER.info("deleteRateRowsHistory invoked");
 		return null/* rateRowsHistorySer.delete(id) */;

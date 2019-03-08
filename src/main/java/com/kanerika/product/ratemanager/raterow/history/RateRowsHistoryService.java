@@ -46,12 +46,12 @@ public class RateRowsHistoryService extends AbstractJpaService<RateRowsHistory>{
 	}
 
 	@Override
-	protected AbstractJpaRepository<RateRowsHistory, Long> getRepository() {
+	protected AbstractJpaRepository<RateRowsHistory, String> getRepository() {
 		// TODO Auto-generated method stub
 		return rateRowsHistoryRepository;
 	}
 
-	public RateRowsHistory getById(Long id) {
+	public RateRowsHistory getById(String id) {
 		// TODO Auto-generated method stub
 		return rateRowsHistoryRepository.getById(id);
 	}

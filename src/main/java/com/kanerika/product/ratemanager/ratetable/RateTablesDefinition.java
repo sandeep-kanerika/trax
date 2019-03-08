@@ -24,7 +24,7 @@ public class RateTablesDefinition {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private String id;
     private Long creatorOrgId;
     private String name;
     @JsonFormat(pattern = AppConstants.DEFAULT_DATETIME_FORMAT)

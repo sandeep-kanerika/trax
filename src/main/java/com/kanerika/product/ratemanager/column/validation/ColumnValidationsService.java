@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.kanerika.product.ratemanager.amendment.Amendments;
 import com.kanerika.product.ratemanager.exception.ResourceNotFoundException;
 import com.kanerika.product.ratemanager.jpa.AbstractJpaRepository;
 import com.kanerika.product.ratemanager.jpa.AbstractJpaService;
@@ -46,12 +45,12 @@ public class ColumnValidationsService extends AbstractJpaService<ColumnValidatio
 	}
 
 	@Override
-	protected AbstractJpaRepository<ColumnValidations, Long> getRepository() {
+	protected AbstractJpaRepository<ColumnValidations, String> getRepository() {
 		// TODO Auto-generated method stub
 		return columnValidationsRepository;
 	}
 
-	public ColumnValidations getById(Long id) {
+	public ColumnValidations getById(String id) {
 		// TODO Auto-generated method stub
 		return columnValidationsRepository.getById(id);
 	}

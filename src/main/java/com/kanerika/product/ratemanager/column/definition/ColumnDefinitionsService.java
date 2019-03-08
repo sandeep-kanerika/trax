@@ -46,12 +46,12 @@ public class ColumnDefinitionsService extends AbstractJpaService<ColumnDefinitio
 	}
 
 	@Override
-	protected AbstractJpaRepository<ColumnDefinitions, Long> getRepository() {
+	protected AbstractJpaRepository<ColumnDefinitions, String> getRepository() {
 		// TODO Auto-generated method stub
 		return columnDefinitionsrepository;
 	}
 	
-    public ColumnDefinitions getById(Long id) {
+    public ColumnDefinitions getById(String id) {
 //		return search(id);
     	return columnDefinitionsrepository.getById(id);
     }

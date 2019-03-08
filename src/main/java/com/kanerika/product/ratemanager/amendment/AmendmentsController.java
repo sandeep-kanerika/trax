@@ -39,7 +39,7 @@ public class AmendmentsController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Amendments> getAmandments(@PathVariable Long id) {
+	public ResponseEntity<Amendments> getAmandments(@PathVariable String id) {
 		LOGGER.info("getAmandments invoked");
 		HttpStatus returnStatus = HttpStatus.OK;
 		try {
@@ -67,7 +67,7 @@ public class AmendmentsController {
 	}
 
 	@DeleteMapping(value = "/{id}")
-	public Amendments deleteAmandments(@PathVariable Long id) {
+	public Amendments deleteAmandments(@PathVariable String id) {
 
 		LOGGER.info("deleteAmandment invoked");
 		return null/* amendmentsSer.delete(id) */;

@@ -49,7 +49,7 @@ public class AmendmentsService extends AbstractJpaService<Amendments> {
 		}
 	}
 
-	public Amendments getById(Long id) {
+	public Amendments getById(String id) {
 		return amendmentsRepository.getById(id);
 	}
 
@@ -60,7 +60,7 @@ public class AmendmentsService extends AbstractJpaService<Amendments> {
 		return amendments;
 	}
 	
-	public Boolean delete(Long id)
+	public Boolean delete(String id)
 	{
 		try
 		{
@@ -79,7 +79,7 @@ public class AmendmentsService extends AbstractJpaService<Amendments> {
 	}
 
 	@Override
-	protected AbstractJpaRepository<Amendments, Long> getRepository() {
+	protected AbstractJpaRepository<Amendments, String> getRepository() {
 		return amendmentsRepository;
 	}
 }

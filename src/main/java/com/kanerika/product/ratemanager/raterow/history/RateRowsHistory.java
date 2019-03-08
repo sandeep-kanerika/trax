@@ -27,7 +27,7 @@ public class RateRowsHistory {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private String id;
 
 	private Long amendmentId;
 

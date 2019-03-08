@@ -11,9 +11,9 @@ import com.kanerika.product.ratemanager.jpa.AbstractJpaRepository;
  * Created by sudhakar.rao on 2/19/2019.
  */
 @Repository
-public interface AmendmentsRepository extends AbstractJpaRepository<Amendments, Long> {
+public interface AmendmentsRepository extends AbstractJpaRepository<Amendments, String> {
 	
-    Amendments getById(Long id);
+    Amendments getById(String id);
     
     @Query("SELECT u FROM Amendments u WHERE u.status = 1")
     Collection<Amendments> findAllActiveAmendments();

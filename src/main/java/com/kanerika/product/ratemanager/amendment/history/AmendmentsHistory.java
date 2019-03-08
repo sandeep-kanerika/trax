@@ -30,15 +30,15 @@ public class AmendmentsHistory {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 	private Integer status;
-    private Long amendmentId;
+    private String amendmentId;
 
     private String actionType;
 
     @JsonFormat(pattern = AppConstants.DEFAULT_DATETIME_FORMAT)
     private Timestamp dateRecorded;
-    private Long referenceId;
+    private String referenceId;
     private Integer type;
     private String description;
     private Long ratesetId;

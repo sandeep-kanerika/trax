@@ -1,7 +1,7 @@
 package com.kanerika.product.ratemanager.raterow;
 
-import java.sql.Timestamp;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,56 +27,56 @@ public class RateRows {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private String id;
 	
-	private Long amendmentId;
+	private String amendmentId;
 	
 	private Integer amendmentType;
 	
 	private String amendmentReferenceId;
 	
-	private Long parentId;
+	private String parentId;
 	
 	private Integer version;
 
-	private Long buyerOrgId;
+	private String buyerOrgId;
 
-	private Long sellerOrgId;
+	private String sellerOrgId;
 	
 	private String buyerOrgName;
 	
 	private String sellerOrgName;
 
-	private Long ratesetId;
+	private String ratesetId;
 	
-	private Long tableId;
+	private String tableId;
 	
 	private Integer status;
 	
-    @JsonFormat(pattern = AppConstants.DEFAULT_DATETIME_FORMAT)
-    private Timestamp dateCreated;
+  //  @JsonFormat(pattern = AppConstants.DEFAULT_DATE_FORMAT)
+    private LocalDate dateCreated;
 
-    @JsonFormat(pattern = AppConstants.DEFAULT_DATETIME_FORMAT)
-    private Timestamp dateUpdated;
+ //   @JsonFormat(pattern = AppConstants.DEFAULT_DATE_FORMAT)
+    private LocalDate dateUpdated;
 
 	private String keyValueHash;
 	
-	private Long laneId;
+	private String laneId;
 	
-	private Long tableDefinition;
+	private String tableDefinition;
 	
 	private String validationErrors;
 	
 	private Boolean hasError;
 
-    @JsonFormat(pattern = AppConstants.DEFAULT_DATE_FORMAT)
-    private Date effectiveDateFrom;
+//    @JsonFormat(pattern = AppConstants.DEFAULT_DATE_FORMAT)
+    private LocalDate effectiveDateFrom;
 
-    @JsonFormat(pattern = AppConstants.DEFAULT_DATE_FORMAT)
-    private Date effectiveDateThru;
-    
-    @JsonFormat(pattern = AppConstants.DEFAULT_DATE_FORMAT)
-    private Date effectiveDate;
+ //   @JsonFormat(pattern = AppConstants.DEFAULT_DATE_FORMAT)
+    private LocalDate effectiveDateThru;
+ //   
+   // @JsonFormat(pattern = AppConstants.DEFAULT_DATE_FORMAT)
+    private LocalDate effectiveDate;
     
     private String originCountry;
     
@@ -166,7 +166,7 @@ public class RateRows {
     
     private Double rate;
     
-    private Double currency;
+    private String currency;
     
     private Double baseRate;
     

@@ -40,7 +40,7 @@ public class AmendmentsHistoryController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<AmendmentsHistory> getAmendmentsHistory(@PathVariable Long id) {
+	public ResponseEntity<AmendmentsHistory> getAmendmentsHistory(@PathVariable String id) {
 		LOGGER.info("getAmandmentsHistory invoked");
 		HttpStatus returnStatus = HttpStatus.OK;
 		
@@ -69,7 +69,7 @@ public class AmendmentsHistoryController {
 	}
 
 	@DeleteMapping(value = "/{id}")
-	public AmendmentsHistory deleteAmendmentsHistory(@PathVariable Long id) {
+	public AmendmentsHistory deleteAmendmentsHistory(@PathVariable String id) {
 
 		LOGGER.info("deleteAmendmentsHistory invoked");
 		return null/* amendmentsHistorySer.delete(id) */;

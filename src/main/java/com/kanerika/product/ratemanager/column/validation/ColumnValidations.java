@@ -22,13 +22,13 @@ public class ColumnValidations {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private String id;
 
-	private Long tableId;
+	private String tableId;
 
-	private Long columnDefinitionId;
+	private String columnDefinitionId;
 
-	private Long rateSetId;
+	private String rateSetId;
 	
 	private String validation;
 

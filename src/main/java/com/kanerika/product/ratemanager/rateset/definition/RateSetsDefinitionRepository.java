@@ -6,8 +6,8 @@ import org.springframework.stereotype.Repository;
 import com.kanerika.product.ratemanager.jpa.AbstractJpaRepository;
 
 @Repository
-public interface RateSetsDefinitionRepository extends AbstractJpaRepository<RateSetsDefinition, Long> {
+public interface RateSetsDefinitionRepository extends AbstractJpaRepository<RateSetsDefinition, String> {
 	
-	RateSetsDefinition getById(Long id);
+	RateSetsDefinition getById(String id);
 
 }

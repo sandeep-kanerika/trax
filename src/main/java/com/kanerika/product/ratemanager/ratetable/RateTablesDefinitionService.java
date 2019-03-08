@@ -9,8 +9,6 @@ import com.kanerika.product.ratemanager.exception.ResourceNotFoundException;
 import com.kanerika.product.ratemanager.jpa.AbstractJpaRepository;
 import com.kanerika.product.ratemanager.jpa.AbstractJpaService;
 
-import jdk.nashorn.internal.runtime.FindProperty;
-
 @Repository
 public class RateTablesDefinitionService extends AbstractJpaService<RateTablesDefinition> {
 
@@ -44,11 +42,11 @@ public class RateTablesDefinitionService extends AbstractJpaService<RateTablesDe
 	}
 
 	@Override
-	protected AbstractJpaRepository<RateTablesDefinition, Long> getRepository() {
+	protected AbstractJpaRepository<RateTablesDefinition, String> getRepository() {
 		return this.rateTablesDefinitionRepository;
 	}
 
-	public RateTablesDefinition getById(Long id) {
+	public RateTablesDefinition getById(String id) {
 		return rateTablesDefinitionRepository.getById(id);
 	}
 

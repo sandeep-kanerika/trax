@@ -37,7 +37,7 @@ public class ColumnDefinitionsController {
 	}
 
 	@GetMapping("/{id}")
-	public ColumnDefinitions getColumnDefinitions(@PathVariable Long id) {
+	public ColumnDefinitions getColumnDefinitions(@PathVariable String id) {
 		logger.info("getColumnDefinitions invoked");
 		ColumnDefinitions getcolumnDefinitionDetail =  columnDefinitionSer.getById(id);
 		if(getcolumnDefinitionDetail != null) {
@@ -61,7 +61,7 @@ public class ColumnDefinitionsController {
 	}
 
 	@DeleteMapping(value = "/{id}")
-	public ColumnDefinitions deleteColumnDefinitions(@PathVariable Long id) {
+	public ColumnDefinitions deleteColumnDefinitions(@PathVariable String id) {
 
 		logger.info("deleteColumnDefinition invoked");
 		return null/* columnDefinitionSer.delete(id) */;

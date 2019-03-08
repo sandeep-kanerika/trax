@@ -41,11 +41,11 @@ public class RateRowsService extends AbstractJpaService<RateRows>{
 	}
 
 	@Override
-	protected AbstractJpaRepository<RateRows, Long> getRepository() {
+	protected AbstractJpaRepository<RateRows, String> getRepository() {
 		return rateRowsRepository;
 	}
 
-	public RateRows getById(Long id) {
+	public RateRows getById(String id) {
 		return rateRowsRepository.getById(id);
 	}
 

@@ -37,7 +37,7 @@ public class RateSetsDefinitionController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<RateSetsDefinition> getRateSetsDefinition(@PathVariable Long id) {
+	public ResponseEntity<RateSetsDefinition> getRateSetsDefinition(@PathVariable String id) {
 		LOGGER.info("getRateSetsDefinition invoked");
 		HttpStatus returnStatus = HttpStatus.OK;
 		try {
@@ -65,7 +65,7 @@ public class RateSetsDefinitionController {
 	}
 
 	@DeleteMapping(value = "/{id}")
-	public RateSetsDefinition deleteRateSetsDefinition(@PathVariable Long id) {
+	public RateSetsDefinition deleteRateSetsDefinition(@PathVariable String id) {
 
 		LOGGER.info("deleteRateSetsDefinition invoked");
 		return null/* RateSetsSer.delete(id) */;

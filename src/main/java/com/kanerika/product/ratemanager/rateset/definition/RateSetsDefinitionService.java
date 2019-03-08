@@ -46,12 +46,12 @@ public class RateSetsDefinitionService extends AbstractJpaService<RateSetsDefini
 	}
 
 	@Override
-	protected AbstractJpaRepository<RateSetsDefinition, Long> getRepository() {
+	protected AbstractJpaRepository<RateSetsDefinition, String> getRepository() {
 		// TODO Auto-generated method stub
 		return rateSetsDefinitionRepository;
 	}
 
-	public RateSetsDefinition getById(Long id) {
+	public RateSetsDefinition getById(String id) {
 		// TODO Auto-generated method stub
 		return rateSetsDefinitionRepository.getById(id);
 	}

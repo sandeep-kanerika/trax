@@ -22,7 +22,7 @@ public class AmendmentsHistoryService extends AbstractJpaService<AmendmentsHisto
         return save(amendmentsHistory );
     }
 
-    public AmendmentsHistory getById(Long id) {
+    public AmendmentsHistory getById(String id) {
 //		return search(id);
     	return amendamendmentsHistoryRepository.getById(id);
     }
@@ -81,7 +81,7 @@ public class AmendmentsHistoryService extends AbstractJpaService<AmendmentsHisto
     }
 
     @Override
-    protected AbstractJpaRepository<AmendmentsHistory , Long> getRepository() {
+    protected AbstractJpaRepository<AmendmentsHistory , String> getRepository() {
 		return amendamendmentsHistoryRepository;
     }
 }
