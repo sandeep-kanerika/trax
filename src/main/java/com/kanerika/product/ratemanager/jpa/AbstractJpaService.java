@@ -1,5 +1,6 @@
 package com.kanerika.product.ratemanager.jpa;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -15,9 +16,8 @@ import org.springframework.data.jpa.domain.Specification;
  */
 public abstract class AbstractJpaService<T> extends BaseJpaService<T> {
 	
-    public java.sql.Timestamp getCurrentTimeStamp() {
-        Date today = new Date();
-        return new java.sql.Timestamp(today.getTime());
+    public LocalDateTime getCurrentTimeStamp() {
+        return LocalDateTime.now();
     }
 
     protected T save(T t) {

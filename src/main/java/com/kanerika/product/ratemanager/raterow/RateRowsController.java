@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kanerika.product.ratemanager.exception.ResourceNotFoundException;
@@ -22,7 +22,7 @@ import com.kanerika.product.ratemanager.exception.ResourceNotFoundException;
 public class RateRowsController {
 	
 	@Autowired
-	RateRowsService rateRowsSer;
+	RateRowsService rateRowsService;
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(RateRowsController.class);
 
@@ -30,7 +30,7 @@ public class RateRowsController {
 	public RateRows createRateRows(@RequestBody RateRows rateRows) {
 
 		LOGGER.info("addRateRows invoked---------------------->>>>>");
-		return rateRowsSer.create(rateRows);
+		return rateRowsService.create(rateRows);
 	}
 
 	@GetMapping("/{id}")
@@ -38,7 +38,7 @@ public class RateRowsController {
 		LOGGER.info("getRateRows invoked");
 		HttpStatus returnStatus = HttpStatus.OK;
 		try {
-			RateRows getAmendmentsDetail = rateRowsSer.getById(id);
+			RateRows getAmendmentsDetail = rateRowsService.getById(id);
 			if (getAmendmentsDetail != null) {
 				return new ResponseEntity<>(getAmendmentsDetail, returnStatus);
 			} else {
@@ -54,18 +54,18 @@ public class RateRowsController {
 		return new ResponseEntity<>(returnStatus);
 	}
 	
-	@RequestMapping(method = {RequestMethod.PUT, RequestMethod.PATCH})
+	@PutMapping(consumes = { MediaType.APPLICATION_JSON_VALUE}, produces = { MediaType.APPLICATION_JSON_VALUE})
 	public RateRows updateRateRows(@RequestBody RateRows rateRows) {
 
 		LOGGER.info("updateRateRows invoked");
-		return rateRowsSer.update(rateRows);
+		return rateRowsService.update(rateRows);
 	}
 
 	@DeleteMapping(value = "/{id}")
-	public RateRows deleteRateRows(@PathVariable String id) {
+	public void deleteRateRows(@PathVariable String id) {
 
 		LOGGER.info("deleteRateRows invoked");
-		return null/* rateRowsSer.delete(id) */;
+		rateRowsService.delete(id);
 	}
 
 }

@@ -32,12 +32,18 @@ public class RateRowsService extends AbstractJpaService<RateRows>{
 
 	@Override
 	protected RateRows delete(RateRows rateRows) {
-		return null;
+		rateRowsRepository.delete(rateRows);
+		return rateRows;
 	}
+	
+	protected void delete(String id) {
+		rateRowsRepository.deleteById(id); 
+	}
+
 
 	@Override
 	protected List<RateRows> search(RateRows rateRows) {
-		return null;
+		return rateRowsRepository.findAll();
 	}
 
 	@Override

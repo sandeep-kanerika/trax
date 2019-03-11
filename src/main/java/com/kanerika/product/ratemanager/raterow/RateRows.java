@@ -1,16 +1,13 @@
 package com.kanerika.product.ratemanager.raterow;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.kanerika.product.ratemanager.config.AppConstants;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
