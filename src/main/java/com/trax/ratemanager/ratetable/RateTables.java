@@ -12,8 +12,8 @@ import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.trax.ratemanager.config.AppConstants;
+import com.trax.ratemanager.ratecolumn.RateColumn;
 import com.trax.ratemanager.raterow.RateRows;
-import com.trax.ratemanager.wrapper.RateColumn;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -1,4 +1,4 @@
-package com.trax.ratemanager.wrapper;
+package com.trax.ratemanager.ratecolumn;
 
 import java.util.List;
 
