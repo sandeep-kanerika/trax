@@ -8,24 +8,39 @@ import org.springframework.stereotype.Service;
 import com.trax.ratemanager.exception.ResourceNotFoundException;
 import com.trax.ratemanager.jpa.AbstractJpaRepository;
 import com.trax.ratemanager.jpa.AbstractJpaService;
+import com.trax.ratemaneger.utility.CreateByUserRepository;
+import com.trax.ratemaneger.utility.CreatedByUser;
+import com.trax.ratemaneger.utility.LastModifiedByUser;
+import com.trax.ratemaneger.utility.LastModifiedByUserRepository;
 
 @Service
-public class RateSetsService extends AbstractJpaService<RateSets>{
+public class RateSetsService extends AbstractJpaService<RateSets> {
 
 	@Autowired
-	RateSetsRepository rateSetsRepository; 
+	private RateSetsRepository rateSetsRepository;
 	
+	@Autowired
+	private LastModifiedByUserRepository lastModifiedByRepo;
+	
+	@Autowired
+	private CreateByUserRepository createdByRepo;
+	
+
 	@Override
 	protected RateSets create(RateSets rateSets) {
-		// TODO Auto-generated method stub
+		LastModifiedByUser lastModifiedBy = rateSets.getLastUpdatedBy();
+		CreatedByUser createdBy = rateSets.getCreatedBy();
+		
+		createdByRepo.save(createdBy);
+		lastModifiedByRepo.save(lastModifiedBy);
+
 		return save(rateSets);
 	}
 
 	@Override
 	protected RateSets update(RateSets _rateSets) {
-		// TODO Auto-generated method stub
 		RateSets rateSets = getById(_rateSets.getId());
-		if(rateSets != null)
+		if (rateSets != null)
 			return save(_rateSets);
 		else {
 			throw new ResourceNotFoundException("RateSets Id Doesn't Exists !");

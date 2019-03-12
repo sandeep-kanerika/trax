@@ -9,10 +9,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.trax.ratemanager.raterow.RateRows;
+import com.trax.ratemaneger.utility.LastModifiedByUser;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -44,16 +46,18 @@ public class Amendments {
 	private String ratesetName;
 	private String region;
 	private String mode;
-	
-    @OneToMany
-    private List <RateRows> rateRows;
+
+	@OneToMany
+	private List<RateRows> rateRows;
 
 	private Date defaultEffectiveDateFrom;
 	private Date defaultEffectiveDateThru;
 
 	private String reviewedBy;
 
-	private String lastUpdatedBy;
+	@OneToOne
+	private LastModifiedByUser lastUpdatedBy;
+
 	private String lastAssignedBy;
 	private String approvers;
 	private Long currentApprover;

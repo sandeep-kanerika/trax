@@ -10,7 +10,7 @@
 		<version>2.1.2.RELEASE</version>
 		<relativePath />
 	</parent>
-	<groupId>com.kanerika.product</groupId>
+	<groupId>com.trax</groupId>
 	<artifactId>rate-manager-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>rate-manager-api</name>

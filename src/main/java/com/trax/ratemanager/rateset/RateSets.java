@@ -1,6 +1,7 @@
 package com.trax.ratemanager.rateset;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -8,10 +9,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.trax.ratemanager.amendment.Amendments;
 import com.trax.ratemanager.ratetable.RateTables;
+import com.trax.ratemaneger.utility.CreatedByUser;
+import com.trax.ratemaneger.utility.LastModifiedByUser;
 
 import lombok.Data;
 
@@ -26,9 +30,9 @@ public class RateSets {
 
     private Integer status;
     
-	private Long buyerOrgId;
+	private String buyerOrgId;
 	
-	private Long sellerOrgId;
+	private String sellerOrgId;
 	
 	private String Name;
 	
@@ -36,11 +40,11 @@ public class RateSets {
 	
 	private String mode;
 	
-    private Timestamp dateCreated;
+    private LocalDateTime dateCreated;
     
-    private Timestamp dateUpdated;
+    private LocalDateTime dateUpdated;
 
-    private Timestamp dateReviewed;
+    private LocalDateTime dateReviewed;
     
     private Timestamp dateAssigned;
     
@@ -53,8 +57,12 @@ public class RateSets {
     private List <Amendments> amendments;
     
     private Long reviewedBy;
-    private Long createdBy;
-    private Long lastUpdatedBy;
+    @OneToOne
+    private CreatedByUser createdBy;
+    
+    @OneToOne
+    private LastModifiedByUser lastUpdatedBy;
+    
     private Long lastAssignedBy;
     private String approvers;
     

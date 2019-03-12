@@ -1,7 +1,5 @@
 package com.trax.ratemanager.rateset;
 
-import java.util.Collection;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +30,7 @@ public class RateSetsController {
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE}, produces = { MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
 	public RateSets createRateSets(@RequestBody RateSets rateSets) {
-		LOGGER.info("addRateSets invoked");
+		LOGGER.info("addRateSets invoked*************************************");
 		return rateSetsSer.create(rateSets);
 	}
 

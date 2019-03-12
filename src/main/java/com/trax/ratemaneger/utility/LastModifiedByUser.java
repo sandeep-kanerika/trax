@@ -1,19 +1,23 @@
-package com.trax.ratemanager.orgnization;
+package com.trax.ratemaneger.utility;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import lombok.Data;
 
-@Entity
 @Data
-public class Orgnization {
+@Entity
+@Table
+public class LastModifiedByUser {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	private String orgName;
+	private String id;
 
+	private String orgId;
+	private String userEmail;
+	private String comment;
 }

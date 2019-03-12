@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import com.trax.ratemanager.exception.ResourceNotFoundException;
 import com.trax.ratemanager.jpa.AbstractJpaRepository;
 import com.trax.ratemanager.jpa.AbstractJpaService;
+import com.trax.ratemaneger.utility.LastModifiedByUser;
+import com.trax.ratemaneger.utility.LastModifiedByUserRepository;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -23,28 +25,30 @@ import lombok.extern.slf4j.Slf4j;
 public class AmendmentsService extends AbstractJpaService<Amendments> {
 
 	private static final Logger logger = LoggerFactory.getLogger(AmendmentsService.class);
-	
-    @Autowired
-    AmendmentsRepository amendmentsRepository;
+
+	@Autowired
+	private LastModifiedByUserRepository lastModifiedByUserRepo;
+
+	@Autowired
+	private AmendmentsRepository amendmentsRepository;
 
 	@Override
 	public Amendments create(Amendments amendments) {
 		log.debug("inside create ammendments");
+
+		LastModifiedByUser lastUpdateBy = amendments.getLastUpdatedBy();
+		lastModifiedByUserRepo.save(lastUpdateBy);
 		return save(amendments);
 	}
 
 	@Override
 	@Transactional
-	public Amendments update(Amendments _amendments) 
-	{
+	public Amendments update(Amendments _amendments) {
 		// Get the data from DB and update the fields and information from request data
 		Amendments amendments = getById(_amendments.getId());
-		if (amendments != null) 
-		{
+		if (amendments != null) {
 			return save(amendments);
-		}
-		else 
-		{
+		} else {
 			throw new ResourceNotFoundException("Amendment Id Not Found !");
 		}
 	}
@@ -59,16 +63,12 @@ public class AmendmentsService extends AbstractJpaService<Amendments> {
 		amendmentsRepository.delete(amendments);
 		return amendments;
 	}
-	
-	public Boolean delete(String id)
-	{
-		try
-		{
+
+	public Boolean delete(String id) {
+		try {
 			amendmentsRepository.deleteById(id);
 			return true;
-		}
-		catch(Exception ex)
-		{
+		} catch (Exception ex) {
 			return false;
 		}
 	}
