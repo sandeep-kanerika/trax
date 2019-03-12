@@ -26,7 +26,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.kanerika.product.ratemanager.amendment.AmendmentsController;
+import com.trax.ratemanager.amendment.AmendmentsController;
 
 //@RunWith(SpringRunner.class)
 @RunWith(SpringJUnit4ClassRunner.class)

@@ -1,4 +1,4 @@
-//package com.kanerika.product.ratemanager.amendment.test;
+//package com.trax.ratemaneger.amendment.test;
 //
 //import static org.junit.Assert.assertEquals;
 //import static org.junit.Assert.assertNotEquals;
@@ -28,10 +28,10 @@
 //import org.springframework.test.context.ContextConfiguration;
 //import org.springframework.test.context.junit4.SpringRunner;
 //
-//import com.kanerika.product.ratemanager.amendment.Amendments;
-//import com.kanerika.product.ratemanager.amendment.AmendmentsController;
-//import com.kanerika.product.ratemanager.amendment.AmendmentsService;
-//import com.kanerika.product.ratemanager.test.TestRateManagerMain;
+//import com.trax.ratemaneger.amendment.Amendments;
+//import com.trax.ratemaneger.amendment.AmendmentsController;
+//import com.trax.ratemaneger.amendment.AmendmentsService;
+//import com.trax.ratemaneger.test.TestRateManagerMain;
 //
 //@ContextConfiguration
 ////@WebMvcTest(AmendmentController.class)

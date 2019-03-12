@@ -1,4 +1,4 @@
-//package com.kanerika.product.ratemanager.test;
+//package com.trax.ratemaneger.test;
 //
 //import static org.junit.Assert.assertEquals;
 //
@@ -14,7 +14,7 @@
 //import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 //import org.springframework.test.context.web.WebAppConfiguration;
 //
-//import com.kanerika.product.ratemanager.amendment.test.TestAmendmentController;		
+//import com.trax.ratemaneger.amendment.test.TestAmendmentController;		
 //
 //@RunWith(SpringJUnit4ClassRunner.class)
 //@WebAppConfiguration
