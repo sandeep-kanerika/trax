@@ -29,7 +29,7 @@ public class RateTables {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String id;
-	private Long creatorOrgId;
+	private String creatorOrgId;
 	private String name;
 	@JsonFormat(pattern = AppConstants.DEFAULT_DATETIME_FORMAT)
 	private Timestamp dateCreated;
