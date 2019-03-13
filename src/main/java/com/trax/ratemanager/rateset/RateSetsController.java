@@ -25,12 +25,14 @@ public class RateSetsController {
 	@Autowired
 	RateSetsService rateSetsSer;
 	
+
 	private static final Logger LOGGER = LoggerFactory.getLogger(RateSetsController.class);
 
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE}, produces = { MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
 	public RateSets createRateSets(@RequestBody RateSets rateSets) {
 		LOGGER.info("addRateSets invoked*************************************");
+			
 		return rateSetsSer.create(rateSets);
 	}
 
