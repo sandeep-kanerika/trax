@@ -1,10 +1,11 @@
 package com.trax.ratemanager.wrapper;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.trax.ratemanager.amendment.Amendments;
 import com.trax.ratemanager.raterow.RateRows;
 
-@JsonInclude(JsonInclude.Include.NON_EMPTY)
+@JsonInclude(Include.NON_EMPTY)
 public class AmendmentRateRowsWraper {
 
 	private Amendments amendments;

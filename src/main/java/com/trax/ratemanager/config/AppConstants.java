@@ -3,8 +3,10 @@ package com.trax.ratemanager.config;
 public class AppConstants {
 
 	// Date and time format constants
-	public static final String DEFAULT_DATETIME_FORMAT = "yyyy-mm-dd HH:MM:ss";
-	public static final String DEFAULT_DATE_FORMAT = "yyyy-mm-dd";
+	public static final String DEFAULT_DATETIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
+	public static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd";
+	
+	public static final String DEFAULT_LOCAL_DATETIME_FORMAT_WITH_ZONE = "yyyy-MM-dd HH:mm:ssZ";
 
 	// Rate status constants
 	public static final int RATESTATUS_REJECTED = 3;

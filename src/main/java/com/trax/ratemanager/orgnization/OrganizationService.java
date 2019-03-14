@@ -10,48 +10,47 @@ import com.trax.ratemanager.jpa.AbstractJpaRepository;
 import com.trax.ratemanager.jpa.AbstractJpaService;
 
 @Service
-public class OrganizationService extends AbstractJpaService<Orgnization>{
+public class OrganizationService extends AbstractJpaService<Organization> {
 
 	@Autowired
-	OrganizationRepository organizationRepository; 
-	
+	OrganizationRepository organizationRepository;
+
 	@Override
-	protected Orgnization create(Orgnization orgnization) {
+	protected Organization create(Organization orgnization) {
 		return save(orgnization);
 	}
 
 	@Override
-	protected Orgnization update(Orgnization _orgnization) {
-		Orgnization orgnization = getById(_orgnization.getId());
-		if(orgnization != null)
-			return save(_orgnization);
+	protected Organization update(Organization org) {
+		Organization orgnization = getById(org.getId());
+		if (orgnization != null)
+			return save(org);
 		else {
 			throw new ResourceNotFoundException("Orgnization Id Doesn't Exists !");
 		}
 	}
 
 	@Override
-	protected Orgnization delete(Orgnization orgnization) {
+	protected Organization delete(Organization orgnization) {
 		organizationRepository.delete(orgnization);
 		return orgnization;
 	}
-	
+
 	protected void delete(String id) {
-		organizationRepository.deleteById(id); 
+		organizationRepository.deleteById(id);
 	}
 
-
 	@Override
-	protected List<Orgnization> search(Orgnization orgnization) {
+	protected List<Organization> search(Organization orgnization) {
 		return organizationRepository.findAll();
 	}
 
 	@Override
-	protected AbstractJpaRepository<Orgnization, String> getRepository() {
+	protected AbstractJpaRepository<Organization, String> getRepository() {
 		return organizationRepository;
 	}
 
-	public Orgnization getById(String id) {
+	public Organization getById(String id) {
 		return organizationRepository.getById(id);
 	}
 

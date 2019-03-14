@@ -38,9 +38,9 @@ public class RateRows {
 	@Version
 	private Integer version;
 
-	private String buyerOrgId;
+	//private String buyerOrgId;
 
-	private String sellerOrgId;
+	//private String sellerOrgId;
 
 	private String ratesetId;
 	

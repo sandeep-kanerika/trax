@@ -17,22 +17,26 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trax.ratemanager.exception.ResourceNotFoundException;
+import com.trax.ratemanager.orgnization.OrganizationService;
 
 @RestController
 @RequestMapping("/rate/sets")
 public class RateSetsController {
-	
+
 	@Autowired
-	RateSetsService rateSetsSer;
-	
+	private RateSetsService rateSetsSer;
+
+	@Autowired
+	private OrganizationService organizationService;
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(RateSetsController.class);
 
-	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE}, produces = { MediaType.APPLICATION_JSON_VALUE})
+	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
 	@ResponseBody
 	public RateSets createRateSets(@RequestBody RateSets rateSets) {
-		LOGGER.info("addRateSets invoked*************************************");
-			
+		LOGGER.info("addRateSets invoked*************************************" + rateSets);
+		System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&" + rateSets);
+
 		return rateSetsSer.create(rateSets);
 	}
 
@@ -56,8 +60,8 @@ public class RateSetsController {
 		}
 		return new ResponseEntity<>(returnStatus);
 	}
-	
-	@RequestMapping(method = {RequestMethod.PUT, RequestMethod.PATCH})
+
+	@RequestMapping(method = { RequestMethod.PUT, RequestMethod.PATCH })
 	public RateSets updateRateSets(@RequestBody RateSets rateSets) {
 
 		LOGGER.info("updateRateSets invoked");

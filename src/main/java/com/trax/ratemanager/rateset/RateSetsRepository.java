@@ -8,5 +8,4 @@ import com.trax.ratemanager.jpa.AbstractJpaRepository;
 public interface RateSetsRepository extends AbstractJpaRepository<RateSets, String> {
 	
 	RateSets getById(String id);
-
 }
