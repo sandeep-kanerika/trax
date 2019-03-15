@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.trax.ratemanager.config.AppConstants;
 import com.trax.ratemanager.ratecolumn.RateColumn;
-import com.trax.ratemanager.raterow.RateRows;
+import com.trax.ratemanager.raterow.RateRow;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,7 +27,7 @@ import lombok.Setter;
 public class RateTables {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private String id;
 	private String creatorOrgId;
 	private String name;
@@ -36,11 +36,9 @@ public class RateTables {
 	private String tableGroup;
 	private String tableType;
 	private String columnHash;
-
-	@OneToMany
-	private List<RateColumn> columns;
-
-	@OneToMany
-	private List<RateRows> rateRows;
-
+	/*
+	 * @OneToMany private List<RateColumn> columns;
+	 * 
+	 * @OneToMany private List<RateRow> rateRows;
+	 */
 }

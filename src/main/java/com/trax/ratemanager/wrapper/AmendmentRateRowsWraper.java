@@ -2,13 +2,13 @@ package com.trax.ratemanager.wrapper;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.trax.ratemanager.amendment.Amendments;
-import com.trax.ratemanager.raterow.RateRows;
+import com.trax.ratemanager.raterow.RateRow;
 
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class AmendmentRateRowsWraper {
 
 	private Amendments amendments;
-	private RateRows rateRows[];
+	private RateRow rateRows[];
 
 	public AmendmentRateRowsWraper() {
 
@@ -22,11 +22,11 @@ public class AmendmentRateRowsWraper {
 		this.amendments = amendments;
 	}
 
-	public RateRows[] getRateRows() {
+	public RateRow[] getRateRows() {
 		return rateRows;
 	}
 
-	public void setRateRows(RateRows[] rateRows) {
+	public void setRateRows(RateRow[] rateRows) {
 		this.rateRows = rateRows;
 	}
 

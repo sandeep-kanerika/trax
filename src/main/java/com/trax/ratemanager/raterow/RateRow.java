@@ -21,7 +21,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class RateRows {
+public class RateRow {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

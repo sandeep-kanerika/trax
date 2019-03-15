@@ -13,7 +13,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.trax.ratemanager.raterow.RateRows;
+import com.trax.ratemanager.raterow.RateRow;
 import com.trax.ratemaneger.utility.LastModifiedByUser;
 
 import lombok.AllArgsConstructor;
@@ -48,7 +48,7 @@ public class Amendments {
 	private String mode;
 
 	@OneToMany
-	private List<RateRows> rateRows;
+	private List<RateRow> rateRows;
 
 	private Date defaultEffectiveDateFrom;
 	private Date defaultEffectiveDateThru;

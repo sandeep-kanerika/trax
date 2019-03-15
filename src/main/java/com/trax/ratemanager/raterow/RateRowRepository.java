@@ -5,8 +5,8 @@ import org.springframework.stereotype.Repository;
 import com.trax.ratemanager.jpa.AbstractJpaRepository;
 
 @Repository
-public interface RateRowsRepository extends AbstractJpaRepository<RateRows, String> {
+public interface RateRowRepository extends AbstractJpaRepository<RateRow, String> {
 	
-	RateRows getById(String id);
+	RateRow getById(String id);
 
 }

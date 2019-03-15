@@ -23,7 +23,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class RateRowsHistory {
+public class RateRowHistory {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

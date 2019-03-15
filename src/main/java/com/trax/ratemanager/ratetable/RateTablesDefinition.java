@@ -35,8 +35,7 @@ public class RateTablesDefinition {
     private String tableGroup;
     private String tableType;
     private String columnHash;
-    
-    @OneToMany
-    private List <ColumnDefinitions> columns;
-    
+	/*
+	 * @OneToMany private List <ColumnDefinitions> columns;
+	 */
 }

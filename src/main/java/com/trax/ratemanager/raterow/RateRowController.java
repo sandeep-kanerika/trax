@@ -1,4 +1,4 @@
-package com.trax.ratemanager.raterow.history;
+package com.trax.ratemanager.raterow;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,41 +10,39 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trax.ratemanager.exception.ResourceNotFoundException;
 
 @RestController
-@RequestMapping("/rate/rows/history")
-public class RateRowsHistoryController {
+@RequestMapping("/rate/rows")
+public class RateRowController {
 	
 	@Autowired
-	RateRowsHistoryService rateRowsHistorySer;
+	RateRowService rateRowsService;
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(RateRowsHistoryController.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(RateRowController.class);
 
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE}, produces = { MediaType.APPLICATION_JSON_VALUE})
-	@ResponseBody
-	public RateRowsHistory createRateRowsHistory(@RequestBody RateRowsHistory rateRowsHistory) {
+	public RateRow createRateRows(@RequestBody RateRow rateRows) {
 
-		LOGGER.info("addRateRowsHistory invoked");
-		return rateRowsHistorySer.create(rateRowsHistory);
+		LOGGER.info("addRateRows invoked---------------------->>>>>");
+		return rateRowsService.create(rateRows);
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<RateRowsHistory> getRateRowsHistory(@PathVariable String id) {
-		LOGGER.info("getRateRowsHistory invoked");
+	public ResponseEntity<RateRow> getRateRows(@PathVariable String id) {
+		LOGGER.info("getRateRows invoked");
 		HttpStatus returnStatus = HttpStatus.OK;
 		try {
-			RateRowsHistory getAmendmentsDetail = rateRowsHistorySer.getById(id);
+			RateRow getAmendmentsDetail = rateRowsService.getById(id);
 			if (getAmendmentsDetail != null) {
 				return new ResponseEntity<>(getAmendmentsDetail, returnStatus);
 			} else {
-				throw new ResourceNotFoundException("RateRowsHistory Id doesn't exist !");
+				throw new ResourceNotFoundException("RateRows Id doesn't exist !");
 			}
 		} catch (ResourceNotFoundException e) {
 			LOGGER.error(e.getMessage());
@@ -56,17 +54,18 @@ public class RateRowsHistoryController {
 		return new ResponseEntity<>(returnStatus);
 	}
 	
-	@RequestMapping(method = {RequestMethod.PUT, RequestMethod.PATCH})
-	public RateRowsHistory updateRateRowsHistory(@RequestBody RateRowsHistory rateRowsHistory) {
+	@PutMapping(consumes = { MediaType.APPLICATION_JSON_VALUE}, produces = { MediaType.APPLICATION_JSON_VALUE})
+	public RateRow updateRateRows(@RequestBody RateRow rateRows) {
 
-		LOGGER.info("updateRateRowsHistory invoked");
-		return rateRowsHistorySer.update(rateRowsHistory);
+		LOGGER.info("updateRateRows invoked");
+		return rateRowsService.update(rateRows);
 	}
 
 	@DeleteMapping(value = "/{id}")
-	public RateRowsHistory deleteRateRowsHistory(@PathVariable String id) {
+	public void deleteRateRows(@PathVariable String id) {
 
-		LOGGER.info("deleteRateRowsHistory invoked");
-		return null/* rateRowsHistorySer.delete(id) */;
+		LOGGER.info("deleteRateRows invoked");
+		rateRowsService.delete(id);
 	}
+
 }

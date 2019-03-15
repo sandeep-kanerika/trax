@@ -20,28 +20,28 @@ import com.trax.ratemanager.exception.ResourceNotFoundException;
 
 @RestController
 @RequestMapping("/rate/sets")
-public class RateSetsController {
+public class RateSetController {
 	
 	@Autowired
 	RateSetsService rateSetsSer;
 	
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(RateSetsController.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(RateSetController.class);
 
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE}, produces = { MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public RateSets createRateSets(@RequestBody RateSets rateSets) {
+	public RateSet createRateSets(@RequestBody RateSet rateSets) {
 		LOGGER.info("addRateSets invoked*************************************");
 			
 		return rateSetsSer.create(rateSets);
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<RateSets> getRateSets(@PathVariable String id) {
+	public ResponseEntity<RateSet> getRateSets(@PathVariable String id) {
 		LOGGER.info("getRateSets invoked");
 		HttpStatus returnStatus = HttpStatus.OK;
 		try {
-			RateSets getAmendmentsDetail = rateSetsSer.getById(id);
+			RateSet getAmendmentsDetail = rateSetsSer.getById(id);
 			if (getAmendmentsDetail != null) {
 				return new ResponseEntity<>(getAmendmentsDetail, returnStatus);
 			} else {
@@ -58,14 +58,14 @@ public class RateSetsController {
 	}
 	
 	@RequestMapping(method = {RequestMethod.PUT, RequestMethod.PATCH})
-	public RateSets updateRateSets(@RequestBody RateSets rateSets) {
+	public RateSet updateRateSets(@RequestBody RateSet rateSets) {
 
 		LOGGER.info("updateRateSets invoked");
 		return rateSetsSer.update(rateSets);
 	}
 
 	@DeleteMapping(value = "/{id}")
-	public RateSets deleteRateSets(@PathVariable String id) {
+	public RateSet deleteRateSets(@PathVariable String id) {
 
 		LOGGER.info("deleteRateSets invoked");
 		return null/* RateSetsSer.delete(id) */;

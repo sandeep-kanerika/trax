@@ -1,72 +1,66 @@
 package com.trax.ratemanager.rateset;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.trax.ratemanager.exception.ResourceNotFoundException;
-import com.trax.ratemanager.jpa.AbstractJpaRepository;
-import com.trax.ratemanager.jpa.AbstractJpaService;
 import com.trax.ratemaneger.utility.CreateByUserRepository;
 import com.trax.ratemaneger.utility.CreatedByUser;
 import com.trax.ratemaneger.utility.LastModifiedByUser;
 import com.trax.ratemaneger.utility.LastModifiedByUserRepository;
 
 @Service
-public class RateSetsService extends AbstractJpaService<RateSets> {
+public class RateSetsService/* extends AbstractJpaService<RateSet> */ {
 
 	@Autowired
-	private RateSetsRepository rateSetsRepository;
-	
+	private RateSetRepository rateSetsRepository;
+
 	@Autowired
 	private LastModifiedByUserRepository lastModifiedByRepo;
-	
+
 	@Autowired
 	private CreateByUserRepository createdByRepo;
-	
 
-	@Override
-	protected RateSets create(RateSets rateSets) {
-		LastModifiedByUser lastModifiedBy = rateSets.getLastUpdatedBy();
-		CreatedByUser createdBy = rateSets.getCreatedBy();
-		
-		createdByRepo.save(createdBy);
-		lastModifiedByRepo.save(lastModifiedBy);
+	protected RateSet create(RateSet rateSet) {
+		System.out.println("RateSet:::::" + rateSet);
 
-		return save(rateSets);
+		LastModifiedByUser lastModifiedBy = rateSet.getLastUpdatedBy();
+		CreatedByUser createdBy = rateSet.getCreatedBy();
+
+		System.out.println("lastModifiedBy:" + lastModifiedBy);
+		System.out.println("createdby:" + createdBy);
+
+		if (createdBy != null)
+			createdByRepo.save(createdBy);
+		if (lastModifiedBy != null)
+			lastModifiedByRepo.save(lastModifiedBy);
+
+		System.out.println("trying to store rateSets:::" + rateSet);
+		return rateSetsRepository.save(rateSet);
 	}
 
-	@Override
-	protected RateSets update(RateSets _rateSets) {
-		RateSets rateSets = getById(_rateSets.getId());
-		if (rateSets != null)
-			return save(_rateSets);
+	protected RateSet update(RateSet _rateSets) {
+		Optional<RateSet> rateSet = rateSetsRepository.findById(_rateSets.getId());
+		if (rateSet.isPresent())
+			return rateSetsRepository.save(rateSet.get());
 		else {
 			throw new ResourceNotFoundException("RateSets Id Doesn't Exists !");
 		}
 	}
 
-	@Override
-	protected RateSets delete(RateSets rateSets) {
-		// TODO Auto-generated method stub
+	protected RateSet delete(RateSet rateSets) {
 		return null;
 	}
 
-	@Override
-	protected List<RateSets> search(RateSets rateSets) {
-		// TODO Auto-generated method stub
+	public List<RateSet> search(RateSet rateSets) {
 		return null;
 	}
 
-	@Override
-	protected AbstractJpaRepository<RateSets, String> getRepository() {
-		// TODO Auto-generated method stub
-		return rateSetsRepository;
-	}
-
-	public RateSets getById(String id) {
-		// TODO Auto-generated method stub
+	public RateSet getById(String id) {
 		return rateSetsRepository.getById(id);
 	}
 

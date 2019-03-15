@@ -10,19 +10,20 @@ import com.trax.ratemanager.jpa.AbstractJpaRepository;
 import com.trax.ratemanager.jpa.AbstractJpaService;
 
 @Service
-public class RateRowsService extends AbstractJpaService<RateRows>{
+public class RateRowService extends AbstractJpaService<RateRow>{
 
 	@Autowired
-	RateRowsRepository rateRowsRepository; 
+	RateRowRepository rateRowsRepository; 
 	
 	@Override
-	protected RateRows create(RateRows rateRows) {
+	protected RateRow create(RateRow rateRows) {
+		
 		return save(rateRows);
 	}
 
 	@Override
-	protected RateRows update(RateRows _rateRows) {
-		RateRows rateRows = getById(_rateRows.getId());
+	protected RateRow update(RateRow _rateRows) {
+		RateRow rateRows = getById(_rateRows.getId());
 		if(rateRows != null)
 			return save(_rateRows);
 		else {
@@ -31,7 +32,7 @@ public class RateRowsService extends AbstractJpaService<RateRows>{
 	}
 
 	@Override
-	protected RateRows delete(RateRows rateRows) {
+	protected RateRow delete(RateRow rateRows) {
 		rateRowsRepository.delete(rateRows);
 		return rateRows;
 	}
@@ -42,16 +43,16 @@ public class RateRowsService extends AbstractJpaService<RateRows>{
 
 
 	@Override
-	protected List<RateRows> search(RateRows rateRows) {
+	protected List<RateRow> search(RateRow rateRows) {
 		return rateRowsRepository.findAll();
 	}
 
 	@Override
-	protected AbstractJpaRepository<RateRows, String> getRepository() {
+	protected AbstractJpaRepository<RateRow, String> getRepository() {
 		return rateRowsRepository;
 	}
 
-	public RateRows getById(String id) {
+	public RateRow getById(String id) {
 		return rateRowsRepository.getById(id);
 	}
 

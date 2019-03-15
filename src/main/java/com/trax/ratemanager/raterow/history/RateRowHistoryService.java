@@ -3,7 +3,6 @@ package com.trax.ratemanager.raterow.history;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.trax.ratemanager.exception.ResourceNotFoundException;
@@ -11,22 +10,22 @@ import com.trax.ratemanager.jpa.AbstractJpaRepository;
 import com.trax.ratemanager.jpa.AbstractJpaService;
 
 @Service
-public class RateRowsHistoryService extends AbstractJpaService<RateRowsHistory>{
+public class RateRowHistoryService extends AbstractJpaService<RateRowHistory> {
 
 	@Autowired
-	RateRowsHistoryRepository rateRowsHistoryRepository; 
-	
+	RateRowHistoryRepository rateRowsHistoryRepository;
+
 	@Override
-	protected RateRowsHistory create(RateRowsHistory rateRowsHistory) {
+	protected RateRowHistory create(RateRowHistory rateRowsHistory) {
 		// TODO Auto-generated method stub
 		return save(rateRowsHistory);
 	}
 
 	@Override
-	protected RateRowsHistory update(RateRowsHistory _rateRowsHistory) {
+	protected RateRowHistory update(RateRowHistory _rateRowsHistory) {
 		// TODO Auto-generated method stub
-		RateRowsHistory rateRowsHistory = getById(_rateRowsHistory.getId());
-		if(rateRowsHistory != null)
+		RateRowHistory rateRowsHistory = getById(_rateRowsHistory.getId());
+		if (rateRowsHistory != null)
 			return save(_rateRowsHistory);
 		else {
 			throw new ResourceNotFoundException("RateRowsHistory Id Doesn't Exists !");
@@ -34,26 +33,25 @@ public class RateRowsHistoryService extends AbstractJpaService<RateRowsHistory>{
 	}
 
 	@Override
-	protected RateRowsHistory delete(RateRowsHistory rateRowsHistory) {
+	protected RateRowHistory delete(RateRowHistory rateRowsHistory) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	protected List<RateRowsHistory> search(RateRowsHistory rateRowsHistory) {
+	protected List<RateRowHistory> search(RateRowHistory rateRowsHistory) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	protected AbstractJpaRepository<RateRowsHistory, String> getRepository() {
-		// TODO Auto-generated method stub
-		return rateRowsHistoryRepository;
-	}
-
-	public RateRowsHistory getById(String id) {
+	public RateRowHistory getById(String id) {
 		// TODO Auto-generated method stub
 		return rateRowsHistoryRepository.getById(id);
+	}
+
+	@Override
+	protected AbstractJpaRepository<RateRowHistory, String> getRepository() {
+		return rateRowsHistoryRepository;
 	}
 
 }
