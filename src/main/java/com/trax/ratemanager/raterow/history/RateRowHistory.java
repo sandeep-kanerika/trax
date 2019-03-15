@@ -1,7 +1,7 @@
 package com.trax.ratemanager.raterow.history;
 
-import java.util.Date;
 import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

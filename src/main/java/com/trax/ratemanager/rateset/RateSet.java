@@ -5,20 +5,20 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-
-import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.trax.ratemanager.amendment.Amendments;
 import com.trax.ratemanager.config.AppConstants;
+import com.trax.ratemanager.orgnization.Orgnization;
 import com.trax.ratemanager.ratetable.RateTables;
+import com.trax.ratemanager.utility.LastModifiedByUser;
 import com.trax.ratemaneger.utility.CreatedByUser;
-import com.trax.ratemaneger.utility.LastModifiedByUser;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -30,15 +30,17 @@ import lombok.Setter;
 public class RateSet {
 
 	@Id
-	@GeneratedValue(generator = "system-uuid")
-	@GenericGenerator(name = "system-uuid", strategy = "uuid")
 	private String id;
 
 	private Integer status;
 
-	private String buyerOrgId;
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "buyerOrgId")
+	private Orgnization buyerOrg;
 
-	private String sellerOrgId;
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "sellerOrgId")
+	private Orgnization sellerOrg;
 
 	private String name;
 
@@ -59,17 +61,25 @@ public class RateSet {
 	private ZonedDateTime dateAssigned;
 
 	private String tableHash;
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "rateSetId") 
+	private List<RateTables> tables;
+	 
 	/*
-	 * @OneToMany(cascade = CascadeType.ALL) private List<RateTables> tables;
+	 * @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	 * 
-	 * @OneToMany(cascade = CascadeType.ALL) private List<Amendments> amendments;
+	 * @JoinColumn(name = "amendmentId") private List<Amendments> amendments;
 	 */
+
 	private Long reviewedBy;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "createdBy")
 	private CreatedByUser createdBy;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "lastModifiedBy")
 	private LastModifiedByUser lastUpdatedBy;
 
 	private Long lastAssignedBy;

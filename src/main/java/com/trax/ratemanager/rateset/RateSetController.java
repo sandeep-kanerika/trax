@@ -30,10 +30,10 @@ public class RateSetController {
 
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE}, produces = { MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public RateSet createRateSets(@RequestBody RateSet rateSets) {
+	public RateSet createRateSets(@RequestBody RateSetVo rateSetVo) throws Exception {
 		LOGGER.info("addRateSets invoked*************************************");
-			
-		return rateSetsSer.create(rateSets);
+	    RateSet rateSet = RateSetConverter.convertToRateSet(rateSetVo);
+		return rateSetsSer.create(rateSet);
 	}
 
 	@GetMapping("/{id}")

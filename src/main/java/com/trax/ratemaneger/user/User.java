@@ -1,23 +1,28 @@
-package com.trax.ratemanager.orgnization;
+package com.trax.ratemaneger.user;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.validation.constraints.Email;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
 @Getter
 @Setter
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class Orgnization {
-
+public class User {
+	
 	@Id
 	private String id;
-	private String orgName;
-	private Enum<OrganizationType> orgType;
-
+	
+	private String userName;
+	
+	@Email
+	private String emailId;
+	
+	private String comment;
 }

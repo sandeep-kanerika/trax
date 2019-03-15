@@ -2,10 +2,13 @@ package com.trax.ratemanager.ratecolumn;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -25,7 +28,6 @@ import lombok.Setter;
 public class RateColumn {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String id;
 
 	private String concept;
@@ -54,7 +56,8 @@ public class RateColumn {
 
 	private String pivotCharge;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name="rateColumnId")
 	private List<ColumnValidations> columnValidations;
 
 	private String description;

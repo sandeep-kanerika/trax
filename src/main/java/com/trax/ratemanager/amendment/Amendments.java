@@ -1,20 +1,19 @@
 package com.trax.ratemanager.amendment;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.Date;
-import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.trax.ratemanager.raterow.RateRow;
-import com.trax.ratemaneger.utility.LastModifiedByUser;
+import com.trax.ratemanager.utility.LastModifiedByUser;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,7 +26,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table
 public class Amendments {
 
 	@Id
@@ -46,30 +44,31 @@ public class Amendments {
 	private String ratesetName;
 	private String region;
 	private String mode;
-
-	@OneToMany
-	private List<RateRow> rateRows;
+	/*
+	 * @OneToMany private List<RateRow> rateRows;
+	 */
 
 	private Date defaultEffectiveDateFrom;
 	private Date defaultEffectiveDateThru;
 
 	private String reviewedBy;
 
-	@OneToOne
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "lastUpdateBy")
 	private LastModifiedByUser lastUpdatedBy;
 
 	private String lastAssignedBy;
 	private String approvers;
 	private Long currentApprover;
 
-	private LocalDateTime dateApproved;
+	private ZonedDateTime dateApproved;
 
-	private LocalDateTime dateCreated;
+	private ZonedDateTime dateCreated;
 
-	private LocalDateTime dateUpdated;
+	private ZonedDateTime dateUpdated;
 
-	private LocalDateTime dateReviewed;
+	private ZonedDateTime dateReviewed;
 
-	private LocalDateTime dateAssigned;
+	private ZonedDateTime dateAssigned;
 
 }

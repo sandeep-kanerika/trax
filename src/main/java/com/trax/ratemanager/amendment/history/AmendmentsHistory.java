@@ -30,51 +30,51 @@ public class AmendmentsHistory {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+	private String id;
 	private Integer status;
-    private String amendmentId;
+	private String amendmentId;
 
-    private String actionType;
+	private String actionType;
 
-    @JsonFormat(pattern = AppConstants.DEFAULT_DATETIME_FORMAT)
-    private Timestamp dateRecorded;
-    private String referenceId;
-    private Integer type;
-    private String description;
-    private Long ratesetId;
-    private Long ratesetReferenceId;
-    private Long buyerOrgId;
-    private Long sellerOrgId;
-    private String buyerOrgName;
-    private String sellerOrgName;
-    private String ratesetName;
-    private String region;
-    private String mode;
+	@JsonFormat(pattern = AppConstants.DEFAULT_DATETIME_FORMAT)
+	private Timestamp dateRecorded;
+	private String referenceId;
+	private Integer type;
+	private String description;
+	private Long ratesetId;
+	private Long ratesetReferenceId;
+	private Long buyerOrgId;
+	private Long sellerOrgId;
+	private String buyerOrgName;
+	private String sellerOrgName;
+	private String ratesetName;
+	private String region;
+	private String mode;
 
-    @JsonFormat(pattern = AppConstants.DEFAULT_DATE_FORMAT)
-    private Date defaultEffectiveDateFrom;
-    @JsonFormat(pattern = AppConstants.DEFAULT_DATE_FORMAT)
-    private Date defaultEffectiveDateThru;
+	@JsonFormat(pattern = AppConstants.DEFAULT_DATE_FORMAT)
+	private Date defaultEffectiveDateFrom;
+	@JsonFormat(pattern = AppConstants.DEFAULT_DATE_FORMAT)
+	private Date defaultEffectiveDateThru;
 
-    @JsonFormat(pattern = AppConstants.DEFAULT_DATETIME_FORMAT)
-    private Timestamp dateApproved;
+	@JsonFormat(pattern = AppConstants.DEFAULT_DATETIME_FORMAT)
+	private Timestamp dateApproved;
 
-    @JsonFormat(pattern = AppConstants.DEFAULT_DATETIME_FORMAT)
-    private Timestamp dateCreated;
+	@JsonFormat(pattern = AppConstants.DEFAULT_DATETIME_FORMAT)
+	private Timestamp dateCreated;
 
-    @JsonFormat(pattern = AppConstants.DEFAULT_DATETIME_FORMAT)
-    private Timestamp dateUpdated;
+	@JsonFormat(pattern = AppConstants.DEFAULT_DATETIME_FORMAT)
+	private Timestamp dateUpdated;
 
-    @JsonFormat(pattern = AppConstants.DEFAULT_DATETIME_FORMAT)
-    private Timestamp dateReviewed;
+	@JsonFormat(pattern = AppConstants.DEFAULT_DATETIME_FORMAT)
+	private Timestamp dateReviewed;
 
-    @JsonFormat(pattern = AppConstants.DEFAULT_DATETIME_FORMAT)
-    private Timestamp dateAssigned;
-    
-    private Long reviewedBy;
-    private Long createdBy;
-    private Long lastUpdatedBy;
-    private Long lastAssignedBy;
-    private String approvers;
-    private Long currentApprover;
-    }
+	@JsonFormat(pattern = AppConstants.DEFAULT_DATETIME_FORMAT)
+	private Timestamp dateAssigned;
+
+	private Long reviewedBy;
+	private Long createdBy;
+	private Long lastUpdatedBy;
+	private Long lastAssignedBy;
+	private String approvers;
+	private Long currentApprover;
+}

@@ -1,4 +1,4 @@
-package com.trax.ratemanager.column.definition;
+package com.trax.ratemanager.column.defination;
 
 import java.util.List;
 

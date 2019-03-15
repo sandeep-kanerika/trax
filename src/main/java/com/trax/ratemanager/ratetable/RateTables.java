@@ -3,10 +3,11 @@ package com.trax.ratemanager.ratetable;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -27,18 +28,23 @@ import lombok.Setter;
 public class RateTables {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private String id;
 	private String creatorOrgId;
 	private String name;
+
 	@JsonFormat(pattern = AppConstants.DEFAULT_DATETIME_FORMAT)
 	private Timestamp dateCreated;
+
 	private String tableGroup;
 	private String tableType;
 	private String columnHash;
-	/*
-	 * @OneToMany private List<RateColumn> columns;
-	 * 
-	 * @OneToMany private List<RateRow> rateRows;
-	 */
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "rateTableId")
+	private List<RateColumn> columns;
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "rateTableId")
+	private List<RateRow> rateRows;
+
 }

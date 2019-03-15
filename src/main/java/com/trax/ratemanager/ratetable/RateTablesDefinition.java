@@ -1,17 +1,14 @@
 package com.trax.ratemanager.ratetable;
 
 import java.sql.Timestamp;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.trax.ratemanager.column.definition.ColumnDefinitions;
 import com.trax.ratemanager.config.AppConstants;
 
 import lombok.Getter;
