@@ -13,9 +13,8 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.trax.ratemanager.amendment.Amendments;
 import com.trax.ratemanager.config.AppConstants;
-import com.trax.ratemanager.orgnization.Orgnization;
+import com.trax.ratemanager.orgnization.Organization;
 import com.trax.ratemanager.ratetable.RateTables;
 import com.trax.ratemanager.utility.LastModifiedByUser;
 import com.trax.ratemaneger.utility.CreatedByUser;
@@ -34,13 +33,13 @@ public class RateSet {
 
 	private Integer status;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	@JoinColumn(name = "buyerOrgId")
-	private Orgnization buyerOrg;
+	private Organization buyerOrg;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	@JoinColumn(name = "sellerOrgId")
-	private Orgnization sellerOrg;
+	private Organization sellerOrg;
 
 	private String name;
 
@@ -63,9 +62,9 @@ public class RateSet {
 	private String tableHash;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "rateSetId") 
+	@JoinColumn(name = "rateSetId")
 	private List<RateTables> tables;
-	 
+
 	/*
 	 * @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	 * 
@@ -74,11 +73,11 @@ public class RateSet {
 
 	private Long reviewedBy;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
 	@JoinColumn(name = "createdBy")
 	private CreatedByUser createdBy;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
 	@JoinColumn(name = "lastModifiedBy")
 	private LastModifiedByUser lastUpdatedBy;
 

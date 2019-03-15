@@ -13,7 +13,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Orgnization {
+public class Organization {
 
 	@Id
 	private String id;

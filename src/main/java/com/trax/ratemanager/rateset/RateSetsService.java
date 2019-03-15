@@ -35,7 +35,7 @@ public class RateSetsService/* extends AbstractJpaService<RateSet> */ {
 		 * null) lastModifiedByRepo.save(lastModifiedBy);
 		 */
 
-		System.out.println("trying to store rateSets:::" + rateSet);
+		System.out.println("trying to store rateSets:::" + rateSet.getBuyerOrg().getId());
 		return rateSetsRepository.save(rateSet);
 	}
 
@@ -58,6 +58,10 @@ public class RateSetsService/* extends AbstractJpaService<RateSet> */ {
 
 	public RateSet getById(String id) {
 		return rateSetsRepository.getById(id);
+	}
+
+	public List<RateSet> findAll() {
+		return rateSetsRepository.findAll();
 	}
 
 }
