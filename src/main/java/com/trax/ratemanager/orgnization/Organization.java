@@ -19,5 +19,4 @@ public class Organization {
 	private String id;
 	private String orgName;
 	private Enum<OrganizationType> orgType;
-
 }

@@ -2,6 +2,7 @@ package com.trax.ratemanager.amendment;
 
 import java.time.ZonedDateTime;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -11,8 +12,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.trax.ratemanager.raterow.RateRow;
 import com.trax.ratemanager.utility.LastModifiedByUser;
 
 import lombok.AllArgsConstructor;
@@ -35,7 +38,7 @@ public class Amendments {
 	private String referenceId;
 	private Integer type;
 	private String description;
-	private String ratesetId;
+	// private String ratesetId;
 	private String ratesetReferenceId;
 	private String buyerOrgId;
 	private String sellerOrgId;
@@ -44,9 +47,10 @@ public class Amendments {
 	private String ratesetName;
 	private String region;
 	private String mode;
-	/*
-	 * @OneToMany private List<RateRow> rateRows;
-	 */
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "amendmentId")
+	private List<RateRow> rateRows;
 
 	private Date defaultEffectiveDateFrom;
 	private Date defaultEffectiveDateThru;

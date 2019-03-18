@@ -30,7 +30,7 @@ public class RateTables {
 	@Id
 	private String id;
 	private String creatorOrgId;
-	private String name;
+	private String tableName;
 
 	@JsonFormat(pattern = AppConstants.DEFAULT_DATETIME_FORMAT)
 	private Timestamp dateCreated;
