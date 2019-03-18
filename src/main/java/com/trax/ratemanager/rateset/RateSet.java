@@ -15,6 +15,7 @@ import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.trax.ratemanager.amendment.Amendment;
 import com.trax.ratemanager.config.AppConstants;
@@ -37,14 +38,14 @@ public class RateSet {
 
 	private Integer status;
 
+	@JsonIgnoreProperties("buyer")
 	@NotFound(action = NotFoundAction.IGNORE)
-	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
-	@JoinColumn(name = "buyerOrgId")
+	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	private Organization buyerOrg;
 
+	@JsonIgnoreProperties("seller")
 	@NotFound(action = NotFoundAction.IGNORE)
-	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
-	@JoinColumn(name = "sellerOrgId")
+	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	private Organization sellerOrg;
 
 	private String name;

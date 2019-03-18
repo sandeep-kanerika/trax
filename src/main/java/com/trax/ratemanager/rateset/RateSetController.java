@@ -24,120 +24,94 @@ public class RateSetController {
 	@Autowired
 	RateSetsService rateSetsService;
 
-	private HttpStatus returnStatus = null;
+	private HttpStatus returnStatus = HttpStatus.OK;
 
-	@PostMapping(value = "/rate/sets", 
-			consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {MediaType.APPLICATION_JSON_VALUE })
+	@PostMapping(value = "/rate/sets", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<RateSet> createRateSets(@RequestBody RateSetVo rateSetVo) throws Exception {
 		log.info("***************Create RateSet(PostRequest) ");
-		log.info("***************RateSetValue Object:::"+ rateSetVo);
+		log.info("***************RateSetValue Object:::" + rateSetVo);
 		RateSet rateSet = RateSetConverter.convertToRateSet(rateSetVo);
-		log.info("***************RateSet Object After VO--to-->BO:::"+rateSet);
+		log.info("***************RateSet Object After VO--to-->BO:::" + rateSet);
 		RateSet createdRateSet = null;
-		try
-		{
+		try {
 			createdRateSet = createdRateSet = rateSetsService.create(rateSet);
 			returnStatus = HttpStatus.CREATED;
-		} 
-		catch (Exception ex) 
-		{
-			log.error("Error occured:::"+ex.getMessage());
+		} catch (Exception ex) {
+			log.error("Error occured:::" + ex.getMessage());
 			returnStatus = HttpStatus.INTERNAL_SERVER_ERROR;
 		}
 		return new ResponseEntity(createdRateSet, returnStatus);
 	}
 
 	@GetMapping(value = "/rate/sets/{id}")
-	public ResponseEntity<RateSet> getRateSets(@PathVariable String id) {
-		log.info("***************Retrive rateset by id:::"+id);
-		 
-		try 
-		{
-			RateSet retrivedRateSet = rateSetsService.getById(id);
-			if (retrivedRateSet != null) 
-			{
-				returnStatus = HttpStatus.OK;
-				return new ResponseEntity<RateSet>(retrivedRateSet, returnStatus);
-			} 
-			else 
-			{
-				returnStatus = HttpStatus.NOT_FOUND;
-				//throw new ResourceNotFoundException("RateSets Id doesn't exist !");
-			}
+	public RateSet getRateSets(@PathVariable String id) {
+		log.info("***************Retrive rateset by id:::" + id);
+
+		RateSet retrivedRateSet = rateSetsService.getById(id);
+		return retrivedRateSet;
+	
+		/*
+		 * try { RateSet retrivedRateSet = rateSetsService.getById(id); if
+		 * (retrivedRateSet != null) { return new
+		 * ResponseEntity<RateSet>(retrivedRateSet,HttpStatus.OK ); } else {
+		 * returnStatus = HttpStatus.NOT_FOUND; throw new
+		 * ResourceNotFoundException("RateSets Id doesn't exist !"); } } catch
+		 * (ResourceNotFoundException e) {
+		 * log.error("************Error occured:::"+e.getMessage()); returnStatus =
+		 * HttpStatus.NOT_FOUND; } catch (Exception e) { returnStatus =
+		 * HttpStatus.INTERNAL_SERVER_ERROR;
+		 * log.error("***********Error occured:::"+e.getMessage()); } return new
+		 * ResponseEntity<RateSet>(returnStatus);
+		 */
 		}
-		catch (ResourceNotFoundException e) 
-		{
-			log.error("************Error occured:::"+e.getMessage());
-			returnStatus = HttpStatus.NOT_FOUND;
-		} catch (Exception e) 
-		{
-			returnStatus = HttpStatus.INTERNAL_SERVER_ERROR;
-			log.error("***********Error occured:::"+e.getMessage());
-		}
-		return new ResponseEntity<RateSet>(returnStatus);
-	}
 
 	@GetMapping(value = "/rate/sets/all")
 	public ResponseEntity<List<RateSet>> findAllRateSets() {
 		log.info("**************fetch all rateset objects");
-		try 
-		{
+		try {
 			List<RateSet> allRateSets = rateSetsService.findAll();
-			if (allRateSets != null && !allRateSets.isEmpty())
-			{
-				return new ResponseEntity<List<RateSet>>(allRateSets, returnStatus);
-			} 
-			else 
-			{
+			if (allRateSets != null && !allRateSets.isEmpty()) {
+				return new ResponseEntity<List<RateSet>>(allRateSets, HttpStatus.OK);
+			} else {
 				log.error("**********No object(s) found!!!");
-				returnStatus= HttpStatus.NOT_FOUND;
-				//throw new ResourceNotFoundException("RateSets Id doesn't exist !");
+				returnStatus = HttpStatus.NOT_FOUND;
+				// throw new ResourceNotFoundException("RateSets Id doesn't exist !");
 			}
-			
-		} 
-		catch (ResourceNotFoundException e)
-		{
-			log.error("**********Error occured:::"+e.getMessage());
+
+		} catch (ResourceNotFoundException e) {
+			log.error("**********Error occured:::" + e.getMessage());
 			returnStatus = HttpStatus.NOT_FOUND;
-		}
-		catch (Exception e) 
-		{
-			log.error("**********Error occured:::"+e.getMessage());
+		} catch (Exception e) {
+			log.error("**********Error occured:::" + e.getMessage());
 			returnStatus = HttpStatus.INTERNAL_SERVER_ERROR;
 		}
 		return new ResponseEntity<List<RateSet>>(returnStatus);
 	}
 
-	@PutMapping(value = "/rate/sets", 
-			consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {MediaType.APPLICATION_JSON_VALUE })
+	@PutMapping(value = "/rate/sets", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<RateSet> updateRateSets(@RequestBody RateSetVo rateSetVo) throws Exception {
 		log.info("***************updateRateSets invoked, internally its going to call post method only...");
 		return createRateSets(rateSetVo);
 	}
 
 	@DeleteMapping(value = "/rate/sets/{id}")
-	public ResponseEntity<RateSet> deleteRateSet(@PathVariable String id)
-	{
+	public ResponseEntity<RateSet> deleteRateSet(@PathVariable String id) {
 		ResponseEntity<RateSet> responseEntity = null;
-		log.info("**************deleteRateSets invoked with id:::"+id);
+		log.info("**************deleteRateSets invoked with id:::" + id);
 		RateSet rateSet = rateSetsService.getById(id);
-		log.info("**************found the rateset id in DB:::"+rateSet);
-		if (rateSet != null) 
-		{
-			try
-			{
-			rateSetsService.delete(rateSet);
-			log.info("deleted the ratesetid from database..." + rateSet.getId());
-			}
-			catch(Exception ex)
-			{
+		log.info("**************found the rateset id in DB:::" + rateSet);
+		if (rateSet != null) {
+			try {
+				rateSetsService.delete(rateSet);
+				log.info("deleted the ratesetid from database..." + rateSet.getId());
+			} catch (Exception ex) {
 				ex.printStackTrace();
 			}
 			responseEntity = new ResponseEntity<RateSet>(rateSet, HttpStatus.OK);
-		}
-		else
-		{
-			responseEntity= new ResponseEntity<RateSet>(HttpStatus.NOT_FOUND);
+		} else {
+			responseEntity = new ResponseEntity<RateSet>(HttpStatus.NOT_FOUND);
 		}
 		return responseEntity;
 	}

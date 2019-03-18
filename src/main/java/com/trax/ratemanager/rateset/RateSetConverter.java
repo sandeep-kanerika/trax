@@ -1,7 +1,7 @@
 package com.trax.ratemanager.rateset;
 
-import com.trax.ratemanager.orgnization.OrganizationType;
 import com.trax.ratemanager.orgnization.Organization;
+import com.trax.ratemanager.orgnization.OrganizationType;
 
 public class RateSetConverter {
 

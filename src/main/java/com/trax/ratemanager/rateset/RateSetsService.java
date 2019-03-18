@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.trax.ratemanager.exception.ResourceNotFoundException;
@@ -17,7 +15,7 @@ public class RateSetsService/* extends AbstractJpaService<RateSet> */ {
 	private RateSetRepository rateSetsRepository;
 
 	protected RateSet create(RateSet rateSet) {
-		System.out.println("trying to store rateSets:::" + rateSet.getBuyerOrg().getId());
+		System.out.println("trying to store rateSets:::");
 		return rateSetsRepository.save(rateSet);
 	}
 
@@ -30,9 +28,9 @@ public class RateSetsService/* extends AbstractJpaService<RateSet> */ {
 		}
 	}
 
-	protected ResponseEntity<?> delete(RateSet rateSets) {
+	protected RateSet delete(RateSet rateSets) {
 		rateSetsRepository.delete(rateSets);
-		return new ResponseEntity(HttpStatus.OK);
+		return rateSets;
 	}
 
 	public List<RateSet> search(RateSet rateSets) {
