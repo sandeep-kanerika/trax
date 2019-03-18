@@ -38,12 +38,14 @@ public class Amendment {
 	private String referenceId;
 	private Integer type;
 	private String description;
-	//private String ratesetId;
+	// private String ratesetId;
 	private String ratesetReferenceId;
+
 	private String buyerOrgId;
 	private String sellerOrgId;
 	private String buyerOrgName;
 	private String sellerOrgName;
+
 	private String ratesetName;
 	private String region;
 	private String mode;

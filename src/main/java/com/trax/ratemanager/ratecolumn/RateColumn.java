@@ -54,7 +54,7 @@ public class RateColumn {
 
 	private String pivotCharge;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name="rateColumnId")
 	private List<ColumnValidation> columnValidations;
 
