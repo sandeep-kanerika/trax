@@ -11,14 +11,18 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.trax.ratemanager.amendment.Amendments;
+import com.trax.ratemanager.amendment.Amendment;
 import com.trax.ratemanager.config.AppConstants;
-import com.trax.ratemanager.orgnization.Orgnization;
-import com.trax.ratemanager.ratetable.RateTables;
-import com.trax.ratemanager.utility.LastModifiedByUser;
+import com.trax.ratemanager.orgnization.Organization;
+import com.trax.ratemanager.ratetable.RateTable;
 import com.trax.ratemaneger.utility.CreatedByUser;
+import com.trax.ratemaneger.utility.LastModifiedByUser;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -34,13 +38,15 @@ public class RateSet {
 
 	private Integer status;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "buyerOrgId")
-	private Orgnization buyerOrg;
+	@JsonIgnoreProperties("buyer")
+	@NotFound(action = NotFoundAction.IGNORE)
+	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+	private Organization buyerOrg;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "sellerOrgId")
-	private Orgnization sellerOrg;
+	@JsonIgnoreProperties("seller")
+	@NotFound(action = NotFoundAction.IGNORE)
+	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+	private Organization sellerOrg;
 
 	private String name;
 
@@ -63,22 +69,23 @@ public class RateSet {
 	private String tableHash;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "rateSetId") 
-	private List<RateTables> tables;
-	 
-	/*
-	 * @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	 * 
-	 * @JoinColumn(name = "amendmentId") private List<Amendments> amendments;
-	 */
+	@JoinColumn(name = "rateSetId")
+	private List<RateTable> tables;
+
+	@NotFound(action = NotFoundAction.IGNORE)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "rateSetId")
+	private List<Amendment> amendments;
 
 	private Long reviewedBy;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@NotFound(action = NotFoundAction.IGNORE)
+	@ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
 	@JoinColumn(name = "createdBy")
 	private CreatedByUser createdBy;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@NotFound(action = NotFoundAction.IGNORE)
+	@ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
 	@JoinColumn(name = "lastModifiedBy")
 	private LastModifiedByUser lastUpdatedBy;
 

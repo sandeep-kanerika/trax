@@ -1,7 +1,7 @@
 package com.trax.ratemanager.rateset;
 
+import com.trax.ratemanager.orgnization.Organization;
 import com.trax.ratemanager.orgnization.OrganizationType;
-import com.trax.ratemanager.orgnization.Orgnization;
 
 public class RateSetConverter {
 
@@ -22,8 +22,8 @@ public class RateSetConverter {
 			rateSet.setTableHash(rateSetVo.getTableHash());
 			rateSet.setTables(rateSetVo.getTables());
 
-			rateSet.setBuyerOrg(new Orgnization(rateSetVo.getBuyerOrgId(), rateSetVo.getBuyerOrgName(), OrganizationType.BUYER));
-			rateSet.setSellerOrg(new Orgnization(rateSetVo.getSellerOrgId(), rateSetVo.getSellerOrgName(), OrganizationType.SELLER));
+			rateSet.setBuyerOrg(new Organization(rateSetVo.getBuyerOrgId(), rateSetVo.getBuyerOrgName(), OrganizationType.BUYER));
+			rateSet.setSellerOrg(new Organization(rateSetVo.getSellerOrgId(), rateSetVo.getSellerOrgName(), OrganizationType.SELLER));
 
 			return rateSet;
 
@@ -35,8 +35,12 @@ public class RateSetConverter {
 
 	}
 
-	public static RateSetVo convertToRateSetVo(RateSet rateSet) {
-		return new RateSetVo();
+	public static RateSetVo convertToRateSetVo(RateSet rateSet) 
+	{
+		String id = rateSet.getId();
+		 RateSetVo rateSetVo = new RateSetVo();
+		 rateSetVo.setId(id);
+		return rateSetVo;
 	}
 
 }

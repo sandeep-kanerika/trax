@@ -25,12 +25,12 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class RateTables {
+public class RateTable {
 
 	@Id
 	private String id;
 	private String creatorOrgId;
-	private String name;
+	private String tableName;
 
 	@JsonFormat(pattern = AppConstants.DEFAULT_DATETIME_FORMAT)
 	private Timestamp dateCreated;

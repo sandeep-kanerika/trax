@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,31 +17,29 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.trax.ratemanager.exception.ResourceNotFoundException;
 
-import jdk.nashorn.internal.runtime.FindProperty;
-
 @RestController
 @RequestMapping("/rate/tables")
-public class RateTablesDefinitionController {
+public class RateTableController {
 
 	@Autowired
-	RateTablesDefinitionService rateTablesDefinitionService;
+	RateTableService rateTablesService;
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(RateTablesDefinitionController.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(RateTableController.class);
 
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
 	@ResponseBody
-	public RateTablesDefinition createRateTablesDefinition(@RequestBody RateTablesDefinition rateTablesDefinition) {
+	public RateTable createRateTablesDefinition(@RequestBody RateTable rateTable) {
 
 		LOGGER.info("rateTablesDefinition invoked");
-		return rateTablesDefinitionService.create(rateTablesDefinition);
+		return rateTablesService.create(rateTable);
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<RateTablesDefinition> getRateTablesDefinition(@PathVariable String id) {
+	public ResponseEntity<RateTable> getRateTablesDefinition(@PathVariable String id) {
 		LOGGER.info("getRateTablesDefinition invoked");
 		HttpStatus returnStatus = HttpStatus.OK;
 		try {
-			RateTablesDefinition getAmendmentsDetail = rateTablesDefinitionService.getById(id);
+			RateTable getAmendmentsDetail = rateTablesService.getById(id);
 
 			if (getAmendmentsDetail != null) {
 				return new ResponseEntity<>(getAmendmentsDetail, returnStatus);
@@ -60,10 +57,10 @@ public class RateTablesDefinitionController {
 	}
 
 	@RequestMapping(method = { RequestMethod.PUT, RequestMethod.PATCH })
-	public RateTablesDefinition updateRateTablesDefinition(@RequestBody RateTablesDefinition rateTablesDefinition) {
+	public RateTable updateRateTablesDefinition(@RequestBody RateTable rateTablesDefinition) {
 
 		LOGGER.info("updateRateTablesDefinition invoked");
-		return rateTablesDefinitionService.update(rateTablesDefinition);
+		return rateTablesService.update(rateTablesDefinition);
 	}
 
 	/*
