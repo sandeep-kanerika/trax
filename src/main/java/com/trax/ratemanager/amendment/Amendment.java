@@ -16,7 +16,7 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.trax.ratemanager.raterow.RateRow;
-import com.trax.ratemanager.utility.LastModifiedByUser;
+import com.trax.ratemaneger.user.LastModifiedByUser;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,7 +29,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Amendments {
+public class Amendment {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,7 +38,7 @@ public class Amendments {
 	private String referenceId;
 	private Integer type;
 	private String description;
-	// private String ratesetId;
+	private String ratesetId;
 	private String ratesetReferenceId;
 	private String buyerOrgId;
 	private String sellerOrgId;

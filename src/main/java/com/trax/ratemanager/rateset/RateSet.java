@@ -16,12 +16,12 @@ import org.hibernate.annotations.NotFoundAction;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.trax.ratemanager.amendment.Amendments;
+import com.trax.ratemanager.amendment.Amendment;
 import com.trax.ratemanager.config.AppConstants;
 import com.trax.ratemanager.orgnization.Organization;
-import com.trax.ratemanager.ratetable.RateTables;
-import com.trax.ratemanager.utility.LastModifiedByUser;
+import com.trax.ratemanager.ratetable.RateTable;
 import com.trax.ratemaneger.utility.CreatedByUser;
+import com.trax.ratemaneger.utility.LastModifiedByUser;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -69,12 +69,12 @@ public class RateSet {
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "rateSetId")
-	private List<RateTables> tables;
+	private List<RateTable> tables;
 
 	@NotFound(action = NotFoundAction.IGNORE)
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "rateSetId")
-	private List<Amendments> amendments;
+	private List<Amendment> amendments;
 
 	private Long reviewedBy;
 

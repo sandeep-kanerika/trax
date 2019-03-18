@@ -30,16 +30,16 @@ public class ColumnDefinitionsController {
 
 	@RequestMapping(method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE}, produces = { MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ColumnDefinitions createColumnDefinitions(@RequestBody ColumnDefinitions columnDefinitions) {
+	public ColumnDefinition createColumnDefinitions(@RequestBody ColumnDefinition columnDefinitions) {
 
 		logger.info("addColumnDefinitions invoked");
 		return columnDefinitionSer.create(columnDefinitions);
 	}
 
 	@GetMapping("/{id}")
-	public ColumnDefinitions getColumnDefinitions(@PathVariable String id) {
+	public ColumnDefinition getColumnDefinitions(@PathVariable String id) {
 		logger.info("getColumnDefinitions invoked");
-		ColumnDefinitions getcolumnDefinitionDetail =  columnDefinitionSer.getById(id);
+		ColumnDefinition getcolumnDefinitionDetail =  columnDefinitionSer.getById(id);
 		if(getcolumnDefinitionDetail != null) {
 			return getcolumnDefinitionDetail;
 		}else {
@@ -54,14 +54,14 @@ public class ColumnDefinitionsController {
 //	}
 
 	@RequestMapping(method = { RequestMethod.PUT , RequestMethod.PATCH })
-	public ColumnDefinitions updateColumnDefinitions(@RequestBody ColumnDefinitions columnDefinitions) {
+	public ColumnDefinition updateColumnDefinitions(@RequestBody ColumnDefinition columnDefinitions) {
 
 		logger.info("updateColumnDefinition invoked");
 		return columnDefinitionSer.update(columnDefinitions);
 	}
 
 	@DeleteMapping(value = "/{id}")
-	public ColumnDefinitions deleteColumnDefinitions(@PathVariable String id) {
+	public ColumnDefinition deleteColumnDefinitions(@PathVariable String id) {
 
 		logger.info("deleteColumnDefinition invoked");
 		return null/* columnDefinitionSer.delete(id) */;

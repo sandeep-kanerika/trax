@@ -26,7 +26,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AmendmentsHistory {
+public class AmendmentHistory {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

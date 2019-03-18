@@ -12,8 +12,8 @@ import org.springframework.stereotype.Service;
 import com.trax.ratemanager.exception.ResourceNotFoundException;
 import com.trax.ratemanager.jpa.AbstractJpaRepository;
 import com.trax.ratemanager.jpa.AbstractJpaService;
-import com.trax.ratemanager.utility.LastModifiedByUser;
-import com.trax.ratemanager.utility.LastModifiedByUserRepository;
+import com.trax.ratemaneger.user.LastModifiedByUser;
+import com.trax.ratemaneger.user.LastModifiedByUserRepository;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,18 +22,16 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Service
 @Slf4j
-public class AmendmentsService extends AbstractJpaService<Amendments> {
-
-	private static final Logger logger = LoggerFactory.getLogger(AmendmentsService.class);
+public class AmendmentService extends AbstractJpaService<Amendment> {
 
 	@Autowired
 	private LastModifiedByUserRepository lastModifiedByUserRepo;
 
 	@Autowired
-	private AmendmentsRepository amendmentsRepository;
+	private AmendmentRepository amendmentsRepository;
 
 	@Override
-	public Amendments create(Amendments amendments) {
+	public Amendment create(Amendment amendments) {
 		log.debug("inside create ammendments");
 
 		LastModifiedByUser lastUpdateBy = amendments.getLastUpdatedBy();
@@ -43,9 +41,9 @@ public class AmendmentsService extends AbstractJpaService<Amendments> {
 
 	@Override
 	@Transactional
-	public Amendments update(Amendments _amendments) {
+	public Amendment update(Amendment _amendments) {
 		// Get the data from DB and update the fields and information from request data
-		Amendments amendments = getById(_amendments.getId());
+		Amendment amendments = getById(_amendments.getId());
 		if (amendments != null) {
 			return save(amendments);
 		} else {
@@ -53,13 +51,13 @@ public class AmendmentsService extends AbstractJpaService<Amendments> {
 		}
 	}
 
-	public Amendments getById(String id) {
+	public Amendment getById(String id) {
 		return amendmentsRepository.getById(id);
 	}
 
 	@Override
 	@Transactional
-	protected Amendments delete(Amendments amendments) {
+	protected Amendment delete(Amendment amendments) {
 		amendmentsRepository.delete(amendments);
 		return amendments;
 	}
@@ -74,12 +72,12 @@ public class AmendmentsService extends AbstractJpaService<Amendments> {
 	}
 
 	@Override
-	protected List<Amendments> search(Amendments amendments) {
+	protected List<Amendment> search(Amendment amendments) {
 		return amendmentsRepository.findAll();
 	}
 
 	@Override
-	protected AbstractJpaRepository<Amendments, String> getRepository() {
+	protected AbstractJpaRepository<Amendment, String> getRepository() {
 		return amendmentsRepository;
 	}
 }

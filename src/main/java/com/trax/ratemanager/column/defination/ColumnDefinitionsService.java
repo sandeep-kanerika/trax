@@ -5,27 +5,27 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.trax.ratemanager.amendment.AmendmentsRepository;
+import com.trax.ratemanager.amendment.AmendmentRepository;
 import com.trax.ratemanager.exception.ResourceNotFoundException;
 import com.trax.ratemanager.jpa.AbstractJpaRepository;
 import com.trax.ratemanager.jpa.AbstractJpaService;
 
 @Service
-public class ColumnDefinitionsService extends AbstractJpaService<ColumnDefinitions> {
+public class ColumnDefinitionsService extends AbstractJpaService<ColumnDefinition> {
 
 	@Autowired
 	ColumnDefinitionsRepository columnDefinitionsrepository;
 
 	@Override
-	protected ColumnDefinitions create(ColumnDefinitions columndefinition) {
+	protected ColumnDefinition create(ColumnDefinition columndefinition) {
 		// TODO Auto-generated method stub
 		return save(columndefinition);
 	}
 
 	@Override
-	protected ColumnDefinitions update(ColumnDefinitions _columnDefinitions) {
+	protected ColumnDefinition update(ColumnDefinition _columnDefinitions) {
 		// TODO Auto-generated method stub
-		ColumnDefinitions columnDefinitions = getById(_columnDefinitions.getId());
+		ColumnDefinition columnDefinitions = getById(_columnDefinitions.getId());
 		if(columnDefinitions != null) {
 			return save(_columnDefinitions);
 		}else {
@@ -34,24 +34,24 @@ public class ColumnDefinitionsService extends AbstractJpaService<ColumnDefinitio
 	}
 
 	@Override
-	protected ColumnDefinitions delete(ColumnDefinitions t) {
+	protected ColumnDefinition delete(ColumnDefinition t) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	protected List<ColumnDefinitions> search(ColumnDefinitions t) {
+	protected List<ColumnDefinition> search(ColumnDefinition t) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	protected AbstractJpaRepository<ColumnDefinitions, String> getRepository() {
+	protected AbstractJpaRepository<ColumnDefinition, String> getRepository() {
 		// TODO Auto-generated method stub
 		return columnDefinitionsrepository;
 	}
 	
-    public ColumnDefinitions getById(String id) {
+    public ColumnDefinition getById(String id) {
 //		return search(id);
     	return columnDefinitionsrepository.getById(id);
     }

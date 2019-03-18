@@ -11,11 +11,11 @@ import com.trax.ratemanager.jpa.AbstractJpaRepository;
  * Created by sudhakar.rao on 2/19/2019.
  */
 @Repository
-public interface AmendmentsRepository extends AbstractJpaRepository<Amendments, String> {
+public interface AmendmentRepository extends AbstractJpaRepository<Amendment, String> {
 	
-    Amendments getById(String id);
+    Amendment getById(String id);
     
     @Query("SELECT u FROM Amendments u WHERE u.status = 1")
-    Collection<Amendments> findAllActiveAmendments();
+    Collection<Amendment> findAllActiveAmendments();
     
 }

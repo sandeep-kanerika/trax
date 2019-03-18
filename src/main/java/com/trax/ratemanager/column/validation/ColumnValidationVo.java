@@ -16,7 +16,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ColumnValidations {
+public class ColumnValidationVo {
 	
 	@Id
 	//@GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -13,26 +13,26 @@ import java.util.List;
  * Created by sudhakar.rao on 2/19/2019.
  */
 @Service
-public class AmendmentsHistoryService extends AbstractJpaService<AmendmentsHistory > {
+public class AmendmentsHistoryService extends AbstractJpaService<AmendmentHistory > {
 
     @Autowired
     AmendmentsHistoryRepository amendamendmentsHistoryRepository;
 
     @Override
-    protected AmendmentsHistory create(AmendmentsHistory amendmentsHistory ) {
+    protected AmendmentHistory create(AmendmentHistory amendmentsHistory ) {
         return save(amendmentsHistory );
     }
 
-    public AmendmentsHistory getById(String id) {
+    public AmendmentHistory getById(String id) {
 //		return search(id);
     	return amendamendmentsHistoryRepository.getById(id);
     }
 
     @Override
-    protected AmendmentsHistory update(AmendmentsHistory  _amendmentsHistory ) {
+    protected AmendmentHistory update(AmendmentHistory  _amendmentsHistory ) {
         //Get the data from DB and update the fields and information from request data
 		
-		  AmendmentsHistory amendmentsHistory = amendamendmentsHistoryRepository.getById(_amendmentsHistory .getId());
+		  AmendmentHistory amendmentsHistory = amendamendmentsHistoryRepository.getById(_amendmentsHistory .getId());
 		  if (amendmentsHistory != null) {
 	        	
 	        	amendmentsHistory.setStatus(_amendmentsHistory.getStatus());
@@ -72,17 +72,17 @@ public class AmendmentsHistoryService extends AbstractJpaService<AmendmentsHisto
     }
 
     @Override
-    protected AmendmentsHistory delete(AmendmentsHistory amendmentsHistory ) {
+    protected AmendmentHistory delete(AmendmentHistory amendmentsHistory ) {
         return save(amendmentsHistory);
     }
 
     @Override
-    protected List<AmendmentsHistory > search(AmendmentsHistory amendmentsHistory ) {
+    protected List<AmendmentHistory > search(AmendmentHistory amendmentsHistory ) {
         return null;
     }
 
     @Override
-    protected AbstractJpaRepository<AmendmentsHistory , String> getRepository() {
+    protected AbstractJpaRepository<AmendmentHistory , String> getRepository() {
 		return amendamendmentsHistoryRepository;
     }
 }

@@ -23,27 +23,27 @@ import com.trax.ratemanager.exception.ResourceNotFoundException;
  */
 @RestController
 @RequestMapping("/amendments")
-public class AmendmentsController {
+public class AmendmentController {
 
 	@Autowired
-	AmendmentsService amendmentsSer;
+	AmendmentService amendmentsSer;
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(AmendmentsController.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(AmendmentController.class);
 
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE}, produces = { MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public Amendments createAmandments(@RequestBody Amendments amendment) {
+	public Amendment createAmandments(@RequestBody Amendment amendment) {
 
 		LOGGER.info("addAmandments invoked");
 		return amendmentsSer.create(amendment);
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Amendments> getAmandments(@PathVariable String id) {
+	public ResponseEntity<Amendment> getAmandments(@PathVariable String id) {
 		LOGGER.info("getAmandments invoked");
 		HttpStatus returnStatus = HttpStatus.OK;
 		try {
-			Amendments getAmendmentsDetail = amendmentsSer.getById(id);
+			Amendment getAmendmentsDetail = amendmentsSer.getById(id);
 			if (getAmendmentsDetail != null) {
 				return new ResponseEntity<>(getAmendmentsDetail, returnStatus);
 			} else {
@@ -60,14 +60,14 @@ public class AmendmentsController {
 	}
 	
 	@RequestMapping(method = {RequestMethod.PUT, RequestMethod.PATCH})
-	public Amendments updateAmandments(@RequestBody Amendments amendment) {
+	public Amendment updateAmandments(@RequestBody Amendment amendment) {
 
 		LOGGER.info("updateAmandment invoked");
 		return amendmentsSer.update(amendment);
 	}
 
 	@DeleteMapping(value = "/{id}")
-	public Amendments deleteAmandments(@PathVariable String id) {
+	public Amendment deleteAmandments(@PathVariable String id) {
 
 		LOGGER.info("deleteAmandment invoked");
 		return null/* amendmentsSer.delete(id) */;

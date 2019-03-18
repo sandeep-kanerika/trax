@@ -33,19 +33,19 @@ public class AmendmentsHistoryController {
 	
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE}, produces = { MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public AmendmentsHistory createAmendmentsHistory(@RequestBody AmendmentsHistory amendmentsHistory) {
+	public AmendmentHistory createAmendmentsHistory(@RequestBody AmendmentHistory amendmentsHistory) {
 
 		LOGGER.info("addAmendmentsHistory invoked");
 		return amendmentsHistorySer.create(amendmentsHistory);
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<AmendmentsHistory> getAmendmentsHistory(@PathVariable String id) {
+	public ResponseEntity<AmendmentHistory> getAmendmentsHistory(@PathVariable String id) {
 		LOGGER.info("getAmandmentsHistory invoked");
 		HttpStatus returnStatus = HttpStatus.OK;
 		
 		try {
-			AmendmentsHistory getAmendmentHistoryDetail =  amendmentsHistorySer.getById(id);
+			AmendmentHistory getAmendmentHistoryDetail =  amendmentsHistorySer.getById(id);
 			if(getAmendmentHistoryDetail != null ) {
 				return new ResponseEntity<>(getAmendmentHistoryDetail, returnStatus);
 			}else {
@@ -62,14 +62,14 @@ public class AmendmentsHistoryController {
 	}
 	
 	@RequestMapping(method = {RequestMethod.PUT, RequestMethod.PATCH })
-	public AmendmentsHistory updateAmendmentsHistory(@RequestBody AmendmentsHistory amendmentsHistory) {
+	public AmendmentHistory updateAmendmentsHistory(@RequestBody AmendmentHistory amendmentsHistory) {
 
 		LOGGER.info("updateAmandmentsHistory invoked");
 		return amendmentsHistorySer.update(amendmentsHistory);
 	}
 
 	@DeleteMapping(value = "/{id}")
-	public AmendmentsHistory deleteAmendmentsHistory(@PathVariable String id) {
+	public AmendmentHistory deleteAmendmentsHistory(@PathVariable String id) {
 
 		LOGGER.info("deleteAmendmentsHistory invoked");
 		return null/* amendmentsHistorySer.delete(id) */;

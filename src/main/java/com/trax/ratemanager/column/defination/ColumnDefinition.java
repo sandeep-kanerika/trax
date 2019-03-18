@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.trax.ratemanager.column.validation.ColumnValidations;
+import com.trax.ratemanager.column.validation.ColumnValidation;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,7 +22,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ColumnDefinitions {
+public class ColumnDefinition {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -55,7 +55,7 @@ public class ColumnDefinitions {
 	private String pivotCharge;
 
     @OneToMany
-	private List<ColumnValidations> columnValidations;
+	private List<ColumnValidation> columnValidations;
 
 	private String description;
 }

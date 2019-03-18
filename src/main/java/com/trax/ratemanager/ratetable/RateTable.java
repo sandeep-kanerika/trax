@@ -25,7 +25,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class RateTables {
+public class RateTable {
 
 	@Id
 	private String id;

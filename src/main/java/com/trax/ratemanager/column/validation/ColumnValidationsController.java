@@ -29,18 +29,18 @@ public class ColumnValidationsController {
 
 	@RequestMapping(/* value = "/ColumnValidation", */method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE}, produces = { MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ColumnValidations createColumnValidations(@RequestBody ColumnValidations columnValidations) {
+	public ColumnValidation createColumnValidations(@RequestBody ColumnValidation columnValidations) {
 
 		LOGGER.info("addColumnValidations invoked");
 		return columnValidationSer.create(columnValidations);
 	}
 
 	@RequestMapping("/{id}")
-	public ResponseEntity<ColumnValidations> getColumnValidations(@PathVariable String id) {
+	public ResponseEntity<ColumnValidation> getColumnValidations(@PathVariable String id) {
 		LOGGER.info("getColumnValidations invoked");
 		HttpStatus returnStatus = HttpStatus.OK;
 		try {
-			ColumnValidations getAmendmentsDetail = columnValidationSer.getById(id);
+			ColumnValidation getAmendmentsDetail = columnValidationSer.getById(id);
 			if (getAmendmentsDetail != null) {
 				return new ResponseEntity<>(getAmendmentsDetail, returnStatus);
 			} else {
@@ -57,14 +57,14 @@ public class ColumnValidationsController {
 	}
 	
 	@RequestMapping(method = {RequestMethod.PUT, RequestMethod.PATCH})
-	public ColumnValidations updateAmandments(@RequestBody ColumnValidations columnValidations) {
+	public ColumnValidation updateAmandments(@RequestBody ColumnValidation columnValidations) {
 
 		LOGGER.info("updateColumnValidations invoked");
 		return columnValidationSer.update(columnValidations);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public ColumnValidations deleteColumnValidations(@PathVariable String id) {
+	public ColumnValidation deleteColumnValidations(@PathVariable String id) {
 
 		LOGGER.info("deleteColumnValidations invoked");
 		return null/* ColumnValidationSer.delete(id) */;
