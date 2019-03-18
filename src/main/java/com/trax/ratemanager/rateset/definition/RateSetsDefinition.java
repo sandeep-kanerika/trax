@@ -1,4 +1,4 @@
-package com.trax.ratemanager.column.defination;
+package com.trax.ratemanager.rateset.definition;
 
 import java.sql.Timestamp;
 
@@ -25,7 +25,7 @@ import lombok.Setter;
 public class RateSetsDefinition {
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
 
     private Integer status;

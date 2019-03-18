@@ -2,30 +2,21 @@ package com.trax.ratemanager.column.defination;
 
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.trax.ratemanager.column.validation.ColumnValidations;
+import com.trax.ratemanager.column.validation.ColumnValidation;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ColumnDefinitions {
+public class ColumnDefinitionVo {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String id;
 
 	private String concept;
@@ -54,8 +45,7 @@ public class ColumnDefinitions {
 
 	private String pivotCharge;
 
-    @OneToMany
-	private List<ColumnValidations> columnValidations;
+	private List<ColumnValidation> columnValidations;
 
 	private String description;
 }

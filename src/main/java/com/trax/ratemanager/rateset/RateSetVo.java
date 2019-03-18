@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.trax.ratemanager.config.AppConstants;
-import com.trax.ratemanager.ratetable.RateTables;
+import com.trax.ratemanager.ratetable.RateTable;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -54,7 +54,7 @@ public class RateSetVo {
 
 	private String tableHash;
 
-	private List<RateTables> tables;
+	private List<RateTable> tables;
 
 	private String reviewedBy;
 

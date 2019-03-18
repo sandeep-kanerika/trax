@@ -26,7 +26,7 @@ import lombok.Setter;
 public class RateRowHistory {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String id;
 
 	private Long amendmentId;
