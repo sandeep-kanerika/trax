@@ -2,9 +2,6 @@ package com.trax.ratemanager.ratecolumn;
 
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.trax.ratemanager.column.validation.ColumnValidation;
 
@@ -13,7 +10,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @Getter
 @Setter
@@ -21,7 +17,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class RateColumnVo {
 
-	@Id
 	private String id;
 
 	private String concept;

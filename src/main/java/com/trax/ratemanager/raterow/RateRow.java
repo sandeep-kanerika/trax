@@ -24,7 +24,7 @@ import lombok.Setter;
 public class RateRow {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String id;
 
 	private Integer amendmentType;

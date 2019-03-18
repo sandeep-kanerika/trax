@@ -2,19 +2,19 @@ package com.trax.ratemaneger.utility;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-	@Entity
-	@Table
-	public class CreatedByUser {
+@Getter
+@Setter
+@Entity
+public class CreatedByUser {
 
-		@Id
-		private String id;
+	@Id
+	private String id;
 
-		private String orgId;
-		private String userEmail;
-		private String comment;
-	}
+	private String orgId;
+	private String userEmail;
+	private String comment;
+}

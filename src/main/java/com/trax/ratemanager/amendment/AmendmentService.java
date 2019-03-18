@@ -4,16 +4,14 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.trax.ratemanager.exception.ResourceNotFoundException;
 import com.trax.ratemanager.jpa.AbstractJpaRepository;
 import com.trax.ratemanager.jpa.AbstractJpaService;
-import com.trax.ratemaneger.user.LastModifiedByUser;
-import com.trax.ratemaneger.user.LastModifiedByUserRepository;
+import com.trax.ratemaneger.utility.LastModifiedByUser;
+import com.trax.ratemaneger.utility.LastModifiedByUserRepository;
 
 import lombok.extern.slf4j.Slf4j;
 

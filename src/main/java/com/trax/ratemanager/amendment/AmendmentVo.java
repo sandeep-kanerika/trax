@@ -4,21 +4,15 @@ import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.trax.ratemanager.raterow.RateRow;
-import com.trax.ratemaneger.user.LastModifiedByUser;
+import com.trax.ratemaneger.utility.LastModifiedByUser;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @Getter
 @Setter
@@ -26,8 +20,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class AmendmentVo {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String id;
 	private Integer status;
 	private String referenceId;

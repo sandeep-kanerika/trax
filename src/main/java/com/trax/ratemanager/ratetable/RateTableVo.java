@@ -3,7 +3,6 @@ package com.trax.ratemanager.ratetable;
 import java.sql.Timestamp;
 import java.util.List;
 
-import javax.persistence.Entity;
 import javax.persistence.Id;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -15,8 +14,6 @@ import com.trax.ratemanager.raterow.RateRow;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-@Entity
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @Getter
 @Setter

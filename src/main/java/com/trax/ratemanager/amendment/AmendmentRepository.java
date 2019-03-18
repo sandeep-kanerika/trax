@@ -1,8 +1,5 @@
 package com.trax.ratemanager.amendment;
 
-import java.util.Collection;
-
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.trax.ratemanager.jpa.AbstractJpaRepository;
@@ -12,10 +9,10 @@ import com.trax.ratemanager.jpa.AbstractJpaRepository;
  */
 @Repository
 public interface AmendmentRepository extends AbstractJpaRepository<Amendment, String> {
-	
-    Amendment getById(String id);
-    
-    @Query("SELECT u FROM Amendments u WHERE u.status = 1")
-    Collection<Amendment> findAllActiveAmendments();
-    
+
+	Amendment getById(String id);
+
+	// @Query("SELECT u FROM Amendments u WHERE u.status = 1")
+	// Collection<Amendment> findAllActiveAmendments();
+
 }

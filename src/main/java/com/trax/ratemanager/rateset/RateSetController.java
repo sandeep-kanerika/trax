@@ -124,8 +124,15 @@ public class RateSetController {
 		log.info("**************found the rateset id in DB:::"+rateSet);
 		if (rateSet != null) 
 		{
+			try
+			{
 			rateSetsService.delete(rateSet);
 			log.info("deleted the ratesetid from database..." + rateSet.getId());
+			}
+			catch(Exception ex)
+			{
+				ex.printStackTrace();
+			}
 			responseEntity = new ResponseEntity<RateSet>(rateSet, HttpStatus.OK);
 		}
 		else

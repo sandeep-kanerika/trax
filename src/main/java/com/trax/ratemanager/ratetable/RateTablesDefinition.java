@@ -23,7 +23,7 @@ import lombok.Setter;
 public class RateTablesDefinition {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String id;
     private Long creatorOrgId;
     private String name;
