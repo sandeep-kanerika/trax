@@ -7,16 +7,19 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.trax.ratemanager.orgnization.Organization;
 import com.trax.ratemanager.raterow.RateRow;
-import com.trax.ratemaneger.utility.LastModifiedByUser;
+import com.trax.ratemaneger.user.UserAuditor;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -41,10 +44,15 @@ public class Amendment {
 	// private String ratesetId;
 	private String ratesetReferenceId;
 
-	private String buyerOrgId;
-	private String sellerOrgId;
-	private String buyerOrgName;
-	private String sellerOrgName;
+	@JsonIgnoreProperties("buyer")
+	@NotFound(action = NotFoundAction.IGNORE)
+	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+	private Organization buyerOrg;
+
+	@JsonIgnoreProperties("seller")
+	@NotFound(action = NotFoundAction.IGNORE)
+	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+	private Organization sellerOrg;
 
 	private String ratesetName;
 	private String region;
@@ -59,9 +67,16 @@ public class Amendment {
 
 	private String reviewedBy;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "lastUpdateBy")
-	private LastModifiedByUser lastUpdatedBy;
+	@NotFound(action = NotFoundAction.IGNORE)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "createdById")
+	private UserAuditor createdBy;
+
+	@NotFound(action = NotFoundAction.IGNORE)
+
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "lastUpdatedById")
+	private UserAuditor lastUpdatedBy;
 
 	private String lastAssignedBy;
 	private String approvers;

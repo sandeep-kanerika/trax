@@ -5,7 +5,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.trax.ratemanager.column.validation.ColumnValidation;
+import com.trax.ratemanager.column.validation.RateColumnValidation;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,7 +18,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ColumnDefinition {
+public class RateColumnDefinition {
 
 	@Id
 	private String id;
@@ -51,5 +51,5 @@ public class ColumnDefinition {
 	private String description;
 
 	@OneToOne
-	private ColumnValidation columnValidation;
+	private RateColumnValidation columnValidation;
 }

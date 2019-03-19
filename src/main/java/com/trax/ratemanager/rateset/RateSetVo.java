@@ -6,6 +6,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.trax.ratemanager.config.AppConstants;
 import com.trax.ratemanager.ratetable.RateTable;
+import com.trax.ratemaneger.user.UserAuditor;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -58,12 +59,10 @@ public class RateSetVo {
 
 	private String reviewedBy;
 
-	/*
-	 * private User createdBy;
-	 * 
-	 * private User lastUpdatedBy;
-	 */
-	
+	private UserAuditor createdBy;
+
+	private UserAuditor lastUpdatedBy;
+
 	private String lastAssignedBy;
 
 	private String approvers;

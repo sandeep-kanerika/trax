@@ -10,8 +10,7 @@ import org.springframework.stereotype.Service;
 import com.trax.ratemanager.exception.ResourceNotFoundException;
 import com.trax.ratemanager.jpa.AbstractJpaRepository;
 import com.trax.ratemanager.jpa.AbstractJpaService;
-import com.trax.ratemaneger.utility.LastModifiedByUser;
-import com.trax.ratemaneger.utility.LastModifiedByUserRepository;
+import com.trax.ratemaneger.user.UserAuditor;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -23,17 +22,13 @@ import lombok.extern.slf4j.Slf4j;
 public class AmendmentService extends AbstractJpaService<Amendment> {
 
 	@Autowired
-	private LastModifiedByUserRepository lastModifiedByUserRepo;
-
-	@Autowired
 	private AmendmentRepository amendmentsRepository;
 
 	@Override
 	public Amendment create(Amendment amendments) {
 		log.debug("inside create ammendments");
 
-		LastModifiedByUser lastUpdateBy = amendments.getLastUpdatedBy();
-		lastModifiedByUserRepo.save(lastUpdateBy);
+		//User lastUpdateBy = amendments.getLastUpdatedBy();
 		return save(amendments);
 	}
 

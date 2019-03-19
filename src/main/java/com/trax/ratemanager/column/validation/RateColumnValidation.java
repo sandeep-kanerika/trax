@@ -19,7 +19,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ColumnValidation 
+public class RateColumnValidation 
 {
 	@Id
 	private String id;

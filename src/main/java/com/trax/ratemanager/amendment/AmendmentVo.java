@@ -6,7 +6,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.trax.ratemanager.raterow.RateRow;
-import com.trax.ratemaneger.utility.LastModifiedByUser;
+import com.trax.ratemaneger.user.UserAuditor;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -42,7 +42,7 @@ public class AmendmentVo {
 
 	private String reviewedBy;
 
-	private LastModifiedByUser lastUpdatedBy;
+	private UserAuditor lastUpdatedBy;
 
 	private String lastAssignedBy;
 	private String approvers;
