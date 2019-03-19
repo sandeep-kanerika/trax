@@ -21,7 +21,7 @@ import com.trax.ratemanager.exception.ResourceNotFoundException;
 import jdk.nashorn.internal.runtime.FindProperty;
 
 @RestController
-@RequestMapping("/rate/tables")
+@RequestMapping("/rate/tables/definition")
 public class RateTableDefinitionController {
 
 	@Autowired
