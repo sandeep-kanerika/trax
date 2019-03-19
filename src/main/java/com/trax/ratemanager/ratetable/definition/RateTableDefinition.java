@@ -5,11 +5,12 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.trax.ratemanager.column.defination.ColumnDefinition;
+import com.trax.ratemanager.column.defination.RateColumnDefinition;
 import com.trax.ratemanager.config.AppConstants;
 
 import lombok.Getter;
@@ -35,6 +36,7 @@ public class RateTableDefinition {
 	private String columnHash;
 
 	@OneToMany
-	private List<ColumnDefinition> columns;
+	@JoinColumn(name="rateTableDefinitionId")
+	private List<RateColumnDefinition> columns;
 
 }

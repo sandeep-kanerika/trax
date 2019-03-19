@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 import com.trax.ratemanager.jpa.AbstractJpaRepository;
 
 @Repository
-public interface ColumnValidationsRepository extends AbstractJpaRepository<ColumnValidation, String> {
+public interface ColumnValidationsRepository extends AbstractJpaRepository<RateColumnValidation, String> {
 
-	ColumnValidation getById(String id);
+	RateColumnValidation getById(String id);
 }

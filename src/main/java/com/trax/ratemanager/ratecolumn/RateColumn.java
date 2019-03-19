@@ -8,8 +8,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.trax.ratemanager.column.defination.ColumnDefinition;
-import com.trax.ratemanager.column.validation.ColumnValidation;
+import com.trax.ratemanager.column.defination.RateColumnDefinition;
+import com.trax.ratemanager.column.validation.RateColumnValidation;
 import com.trax.ratemanager.rateset.RateSet;
 import com.trax.ratemanager.ratetable.RateTable;
 
@@ -28,21 +28,29 @@ public class RateColumn {
 
 	@Id
 	private String id;
-	
+	/*
+	 * private String concept; private String name; private Integer sortOrder;
+	 * private String type; private String pivotCharge; private String displayName;
+	 * private String propertyName; private String pivotField; private String
+	 * dataSourceField; private String dataFieldId; private Boolean hasAlias;
+	 * private Boolean isKey; private Boolean isActive; private String reference;
+	 * private String description;
+	 */
+
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name="columnDefinitionId")
-	private ColumnDefinition columnDefinition;
-	
+	@JoinColumn(name = "columnDefinitionId")
+	private RateColumnDefinition columnDefinition;
+
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name="rateSetId")
+	@JoinColumn(name = "rateSetId")
 	private RateSet rateSet;
-	
+
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name="tableId")
+	@JoinColumn(name = "tableId")
 	private RateTable table;
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "rateColumnId")
-	private ColumnValidation validation;
+	private RateColumnValidation validation;
 
 }

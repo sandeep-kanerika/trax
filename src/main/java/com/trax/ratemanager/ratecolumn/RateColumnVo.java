@@ -1,7 +1,7 @@
 package com.trax.ratemanager.ratecolumn;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.trax.ratemanager.column.validation.ColumnValidation;
+import com.trax.ratemanager.column.validation.RateColumnValidation;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,6 +20,6 @@ public class RateColumnVo {
 	private String rateSetId;
 	private String tableId;
 
-	private ColumnValidation validation;
+	private RateColumnValidation validation;
 
 }

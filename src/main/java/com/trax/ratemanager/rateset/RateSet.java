@@ -21,8 +21,6 @@ import com.trax.ratemanager.amendment.Amendment;
 import com.trax.ratemanager.config.AppConstants;
 import com.trax.ratemanager.orgnization.Organization;
 import com.trax.ratemanager.ratetable.RateTable;
-import com.trax.ratemaneger.utility.CreatedByUser;
-import com.trax.ratemaneger.utility.LastModifiedByUser;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -78,16 +76,6 @@ public class RateSet {
 	private List<Amendment> amendments;
 
 	private Long reviewedBy;
-
-	@NotFound(action = NotFoundAction.IGNORE)
-	@ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
-	@JoinColumn(name = "createdBy")
-	private CreatedByUser createdBy;
-
-	@NotFound(action = NotFoundAction.IGNORE)
-	@ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
-	@JoinColumn(name = "lastModifiedBy")
-	private LastModifiedByUser lastUpdatedBy;
 
 	private Long lastAssignedBy;
 
