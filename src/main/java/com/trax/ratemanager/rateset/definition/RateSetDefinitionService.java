@@ -11,21 +11,21 @@ import com.trax.ratemanager.jpa.AbstractJpaService;
 import com.trax.ratemanager.rateset.RateSet;
 
 @Service
-public class RateSetsDefinitionService extends AbstractJpaService<RateSetsDefinition> {
+public class RateSetDefinitionService extends AbstractJpaService<RateSetDefinition> {
 
 	@Autowired
-	RateSetsDefinitionRepository rateSetsDefinitionRepository; 
+	RateSetDefinitionRepository rateSetsDefinitionRepository; 
 	
 	@Override
-	protected RateSetsDefinition create(RateSetsDefinition rateSetsDefinition) {
+	protected RateSetDefinition create(RateSetDefinition rateSetsDefinition) {
 		// TODO Auto-generated method stub
 		return save(rateSetsDefinition);
 	}
 
 	@Override
-	protected RateSetsDefinition update(RateSetsDefinition _rateSetsDefinition) {
+	protected RateSetDefinition update(RateSetDefinition _rateSetsDefinition) {
 		// TODO Auto-generated method stub
-		RateSetsDefinition rateSetsDefinition = getById(_rateSetsDefinition.getId());
+		RateSetDefinition rateSetsDefinition = getById(_rateSetsDefinition.getId());
 		if(rateSetsDefinition != null)
 			return save(_rateSetsDefinition);
 		else {
@@ -34,24 +34,24 @@ public class RateSetsDefinitionService extends AbstractJpaService<RateSetsDefini
 	}
 
 	@Override
-	protected RateSetsDefinition delete(RateSetsDefinition rateSetsDefinition) {
+	protected RateSetDefinition delete(RateSetDefinition rateSetsDefinition) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	protected List<RateSetsDefinition> search(RateSetsDefinition rateSetsDefinition) {
+	protected List<RateSetDefinition> search(RateSetDefinition rateSetsDefinition) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	protected AbstractJpaRepository<RateSetsDefinition, String> getRepository() {
+	protected AbstractJpaRepository<RateSetDefinition, String> getRepository() {
 		// TODO Auto-generated method stub
 		return rateSetsDefinitionRepository;
 	}
 
-	public RateSetsDefinition getById(String id) {
+	public RateSetDefinition getById(String id) {
 		// TODO Auto-generated method stub
 		return rateSetsDefinitionRepository.getById(id);
 	}

@@ -24,96 +24,89 @@ public class RateSetController {
 	@Autowired
 	RateSetsService rateSetsService;
 
-	private HttpStatus returnStatus = HttpStatus.OK;
-
-	@PostMapping(value = "/rate/sets", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
-			MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<RateSet> createRateSets(@RequestBody RateSetVo rateSetVo) throws Exception {
+	@PostMapping(value = "/rate/sets", consumes = { MediaType.APPLICATION_JSON_VALUE }, 
+			produces = {MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<Object> createRateSets(@RequestBody RateSetVo rateSetVo) throws Exception {
 		log.info("***************Create RateSet(PostRequest) ");
 		log.info("***************RateSetValue Object:::" + rateSetVo);
 		RateSet rateSet = RateSetConverter.convertToRateSet(rateSetVo);
 		log.info("***************RateSet Object After VO--to-->BO:::" + rateSet);
 		RateSet createdRateSet = null;
-		try {
-			createdRateSet = createdRateSet = rateSetsService.create(rateSet);
-			returnStatus = HttpStatus.CREATED;
-		} catch (Exception ex) {
+		try 
+		{
+			createdRateSet = rateSetsService.create(rateSet);
+			return ResponseEntity.ok(createdRateSet);
+		} catch (Exception ex) 
+		{
 			log.error("Error occured:::" + ex.getMessage());
-			returnStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+		     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResourceNotFoundException("error",ex));
 		}
-		return new ResponseEntity(createdRateSet, returnStatus);
 	}
 
 	@GetMapping(value = "/rate/sets/{id}")
-	public RateSet getRateSets(@PathVariable String id) {
+	public ResponseEntity<RateSet> getRateSets(@PathVariable String id) {
 		log.info("***************Retrive rateset by id:::" + id);
-
 		RateSet retrivedRateSet = rateSetsService.getById(id);
-		return retrivedRateSet;
-	
-		/*
-		 * try { RateSet retrivedRateSet = rateSetsService.getById(id); if
-		 * (retrivedRateSet != null) { return new
-		 * ResponseEntity<RateSet>(retrivedRateSet,HttpStatus.OK ); } else {
-		 * returnStatus = HttpStatus.NOT_FOUND; throw new
-		 * ResourceNotFoundException("RateSets Id doesn't exist !"); } } catch
-		 * (ResourceNotFoundException e) {
-		 * log.error("************Error occured:::"+e.getMessage()); returnStatus =
-		 * HttpStatus.NOT_FOUND; } catch (Exception e) { returnStatus =
-		 * HttpStatus.INTERNAL_SERVER_ERROR;
-		 * log.error("***********Error occured:::"+e.getMessage()); } return new
-		 * ResponseEntity<RateSet>(returnStatus);
-		 */
+		if(retrivedRateSet!= null)
+		{
+			return new ResponseEntity<RateSet>(retrivedRateSet,HttpStatus.OK);
 		}
+		else
+		{
+			return ResponseEntity.notFound().build();
+		}
+	}
 
 	@GetMapping(value = "/rate/sets/all")
-	public ResponseEntity<List<RateSet>> findAllRateSets() {
+	public ResponseEntity<Object> findAllRateSets() {
 		log.info("**************fetch all rateset objects");
 		try {
 			List<RateSet> allRateSets = rateSetsService.findAll();
-			if (allRateSets != null && !allRateSets.isEmpty()) {
-				return new ResponseEntity<List<RateSet>>(allRateSets, HttpStatus.OK);
-			} else {
-				log.error("**********No object(s) found!!!");
-				returnStatus = HttpStatus.NOT_FOUND;
-				// throw new ResourceNotFoundException("RateSets Id doesn't exist !");
+			if (allRateSets != null && !allRateSets.isEmpty()) 
+			{
+				return ResponseEntity.ok(allRateSets);
 			}
-
-		} catch (ResourceNotFoundException e) {
-			log.error("**********Error occured:::" + e.getMessage());
-			returnStatus = HttpStatus.NOT_FOUND;
-		} catch (Exception e) {
-			log.error("**********Error occured:::" + e.getMessage());
-			returnStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+			else 
+			{
+				log.error("**********No object(s) found!!!");
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+			}
 		}
-		return new ResponseEntity<List<RateSet>>(returnStatus);
+		catch (Exception e) 
+		{
+			log.error("**********Error occured:::" + e.getMessage());
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+		}
 	}
 
 	@PutMapping(value = "/rate/sets", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<RateSet> updateRateSets(@RequestBody RateSetVo rateSetVo) throws Exception {
+	public ResponseEntity<Object> updateRateSets(@RequestBody RateSetVo rateSetVo) throws Exception {
 		log.info("***************updateRateSets invoked, internally its going to call post method only...");
 		return createRateSets(rateSetVo);
 	}
 
 	@DeleteMapping(value = "/rate/sets/{id}")
 	public ResponseEntity<RateSet> deleteRateSet(@PathVariable String id) {
-		ResponseEntity<RateSet> responseEntity = null;
 		log.info("**************deleteRateSets invoked with id:::" + id);
 		RateSet rateSet = rateSetsService.getById(id);
 		log.info("**************found the rateset id in DB:::" + rateSet);
-		if (rateSet != null) {
-			try {
+		if (rateSet != null) 
+		{
+			try 
+			{
 				rateSetsService.delete(rateSet);
 				log.info("deleted the ratesetid from database..." + rateSet.getId());
-			} catch (Exception ex) {
-				ex.printStackTrace();
+				return ResponseEntity.ok(rateSet);
+			} catch (Exception ex) 
+			{
+				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 			}
-			responseEntity = new ResponseEntity<RateSet>(rateSet, HttpStatus.OK);
-		} else {
-			responseEntity = new ResponseEntity<RateSet>(HttpStatus.NOT_FOUND);
+			
+		} else 
+		{
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
-		return responseEntity;
 	}
 
 }

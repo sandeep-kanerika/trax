@@ -22,9 +22,33 @@ public class ColumnDefinition {
 
 	@Id
 	private String id;
-	private String columnDefinitionId;
-	private String ratesetId;
-	private String tableId;
+	private String concept;
+
+	private String name;
+
+	private Long sortOrder;
+
+	private String type;
+
+	private String dateSourceId;
+
+	private String dateFieldId;
+
+	private Boolean hasAlias;
+
+	private Boolean isKey;
+
+	private String reference;
+
+	private String pivotField;
+
+	private String displayName;
+
+	private String propertyName;
+
+	private String pivotCharge;
+
+	private String description;
 
 	@OneToOne
 	private ColumnValidation columnValidation;
