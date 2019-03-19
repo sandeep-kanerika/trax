@@ -23,11 +23,11 @@ public class ColumnDefinitionsService extends AbstractJpaService<ColumnDefinitio
 	}
 
 	@Override
-	protected ColumnDefinition update(ColumnDefinition _columnDefinitions) {
+	protected ColumnDefinition update(ColumnDefinition colDef) {
 		// TODO Auto-generated method stub
-		ColumnDefinition columnDefinitions = getById(_columnDefinitions.getId());
+		ColumnDefinition columnDefinitions = getById(colDef.getId());
 		if(columnDefinitions != null) {
-			return save(_columnDefinitions);
+			return save(colDef);
 		}else {
 			throw new ResourceNotFoundException("ColumnDefinitions Id Doesn't Exists !");
 		}

@@ -42,9 +42,10 @@ public class RateTable {
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "rateTableId")
 	private List<RateColumn> columns;
-
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "rateTableId")
-	private List<RateRow> rateRows;
-
+	
+	/*
+	 * @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	 * 
+	 * @JoinColumn(name = "rateTableId") private List<RateRow> rateRows;
+	 */
 }

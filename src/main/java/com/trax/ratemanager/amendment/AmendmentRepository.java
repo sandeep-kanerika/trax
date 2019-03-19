@@ -11,8 +11,8 @@ import com.trax.ratemanager.jpa.AbstractJpaRepository;
 public interface AmendmentRepository extends AbstractJpaRepository<Amendment, String> {
 
 	Amendment getById(String id);
-
-	// @Query("SELECT u FROM Amendments u WHERE u.status = 1")
-	// Collection<Amendment> findAllActiveAmendments();
-
+	/*
+	 * @Query("SELECT u FROM Amendments u WHERE u.tableId: 1 and id:id")
+	 * Collection<Amendment> findAllActiveAmendments(String id, String tablId);
+	 */
 }
