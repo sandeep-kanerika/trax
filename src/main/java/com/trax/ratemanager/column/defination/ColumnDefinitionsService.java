@@ -11,21 +11,21 @@ import com.trax.ratemanager.jpa.AbstractJpaRepository;
 import com.trax.ratemanager.jpa.AbstractJpaService;
 
 @Service
-public class ColumnDefinitionsService extends AbstractJpaService<ColumnDefinition> {
+public class ColumnDefinitionsService extends AbstractJpaService<RateColumnDefinition> {
 
 	@Autowired
 	ColumnDefinitionsRepository columnDefinitionsrepository;
 
 	@Override
-	protected ColumnDefinition create(ColumnDefinition columndefinition) {
+	protected RateColumnDefinition create(RateColumnDefinition columndefinition) {
 		// TODO Auto-generated method stub
 		return save(columndefinition);
 	}
 
 	@Override
-	protected ColumnDefinition update(ColumnDefinition colDef) {
+	protected RateColumnDefinition update(RateColumnDefinition colDef) {
 		// TODO Auto-generated method stub
-		ColumnDefinition columnDefinitions = getById(colDef.getId());
+		RateColumnDefinition columnDefinitions = getById(colDef.getId());
 		if(columnDefinitions != null) {
 			return save(colDef);
 		}else {
@@ -34,24 +34,24 @@ public class ColumnDefinitionsService extends AbstractJpaService<ColumnDefinitio
 	}
 
 	@Override
-	protected ColumnDefinition delete(ColumnDefinition t) {
+	protected RateColumnDefinition delete(RateColumnDefinition t) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	protected List<ColumnDefinition> search(ColumnDefinition t) {
+	protected List<RateColumnDefinition> search(RateColumnDefinition t) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	protected AbstractJpaRepository<ColumnDefinition, String> getRepository() {
+	protected AbstractJpaRepository<RateColumnDefinition, String> getRepository() {
 		// TODO Auto-generated method stub
 		return columnDefinitionsrepository;
 	}
 	
-    public ColumnDefinition getById(String id) {
+    public RateColumnDefinition getById(String id) {
 //		return search(id);
     	return columnDefinitionsrepository.getById(id);
     }

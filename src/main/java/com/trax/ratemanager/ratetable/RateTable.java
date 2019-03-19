@@ -38,6 +38,7 @@ public class RateTable {
 	private String tableGroup;
 	private String tableType;
 	private String columnHash;
+	
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "rateTableId")

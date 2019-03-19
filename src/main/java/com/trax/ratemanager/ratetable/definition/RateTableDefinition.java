@@ -10,7 +10,7 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.trax.ratemanager.column.defination.ColumnDefinition;
+import com.trax.ratemanager.column.defination.RateColumnDefinition;
 import com.trax.ratemanager.config.AppConstants;
 
 import lombok.Getter;
@@ -37,6 +37,6 @@ public class RateTableDefinition {
 
 	@OneToMany
 	@JoinColumn(name="rateTableDefinitionId")
-	private List<ColumnDefinition> columns;
+	private List<RateColumnDefinition> columns;
 
 }
