@@ -24,10 +24,8 @@ public class RateSetController {
 	@Autowired
 	RateSetsService rateSetsService;
 
-	private HttpStatus returnStatus = HttpStatus.OK;
-
-	@PostMapping(value = "/rate/sets", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
-			MediaType.APPLICATION_JSON_VALUE })
+	@PostMapping(value = "/rate/sets", consumes = { MediaType.APPLICATION_JSON_VALUE }, 
+			produces = {MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<Object> createRateSets(@RequestBody RateSetVo rateSetVo) throws Exception {
 		log.info("***************Create RateSet(PostRequest) ");
 		log.info("***************RateSetValue Object:::" + rateSetVo);
@@ -48,7 +46,6 @@ public class RateSetController {
 	@GetMapping(value = "/rate/sets/{id}")
 	public ResponseEntity<RateSet> getRateSets(@PathVariable String id) {
 		log.info("***************Retrive rateset by id:::" + id);
-		HttpStatus status = HttpStatus.OK;
 		RateSet retrivedRateSet = rateSetsService.getById(id);
 		if(retrivedRateSet!= null)
 		{
@@ -91,7 +88,6 @@ public class RateSetController {
 
 	@DeleteMapping(value = "/rate/sets/{id}")
 	public ResponseEntity<RateSet> deleteRateSet(@PathVariable String id) {
-		ResponseEntity<RateSet> responseEntity = null;
 		log.info("**************deleteRateSets invoked with id:::" + id);
 		RateSet rateSet = rateSetsService.getById(id);
 		log.info("**************found the rateset id in DB:::" + rateSet);

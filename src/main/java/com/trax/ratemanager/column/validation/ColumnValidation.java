@@ -19,7 +19,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ColumnValidation {
+public class ColumnValidation 
+{
 	@Id
 	private String id;
 	private String columnDefinitionId;
@@ -36,7 +37,7 @@ public class ColumnValidation {
 	private String propertyName;
 	private Integer sortyOrder;
 	private String type;
-	private String validValues;
+	private String[] validValues;
 	private String validationType;
 
 	@OneToOne(mappedBy = "validation", fetch = FetchType.LAZY)

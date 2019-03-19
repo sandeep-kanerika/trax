@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -44,5 +45,6 @@ public class RateSetDefinition {
 	private String tableHash;
 
 	@OneToMany
+	@JoinColumn(name="rateSetDefinitionId")
 	private List<RateTableDefinition> tables;
 }
