@@ -22,26 +22,26 @@ import com.trax.ratemanager.exception.ResourceNotFoundException;
 
 @RestController
 @RequestMapping("/rate/sets/definition")
-public class RateSetsDefinitionController {
+public class RateSetDefinitionController {
 	
 	@Autowired
-	RateSetsDefinitionService rateSetsDefinitionSer;
+	RateSetDefinitionService rateSetsDefinitionSer;
 	
-	private static final Logger LOGGER = LoggerFactory.getLogger(RateSetsDefinitionController.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(RateSetDefinitionController.class);
 
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE}, produces = { MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public RateSetsDefinition createRateSetsDefinition(@RequestBody RateSetsDefinition rateSetsDefinition) {
+	public RateSetDefinition createRateSetsDefinition(@RequestBody RateSetDefinition rateSetsDefinition) {
 		LOGGER.info("addRateSetsDefinition invoked");
 		return rateSetsDefinitionSer.create(rateSetsDefinition);
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<RateSetsDefinition> getRateSetsDefinition(@PathVariable String id) {
+	public ResponseEntity<RateSetDefinition> getRateSetsDefinition(@PathVariable String id) {
 		LOGGER.info("getRateSetsDefinition invoked");
 		HttpStatus returnStatus = HttpStatus.OK;
 		try {
-			RateSetsDefinition getRateSetsDefinitionDetail = rateSetsDefinitionSer.getById(id);
+			RateSetDefinition getRateSetsDefinitionDetail = rateSetsDefinitionSer.getById(id);
 			if (getRateSetsDefinitionDetail != null) {
 				return new ResponseEntity<>(getRateSetsDefinitionDetail, returnStatus);
 			} else {
@@ -58,14 +58,14 @@ public class RateSetsDefinitionController {
 	}
 	
 	@RequestMapping(method = {RequestMethod.PUT, RequestMethod.PATCH})
-	public RateSetsDefinition updateRateSetsDefinition(@RequestBody RateSetsDefinition rateSetsDefinition) {
+	public RateSetDefinition updateRateSetsDefinition(@RequestBody RateSetDefinition rateSetsDefinition) {
 
 		LOGGER.info("updateRateSetsDefinition invoked");
 		return rateSetsDefinitionSer.update(rateSetsDefinition);
 	}
 
 	@DeleteMapping(value = "/{id}")
-	public RateSetsDefinition deleteRateSetsDefinition(@PathVariable String id) {
+	public RateSetDefinition deleteRateSetsDefinition(@PathVariable String id) {
 
 		LOGGER.info("deleteRateSetsDefinition invoked");
 		return null/* RateSetsSer.delete(id) */;
