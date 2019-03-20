@@ -41,7 +41,7 @@ public class Amendment {
 	private String referenceId;
 	private Integer type;
 	private String description;
-	// private String ratesetId;
+//	private String ratesetId;
 	private String ratesetReferenceId;
 
 	@JsonIgnoreProperties("buyer")
@@ -73,11 +73,11 @@ public class Amendment {
 	private UserAuditor createdBy;
 
 	@NotFound(action = NotFoundAction.IGNORE)
-
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "lastUpdatedById")
 	private UserAuditor lastUpdatedBy;
 
+	// its userAuditor field lastAssignedBy, approvers and currentApprover
 	private String lastAssignedBy;
 	private String approvers;
 	private Long currentApprover;

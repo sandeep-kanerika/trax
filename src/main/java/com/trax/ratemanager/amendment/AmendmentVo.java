@@ -21,14 +21,25 @@ import lombok.Setter;
 public class AmendmentVo {
 
 	private String id;
-	private Integer status;
-	private String referenceId;
-	private Integer type;
-	private String description;
-	private String ratesetId;
-	private String ratesetReferenceId;
 	private String buyerOrgId;
+	private String status;
 	private String sellerOrgId;
+	private String ratesetId;
+//	private String isSpotQuote;
+
+	private UserAuditor createdBy;
+	private ZonedDateTime dateCreated;
+	private ZonedDateTime dateUpdated;
+	private Date defaultEffectiveDateFrom;
+	private Date defaultEffectiveDateThru;
+	
+	private String description;
+	private UserAuditor lastUpdatedBy;
+	private String ratesetReferenceId;
+	private String referenceId;
+	private String reviewedBy;
+	private String type;
+	
 	private String buyerOrgName;
 	private String sellerOrgName;
 	private String ratesetName;
@@ -37,22 +48,11 @@ public class AmendmentVo {
 
 	private List<RateRow> rateRows;
 
-	private Date defaultEffectiveDateFrom;
-	private Date defaultEffectiveDateThru;
-
-	private String reviewedBy;
-
-	private UserAuditor lastUpdatedBy;
-
 	private String lastAssignedBy;
 	private String approvers;
 	private Long currentApprover;
 
 	private ZonedDateTime dateApproved;
-
-	private ZonedDateTime dateCreated;
-
-	private ZonedDateTime dateUpdated;
 
 	private ZonedDateTime dateReviewed;
 

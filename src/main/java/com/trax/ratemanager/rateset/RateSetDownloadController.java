@@ -26,7 +26,7 @@ public class RateSetDownloadController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(RateSetDownloadController.class);
 
 	@GetMapping("/{id}")
-	public  ResponseEntity< RateSet >  getRateSets(@PathVariable String id) {
+	public  ResponseEntity<RateSet>  getRateSets(@PathVariable String id) {
 		LOGGER.info("getRateSets invoked :::::-------------- " + id);
 		HttpStatus returnStatus = HttpStatus.OK;
 		
@@ -36,9 +36,10 @@ public class RateSetDownloadController {
 //			LOGGER.info("rateSet ::: " + rateSet);
 
 			if (getAmendmentsDetail != null) {
-				return  new ResponseEntity<>( getAmendmentsDetail , returnStatus) ;
+				return new ResponseEntity<>( getAmendmentsDetail , returnStatus) ;
 			} else {
-				throw new ResourceNotFoundException("RateSets Id doesn't exist !");
+				return ResponseEntity.notFound().build();
+//				throw new ResourceNotFoundException("RateSets Id doesn't exist !");
 			}
 
 		} catch (ResourceNotFoundException e) {
@@ -52,12 +53,12 @@ public class RateSetDownloadController {
 	}
 	
 	@GetMapping("/{id}/rate-tables/{tableId}")
-	public  ResponseEntity< RateSet >  getRateSetsByTables(@PathVariable String id, @PathVariable String tableId) {
+	public  ResponseEntity<RateSet>  getRateSetsByTables(@PathVariable String id, @PathVariable String tableId) {
 		LOGGER.info("getRateSets invoked :::::-------------- " + id);
 		HttpStatus returnStatus = HttpStatus.OK;
 		
 		try {
-			RateSet getAmendmentsDetail = rateSetsSer.getById(id);
+			RateSet getAmendmentsDetail = rateSetsSer.getByIdAndTableId(id , tableId);
 			
 //			LOGGER.info("getAmendmentsDetail ::: " + getAmendmentsDetail.getBuyerOrg().getOrgName());
 //			LOGGER.info("rateSet ::: " + rateSet);
