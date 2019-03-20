@@ -16,12 +16,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.trax.ratemanager.amendment.Amendment;
+import com.trax.ratemanager.amendment.AmendmentConverter;
 import com.trax.ratemanager.exception.ResourceNotFoundException;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Created by sudhakar.rao on 2/19/2019.
  */
 @RestController
+@Slf4j
 @RequestMapping("/amendments/history")
 public class AmendmentsHistoryController {
 	
@@ -33,10 +38,22 @@ public class AmendmentsHistoryController {
 	
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE}, produces = { MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public AmendmentHistory createAmendmentsHistory(@RequestBody AmendmentHistory amendmentsHistory) {
+	public ResponseEntity<Object> createAmendmentsHistory(@RequestBody AmendmentHistoryVo amendmentsHistoryVo) throws Exception {
 
-		LOGGER.info("addAmendmentsHistory invoked");
-		return amendmentsHistorySer.create(amendmentsHistory);
+		log.info("***************Create AmendmentsHistory(PostRequest) ");
+		log.info("***************AmendmentsHistoryValue Object:::" + amendmentsHistoryVo);
+		AmendmentHistory amendmentsHistory = AmendmentHistoryConverter.convertToAmendmentHistory(amendmentsHistoryVo);
+		log.info("***************AmendmentsHistory Object After VO--to-->BO:::" + amendmentsHistory);
+		AmendmentHistory createdAmendmentHistory = null;
+		try 
+		{
+			createdAmendmentHistory = amendmentsHistorySer.create(amendmentsHistory);
+			return ResponseEntity.ok(createdAmendmentHistory);
+		} catch (Exception ex) 
+		{
+			log.error("Error occured:::" + ex.getMessage());
+		     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResourceNotFoundException("error",ex));
+		}
 	}
 
 	@GetMapping("/{id}")
@@ -62,17 +79,34 @@ public class AmendmentsHistoryController {
 	}
 	
 	@RequestMapping(method = {RequestMethod.PUT, RequestMethod.PATCH })
-	public AmendmentHistory updateAmendmentsHistory(@RequestBody AmendmentHistory amendmentsHistory) {
-
-		LOGGER.info("updateAmandmentsHistory invoked");
-		return amendmentsHistorySer.update(amendmentsHistory);
+	public ResponseEntity<Object> updateAmendmentsHistory(@RequestBody AmendmentHistoryVo amendmentsHistoryVo) throws Exception {
+		log.info("updateAmandmentHistory invoked");
+		return createAmendmentsHistory(amendmentsHistoryVo);
 	}
 
 	@DeleteMapping(value = "/{id}")
-	public AmendmentHistory deleteAmendmentsHistory(@PathVariable String id) {
+	public ResponseEntity<AmendmentHistory> deleteAmendmentsHistory(@PathVariable String id) {
 
-		LOGGER.info("deleteAmendmentsHistory invoked");
-		return null/* amendmentsHistorySer.delete(id) */;
+		ResponseEntity<AmendmentHistory> responseEntity = null;
+		log.info("**************deleteAmendmentHistory invoked with id:::" + id);
+		AmendmentHistory amendmentHistory = amendmentsHistorySer.getById(id);
+		log.info("**************found the amendmentHistory id in DB:::" + amendmentHistory);
+		if (amendmentHistory != null) 
+		{
+			try 
+			{
+				amendmentsHistorySer.delete(amendmentHistory);
+				log.info("deleted the amendmentHistoryId from database..." + amendmentHistory.getId());
+				return ResponseEntity.ok(amendmentHistory);
+			} catch (Exception ex) 
+			{
+				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+			}
+			
+		} else 
+		{
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		}
 	}
 	
 }

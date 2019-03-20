@@ -80,7 +80,7 @@ public class Amendment {
 	// its userAuditor field lastAssignedBy, approvers and currentApprover
 	private String lastAssignedBy;
 	private String approvers;
-	private Long currentApprover;
+	private String currentApprover;
 
 	private ZonedDateTime dateApproved;
 

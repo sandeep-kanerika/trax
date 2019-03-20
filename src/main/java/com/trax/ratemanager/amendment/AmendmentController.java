@@ -36,12 +36,10 @@ public class AmendmentController {
 	@ResponseBody
 	public ResponseEntity<Object> createAmandments(@RequestBody AmendmentVo amendmentVo) throws Exception {
 		
-//		LOGGER.info("addAmandments invoked");
-//		return amendmentsSer.create(amendment);
-		log.info("***************Create RateSet(PostRequest) ");
-		log.info("***************RateSetValue Object:::" + amendmentVo);
+		log.info("***************Create Amendments(PostRequest) ");
+		log.info("***************AmendmentsValue Object:::" + amendmentVo);
 		Amendment amendment = AmendmentConverter.convertToAmendment(amendmentVo);
-		log.info("***************RateSet Object After VO--to-->BO:::" + amendment);
+		log.info("***************Amendments Object After VO--to-->BO:::" + amendment);
 		Amendment createdAmendment = null;
 		try 
 		{

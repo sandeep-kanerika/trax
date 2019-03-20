@@ -1,14 +1,28 @@
 package com.trax.ratemanager.amendment.history;
 
-import java.sql.Date;
+import java.util.Date;
+import java.util.List;
 import java.sql.Timestamp;
+import java.time.ZonedDateTime;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.trax.ratemanager.config.AppConstants;
+import com.trax.ratemanager.orgnization.Organization;
+import com.trax.ratemanager.raterow.RateRow;
+import com.trax.ratemaneger.user.UserAuditor;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -31,48 +45,55 @@ public class AmendmentHistory {
 	private String id;
 	private Integer status;
 	private String amendmentId;
-
 	private String actionType;
 
-	@JsonFormat(pattern = AppConstants.DEFAULT_DATETIME_FORMAT)
-	private Timestamp dateRecorded;
+	private ZonedDateTime dateRecorded;
 	private String referenceId;
 	private Integer type;
 	private String description;
-	private Long ratesetId;
-	private Long ratesetReferenceId;
-	private Long buyerOrgId;
-	private Long sellerOrgId;
-	private String buyerOrgName;
-	private String sellerOrgName;
+	private String ratesetId;
+	private String ratesetReferenceId;
+	
+	@JsonIgnoreProperties("buyer")
+	@NotFound(action = NotFoundAction.IGNORE)
+	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+	private Organization buyerOrg;
+	
+	@JsonIgnoreProperties("seller")
+	@NotFound(action = NotFoundAction.IGNORE)
+	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+	private Organization sellerOrg;
+//	private String buyerOrgName;
+//	private String sellerOrgName;
 	private String ratesetName;
 	private String region;
 	private String mode;
 
-	@JsonFormat(pattern = AppConstants.DEFAULT_DATE_FORMAT)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "amendmentHistoryId")
+	private List<RateRow> rateRows;
+
 	private Date defaultEffectiveDateFrom;
-	@JsonFormat(pattern = AppConstants.DEFAULT_DATE_FORMAT)
 	private Date defaultEffectiveDateThru;
+	private ZonedDateTime dateApproved;
+	private ZonedDateTime dateCreated;
+	private ZonedDateTime dateUpdated;
+	private ZonedDateTime dateReviewed;
+	private ZonedDateTime dateAssigned;
 
-	@JsonFormat(pattern = AppConstants.DEFAULT_DATETIME_FORMAT)
-	private Timestamp dateApproved;
-
-	@JsonFormat(pattern = AppConstants.DEFAULT_DATETIME_FORMAT)
-	private Timestamp dateCreated;
-
-	@JsonFormat(pattern = AppConstants.DEFAULT_DATETIME_FORMAT)
-	private Timestamp dateUpdated;
-
-	@JsonFormat(pattern = AppConstants.DEFAULT_DATETIME_FORMAT)
-	private Timestamp dateReviewed;
-
-	@JsonFormat(pattern = AppConstants.DEFAULT_DATETIME_FORMAT)
-	private Timestamp dateAssigned;
-
-	private Long reviewedBy;
-	private Long createdBy;
-	private Long lastUpdatedBy;
-	private Long lastAssignedBy;
+	private String reviewedBy;
+	
+	@NotFound(action = NotFoundAction.IGNORE)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "createdById")
+	private UserAuditor createdBy;
+	
+	@NotFound(action = NotFoundAction.IGNORE)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "lastUpdatedById")
+	private UserAuditor lastUpdatedBy;
+	
+	private String lastAssignedBy;
 	private String approvers;
-	private Long currentApprover;
+	private String currentApprover;
 }
