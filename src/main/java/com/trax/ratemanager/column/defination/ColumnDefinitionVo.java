@@ -23,7 +23,7 @@ public class ColumnDefinitionVo {
 
 	private String name;
 
-	private Long sortOrder;
+	private String sortOrder;
 
 	private String type;
 
@@ -31,9 +31,9 @@ public class ColumnDefinitionVo {
 
 	private String dateFieldId;
 
-	private Boolean hasAlias;
+	private String hasAlias;
 
-	private Boolean isKey;
+	private String isKey;
 
 	private String reference;
 

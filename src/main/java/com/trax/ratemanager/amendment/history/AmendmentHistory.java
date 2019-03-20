@@ -47,6 +47,7 @@ public class AmendmentHistory {
 	private String amendmentId;
 	private String actionType;
 
+	@JsonFormat(pattern = AppConstants.DEFAULT_ZONED_DATETIME_FORMAT)
 	private ZonedDateTime dateRecorded;
 	private String referenceId;
 	private Integer type;
@@ -73,12 +74,25 @@ public class AmendmentHistory {
 	@JoinColumn(name = "amendmentHistoryId")
 	private List<RateRow> rateRows;
 
+	@JsonFormat(pattern = AppConstants.DEFAULT_DATE_FORMAT)
 	private Date defaultEffectiveDateFrom;
+	
+	@JsonFormat(pattern = AppConstants.DEFAULT_DATE_FORMAT)
 	private Date defaultEffectiveDateThru;
+	
+	@JsonFormat(pattern = AppConstants.DEFAULT_ZONED_DATETIME_FORMAT)
 	private ZonedDateTime dateApproved;
+	
+	@JsonFormat(pattern = AppConstants.DEFAULT_ZONED_DATETIME_FORMAT)
 	private ZonedDateTime dateCreated;
+	
+	@JsonFormat(pattern = AppConstants.DEFAULT_ZONED_DATETIME_FORMAT)
 	private ZonedDateTime dateUpdated;
+	
+	@JsonFormat(pattern = AppConstants.DEFAULT_ZONED_DATETIME_FORMAT)
 	private ZonedDateTime dateReviewed;
+	
+	@JsonFormat(pattern = AppConstants.DEFAULT_ZONED_DATETIME_FORMAT)
 	private ZonedDateTime dateAssigned;
 
 	private String reviewedBy;

@@ -1,6 +1,7 @@
 package com.trax.ratemanager.ratetable;
 
 import java.sql.Timestamp;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 import javax.persistence.Id;
@@ -25,8 +26,7 @@ public class RateTableVo {
 	private String creatorOrgId;
 	private String tableName;
 
-	@JsonFormat(pattern = AppConstants.DEFAULT_DATETIME_FORMAT)
-	private Timestamp dateCreated;
+	private ZonedDateTime dateCreated;
 
 	private String tableGroup;
 	private String tableType;

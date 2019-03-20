@@ -1,12 +1,16 @@
 package com.trax.ratemanager.raterow;
 
 import java.time.LocalDate;
+import java.time.ZonedDateTime;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.trax.ratemanager.config.AppConstants;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -44,9 +48,11 @@ public class RateRow {
 
 	private Integer status;
 
-	private LocalDate dateCreated;
-
-	private LocalDate dateUpdated;
+	@JsonFormat(pattern = AppConstants.DEFAULT_ZONED_DATETIME_FORMAT)
+	private ZonedDateTime dateCreated;
+	
+	@JsonFormat(pattern = AppConstants.DEFAULT_ZONED_DATETIME_FORMAT)
+	private ZonedDateTime dateUpdated;
 
 	private String keyValueHash;
 
@@ -58,11 +64,14 @@ public class RateRow {
 
 	private Boolean hasError;
 
-	private LocalDate effectiveDateFrom;
+	@JsonFormat(pattern = AppConstants.DEFAULT_DATE_FORMAT)
+	private Date effectiveDateFrom;
+	
+	@JsonFormat(pattern = AppConstants.DEFAULT_DATE_FORMAT)
+	private Date effectiveDateThru;
 
-	private LocalDate effectiveDateThru;
-
-	private LocalDate effectiveDate;
+	@JsonFormat(pattern = AppConstants.DEFAULT_ZONED_DATETIME_FORMAT)
+	private ZonedDateTime effectiveDate;
 
 	private String originCountry;
 

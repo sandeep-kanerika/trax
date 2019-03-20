@@ -15,8 +15,10 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.trax.ratemanager.config.AppConstants;
 import com.trax.ratemanager.orgnization.Organization;
 import com.trax.ratemanager.raterow.RateRow;
 import com.trax.ratemaneger.user.UserAuditor;
@@ -62,7 +64,10 @@ public class Amendment {
 	@JoinColumn(name = "amendmentId")
 	private List<RateRow> rateRows;
 
+	@JsonFormat(pattern = AppConstants.DEFAULT_DATE_FORMAT)
 	private Date defaultEffectiveDateFrom;
+	
+	@JsonFormat(pattern = AppConstants.DEFAULT_DATE_FORMAT)
 	private Date defaultEffectiveDateThru;
 
 	private String reviewedBy;
@@ -82,14 +87,19 @@ public class Amendment {
 	private String approvers;
 	private String currentApprover;
 
+	@JsonFormat(pattern = AppConstants.DEFAULT_ZONED_DATETIME_FORMAT)
 	private ZonedDateTime dateApproved;
 
+	@JsonFormat(pattern = AppConstants.DEFAULT_ZONED_DATETIME_FORMAT)
 	private ZonedDateTime dateCreated;
 
+	@JsonFormat(pattern = AppConstants.DEFAULT_ZONED_DATETIME_FORMAT)
 	private ZonedDateTime dateUpdated;
 
+	@JsonFormat(pattern = AppConstants.DEFAULT_ZONED_DATETIME_FORMAT)
 	private ZonedDateTime dateReviewed;
 
+	@JsonFormat(pattern = AppConstants.DEFAULT_ZONED_DATETIME_FORMAT)
 	private ZonedDateTime dateAssigned;
 
 }

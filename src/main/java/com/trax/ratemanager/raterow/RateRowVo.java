@@ -1,6 +1,7 @@
 package com.trax.ratemanager.raterow;
 
-import java.time.LocalDate;
+import java.time.ZonedDateTime;
+import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -34,9 +35,9 @@ public class RateRowVo {
 
 	private Integer status;
 
-	private LocalDate dateCreated;
+	private ZonedDateTime dateCreated;
 
-	private LocalDate dateUpdated;
+	private ZonedDateTime dateUpdated;
 
 	private String keyValueHash;
 
@@ -48,11 +49,11 @@ public class RateRowVo {
 
 	private Boolean hasError;
 
-	private LocalDate effectiveDateFrom;
+	private Date effectiveDateFrom;
 
-	private LocalDate effectiveDateThru;
+	private Date effectiveDateThru;
 
-	private LocalDate effectiveDate;
+	private ZonedDateTime effectiveDate;
 
 	private String originCountry;
 

@@ -1,12 +1,13 @@
 package com.trax.ratemanager.ratetable.definition;
 
-import java.sql.Timestamp;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 import javax.persistence.Id;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.trax.ratemanager.column.defination.RateColumnDefinition;
 import com.trax.ratemanager.config.AppConstants;
 import com.trax.ratemanager.ratecolumn.RateColumn;
 import com.trax.ratemanager.raterow.RateRow;
@@ -23,15 +24,13 @@ public class RateTableDefinitionVo {
 	@Id
 	private String id;
 	private String creatorOrgId;
-	private String tableName;
+	private String name;
 
-	@JsonFormat(pattern = AppConstants.DEFAULT_DATETIME_FORMAT)
-	private Timestamp dateCreated;
+	private ZonedDateTime dateCreated;
 
 	private String tableGroup;
 	private String tableType;
 	private String columnHash;
-	private List<RateColumn> columns;
-	private List<RateRow> rateRows;
+	private List<RateColumnDefinition> columns;
 
 }

@@ -25,15 +25,15 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class RateSetDefinition {
+public class RateSetDefinitionVo {
 
 	@Id
 	// @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String id;
 
-	private Integer status;
+	private String status;
 
-	private Long creatorOrgId;
+	private String creatorOrgId;
 
 	private String region;
 
@@ -41,15 +41,11 @@ public class RateSetDefinition {
 
 	private String name;
 
-	@JsonFormat(pattern = AppConstants.DEFAULT_ZONED_DATETIME_FORMAT)
 	private ZonedDateTime dateCreated;
 
-	@JsonFormat(pattern = AppConstants.DEFAULT_ZONED_DATETIME_FORMAT)
 	private ZonedDateTime dateUpdated;
 
 	private String tableHash;
 
-	@OneToMany
-	@JoinColumn(name="rateSetDefinitionId")
 	private List<RateTableDefinition> tables;
 }
