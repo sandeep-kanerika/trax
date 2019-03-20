@@ -1,13 +1,9 @@
 package com.trax.ratemanager.column.defination;
 
-import java.util.Collection;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,12 +26,27 @@ public class ColumnDefinitionsController {
 
 	@RequestMapping(method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE}, produces = { MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public RateColumnDefinition createColumnDefinitions(@RequestBody RateColumnDefinition columnDefinitions) {
-
+	public RateColumnDefinition createColumnDefinitions(@RequestBody ColumnDefinitionVo columnDefinitionsVo) {
+		
 		logger.info("addColumnDefinitions invoked");
-		return columnDefinitionSer.create(columnDefinitions);
+		RateColumnDefinition def = new RateColumnDefinition();
+		return columnDefinitionSer.create(def);
 	}
 
+	@GetMapping("/{id}")
+	public RateColumnDefinition getFilteredColumnDefs
+	(
+			@PathVariable String id, 
+			@PathVariable String concept,
+			@PathVariable String name,
+			@PathVariable String pageToken,
+			@PathVariable Integer limit	
+			)
+	{
+		System.out.println("ColumnDefinitionsController.getFilteredColumnDefs()....................");
+		
+	 return null;
+	}
 	@GetMapping("/{id}")
 	public RateColumnDefinition getColumnDefinitions(@PathVariable String id) {
 		logger.info("getColumnDefinitions invoked");
