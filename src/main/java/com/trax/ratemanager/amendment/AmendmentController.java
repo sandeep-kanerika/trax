@@ -15,14 +15,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trax.ratemanager.exception.ResourceNotFoundException;
-import com.trax.ratemanager.rateset.RateSet;
-import com.trax.ratemanager.rateset.RateSetController;
-import com.trax.ratemanager.rateset.RateSetConverter;
 
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * Created by sudhakar.rao on 2/19/2019.
+ * Created by sandeep.sable on 3/20/2019.
  */
 @RestController
 @Slf4j
@@ -32,10 +29,10 @@ public class AmendmentController {
 	@Autowired
 	AmendmentService amendmentsSer;
 
-	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE}, produces = { MediaType.APPLICATION_JSON_VALUE})
+	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
 	@ResponseBody
 	public ResponseEntity<Object> createAmandments(@RequestBody AmendmentVo amendmentVo) throws Exception {
-		
+
 //		LOGGER.info("addAmandments invoked");
 //		return amendmentsSer.create(amendment);
 		log.info("***************Create RateSet(PostRequest) ");
@@ -43,14 +40,13 @@ public class AmendmentController {
 		Amendment amendment = AmendmentConverter.convertToAmendment(amendmentVo);
 		log.info("***************RateSet Object After VO--to-->BO:::" + amendment);
 		Amendment createdAmendment = null;
-		try 
-		{
+		try {
 			createdAmendment = amendmentsSer.create(amendment);
 			return ResponseEntity.ok(createdAmendment);
-		} catch (Exception ex) 
-		{
+		} catch (Exception ex) {
 			log.error("Error occured:::" + ex.getMessage());
-		     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResourceNotFoundException("error",ex));
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body(new ResourceNotFoundException("error", ex));
 		}
 	}
 
@@ -74,8 +70,8 @@ public class AmendmentController {
 		}
 		return new ResponseEntity<>(returnStatus);
 	}
-	
-	@RequestMapping(method = {RequestMethod.PUT, RequestMethod.PATCH})
+
+	@RequestMapping(method = { RequestMethod.PUT, RequestMethod.PATCH })
 	public ResponseEntity<Object> updateAmandments(@RequestBody AmendmentVo amendmentVo) throws Exception {
 
 		log.info("updateAmandment invoked");
@@ -89,22 +85,66 @@ public class AmendmentController {
 		log.info("**************deleteAmendment invoked with id:::" + id);
 		Amendment amendment = amendmentsSer.getById(id);
 		log.info("**************found the amendment id in DB:::" + amendment);
-		if (amendment != null) 
-		{
-			try 
-			{
+		if (amendment != null) {
+			try {
 				amendmentsSer.delete(amendment);
 				log.info("deleted the amendmentId from database..." + amendment.getId());
 				return ResponseEntity.ok(amendment);
-			} catch (Exception ex) 
-			{
+			} catch (Exception ex) {
 				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 			}
-			
-		} else 
-		{
+
+		} else {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
+	}
+
+	@PostMapping(value = "/save-as-draft", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<Amendment> saveAsDraft(@RequestBody AmendmentWithRateRows amendmentWithRateRows) {
+		ResponseEntity<Amendment> saveAsDraft = null;
+		log.info("**************deleteAmendment invoked with id:::");
+		return null; // some response , need to be implemented.
+
+	}
+
+	@PostMapping(value = "/submit-for-approval", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<Amendment> submitForApproval(@RequestBody AmendmentWithMeta amendmentWithMeta) {
+		ResponseEntity<Amendment> responseEntity = null;
+		log.info("**************submitForApproval invoked with id:::");
+		return null; // some response , need to be implemented.
+
+	}
+
+	@PostMapping(value = "/approve-rates", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<Amendment> approveRates(@RequestBody AmendmentWithRateRows amendmentWithMeta) {
+		ResponseEntity<Amendment> responseEntity = null;
+		log.info("**************approveRates invoked with id:::");
+		return null; // some response , need to be implemented.
+
+	}
+
+	@GetMapping("/history")
+	public ResponseEntity<Amendment> getAmandmentHistory(@RequestBody AmendmentVo amendmentVo) {
+		System.out.println("---getAmandmentHistory---amendmentVo---->" + amendmentVo);
+
+		return null; // some response , need to be implemented.
+
+	}
+
+	@GetMapping("/history/{id}")
+	public ResponseEntity<Amendment> getAmandmentHistoryById(@PathVariable String id) {
+		System.out.println("---getAmandmentHistoryById---ID---->" + id);
+
+		return null;
+	}
+
+	@GetMapping("/history/summary/submission-to-review")
+	public ResponseEntity<Amendment> getAmandmentSubmissionToReview(@PathVariable String id) {
+		System.out.println("---getAmandmentSubmissionToReview---ID---->" + id);
+		return null;
 	}
 
 }

@@ -45,7 +45,5 @@ public class ColumnDefinitionVo {
 
 	private String pivotCharge;
 
-	private List<RateColumnValidation> columnValidations;
-
 	private String description;
 }
