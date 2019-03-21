@@ -27,9 +27,9 @@ public class ColumnDefinitionVo {
 
 	private String type;
 
-	private String dateSourceId;
+	private String dataSourceId;
 
-	private String dateFieldId;
+	private String dataFieldId;
 
 	private String hasAlias;
 
