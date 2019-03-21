@@ -15,7 +15,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @Getter
 @Setter

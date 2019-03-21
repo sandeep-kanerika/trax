@@ -1,18 +1,26 @@
 package com.trax.ratemanager.rateset;
 
 import java.time.ZonedDateTime;
+import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.trax.ratemanager.config.AppConstants;
+import com.trax.ratemanager.raterow.RateRow;
 import com.trax.ratemanager.ratetable.RateTable;
 import com.trax.ratemaneger.user.UserAuditor;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class RateSetVo {
 
 	private String id;
