@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trax.ratemanager.exception.ResourceNotFoundException;
@@ -22,28 +21,56 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequestMapping("/rate-sets-definitions")
 public class RateSetDefinitionController {
-	
+
 	@Autowired
 	RateSetDefinitionService rateSetsDefinitionSer;
-	
-	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE}, produces = { MediaType.APPLICATION_JSON_VALUE})
-	@ResponseBody
-	public ResponseEntity<Object> createRateSetsDefinition(@RequestBody RateSetDefinitionVo rateSetsDefinitionVo) throws Exception {
-		
+
+	// store single object of rateset definition
+	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<Object> createRateSetsDefinition(@RequestBody RateSetDefinitionVo rateSetsDefinitionVo)
+			throws Exception {
+
 		log.info("***************Create RateSetDefinition(PostRequest) ");
 		log.info("***************RateSetDefinitionValue Object:::" + rateSetsDefinitionVo);
-		RateSetDefinition rateSetDefinition = RateSetDefinitionConverter.convertToRateSetDefinition(rateSetsDefinitionVo);
+		RateSetDefinition rateSetDefinition = RateSetDefinitionConverter
+				.convertToRateSetDefinition(rateSetsDefinitionVo);
 		log.info("***************RateSetDefinition Object After VO--to-->BO:::" + rateSetDefinition);
 		RateSetDefinition createdRateSetDefinition = null;
-		try 
-		{
+		try {
 			createdRateSetDefinition = rateSetsDefinitionSer.create(rateSetDefinition);
 			return ResponseEntity.ok(createdRateSetDefinition);
-		} catch (Exception ex) 
-		{
+		} catch (Exception ex) {
 			log.error("Error occured:::" + ex.getMessage());
-		     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResourceNotFoundException("error",ex));
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body(new ResourceNotFoundException("error", ex));
 		}
+	}
+
+	// to store array of rateset object into db
+
+	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
+	public int createBultRateSets(@RequestBody RateSetDefinitionVo[] rateSetsDefinitionVo)
+			throws Exception {
+
+		log.info("***************Create RateSetDefinition(PostRequest) ");
+		log.info("***************RateSetDefinitionValue Object:::" + rateSetsDefinitionVo);
+		  int voLengh = rateSetsDefinitionVo.length;
+		  int count = 0;
+		for (RateSetDefinitionVo vo : rateSetsDefinitionVo) {
+			RateSetDefinition rateSetDef = RateSetDefinitionConverter.convertToRateSetDefinition(vo);
+			log.info("*************** in array::;RateSetDefinition Object After VO--to-->BO:::" + rateSetDef);
+			try 
+			{
+			    rateSetsDefinitionSer.create(rateSetDef);
+			    count++;
+			}
+			catch (Exception ex) 
+			{
+				log.error("Error occured:::" + ex.getMessage());
+			}
+
+		}
+		return count;
 	}
 
 	@GetMapping("/{id}")
@@ -66,8 +93,8 @@ public class RateSetDefinitionController {
 		}
 		return new ResponseEntity<>(returnStatus);
 	}
-	
-	@RequestMapping(method = {RequestMethod.PUT, RequestMethod.PATCH})
+
+	@RequestMapping(method = { RequestMethod.PUT, RequestMethod.PATCH })
 	public RateSetDefinition updateRateSetsDefinition(@RequestBody RateSetDefinition rateSetsDefinition) {
 
 		log.info("updateRateSetsDefinition invoked");
@@ -81,20 +108,16 @@ public class RateSetDefinitionController {
 		log.info("**************deleteRateSetDefinition invoked with id:::" + id);
 		RateSetDefinition rateSetDefinition = rateSetsDefinitionSer.getById(id);
 		log.info("**************found the RateSetDefinition id in DB:::" + rateSetDefinition);
-		if (rateSetDefinition != null) 
-		{
-			try 
-			{
+		if (rateSetDefinition != null) {
+			try {
 				rateSetsDefinitionSer.delete(rateSetDefinition);
 				log.info("deleted the ratesetid from database..." + rateSetDefinition.getId());
 				return ResponseEntity.ok(rateSetDefinition);
-			} catch (Exception ex) 
-			{
+			} catch (Exception ex) {
 				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 			}
-			
-		} else 
-		{
+
+		} else {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
 	}

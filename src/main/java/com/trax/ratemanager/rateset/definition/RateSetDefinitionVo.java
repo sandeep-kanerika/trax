@@ -3,7 +3,6 @@ package com.trax.ratemanager.rateset.definition;
 import java.time.ZonedDateTime;
 import java.util.List;
 
-import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 

@@ -1,11 +1,16 @@
 package com.trax.ratemanager.jpa;
 
+import java.io.Serializable;
+import java.sql.Array;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Types;
+
 import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.usertype.UserType;
-
-import java.io.Serializable;
-import java.sql.*;
 
 /**
  * Created by sudhakar.rao on 2/18/2019.

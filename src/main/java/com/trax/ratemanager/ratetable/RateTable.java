@@ -1,6 +1,5 @@
 package com.trax.ratemanager.ratetable;
 
-import java.sql.Timestamp;
 import java.time.ZonedDateTime;
 import java.util.List;
 
@@ -15,7 +14,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.trax.ratemanager.config.AppConstants;
 import com.trax.ratemanager.ratecolumn.RateColumn;
-import com.trax.ratemanager.raterow.RateRow;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

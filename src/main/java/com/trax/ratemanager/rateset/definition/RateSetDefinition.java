@@ -3,9 +3,10 @@ package com.trax.ratemanager.rateset.definition;
 import java.time.ZonedDateTime;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -27,7 +28,6 @@ import lombok.Setter;
 public class RateSetDefinition {
 
 	@Id
-	// @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String id;
 
 	private Integer status;
@@ -48,7 +48,6 @@ public class RateSetDefinition {
 
 	private String tableHash;
 
-	@OneToMany
-	@JoinColumn(name="rateSetDefinitionId")
+	@OneToMany(cascade = CascadeType.ALL, targetEntity = RateTableDefinition.class, mappedBy = "rateSetDefinition", fetch = FetchType.EAGER)
 	private List<RateTableDefinition> tables;
 }

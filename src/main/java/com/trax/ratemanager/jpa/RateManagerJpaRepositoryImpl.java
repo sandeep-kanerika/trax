@@ -1,11 +1,12 @@
 package com.trax.ratemanager.jpa;
 
+import java.io.Serializable;
+
+import javax.persistence.EntityManager;
+
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.persistence.EntityManager;
-import java.io.Serializable;
 
 /**
  * Created by sudhakar.rao on 2/4/2019.

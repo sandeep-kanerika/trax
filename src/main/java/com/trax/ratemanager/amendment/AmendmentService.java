@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import com.trax.ratemanager.exception.ResourceNotFoundException;
 import com.trax.ratemanager.jpa.AbstractJpaRepository;
 import com.trax.ratemanager.jpa.AbstractJpaService;
-import com.trax.ratemaneger.user.UserAuditor;
 
 import lombok.extern.slf4j.Slf4j;
 

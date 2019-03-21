@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trax.ratemanager.amendment.Amendment;
-import com.trax.ratemanager.amendment.AmendmentConverter;
 import com.trax.ratemanager.amendment.AmendmentVo;
 import com.trax.ratemanager.exception.ResourceNotFoundException;
 

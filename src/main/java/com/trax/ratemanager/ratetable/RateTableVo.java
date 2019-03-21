@@ -1,18 +1,13 @@
 package com.trax.ratemanager.ratetable;
 
-import java.sql.Timestamp;
 import java.time.ZonedDateTime;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Id;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.trax.ratemanager.config.AppConstants;
 import com.trax.ratemanager.ratecolumn.RateColumn;
 import com.trax.ratemanager.raterow.RateRow;
-import com.trax.ratemaneger.user.UserAuditor;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

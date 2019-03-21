@@ -2,10 +2,10 @@ package com.trax.ratemanager.column.defination;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.trax.ratemanager.column.validation.ColumnValidation;
+import com.trax.ratemanager.ratetable.definition.RateTableDefinition;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -49,5 +49,5 @@ public class RateColumnDefinition {
 	private String pivotCharge;
 
 	private String description;
-
+	
 }

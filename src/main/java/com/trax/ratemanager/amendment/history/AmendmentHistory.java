@@ -1,9 +1,8 @@
 package com.trax.ratemanager.amendment.history;
 
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
-import java.sql.Timestamp;
-import java.time.ZonedDateTime;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
