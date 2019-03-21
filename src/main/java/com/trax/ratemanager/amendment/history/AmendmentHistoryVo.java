@@ -1,4 +1,4 @@
-package com.trax.ratemanager.amendment;
+package com.trax.ratemanager.amendment.history;
 
 import java.time.ZonedDateTime;
 import java.util.Date;
@@ -18,44 +18,40 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AmendmentVo {
+public class AmendmentHistoryVo {
 
 	private String id;
-	private String buyerOrgId;
-	private String status;
-	private String sellerOrgId;
-	private String ratesetId;
-//	private String isSpotQuote;
-
-	private UserAuditor createdBy;
-	private ZonedDateTime dateCreated;
-	private ZonedDateTime dateUpdated;
-	private Date defaultEffectiveDateFrom;
-	private Date defaultEffectiveDateThru;
-	
-	private String description;
-	private UserAuditor lastUpdatedBy;
-	private String ratesetReferenceId;
+	private String amendmentId;
+	private String actionType;
+	private ZonedDateTime dateRecorded;
 	private String referenceId;
-	private String reviewedBy;
 	private String type;
-	
+	private String description;
+	private String ratesetId;
+	private String ratesetReferenceId;
+	private String buyerOrgId;
+	private String sellerOrgId;
 	private String buyerOrgName;
 	private String sellerOrgName;
 	private String ratesetName;
 	private String region;
 	private String mode;
+	private String status;
+
+	private UserAuditor createdBy;
+	private ZonedDateTime dateCreated;
+	private ZonedDateTime dateUpdated;
+	private ZonedDateTime dateReviewed;
+	private ZonedDateTime dateAssigned;
+	private Date defaultEffectiveDateFrom;
+	private Date defaultEffectiveDateThru;
+	
+	private UserAuditor lastUpdatedBy;
+	private String reviewedBy;
 
 	private List<RateRow> rateRows;
-
 	private String lastAssignedBy;
 	private String approvers;
 	private String currentApprover;
-
-	private ZonedDateTime dateApproved;
-
-	private ZonedDateTime dateReviewed;
-
-	private ZonedDateTime dateAssigned;
 
 }

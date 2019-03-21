@@ -5,12 +5,9 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.trax.ratemanager.config.AppConstants;
 import com.trax.ratemanager.ratetable.definition.RateTableDefinition;
 
 import lombok.AllArgsConstructor;
@@ -24,15 +21,15 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class RateSetDefinition {
+public class RateSetDefinitionVo {
 
 	@Id
 	// @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String id;
 
-	private Integer status;
+	private String status;
 
-	private Long creatorOrgId;
+	private String creatorOrgId;
 
 	private String region;
 
@@ -40,15 +37,12 @@ public class RateSetDefinition {
 
 	private String name;
 
-	@JsonFormat(pattern = AppConstants.DEFAULT_ZONED_DATETIME_FORMAT)
 	private ZonedDateTime dateCreated;
 
-	@JsonFormat(pattern = AppConstants.DEFAULT_ZONED_DATETIME_FORMAT)
 	private ZonedDateTime dateUpdated;
 
 	private String tableHash;
 
 	@OneToMany
-	@JoinColumn(name="rateSetDefinitionId")
 	private List<RateTableDefinition> tables;
 }

@@ -13,10 +13,10 @@ import java.util.List;
  * Created by sudhakar.rao on 2/19/2019.
  */
 @Service
-public class AmendmentsHistoryService extends AbstractJpaService<AmendmentHistory > {
+public class AmendmentHistoryService extends AbstractJpaService<AmendmentHistory > {
 
     @Autowired
-    AmendmentsHistoryRepository amendamendmentsHistoryRepository;
+    AmendmentHistoryRepository amendmentsHistoryRepository;
 
     @Override
     protected AmendmentHistory create(AmendmentHistory amendmentsHistory ) {
@@ -25,14 +25,14 @@ public class AmendmentsHistoryService extends AbstractJpaService<AmendmentHistor
 
     public AmendmentHistory getById(String id) {
 //		return search(id);
-    	return amendamendmentsHistoryRepository.getById(id);
+    	return amendmentsHistoryRepository.getById(id);
     }
 
     @Override
     protected AmendmentHistory update(AmendmentHistory  _amendmentsHistory ) {
         //Get the data from DB and update the fields and information from request data
 		
-		  AmendmentHistory amendmentsHistory = amendamendmentsHistoryRepository.getById(_amendmentsHistory .getId());
+		  AmendmentHistory amendmentsHistory = amendmentsHistoryRepository.getById(_amendmentsHistory .getId());
 		  if (amendmentsHistory != null) {
 	        	
 	        	amendmentsHistory.setStatus(_amendmentsHistory.getStatus());
@@ -43,10 +43,14 @@ public class AmendmentsHistoryService extends AbstractJpaService<AmendmentHistor
 	        	amendmentsHistory.setDescription(_amendmentsHistory.getDescription());
 	        	amendmentsHistory.setRatesetId(_amendmentsHistory.getRatesetId());
 	        	amendmentsHistory.setRatesetReferenceId(_amendmentsHistory.getRatesetReferenceId());
-	            amendmentsHistory.setBuyerOrgId(_amendmentsHistory.getBuyerOrgId());
-	            amendmentsHistory.setSellerOrgId(_amendmentsHistory.getSellerOrgId());
-	            amendmentsHistory.setBuyerOrgName(_amendmentsHistory.getBuyerOrgName());
-	            amendmentsHistory.setSellerOrgName(_amendmentsHistory.getSellerOrgName());
+			/*
+			 * amendmentsHistory.setBuyerOrgId(_amendmentsHistory.getBuyerOrgId());
+			 * amendmentsHistory.setSellerOrgId(_amendmentsHistory.getSellerOrgId());
+			 * amendmentsHistory.setBuyerOrgName(_amendmentsHistory.getBuyerOrgName());
+			 * amendmentsHistory.setSellerOrgName(_amendmentsHistory.getSellerOrgName());
+			 */
+	        	amendmentsHistory.setBuyerOrg(_amendmentsHistory.getBuyerOrg());
+	        	amendmentsHistory.setSellerOrg(_amendmentsHistory.getSellerOrg());
 	            amendmentsHistory.setRatesetName(_amendmentsHistory.getRatesetName());
 	            amendmentsHistory.setRegion(_amendmentsHistory.getRegion());
 	            amendmentsHistory.setMode(_amendmentsHistory.getMode());
@@ -73,16 +77,17 @@ public class AmendmentsHistoryService extends AbstractJpaService<AmendmentHistor
 
     @Override
     protected AmendmentHistory delete(AmendmentHistory amendmentsHistory ) {
-        return save(amendmentsHistory);
+    	amendmentsHistoryRepository.delete(amendmentsHistory);
+		return amendmentsHistory;
     }
 
     @Override
     protected List<AmendmentHistory > search(AmendmentHistory amendmentsHistory ) {
-        return null;
+        return amendmentsHistoryRepository.findAll();
     }
 
     @Override
     protected AbstractJpaRepository<AmendmentHistory , String> getRepository() {
-		return amendamendmentsHistoryRepository;
+		return amendmentsHistoryRepository;
     }
 }

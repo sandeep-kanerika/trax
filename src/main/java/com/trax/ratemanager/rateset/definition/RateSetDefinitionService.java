@@ -36,7 +36,8 @@ public class RateSetDefinitionService extends AbstractJpaService<RateSetDefiniti
 	@Override
 	protected RateSetDefinition delete(RateSetDefinition rateSetsDefinition) {
 		// TODO Auto-generated method stub
-		return null;
+		rateSetsDefinitionRepository.delete(rateSetsDefinition);
+		return rateSetsDefinition;
 	}
 
 	@Override

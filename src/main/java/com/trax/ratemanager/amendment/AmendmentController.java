@@ -1,7 +1,5 @@
 package com.trax.ratemanager.amendment;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -18,29 +16,42 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.trax.ratemanager.exception.ResourceNotFoundException;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
- * Created by sudhakar.rao on 2/19/2019.
+ * Created by sandeep.sable on 3/20/2019.
  */
 @RestController
+@Slf4j
 @RequestMapping("/amendments")
 public class AmendmentController {
 
 	@Autowired
 	AmendmentService amendmentsSer;
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(AmendmentController.class);
-
-	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE}, produces = { MediaType.APPLICATION_JSON_VALUE})
+	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
 	@ResponseBody
-	public Amendment createAmandments(@RequestBody Amendment amendment) {
+	public ResponseEntity<Object> createAmandments(@RequestBody AmendmentVo amendmentVo) throws Exception {
+		
+		log.info("***************Create Amendments(PostRequest) ");
+		log.info("***************AmendmentsValue Object:::" + amendmentVo);
 
-		LOGGER.info("addAmandments invoked");
-		return amendmentsSer.create(amendment);
+		Amendment amendment = AmendmentConverter.convertToAmendment(amendmentVo);
+		log.info("***************Amendments Object After VO--to-->BO:::" + amendment);
+		Amendment createdAmendment = null;
+		try {
+			createdAmendment = amendmentsSer.create(amendment);
+			return ResponseEntity.ok(createdAmendment);
+		} catch (Exception ex) {
+			log.error("Error occured:::" + ex.getMessage());
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body(new ResourceNotFoundException("error", ex));
+		}
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Amendment> getAmandments(@PathVariable String id) {
-		LOGGER.info("getAmandments invoked");
+		log.info("getAmandments invoked");
 		HttpStatus returnStatus = HttpStatus.OK;
 		try {
 			Amendment getAmendmentsDetail = amendmentsSer.getById(id);
@@ -50,27 +61,67 @@ public class AmendmentController {
 				throw new ResourceNotFoundException("Amendment Id doesn't exist !");
 			}
 		} catch (ResourceNotFoundException e) {
-			LOGGER.error(e.getMessage());
+			log.error(e.getMessage());
 			returnStatus = HttpStatus.NOT_FOUND;
 		} catch (Exception e) {
 			returnStatus = HttpStatus.INTERNAL_SERVER_ERROR;
-			LOGGER.error(e.getMessage());
+			log.error(e.getMessage());
 		}
 		return new ResponseEntity<>(returnStatus);
 	}
-	
-	@RequestMapping(method = {RequestMethod.PUT, RequestMethod.PATCH})
-	public Amendment updateAmandments(@RequestBody Amendment amendment) {
 
-		LOGGER.info("updateAmandment invoked");
-		return amendmentsSer.update(amendment);
+	@RequestMapping(method = { RequestMethod.PUT, RequestMethod.PATCH })
+	public ResponseEntity<Object> updateAmandments(@RequestBody AmendmentVo amendmentVo) throws Exception {
+
+		log.info("updateAmandment invoked");
+		return createAmandments(amendmentVo);
 	}
 
 	@DeleteMapping(value = "/{id}")
-	public Amendment deleteAmandments(@PathVariable String id) {
+	public ResponseEntity<Amendment> deleteAmandments(@PathVariable String id) {
 
-		LOGGER.info("deleteAmandment invoked");
-		return null/* amendmentsSer.delete(id) */;
+		ResponseEntity<Amendment> responseEntity = null;
+		log.info("**************deleteAmendment invoked with id:::" + id);
+		Amendment amendment = amendmentsSer.getById(id);
+		log.info("**************found the amendment id in DB:::" + amendment);
+		if (amendment != null) {
+			try {
+				amendmentsSer.delete(amendment);
+				log.info("deleted the amendmentId from database..." + amendment.getId());
+				return ResponseEntity.ok(amendment);
+			} catch (Exception ex) {
+				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+			}
+
+		} else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		}
 	}
 
+	@PostMapping(value = "/save-as-draft", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<Amendment> saveAsDraft(@RequestBody AmendmentWithRateRows amendmentWithRateRows) {
+		ResponseEntity<Amendment> saveAsDraft = null;
+		log.info("**************deleteAmendment invoked with id:::");
+		return null; // some response , need to be implemented.
+
+	}
+
+	@PostMapping(value = "/submit-for-approval", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<Amendment> submitForApproval(@RequestBody AmendmentWithMeta amendmentWithMeta) {
+		ResponseEntity<Amendment> responseEntity = null;
+		log.info("**************submitForApproval invoked with id:::");
+		return null; // some response , need to be implemented.
+
+	}
+
+	@PostMapping(value = "/approve-rates", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<Amendment> approveRates(@RequestBody AmendmentWithRateRows amendmentWithMeta) {
+		ResponseEntity<Amendment> responseEntity = null;
+		log.info("**************approveRates invoked with id:::");
+		return null; // some response , need to be implemented.
+
+	}
 }

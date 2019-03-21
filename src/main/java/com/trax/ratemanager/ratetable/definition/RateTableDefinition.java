@@ -1,6 +1,7 @@
 package com.trax.ratemanager.ratetable.definition;
 
 import java.sql.Timestamp;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -29,8 +30,10 @@ public class RateTableDefinition {
 	private String id;
 	private Long creatorOrgId;
 	private String name;
-	@JsonFormat(pattern = AppConstants.DEFAULT_DATETIME_FORMAT)
-	private Timestamp dateCreated;
+	
+	@JsonFormat(pattern = AppConstants.DEFAULT_ZONED_DATETIME_FORMAT)
+	private ZonedDateTime dateCreated;
+	
 	private String tableGroup;
 	private String tableType;
 	private String columnHash;

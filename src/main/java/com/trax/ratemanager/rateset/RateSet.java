@@ -58,10 +58,10 @@ public class RateSet {
 	@JsonFormat(pattern = AppConstants.DEFAULT_ZONED_DATETIME_FORMAT)
 	private ZonedDateTime dateUpdated;
 
-	@JsonFormat(pattern = AppConstants.DEFAULT_DATE_FORMAT)
+	@JsonFormat(pattern = AppConstants.DEFAULT_ZONED_DATETIME_FORMAT)
 	private ZonedDateTime dateReviewed;
 
-	@JsonFormat(pattern = AppConstants.DEFAULT_DATE_FORMAT)
+	@JsonFormat(pattern = AppConstants.DEFAULT_ZONED_DATETIME_FORMAT)
 	private ZonedDateTime dateAssigned;
 
 	private String tableHash;

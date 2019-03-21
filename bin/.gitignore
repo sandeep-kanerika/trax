@@ -24,3 +24,21 @@ HELP.md
 /nbdist/
 /.nb-gradle/
 /build/
+
+
+### Java ###
+.class
+.jar
+.war
+.ear
+
+### Eclipse ###
+
+/module
+/bin
+/target
+/.settings
+.mvn
+/mvnw.bat
+/mvnw
+/.mvn/

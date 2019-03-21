@@ -33,7 +33,8 @@ public class RateTableDefinitionService extends AbstractJpaService<RateTableDefi
 
 	@Override
 	protected RateTableDefinition delete(RateTableDefinition rateTablesDefinition) {
-		return delete(rateTablesDefinition);
+		rateTablesDefinitionRepository.delete(rateTablesDefinition);
+		return rateTablesDefinition;
 	}
 
 	@Override

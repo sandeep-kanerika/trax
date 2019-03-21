@@ -40,6 +40,10 @@ public class RateSetsService/* extends AbstractJpaService<RateSet> */ {
 	public RateSet getById(String id) {
 		return rateSetsRepository.getById(id);
 	}
+	
+	public RateSet getByIdAndTableId(String id , String tableId) {
+		return rateSetsRepository.getByIdAndTableId(id, tableId );
+	}
 
 	public List<RateSet> findAll() {
 		return rateSetsRepository.findAll();
