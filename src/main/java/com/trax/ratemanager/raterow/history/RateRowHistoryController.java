@@ -19,9 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.trax.ratemanager.exception.ResourceNotFoundException;
 
 @RestController
-@RequestMapping("/rate/rows/history")
+@RequestMapping("/rate-rows/history")
 public class RateRowHistoryController {
-	
+
 	@Autowired
 	RateRowHistoryService rateRowsHistorySer;
 
@@ -33,6 +33,21 @@ public class RateRowHistoryController {
 
 		LOGGER.info("addRateRowsHistory invoked");
 		return rateRowsHistorySer.create(rateRowsHistory);
+	}
+
+	
+
+	@GetMapping("/rate-rows/history/latest")
+	public ResponseEntity<RateRowHistory> getRateRowstHistoryLatest(@PathVariable String rootParentId) {
+		LOGGER.info("getRateRowsHistory invoked");
+		return null;
+	}
+
+	@GetMapping("/rate-rows/{rootParentId}/history")
+
+	public ResponseEntity<RateRowHistory> getRateRowsParentHistory(@PathVariable String rootParentId) {
+		LOGGER.info("getRateRowsParentHistory invoked");
+		return null;
 	}
 
 	@GetMapping("/{id}")
@@ -55,8 +70,8 @@ public class RateRowHistoryController {
 		}
 		return new ResponseEntity<>(returnStatus);
 	}
-	
-	@RequestMapping(method = {RequestMethod.PUT, RequestMethod.PATCH})
+
+	@RequestMapping(method = { RequestMethod.PUT, RequestMethod.PATCH })
 	public RateRowHistory updateRateRowsHistory(@RequestBody RateRowHistory rateRowsHistory) {
 
 		LOGGER.info("updateRateRowsHistory invoked");

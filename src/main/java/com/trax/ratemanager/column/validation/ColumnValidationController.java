@@ -20,12 +20,12 @@ import com.trax.ratemanager.exception.ResourceNotFoundException;
 
 @RestController
 @RequestMapping("/column/validations")
-public class ColumnValidationsController {
+public class ColumnValidationController {
 	
 	@Autowired
-	ColumnValidationsService columnValidationSer;
+	ColumnValidationService columnValidationSer;
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(ColumnValidationsController.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(ColumnValidationController.class);
 
 	@RequestMapping(/* value = "/ColumnValidation", */method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE}, produces = { MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody

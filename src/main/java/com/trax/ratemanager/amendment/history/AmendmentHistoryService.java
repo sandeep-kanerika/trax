@@ -13,10 +13,10 @@ import java.util.List;
  * Created by sudhakar.rao on 2/19/2019.
  */
 @Service
-public class AmendmentsHistoryService extends AbstractJpaService<AmendmentHistory > {
+public class AmendmentHistoryService extends AbstractJpaService<AmendmentHistory > {
 
     @Autowired
-    AmendmentsHistoryRepository amendmentsHistoryRepository;
+    AmendmentHistoryRepository amendmentsHistoryRepository;
 
     @Override
     protected AmendmentHistory create(AmendmentHistory amendmentsHistory ) {
