@@ -124,26 +124,4 @@ public class AmendmentController {
 		return null; // some response , need to be implemented.
 
 	}
-
-	@GetMapping("/history")
-	public ResponseEntity<Amendment> getAmandmentHistory(@RequestBody AmendmentVo amendmentVo) {
-		System.out.println("---getAmandmentHistory---amendmentVo---->" + amendmentVo);
-
-		return null; // some response , need to be implemented.
-
-	}
-
-	@GetMapping("/history/{id}")
-	public ResponseEntity<Amendment> getAmandmentsHistoryById(@PathVariable String id) {
-		System.out.println("---getAmandmentHistoryById---ID---->" + id);
-
-		return null;
-	}
-
-	@GetMapping("/history/summary/submission-to-review")
-	public ResponseEntity<Amendment> getAmandmentSubmissionToReview(@PathVariable String id) {
-		System.out.println("---getAmandmentSubmissionToReview---ID---->" + id);
-		return null;
-	}
-
 }

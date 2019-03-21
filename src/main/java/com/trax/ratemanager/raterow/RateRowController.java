@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.trax.ratemanager.exception.ResourceNotFoundException;
 
 @RestController
-@RequestMapping("/rate/rows")
+@RequestMapping("/rate-rows")
 public class RateRowController {
 
 	@Autowired
@@ -60,6 +60,12 @@ public class RateRowController {
 		return null;
 	}
 
+	@PostMapping("/rate-rows/lookup")
+	public ResponseEntity<RateRow> getRateRowsByFilter(@RequestBody Object object) {
+          System.out.println("RateRowController.getRateRowsByFilter()");
+		return null;
+	}
+	
 	@GetMapping("/{id}")
 	public ResponseEntity<RateRow> getRateRows(@PathVariable String id) {
 		LOGGER.info("getRateRows invoked");

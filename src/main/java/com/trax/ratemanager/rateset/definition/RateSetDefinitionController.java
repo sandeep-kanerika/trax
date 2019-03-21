@@ -1,7 +1,5 @@
 package com.trax.ratemanager.rateset.definition;
 
-import java.util.Collection;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -17,14 +15,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trax.ratemanager.exception.ResourceNotFoundException;
-import com.trax.ratemanager.rateset.RateSet;
-import com.trax.ratemanager.rateset.RateSetConverter;
 
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @Slf4j
-@RequestMapping("/rate/sets/definition")
+@RequestMapping("/rate-sets-definitions")
 public class RateSetDefinitionController {
 	
 	@Autowired

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.trax.ratemanager.amendment.Amendment;
 import com.trax.ratemanager.amendment.AmendmentConverter;
+import com.trax.ratemanager.amendment.AmendmentVo;
 import com.trax.ratemanager.exception.ResourceNotFoundException;
 
 import lombok.extern.slf4j.Slf4j;
@@ -29,57 +30,35 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequestMapping("/amendments/history")
 public class AmendmentHistoryController {
-	
+
 	@Autowired
 	AmendmentHistoryService amendmentsHistorySer;
 
-
 	private static final Logger LOGGER = LoggerFactory.getLogger(AmendmentHistoryController.class);
-	
-	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE}, produces = { MediaType.APPLICATION_JSON_VALUE})
+
+	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
 	@ResponseBody
-	public ResponseEntity<Object> createAmendmentsHistory(@RequestBody AmendmentHistoryVo amendmentsHistoryVo) throws Exception {
+	public ResponseEntity<Object> createAmendmentsHistory(@RequestBody AmendmentHistoryVo amendmentsHistoryVo)
+			throws Exception {
 
 		log.info("***************Create AmendmentsHistory(PostRequest) ");
 		log.info("***************AmendmentsHistoryValue Object:::" + amendmentsHistoryVo);
 		AmendmentHistory amendmentsHistory = AmendmentHistoryConverter.convertToAmendmentHistory(amendmentsHistoryVo);
 		log.info("***************AmendmentsHistory Object After VO--to-->BO:::" + amendmentsHistory);
 		AmendmentHistory createdAmendmentHistory = null;
-		try 
-		{
+		try {
 			createdAmendmentHistory = amendmentsHistorySer.create(amendmentsHistory);
 			return ResponseEntity.ok(createdAmendmentHistory);
-		} catch (Exception ex) 
-		{
+		} catch (Exception ex) {
 			log.error("Error occured:::" + ex.getMessage());
-		     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResourceNotFoundException("error",ex));
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body(new ResourceNotFoundException("error", ex));
 		}
 	}
 
-	@GetMapping("/history/{id}")
-	public ResponseEntity<AmendmentHistory> getAmendmentsHistoryByTheId(@PathVariable String id) {
-		LOGGER.info("getAmandmentsHistory invoked");
-		HttpStatus returnStatus = HttpStatus.OK;
-		
-		try {
-			AmendmentHistory getAmendmentHistoryDetail =  amendmentsHistorySer.getById(id);
-			if(getAmendmentHistoryDetail != null ) {
-				return new ResponseEntity<>(getAmendmentHistoryDetail, returnStatus);
-			}else {
-				throw new ResourceNotFoundException("AmendmentsHistory Id Doesn't Exists !");
-			}
-		} catch (ResourceNotFoundException e) {
-			LOGGER.error(e.getMessage());
-			returnStatus = HttpStatus.NOT_FOUND;
-		} catch (Exception e) {
-			returnStatus = HttpStatus.INTERNAL_SERVER_ERROR;
-			LOGGER.error(e.getMessage());
-		}
-		return new ResponseEntity<>(returnStatus);
-	}
-	
-	@RequestMapping(method = {RequestMethod.PUT, RequestMethod.PATCH })
-	public ResponseEntity<Object> updateAmendmentsHistory(@RequestBody AmendmentHistoryVo amendmentsHistoryVo) throws Exception {
+	@RequestMapping(method = { RequestMethod.PUT, RequestMethod.PATCH })
+	public ResponseEntity<Object> updateAmendmentsHistory(@RequestBody AmendmentHistoryVo amendmentsHistoryVo)
+			throws Exception {
 		log.info("updateAmandmentHistory invoked");
 		return createAmendmentsHistory(amendmentsHistoryVo);
 	}
@@ -91,22 +70,54 @@ public class AmendmentHistoryController {
 		log.info("**************deleteAmendmentHistory invoked with id:::" + id);
 		AmendmentHistory amendmentHistory = amendmentsHistorySer.getById(id);
 		log.info("**************found the amendmentHistory id in DB:::" + amendmentHistory);
-		if (amendmentHistory != null) 
-		{
-			try 
-			{
+		if (amendmentHistory != null) {
+			try {
 				amendmentsHistorySer.delete(amendmentHistory);
 				log.info("deleted the amendmentHistoryId from database..." + amendmentHistory.getId());
 				return ResponseEntity.ok(amendmentHistory);
-			} catch (Exception ex) 
-			{
+			} catch (Exception ex) {
 				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 			}
-			
-		} else 
-		{
+
+		} else {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
 	}
-	
+
+	@GetMapping("/history/{id}")
+	public ResponseEntity<AmendmentHistory> getAmendmentsHistoryByTheId(@PathVariable String id) {
+		LOGGER.info("getAmandmentsHistory invoked");
+		HttpStatus returnStatus = HttpStatus.OK;
+
+		try {
+			AmendmentHistory getAmendmentHistoryDetail = amendmentsHistorySer.getById(id);
+			if (getAmendmentHistoryDetail != null) {
+				return new ResponseEntity<>(getAmendmentHistoryDetail, returnStatus);
+			} else {
+				throw new ResourceNotFoundException("AmendmentsHistory Id Doesn't Exists !");
+			}
+		} catch (ResourceNotFoundException e) {
+			LOGGER.error(e.getMessage());
+			returnStatus = HttpStatus.NOT_FOUND;
+		} catch (Exception e) {
+			returnStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+			LOGGER.error(e.getMessage());
+		}
+		return new ResponseEntity<>(returnStatus);
+	}
+
+	@GetMapping("/history")
+	public ResponseEntity<Amendment> getAmandmentHistory(@RequestBody AmendmentVo amendmentVo) {
+		System.out.println("---getAmandmentHistory---amendmentVo---->" + amendmentVo);
+
+		return null; // some response , need to be implemented.
+
+	}
+
+	@GetMapping("/history/summary/submission-to-review")
+	public ResponseEntity<Amendment> getAmandmentSubmissionToReview(@PathVariable String id) {
+		System.out.println("---getAmandmentSubmissionToReview---ID---->" + id);
+		return null;
+	}
+
 }
