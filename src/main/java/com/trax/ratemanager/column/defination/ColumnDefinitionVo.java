@@ -1,9 +1,6 @@
 package com.trax.ratemanager.column.defination;
 
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.trax.ratemanager.column.validation.RateColumnValidation;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

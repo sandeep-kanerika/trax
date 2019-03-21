@@ -19,10 +19,11 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class RateColumnValidation 
-{
+public class ColumnValidation {
 	@Id
 	private String id;
+	private String rateSetId;
+	private String tableId;
 	private String columnDefinitionId;
 	private String concept;
 	private String dataFieldId;

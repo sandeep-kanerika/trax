@@ -20,6 +20,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.trax.ratemanager.amendment.Amendment;
 import com.trax.ratemanager.config.AppConstants;
 import com.trax.ratemanager.orgnization.Organization;
+import com.trax.ratemanager.rateset.definition.RateSetDefinition;
 import com.trax.ratemanager.ratetable.RateTable;
 
 import lombok.Getter;
@@ -34,6 +35,8 @@ public class RateSet {
 	@Id
 	private String id;
 
+	private RateSetDefinition rateSetDefinition;
+	
 	private Integer status;
 
 	@JsonIgnoreProperties("buyer")

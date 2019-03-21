@@ -4,17 +4,17 @@ import com.trax.ratemanager.column.defination.RateColumnDefinition;
 
 public class ColumnValidationConverter {
 	
-	public static RateColumnValidation convertToRateColumnValidation(ColumnValidationVo columnValidationVo) throws Exception{
+	public static ColumnValidation convertToColumnValidation(ColumnValidationVo columnValidationVo) throws Exception{
 		
-		RateColumnValidation rateColumnValidation = null;
+		ColumnValidation ColumnValidation = null;
 		if(columnValidationVo != null) {
-			rateColumnValidation = new RateColumnValidation();
+			ColumnValidation = new ColumnValidation();
 			
 			System.out.println("existing id:::" + columnValidationVo.getId());
 			
-			rateColumnValidation.setId(columnValidationVo.getId());
+			ColumnValidation.setId(columnValidationVo.getId());
 			
-			return rateColumnValidation;
+			return ColumnValidation;
 		}else {
 			throw new Exception("Problem with input");
 		}

@@ -1,5 +1,7 @@
 package com.trax.ratemanager.column.validation;
 
+import javax.persistence.OneToOne;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import lombok.AllArgsConstructor;
@@ -22,6 +24,7 @@ public class ColumnValidationVo {
 
 	private String rateSetId;
 	
-	private String validation;
+	@OneToOne
+	private ColumnValidation validation;
 
 }

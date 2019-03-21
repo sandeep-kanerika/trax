@@ -9,7 +9,7 @@ import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.trax.ratemanager.column.defination.RateColumnDefinition;
-import com.trax.ratemanager.column.validation.RateColumnValidation;
+import com.trax.ratemanager.column.validation.ColumnValidation;
 import com.trax.ratemanager.rateset.RateSet;
 import com.trax.ratemanager.ratetable.RateTable;
 
@@ -43,6 +43,6 @@ public class RateColumn {
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "rateColumnId")
-	private RateColumnValidation validation;
+	private ColumnValidation validation;
 
 }

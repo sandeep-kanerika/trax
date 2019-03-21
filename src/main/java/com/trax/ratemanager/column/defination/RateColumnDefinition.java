@@ -5,7 +5,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.trax.ratemanager.column.validation.RateColumnValidation;
+import com.trax.ratemanager.column.validation.ColumnValidation;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -50,6 +50,4 @@ public class RateColumnDefinition {
 
 	private String description;
 
-	@OneToOne
-	private RateColumnValidation columnValidation;
 }

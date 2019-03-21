@@ -10,21 +10,21 @@ import com.trax.ratemanager.jpa.AbstractJpaRepository;
 import com.trax.ratemanager.jpa.AbstractJpaService;
 
 @Service
-public class ColumnValidationService extends AbstractJpaService<RateColumnValidation>{
+public class ColumnValidationService extends AbstractJpaService<ColumnValidation>{
 
 	@Autowired
 	ColumnValidationRepository columnValidationsRepository;
 	
 	@Override
-	protected RateColumnValidation create(RateColumnValidation columnValidations) {
+	protected ColumnValidation create(ColumnValidation columnValidations) {
 		// TODO Auto-generated method stub
 		return save(columnValidations);
 	}
 
 	@Override
-	protected RateColumnValidation update(RateColumnValidation _columnValidations) {
+	protected ColumnValidation update(ColumnValidation _columnValidations) {
 		// TODO Auto-generated method stub
-		RateColumnValidation columnValidations = getById(_columnValidations.getId());
+		ColumnValidation columnValidations = getById(_columnValidations.getId());
         if (columnValidations != null) {
         	return save(_columnValidations);
         }else {
@@ -33,24 +33,24 @@ public class ColumnValidationService extends AbstractJpaService<RateColumnValida
 	}
 
 	@Override
-	protected RateColumnValidation delete(RateColumnValidation columnValidations) {
+	protected ColumnValidation delete(ColumnValidation columnValidations) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	protected List<RateColumnValidation> search(RateColumnValidation columnValidations) {
+	protected List<ColumnValidation> search(ColumnValidation columnValidations) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	protected AbstractJpaRepository<RateColumnValidation, String> getRepository() {
+	protected AbstractJpaRepository<ColumnValidation, String> getRepository() {
 		// TODO Auto-generated method stub
 		return columnValidationsRepository;
 	}
 
-	public RateColumnValidation getById(String id) {
+	public ColumnValidation getById(String id) {
 		// TODO Auto-generated method stub
 		return columnValidationsRepository.getById(id);
 	}
