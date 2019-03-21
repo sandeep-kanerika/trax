@@ -28,13 +28,13 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @Slf4j
 @RequestMapping("/amendments/history")
-public class AmendmentsHistoryController {
+public class AmendmentHistoryController {
 	
 	@Autowired
-	AmendmentsHistoryService amendmentsHistorySer;
+	AmendmentHistoryService amendmentsHistorySer;
 
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(AmendmentsHistoryController.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(AmendmentHistoryController.class);
 	
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE}, produces = { MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
@@ -56,8 +56,8 @@ public class AmendmentsHistoryController {
 		}
 	}
 
-	@GetMapping("/{id}")
-	public ResponseEntity<AmendmentHistory> getAmendmentsHistory(@PathVariable String id) {
+	@GetMapping("/history/{id}")
+	public ResponseEntity<AmendmentHistory> getAmendmentsHistoryByTheId(@PathVariable String id) {
 		LOGGER.info("getAmandmentsHistory invoked");
 		HttpStatus returnStatus = HttpStatus.OK;
 		

@@ -33,7 +33,7 @@ public class ColumnDefinitionsController {
 		return columnDefinitionSer.create(def);
 	}
 
-	@GetMapping("/{id}")
+	@GetMapping("/column/definitions/{id}")
 	public RateColumnDefinition getFilteredColumnDefs
 	(
 			@PathVariable String id, 

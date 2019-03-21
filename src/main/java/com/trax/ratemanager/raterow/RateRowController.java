@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trax.ratemanager.exception.ResourceNotFoundException;
@@ -20,17 +21,43 @@ import com.trax.ratemanager.exception.ResourceNotFoundException;
 @RestController
 @RequestMapping("/rate/rows")
 public class RateRowController {
-	
+
 	@Autowired
 	RateRowService rateRowsService;
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(RateRowController.class);
 
-	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE}, produces = { MediaType.APPLICATION_JSON_VALUE})
+	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
 	public RateRow createRateRows(@RequestBody RateRow rateRows) {
 
 		LOGGER.info("addRateRows invoked---------------------->>>>>");
 		return rateRowsService.create(rateRows);
+	}
+
+	@PostMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
+	public RateRow createRateRow(String ratesetId,String tableId, RateRowVo [] rateRowVo)
+	{
+
+		LOGGER.info("addRateRows invoked---------------------->>>>>");
+		return rateRowsService.create(null);
+	}
+
+	@GetMapping("/rate-rows/distinct")
+	public ResponseEntity<RateRow> getRateRowsDistinct(@RequestParam String filterOr, @RequestParam String rateSetId,
+			@RequestParam String tableId,
+			@RequestParam String search, @RequestParam String[] fields) {
+		System.out.println("RateRowController.getRateRowsByFilter()............");
+		return null;
+	}
+
+	
+	@GetMapping("/rate-rows")
+	public ResponseEntity<RateRow> getRateRowsByFilter(@RequestParam String filterOr, @RequestParam String rateSetId,
+			@RequestParam String tableId, @RequestParam String sortBy, @RequestParam String sortOrder,
+			@RequestParam String searchAfter, @RequestParam String[] fields, @RequestParam String pageToken,
+			@RequestParam String limit) {
+		System.out.println("RateRowController.getRateRowsByFilter()............");
+		return null;
 	}
 
 	@GetMapping("/{id}")
@@ -53,8 +80,8 @@ public class RateRowController {
 		}
 		return new ResponseEntity<>(returnStatus);
 	}
-	
-	@PutMapping(consumes = { MediaType.APPLICATION_JSON_VALUE}, produces = { MediaType.APPLICATION_JSON_VALUE})
+
+	@PutMapping(consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
 	public RateRow updateRateRows(@RequestBody RateRow rateRows) {
 
 		LOGGER.info("updateRateRows invoked");

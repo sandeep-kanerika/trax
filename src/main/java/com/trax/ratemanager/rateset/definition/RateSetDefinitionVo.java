@@ -1,17 +1,13 @@
 package com.trax.ratemanager.rateset.definition;
 
-import java.sql.Timestamp;
 import java.time.ZonedDateTime;
 import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.trax.ratemanager.config.AppConstants;
 import com.trax.ratemanager.ratetable.definition.RateTableDefinition;
 
 import lombok.AllArgsConstructor;
@@ -47,5 +43,6 @@ public class RateSetDefinitionVo {
 
 	private String tableHash;
 
+	@OneToMany
 	private List<RateTableDefinition> tables;
 }

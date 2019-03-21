@@ -2,7 +2,7 @@ package com.trax.ratemanager.column.validation;
 
 import com.trax.ratemanager.column.defination.RateColumnDefinition;
 
-public class ColumnValidationsConverter {
+public class ColumnValidationConverter {
 	
 	public static RateColumnValidation convertToRateColumnValidation(ColumnValidationVo columnValidationVo) throws Exception{
 		

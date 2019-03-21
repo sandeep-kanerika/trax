@@ -28,14 +28,6 @@ public class RateColumn {
 
 	@Id
 	private String id;
-	/*
-	 * private String concept; private String name; private Integer sortOrder;
-	 * private String type; private String pivotCharge; private String displayName;
-	 * private String propertyName; private String pivotField; private String
-	 * dataSourceField; private String dataFieldId; private Boolean hasAlias;
-	 * private Boolean isKey; private Boolean isActive; private String reference;
-	 * private String description;
-	 */
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "columnDefinitionId")

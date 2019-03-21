@@ -134,7 +134,7 @@ public class AmendmentController {
 	}
 
 	@GetMapping("/history/{id}")
-	public ResponseEntity<Amendment> getAmandmentHistoryById(@PathVariable String id) {
+	public ResponseEntity<Amendment> getAmandmentsHistoryById(@PathVariable String id) {
 		System.out.println("---getAmandmentHistoryById---ID---->" + id);
 
 		return null;

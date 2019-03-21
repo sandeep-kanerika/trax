@@ -1,6 +1,5 @@
 package com.trax.ratemanager.rateset.definition;
 
-import java.sql.Timestamp;
 import java.time.ZonedDateTime;
 import java.util.List;
 

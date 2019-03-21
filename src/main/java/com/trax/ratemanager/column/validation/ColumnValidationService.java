@@ -10,10 +10,10 @@ import com.trax.ratemanager.jpa.AbstractJpaRepository;
 import com.trax.ratemanager.jpa.AbstractJpaService;
 
 @Service
-public class ColumnValidationsService extends AbstractJpaService<RateColumnValidation>{
+public class ColumnValidationService extends AbstractJpaService<RateColumnValidation>{
 
 	@Autowired
-	ColumnValidationsRepository columnValidationsRepository;
+	ColumnValidationRepository columnValidationsRepository;
 	
 	@Override
 	protected RateColumnValidation create(RateColumnValidation columnValidations) {
