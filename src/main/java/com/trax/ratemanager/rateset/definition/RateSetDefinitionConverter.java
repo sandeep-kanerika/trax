@@ -1,8 +1,5 @@
 package com.trax.ratemanager.rateset.definition;
 
-import com.trax.ratemanager.orgnization.Organization;
-import com.trax.ratemanager.orgnization.OrganizationType;
-
 public class RateSetDefinitionConverter {
 
 	public static RateSetDefinition convertToRateSetDefinition(RateSetDefinitionVo rateSetDefinitionVo) throws Exception {
@@ -20,7 +17,7 @@ public class RateSetDefinitionConverter {
 			rateSetDefinition.setDateCreated(rateSetDefinitionVo.getDateCreated());
 			rateSetDefinition.setDateUpdated(rateSetDefinitionVo.getDateUpdated());
 			rateSetDefinition.setTableHash(rateSetDefinitionVo.getTableHash());
-			rateSetDefinition.setTables(rateSetDefinitionVo.getTables());
+		//	rateSetDefinition.setTables(rateSetDefinitionVo.getTables());
 
 			return rateSetDefinition;
 
