@@ -13,10 +13,11 @@ public class ColumnDefinitionConverter {
 			rateColumnDefinition.setId(columnDefinitionVo.getId());
 			rateColumnDefinition.setConcept(columnDefinitionVo.getConcept());
 			rateColumnDefinition.setName(columnDefinitionVo.getName());
-			rateColumnDefinition.setSortOrder(Long.getLong(columnDefinitionVo.getSortOrder()));
+			rateColumnDefinition.setPropertyName(columnDefinitionVo.getPropertyName());
+			rateColumnDefinition.setSortOrder(Long.valueOf(columnDefinitionVo.getSortOrder()));
 			rateColumnDefinition.setType(columnDefinitionVo.getType());
-			rateColumnDefinition.setDateSourceId(columnDefinitionVo.getDateSourceId());
-			rateColumnDefinition.setDateFieldId(columnDefinitionVo.getDateFieldId());
+			rateColumnDefinition.setDataSourceId(columnDefinitionVo.getDataSourceId());
+			rateColumnDefinition.setDataFieldId(columnDefinitionVo.getDataFieldId());
 			rateColumnDefinition.setHasAlias(Boolean.valueOf(columnDefinitionVo.getHasAlias()));
 			rateColumnDefinition.setIsKey(Boolean.valueOf(columnDefinitionVo.getIsKey()));
 			rateColumnDefinition.setReference(columnDefinitionVo.getReference());
@@ -24,7 +25,7 @@ public class ColumnDefinitionConverter {
 			rateColumnDefinition.setDisplayName(columnDefinitionVo.getDisplayName());
 			rateColumnDefinition.setPivotCharge(columnDefinitionVo.getPivotCharge());
 			rateColumnDefinition.setDescription(columnDefinitionVo.getDescription());
-			
+
 			return rateColumnDefinition;
 		}else {
 			throw new Exception("Problem with input");

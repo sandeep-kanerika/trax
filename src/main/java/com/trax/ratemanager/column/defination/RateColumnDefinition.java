@@ -30,9 +30,9 @@ public class RateColumnDefinition {
 
 	private String type;
 
-	private String dateSourceId;
+	private String dataSourceId;
 
-	private String dateFieldId;
+	private String dataFieldId;
 
 	private Boolean hasAlias;
 

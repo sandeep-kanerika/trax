@@ -1,6 +1,7 @@
 package com.trax.ratemanager.rateset;
 
 import java.time.ZonedDateTime;
+import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -36,11 +37,13 @@ public class RateSetVo {
 
 	private ZonedDateTime dateUpdated;
 
-	private String dateReviewed;
+	private ZonedDateTime dateReviewed;
+	
+	private ZonedDateTime dateAssigned;
 
-	private String effectiveDateFrom;
+	private ZonedDateTime effectiveDateFrom;
 
-	private String effectiveDateThru;
+	private ZonedDateTime effectiveDateThru;
 
 	private String earliestExpirationDate;
 
@@ -52,20 +55,20 @@ public class RateSetVo {
 
 	private String sellerOrgName;
 
-	private String dateAssigned;
-
 	private String tableHash;
 
 	private List<RateTable> tables;
 
+	private String createdBy;
+	
 	private String reviewedBy;
 
-	private String createdBy;
-
-	private String lastUpdatedBy;
-
 	private String lastAssignedBy;
+	
+	private String LastUpdatedBy;
 
 	private String approvers;
+
+	private String lastUpdatedBy;
 
 }

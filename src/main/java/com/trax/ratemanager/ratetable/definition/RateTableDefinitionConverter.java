@@ -9,7 +9,7 @@ public class RateTableDefinitionConverter {
 			System.out.println("existing id:::" + rateTableDefinitionVo.getId());
 
 			rateTableDefinition.setId(rateTableDefinitionVo.getId());
-			rateTableDefinition.setCreatorOrgId(Long.getLong(rateTableDefinitionVo.getCreatorOrgId()));
+			rateTableDefinition.setCreatorOrgId(Long.valueOf(rateTableDefinitionVo.getCreatorOrgId()));
 			rateTableDefinition.setName(rateTableDefinitionVo.getName());
 			rateTableDefinition.setDateCreated(rateTableDefinitionVo.getDateCreated());
 			rateTableDefinition.setTableGroup(rateTableDefinitionVo.getTableGroup());

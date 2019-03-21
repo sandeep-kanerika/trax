@@ -10,7 +10,7 @@ public class RateSetDefinitionConverter {
 
 			rateSetDefinition.setId(rateSetDefinitionVo.getId());
 			rateSetDefinition.setStatus(Integer.getInteger(rateSetDefinitionVo.getStatus()));
-			rateSetDefinition.setCreatorOrgId(Long.getLong(rateSetDefinitionVo.getCreatorOrgId()));
+			rateSetDefinition.setCreatorOrgId(Long.valueOf(rateSetDefinitionVo.getCreatorOrgId()));
 			rateSetDefinition.setRegion(rateSetDefinitionVo.getRegion());
 			rateSetDefinition.setMode(rateSetDefinitionVo.getMode());
 			rateSetDefinition.setName(rateSetDefinitionVo.getName());
