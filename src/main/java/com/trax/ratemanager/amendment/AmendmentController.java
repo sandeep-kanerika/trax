@@ -23,7 +23,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @RestController
 @Slf4j
-@RequestMapping("/amendments")
+@RequestMapping("/amendment")
 public class AmendmentController {
 
 	@Autowired
