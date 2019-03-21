@@ -1,6 +1,7 @@
 package com.trax.ratemanager.rateset;
 
 import java.time.ZonedDateTime;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -22,13 +23,17 @@ import com.trax.ratemanager.config.AppConstants;
 import com.trax.ratemanager.orgnization.Organization;
 import com.trax.ratemanager.ratetable.RateTable;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class RateSet {
 
 	@Id
@@ -75,9 +80,13 @@ public class RateSet {
 	@JoinColumn(name = "rateSetId")
 	private List<Amendment> amendments;
 
-	private Long reviewedBy;
+	private String createdBy;
+	
+	private String reviewedBy;
 
-	private Long lastAssignedBy;
+	private String lastAssignedBy;
+	
+	private String LastUpdatedBy;
 
 	private String approvers;
 

@@ -2,6 +2,7 @@ package com.trax.ratemanager.ratetable.definition;
 
 import java.sql.Timestamp;
 import java.time.ZonedDateTime;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -14,6 +15,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.trax.ratemanager.column.defination.RateColumnDefinition;
 import com.trax.ratemanager.config.AppConstants;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,6 +25,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class RateTableDefinition {
 
 	@Id

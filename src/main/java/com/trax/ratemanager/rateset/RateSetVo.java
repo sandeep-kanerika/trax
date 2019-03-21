@@ -41,11 +41,13 @@ public class RateSetVo {
 
 	private ZonedDateTime dateUpdated;
 
-	private String dateReviewed;
+	private ZonedDateTime dateReviewed;
+	
+	private ZonedDateTime dateAssigned;
 
-	private String effectiveDateFrom;
+	private Date effectiveDateFrom;
 
-	private String effectiveDateThru;
+	private Date effectiveDateThru;
 
 	private String earliestExpirationDate;
 
@@ -57,20 +59,20 @@ public class RateSetVo {
 
 	private String sellerOrgName;
 
-	private String dateAssigned;
-
 	private String tableHash;
 
 	private List<RateTable> tables;
 
+	private String createdBy;
+	
 	private String reviewedBy;
 
-	private UserAuditor createdBy;
-
-	private UserAuditor lastUpdatedBy;
-
 	private String lastAssignedBy;
+	
+	private String LastUpdatedBy;
 
 	private String approvers;
+
+	private String lastUpdatedBy;
 
 }
