@@ -4,6 +4,7 @@ import java.time.ZonedDateTime;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -30,9 +31,10 @@ public class RateSetDefinition {
 	@Id
 	private String id;
 
-	private Integer status;
+	private String status;
 
-	private Long creatorOrgId;
+	@Column(columnDefinition="string")
+	private String creatorOrgId;
 
 	private String region;
 
@@ -48,6 +50,6 @@ public class RateSetDefinition {
 
 	private String tableHash;
 
-	@OneToMany(cascade = CascadeType.ALL, targetEntity = RateTableDefinition.class, mappedBy = "rateSetDefinition", fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL, targetEntity = RateTableDefinition.class, mappedBy = "rateSetDefinition", fetch = FetchType.LAZY)
 	private List<RateTableDefinition> tables;
 }

@@ -1,7 +1,6 @@
 package com.trax.ratemanager.ratetable.definition;
 
 import java.time.ZonedDateTime;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -34,22 +33,22 @@ public class RateTableDefinition {
 	@Id
 	// @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String id;
-	private Long creatorOrgId;
+	private String creatorOrgId;
 	private String name;
-	
+
 	@JsonFormat(pattern = AppConstants.DEFAULT_ZONED_DATETIME_FORMAT)
 	private ZonedDateTime dateCreated;
-	
+
 	private String tableGroup;
 	private String tableType;
 	private String columnHash;
-	
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name="rateSetDefinitionId")
+
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "rateSetDefinitionId")
 	private RateSetDefinition rateSetDefinition;
-	
+
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name="rateTableDefinitionId")
+	@JoinColumn(name = "rateTableDefinitionId")
 	private List<RateColumnDefinition> columns;
 
 }

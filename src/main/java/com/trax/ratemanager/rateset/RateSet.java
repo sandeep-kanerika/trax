@@ -40,8 +40,6 @@ public class RateSet {
 	@Id
 	private String id;
 
-	private RateSetDefinition rateSetDefinition;
-	
 	private Integer status;
 
 	@JsonIgnoreProperties("buyer")

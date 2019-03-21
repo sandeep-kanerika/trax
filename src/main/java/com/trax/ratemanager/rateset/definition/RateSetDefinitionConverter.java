@@ -9,15 +9,15 @@ public class RateSetDefinitionConverter {
 			System.out.println("existing id:::" + rateSetDefinitionVo.getId());
 
 			rateSetDefinition.setId(rateSetDefinitionVo.getId());
-			rateSetDefinition.setStatus(Integer.getInteger(rateSetDefinitionVo.getStatus()));
-			rateSetDefinition.setCreatorOrgId(Long.valueOf(rateSetDefinitionVo.getCreatorOrgId()));
+			rateSetDefinition.setStatus(rateSetDefinitionVo.getStatus());
+			rateSetDefinition.setCreatorOrgId(rateSetDefinitionVo.getCreatorOrgId());
 			rateSetDefinition.setRegion(rateSetDefinitionVo.getRegion());
 			rateSetDefinition.setMode(rateSetDefinitionVo.getMode());
 			rateSetDefinition.setName(rateSetDefinitionVo.getName());
 			rateSetDefinition.setDateCreated(rateSetDefinitionVo.getDateCreated());
 			rateSetDefinition.setDateUpdated(rateSetDefinitionVo.getDateUpdated());
 			rateSetDefinition.setTableHash(rateSetDefinitionVo.getTableHash());
-		//	rateSetDefinition.setTables(rateSetDefinitionVo.getTables());
+			rateSetDefinition.setTables(rateSetDefinitionVo.getTables());
 
 			return rateSetDefinition;
 

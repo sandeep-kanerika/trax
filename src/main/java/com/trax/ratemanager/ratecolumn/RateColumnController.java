@@ -58,7 +58,7 @@ public class RateColumnController {
 		return new ResponseEntity<RateColumn>(rateColumnService.update(rateColumn), HttpStatus.OK);
 	}
 
-	@DeleteMapping(value = "/{id}")
+	@DeleteMapping(value = "/test/{id}")
 	public ResponseEntity<RateColumn> deleteColumnValidations(@PathVariable String id) {
 
 		log.info("delete rate column invoked");

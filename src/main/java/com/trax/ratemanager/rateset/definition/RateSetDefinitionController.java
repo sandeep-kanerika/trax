@@ -47,32 +47,23 @@ public class RateSetDefinitionController {
 	}
 
 	// to store array of rateset object into db
-
-	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
-	public int createBultRateSets(@RequestBody RateSetDefinitionVo[] rateSetsDefinitionVo)
-			throws Exception {
-
-		log.info("***************Create RateSetDefinition(PostRequest) ");
-		log.info("***************RateSetDefinitionValue Object:::" + rateSetsDefinitionVo);
-		  int voLengh = rateSetsDefinitionVo.length;
-		  int count = 0;
-		for (RateSetDefinitionVo vo : rateSetsDefinitionVo) {
-			RateSetDefinition rateSetDef = RateSetDefinitionConverter.convertToRateSetDefinition(vo);
-			log.info("*************** in array::;RateSetDefinition Object After VO--to-->BO:::" + rateSetDef);
-			try 
-			{
-			    rateSetsDefinitionSer.create(rateSetDef);
-			    count++;
-			}
-			catch (Exception ex) 
-			{
-				log.error("Error occured:::" + ex.getMessage());
-			}
-
-		}
-		return count;
-	}
-
+	/*
+	 * @PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
+	 * MediaType.APPLICATION_JSON_VALUE }) public int
+	 * createBultRateSets(@RequestBody RateSetDefinitionVo[] rateSetsDefinitionVo)
+	 * throws Exception {
+	 * 
+	 * log.info("***************Create RateSetDefinition(PostRequest) ");
+	 * log.info("***************RateSetDefinitionValue Object:::" +
+	 * rateSetsDefinitionVo); int voLengh = rateSetsDefinitionVo.length; int count =
+	 * 0; for (RateSetDefinitionVo vo : rateSetsDefinitionVo) { RateSetDefinition
+	 * rateSetDef = RateSetDefinitionConverter.convertToRateSetDefinition(vo); log.
+	 * info("*************** in array::;RateSetDefinition Object After VO--to-->BO:::"
+	 * + rateSetDef); try { rateSetsDefinitionSer.create(rateSetDef); count++; }
+	 * catch (Exception ex) { log.error("Error occured:::" + ex.getMessage()); }
+	 * 
+	 * } return count; }
+	 */
 	@GetMapping("/{id}")
 	public ResponseEntity<RateSetDefinition> getRateSetsDefinition(@PathVariable String id) {
 		log.info("getRateSetsDefinition invoked");
