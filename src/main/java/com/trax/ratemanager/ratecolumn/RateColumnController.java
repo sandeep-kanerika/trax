@@ -24,11 +24,22 @@ public class RateColumnController {
 	RateColumnService rateColumnService;
 
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<RateColumn> createRateColumn(@RequestBody RateColumnVo rateColumnVo) 
+	public ResponseEntity<Object> createRateColumn(@RequestBody RateColumnVo rateColumnVo) throws Exception 
 	{
-        RateColumnco
-		log.info("add ratecolumn invoked");
-		return new ResponseEntity<RateColumn>(rateColumnService.create(rateColumn), HttpStatus.CREATED);
+		log.info("***************Create RateColumn(PostRequest) ");
+		log.info("***************RateSetValue Object:::" + rateColumnVo);
+		RateColumn rateColumn = RateColumnConverter.convertToRateColumn(rateColumnVo);
+		log.info("***************RateSet Object After VO--to-->BO:::" + rateColumn);
+		RateColumn createdRateColumn = null;
+		try 
+		{
+			createdRateColumn = rateColumnService.create(rateColumn);
+			return ResponseEntity.ok(createdRateColumn);
+		} catch (Exception ex) 
+		{
+			log.error("Error occured:::" + ex.getMessage());
+		     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResourceNotFoundException("error",ex));
+		}
 	}
 
 	@GetMapping("/{id}")

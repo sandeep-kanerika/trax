@@ -1,52 +1,29 @@
 package com.trax.ratemanager.ratecolumn;
 
-import com.trax.ratemanager.orgnization.Organization;
-import com.trax.ratemanager.orgnization.OrganizationType;
-
 public class RateColumnConverter {
 
-	public static RateColumn convertToAmendmentHistory(RateColumnVo rateColumnVo) throws Exception {
+	public static RateColumn convertToRateColumn(RateColumnVo rateColumnVo) throws Exception {
 		RateColumn rateColumn = null;
 		if (rateColumnVo != null) {
 			rateColumn = new RateColumn();
 			System.out.println("existing id:::" + rateColumnVo.getId());
 
 			rateColumn.setId(rateColumnVo.getId());
-			rateColumn.setAmendmentId(rateColumnVo.getAmendmentId());
-			rateColumn.setActionType(rateColumnVo.getActionType());
-
-			rateColumn.setBuyerOrg(new Organization(rateColumnVo.getBuyerOrgId(), rateColumnVo.getBuyerOrgName(),
-					OrganizationType.BUYER));
-			rateColumn.setSellerOrg(new Organization(rateColumnVo.getSellerOrgId(), rateColumnVo.getSellerOrgName(),
-					OrganizationType.SELLER));
-
-			rateColumn.setRatesetId(rateColumnVo.getRatesetId());
-
+			rateColumn.setConcept(rateColumnVo.getConcept());
+			rateColumn.setDataFieldId(rateColumnVo.getDataFieldId());
+			rateColumn.setDataSourceId(rateColumnVo.getDataSourceId());
 			rateColumn.setDescription(rateColumnVo.getDescription());
-			rateColumn.setRatesetReferenceId(rateColumnVo.getRatesetReferenceId());
-			rateColumn.setReferenceId(rateColumnVo.getReferenceId());
-			rateColumn.setReviewedBy(rateColumnVo.getReviewedBy());
-			rateColumn.setType(Integer.parseInt(rateColumnVo.getType()));
-			rateColumn.setRatesetName(rateColumnVo.getRatesetName());
-			rateColumn.setRegion(rateColumnVo.getRegion());
-			rateColumn.setMode(rateColumnVo.getMode());
-			rateColumn.setStatus(Integer.parseInt(rateColumnVo.getStatus()));
-
-			rateColumn.setRateRows(rateColumnVo.getRateRows());
-
-			rateColumn.setDateRecorded(rateColumnVo.getDateRecorded());
-			rateColumn.setCreatedBy(rateColumnVo.getCreatedBy());
-			rateColumn.setDateCreated(rateColumnVo.getDateCreated());
-			rateColumn.setDateUpdated(rateColumnVo.getDateUpdated());
-			rateColumn.setDefaultEffectiveDateFrom(rateColumnVo.getDefaultEffectiveDateFrom());
-			rateColumn.setDefaultEffectiveDateThru(rateColumnVo.getDefaultEffectiveDateThru());
-			rateColumn.setDateReviewed(rateColumnVo.getDateReviewed());
-			rateColumn.setDateAssigned(rateColumnVo.getDateAssigned());
-			rateColumn.setLastUpdatedBy(rateColumnVo.getLastUpdatedBy());
-
-			rateColumn.setLastAssignedBy(rateColumnVo.getLastAssignedBy());
-			rateColumn.setApprovers(rateColumnVo.getApprovers());
-			rateColumn.setCurrentApprover(rateColumnVo.getCurrentApprover());
+			rateColumn.setDisplayName(rateColumnVo.getDisplayName());
+			rateColumn.setIsActive(rateColumnVo.getIsActive());
+			rateColumn.setIsKey(rateColumnVo.getIsKey());
+			rateColumn.setName(rateColumnVo.getName());
+			rateColumn.setPivotCharge(rateColumnVo.getPivotCharge());
+			rateColumn.setPivotField(rateColumnVo.getPivotField());
+			rateColumn.setPropertyName(rateColumnVo.getPropertyName());
+			rateColumn.setSortOrder(rateColumnVo.getSortOrder());
+			rateColumn.setType(rateColumnVo.getType());
+			rateColumn.setHasAlias(rateColumnVo.getHasAlias());
+			rateColumn.setReference(rateColumnVo.getReference());
 
 			return rateColumn;
 
@@ -56,11 +33,11 @@ public class RateColumnConverter {
 
 	}
 
-	public static AmendmentHistoryVo convertToRateSetVo(AmendmentHistory amendmentHistory) {
-		String id = amendmentHistory.getId();
-		AmendmentHistoryVo amendmentHistoryVo = new AmendmentHistoryVo();
-		amendmentHistoryVo.setId(id);
-		return amendmentHistoryVo;
+	public static RateColumnVo convertToRateSetVo(RateColumn rateColumn) {
+		String id = rateColumn.getId();
+		RateColumnVo rateColumnVo = new RateColumnVo();
+		rateColumnVo.setId(id);
+		return rateColumnVo;
 	}
 
 }
