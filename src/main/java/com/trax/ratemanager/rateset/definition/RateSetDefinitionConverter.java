@@ -17,10 +17,11 @@ public class RateSetDefinitionConverter {
 			rateSetDefinition.setDateCreated(rateSetDefinitionVo.getDateCreated());
 			rateSetDefinition.setDateUpdated(rateSetDefinitionVo.getDateUpdated());
 			rateSetDefinition.setTableHash(rateSetDefinitionVo.getTableHash());
+			
 			rateSetDefinition.setTables(rateSetDefinitionVo.getTables());
-
+			System.out.println("**********************"+rateSetDefinitionVo.getTables());
+			
 			return rateSetDefinition;
-
 		}
 		else 
 		{

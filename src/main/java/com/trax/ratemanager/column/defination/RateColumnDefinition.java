@@ -58,5 +58,16 @@ public class RateColumnDefinition {
 	private String pivotCharge;
 
 	private String description;
+
+	@Override
+	public String toString() {
+		return "RateColumnDefinition [id=" + id + ", concept=" + concept + ", name=" + name + ", sortOrder=" + sortOrder
+				+ ", type=" + type + ", dataSourceId=" + dataSourceId + ", dataFieldId=" + dataFieldId + ", hasAlias="
+				+ hasAlias + ", isKey=" + isKey + ", reference=" + reference + ", pivotField=" + pivotField
+				+ ", displayName=" + displayName + ", propertyName=" + propertyName + ", pivotCharge=" + pivotCharge
+				+ ", description=" + description + "]";
+	}
+	
+	
 	
 }

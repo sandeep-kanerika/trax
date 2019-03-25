@@ -1,12 +1,16 @@
 package com.trax.ratemanager.column.validation;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.trax.ratemanager.ratecolumn.RateColumn;
+import com.trax.ratemanager.column.defination.RateColumnDefinition;
+import com.trax.ratemanager.rateset.RateSet;
+import com.trax.ratemanager.ratetable.RateTable;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,27 +24,23 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ColumnValidation {
+
 	@Id
 	private String id;
-	private String rateSetId;
-	private String tableId;
-	private String columnDefinitionId;
-	private String concept;
-	private String dataFieldId;
-	private String dataSourceId;
-	private String description;
-	private String displayName;
-	private Boolean isActive;
-	private Boolean isRequired;
-	private String name;
-	private String pivotCharge;
-	private String pivotField;
-	private String propertyName;
-	private Integer sortyOrder;
-	private String type;
-	private String[] validValues;
-	private String validationType;
 
-	@OneToOne(mappedBy = "validation", fetch = FetchType.LAZY)
-	private RateColumn column;
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "columnDefinitionId")
+	private RateColumnDefinition columnDefinition;
+
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "rateSetId")
+	private RateSet rateSet;
+
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "tableId")
+	private RateTable table;
+
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "validationId")
+	private Validation validation;
 }

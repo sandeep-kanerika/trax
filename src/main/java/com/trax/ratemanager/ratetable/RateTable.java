@@ -8,16 +8,15 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.trax.ratemanager.column.defination.RateColumnDefinition;
-import com.trax.ratemanager.column.validation.ColumnValidation;
 import com.trax.ratemanager.config.AppConstants;
 import com.trax.ratemanager.ratecolumn.RateColumn;
 import com.trax.ratemanager.raterow.RateRow;
-import com.trax.ratemanager.rateset.RateSet;
+import com.trax.ratemanager.ratetable.definition.RateTableDefinition;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -35,6 +34,11 @@ public class RateTable {
 	@Id
 	private String id;
 	private String creatorOrgId;
+	
+	@ManyToOne
+	@JoinColumn(name="rateTableDefinitionId")
+	private RateTableDefinition rateTableDefinition;
+	
 	private String name;
 
 	@JsonFormat(pattern = AppConstants.DEFAULT_ZONED_DATETIME_FORMAT)

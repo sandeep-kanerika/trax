@@ -64,8 +64,6 @@ public class RateSetVo {
 	private String reviewedBy;
 
 	private String lastAssignedBy;
-	
-	private String LastUpdatedBy;
 
 	private String approvers;
 

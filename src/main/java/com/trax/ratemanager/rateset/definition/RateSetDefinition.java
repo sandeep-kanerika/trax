@@ -4,14 +4,15 @@ import java.time.ZonedDateTime;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.trax.ratemanager.column.defination.RateColumnDefinition;
 import com.trax.ratemanager.config.AppConstants;
 import com.trax.ratemanager.ratetable.definition.RateTableDefinition;
 
@@ -49,6 +50,16 @@ public class RateSetDefinition {
 
 	private String tableHash;
 
-	@OneToMany(cascade = CascadeType.ALL, targetEntity = RateTableDefinition.class, mappedBy = "rateSetDefinition", fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "rateSetDefinitionId")
 	private List<RateTableDefinition> tables;
+	
+	@Override
+	public String toString() {
+		return "RateSetDefinition [id=" + id + ", status=" + status + ", creatorOrgId=" + creatorOrgId + ", region="
+				+ region + ", mode=" + mode + ", name=" + name + ", dateCreated=" + dateCreated + ", dateUpdated="
+				+ dateUpdated + ", tableHash=" + tableHash + ", tables=" + tables + "]";
+	}
+	
+	
 }

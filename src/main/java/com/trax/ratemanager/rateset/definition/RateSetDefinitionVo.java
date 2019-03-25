@@ -39,7 +39,6 @@ public class RateSetDefinitionVo {
 
 	private String name;
 
-
 	@JsonFormat(pattern = AppConstants.DEFAULT_ZONED_DATETIME_FORMAT)
 	private ZonedDateTime dateCreated;
 
