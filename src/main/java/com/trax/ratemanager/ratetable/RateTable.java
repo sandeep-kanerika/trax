@@ -12,9 +12,14 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.trax.ratemanager.column.defination.RateColumnDefinition;
+import com.trax.ratemanager.column.validation.ColumnValidation;
 import com.trax.ratemanager.config.AppConstants;
 import com.trax.ratemanager.ratecolumn.RateColumn;
+import com.trax.ratemanager.raterow.RateRow;
+import com.trax.ratemanager.rateset.RateSet;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,12 +29,13 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class RateTable {
 
 	@Id
 	private String id;
 	private String creatorOrgId;
-	private String tableName;
+	private String name;
 
 	@JsonFormat(pattern = AppConstants.DEFAULT_ZONED_DATETIME_FORMAT)
 	private ZonedDateTime dateCreated;
@@ -37,15 +43,13 @@ public class RateTable {
 	private String tableGroup;
 	private String tableType;
 	private String columnHash;
-	
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "rateTableId")
 	private List<RateColumn> columns;
-	
-	/*
-	 * @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	 * 
-	 * @JoinColumn(name = "rateTableId") private List<RateRow> rateRows;
-	 */
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "rateTableId")
+	private List<RateRow> rateRows;
+
 }

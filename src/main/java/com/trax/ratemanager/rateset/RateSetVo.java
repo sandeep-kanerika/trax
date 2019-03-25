@@ -41,9 +41,9 @@ public class RateSetVo {
 	
 	private ZonedDateTime dateAssigned;
 
-	private ZonedDateTime effectiveDateFrom;
+	private Date effectiveDateFrom;
 
-	private ZonedDateTime effectiveDateThru;
+	private Date effectiveDateThru;
 
 	private String earliestExpirationDate;
 

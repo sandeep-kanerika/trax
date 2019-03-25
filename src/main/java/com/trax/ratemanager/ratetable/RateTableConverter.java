@@ -10,7 +10,7 @@ public class RateTableConverter {
 
 			rateTable.setId(rateTableVo.getId());
 			rateTable.setCreatorOrgId(rateTableVo.getCreatorOrgId());
-			rateTable.setTableName(rateTableVo.getTableName());
+			rateTable.setName(rateTableVo.getName());
 			rateTable.setDateCreated(rateTableVo.getDateCreated());
 			rateTable.setTableGroup(rateTableVo.getTableGroup());
 			rateTable.setTableType(rateTableVo.getTableType());

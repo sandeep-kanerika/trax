@@ -19,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @Slf4j
-@RequestMapping("/rate/tables/definition")
+@RequestMapping("/rate-tables-definition")
 public class RateTableDefinitionController {
 
 	@Autowired

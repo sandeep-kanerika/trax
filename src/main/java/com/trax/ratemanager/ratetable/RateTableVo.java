@@ -24,7 +24,7 @@ public class RateTableVo {
 	@Id
 	private String id;
 	private String creatorOrgId;
-	private String tableName;
+	private String name;
 
 	private ZonedDateTime dateCreated;
 

@@ -33,7 +33,6 @@ public class RateSetDefinition {
 
 	private String status;
 
-	@Column(columnDefinition="string")
 	private String creatorOrgId;
 
 	private String region;

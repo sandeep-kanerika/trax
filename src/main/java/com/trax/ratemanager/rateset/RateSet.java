@@ -70,6 +70,12 @@ public class RateSet {
 	@JsonFormat(pattern = AppConstants.DEFAULT_ZONED_DATETIME_FORMAT)
 	private ZonedDateTime dateAssigned;
 
+	@JsonFormat(pattern = AppConstants.DEFAULT_DATE_FORMAT)
+	private Date effectiveDateFrom;
+	
+	@JsonFormat(pattern = AppConstants.DEFAULT_DATE_FORMAT)
+	private Date effectiveDateThru;
+
 	private String tableHash;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)

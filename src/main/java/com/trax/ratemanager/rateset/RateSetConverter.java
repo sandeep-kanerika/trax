@@ -17,6 +17,8 @@ public class RateSetConverter {
 			rateSet.setDateUpdated(rateSetVo.getDateUpdated());
 			rateSet.setDateReviewed(rateSetVo.getDateReviewed());
 			rateSet.setDateAssigned(rateSetVo.getDateAssigned());
+			rateSet.setEffectiveDateFrom(rateSetVo.getEffectiveDateFrom());
+			rateSet.setEffectiveDateThru(rateSetVo.getEffectiveDateThru());
 			
 			rateSet.setMode(rateSetVo.getMode());
 			rateSet.setName(rateSetVo.getName());
