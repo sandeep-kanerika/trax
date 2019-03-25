@@ -16,7 +16,7 @@ import com.trax.ratemanager.exception.ResourceNotFoundException;
 
 import lombok.extern.slf4j.Slf4j;
 
-@RestController("/column/validations")
+@RestController("/rate/column")
 @Slf4j
 public class RateColumnController {
 
@@ -24,8 +24,9 @@ public class RateColumnController {
 	RateColumnService rateColumnService;
 
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<RateColumn> createRateColumn(@RequestBody RateColumn rateColumn) {
-
+	public ResponseEntity<RateColumn> createRateColumn(@RequestBody RateColumnVo rateColumnVo) 
+	{
+        RateColumnco
 		log.info("add ratecolumn invoked");
 		return new ResponseEntity<RateColumn>(rateColumnService.create(rateColumn), HttpStatus.CREATED);
 	}
@@ -58,7 +59,7 @@ public class RateColumnController {
 		return new ResponseEntity<RateColumn>(rateColumnService.update(rateColumn), HttpStatus.OK);
 	}
 
-	@DeleteMapping(value = "/test/{id}")
+	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<RateColumn> deleteColumnValidations(@PathVariable String id) {
 
 		log.info("delete rate column invoked");

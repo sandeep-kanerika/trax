@@ -1,14 +1,9 @@
 package com.trax.ratemanager.ratecolumn;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.trax.ratemanager.column.validation.ColumnValidation;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,6 +20,7 @@ public class RateColumn {
 
 	@Id
 	private String id;
+	
 	private String concept;
 	private String dataFieldId;
 	private String dataSourceId;
