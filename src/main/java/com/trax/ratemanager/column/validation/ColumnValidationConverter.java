@@ -1,18 +1,21 @@
 package com.trax.ratemanager.column.validation;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class ColumnValidationConverter {
 	
 	public static ColumnValidation convertToColumnValidation(ColumnValidationVo columnValidationVo) throws Exception{
 		
-		ColumnValidation ColumnValidation = null;
+		ColumnValidation columnValidation = null;
 		if(columnValidationVo != null) {
-			ColumnValidation = new ColumnValidation();
+			columnValidation = new ColumnValidation();
 			
-			System.out.println("existing id:::" + columnValidationVo.getId());
+			log.info("***************existing id in convertor ::::" + columnValidationVo.getId());
 			
-			ColumnValidation.setId(columnValidationVo.getId());
-			
-			return ColumnValidation;
+			columnValidation.setId(columnValidationVo.getId());
+			log.info("***************Column Validation Object in Amendment Convert:::" + columnValidation);
+			return columnValidation;
 		}else {
 			throw new Exception("Problem with input");
 		}

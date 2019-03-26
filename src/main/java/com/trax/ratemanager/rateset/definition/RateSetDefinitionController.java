@@ -31,10 +31,10 @@ public class RateSetDefinitionController {
 			throws Exception {
 
 		log.info("***************Create RateSetDefinition(PostRequest) ");
-		log.info("***************RateSetDefinitionValue Object:::" + rateSetsDefinitionVo);
+		log.info("***************RateSetDefinitionValue Object ::::" + rateSetsDefinitionVo);
 		RateSetDefinition rateSetDefinition = RateSetDefinitionConverter
 				.convertToRateSetDefinition(rateSetsDefinitionVo);
-		log.info("***************RateSetDefinition Object After VO--to-->BO:::" + rateSetDefinition);
+		log.info("***************RateSetDefinition Object After VO--to-->BO ::::" + rateSetDefinition);
 		RateSetDefinition createdRateSetDefinition = null;
 		try {
 			createdRateSetDefinition = rateSetsDefinitionSer.create(rateSetDefinition);
@@ -66,14 +66,14 @@ public class RateSetDefinitionController {
 	 */
 	@GetMapping("/{id}")
 	public ResponseEntity<RateSetDefinition> getRateSetsDefinition(@PathVariable String id) {
-		log.info("getRateSetsDefinition invoked");
+		log.info("***************Get Rate Sets Definition ");
 		HttpStatus returnStatus = HttpStatus.OK;
 		try {
 			RateSetDefinition getRateSetsDefinitionDetail = rateSetsDefinitionSer.getById(id);
 			if (getRateSetsDefinitionDetail != null) {
 				return new ResponseEntity<>(getRateSetsDefinitionDetail, returnStatus);
 			} else {
-				throw new ResourceNotFoundException("RateSetsDefinition Id doesn't exist !");
+				throw new ResourceNotFoundException("Rate Sets Definition Id doesn't exist !");
 			}
 		} catch (ResourceNotFoundException e) {
 			log.error(e.getMessage());
@@ -88,7 +88,7 @@ public class RateSetDefinitionController {
 	@RequestMapping(method = { RequestMethod.PUT, RequestMethod.PATCH })
 	public RateSetDefinition updateRateSetsDefinition(@RequestBody RateSetDefinition rateSetsDefinition) {
 
-		log.info("updateRateSetsDefinition invoked");
+		log.info("***************Update Rate Sets Definition invoked");
 		return rateSetsDefinitionSer.update(rateSetsDefinition);
 	}
 
@@ -96,13 +96,13 @@ public class RateSetDefinitionController {
 	public ResponseEntity<RateSetDefinition> deleteRateSetsDefinition(@PathVariable String id) {
 
 		ResponseEntity<RateSetDefinition> responseEntity = null;
-		log.info("**************deleteRateSetDefinition invoked with id:::" + id);
+		log.info("**************Delete Rate Set Definition invoked with id ::::" + id);
 		RateSetDefinition rateSetDefinition = rateSetsDefinitionSer.getById(id);
-		log.info("**************found the RateSetDefinition id in DB:::" + rateSetDefinition);
+		log.info("**************found the Rate Set Definition id in DB ::::" + rateSetDefinition);
 		if (rateSetDefinition != null) {
 			try {
 				rateSetsDefinitionSer.delete(rateSetDefinition);
-				log.info("deleted the ratesetid from database..." + rateSetDefinition.getId());
+				log.info("deleted the ratesetid from database ::::" + rateSetDefinition.getId());
 				return ResponseEntity.ok(rateSetDefinition);
 			} catch (Exception ex) {
 				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();

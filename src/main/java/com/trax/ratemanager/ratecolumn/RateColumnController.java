@@ -26,10 +26,10 @@ public class RateColumnController {
 	@PostMapping(value="/rate-column", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<Object> createRateColumn(@RequestBody RateColumnVo rateColumnVo) throws Exception 
 	{
-		log.info("***************Create RateColumn(PostRequest) ");
-		log.info("***************RateSetValue Object:::" + rateColumnVo);
+		log.info("***************Create Rate Column(PostRequest) ");
+		log.info("***************Rate Column Value Object ::::" + rateColumnVo);
 		RateColumn rateColumn = RateColumnConverter.convertToRateColumn(rateColumnVo);
-		log.info("***************RateSet Object After VO--to-->BO:::" + rateColumn);
+		log.info("***************Rate Column Object After VO--to-->BO ::::" + rateColumn);
 		RateColumn createdRateColumn = null;
 		try 
 		{
@@ -37,19 +37,20 @@ public class RateColumnController {
 			return ResponseEntity.ok(createdRateColumn);
 		} catch (Exception ex) 
 		{
-			log.error("Error occured:::" + ex.getMessage());
+			log.error("Error occured ::::" + ex.getMessage());
 		     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResourceNotFoundException("error",ex));
 		}
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<RateColumn> getRateColumn(@PathVariable String id) {
-		log.info("getRateColumn invoked");
+		log.info("***************Get Rate Column(GETREQUEST) ");
 		HttpStatus returnStatus = HttpStatus.OK;
 		try {
-			RateColumn rateColumn = rateColumnService.getById(id);
-			if (rateColumn != null) {
-				return new ResponseEntity<>(rateColumn, returnStatus);
+			RateColumn getRateColumnDetail = rateColumnService.getById(id);
+			log.info("***************Get Rate Column Object ::::" + getRateColumnDetail);
+			if (getRateColumnDetail != null) {
+				return new ResponseEntity<>(getRateColumnDetail, returnStatus);
 			} else {
 				throw new ResourceNotFoundException("RateColumn Id doesn't exist !");
 			}

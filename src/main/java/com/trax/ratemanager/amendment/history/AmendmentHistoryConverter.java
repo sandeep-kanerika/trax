@@ -3,13 +3,16 @@ package com.trax.ratemanager.amendment.history;
 import com.trax.ratemanager.orgnization.Organization;
 import com.trax.ratemanager.orgnization.OrganizationType;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class AmendmentHistoryConverter {
 
 	public static AmendmentHistory convertToAmendmentHistory(AmendmentHistoryVo amendmentHistoryVo) throws Exception {
 		AmendmentHistory amendmentHistory = null;
 		if (amendmentHistoryVo != null) {
 			amendmentHistory = new AmendmentHistory();
-			System.out.println("existing id:::" + amendmentHistoryVo.getId());
+			log.info("***************Amendment History id in convertor ::::" + amendmentHistoryVo.getId());
 
 			amendmentHistory.setId(amendmentHistoryVo.getId());
 			amendmentHistory.setAmendmentId(amendmentHistoryVo.getAmendmentId());
@@ -47,7 +50,8 @@ public class AmendmentHistoryConverter {
 			amendmentHistory.setLastAssignedBy(amendmentHistoryVo.getLastAssignedBy());
 			amendmentHistory.setApprovers(amendmentHistoryVo.getApprovers());
 			amendmentHistory.setCurrentApprover(amendmentHistoryVo.getCurrentApprover());
-
+			
+			log.info("***************Amendment History Object in Amendment History Convert:::" + amendmentHistory);
 			return amendmentHistory;
 
 		} else {

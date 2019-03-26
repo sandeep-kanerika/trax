@@ -1,12 +1,15 @@
 package com.trax.ratemanager.ratecolumn;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class RateColumnConverter {
 
 	public static RateColumn convertToRateColumn(RateColumnVo rateColumnVo) throws Exception {
 		RateColumn rateColumn = null;
 		if (rateColumnVo != null) {
 			rateColumn = new RateColumn();
-			System.out.println("existing id:::" + rateColumnVo.getId());
+			log.info("***************Rate Column in convertor ::::" + rateColumnVo.getId());
 
 			rateColumn.setId(rateColumnVo.getId());
 			rateColumn.setConcept(rateColumnVo.getConcept());
@@ -24,7 +27,8 @@ public class RateColumnConverter {
 			rateColumn.setType(rateColumnVo.getType());
 			rateColumn.setHasAlias(rateColumnVo.getHasAlias());
 			rateColumn.setReference(rateColumnVo.getReference());
-
+			
+			log.info("***************Rate Column Object in Rate Column Convert :::" + rateColumn);
 			return rateColumn;
 
 		} else {

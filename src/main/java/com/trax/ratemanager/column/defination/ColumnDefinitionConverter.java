@@ -1,5 +1,8 @@
 package com.trax.ratemanager.column.defination;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class ColumnDefinitionConverter {
 
 	public static RateColumnDefinition convertToRateColumnDefinition(ColumnDefinitionVo columnDefinitionVo) throws Exception{
@@ -8,7 +11,7 @@ public class ColumnDefinitionConverter {
 		if(columnDefinitionVo != null) {
 			rateColumnDefinition = new RateColumnDefinition();
 			
-			System.out.println("existing id:::" + columnDefinitionVo.getId());
+			log.info("***************existing id in convertor ::::" + columnDefinitionVo.getId());
 			
 			rateColumnDefinition.setId(columnDefinitionVo.getId());
 			rateColumnDefinition.setConcept(columnDefinitionVo.getConcept());
@@ -25,7 +28,8 @@ public class ColumnDefinitionConverter {
 			rateColumnDefinition.setDisplayName(columnDefinitionVo.getDisplayName());
 			rateColumnDefinition.setPivotCharge(columnDefinitionVo.getPivotCharge());
 			rateColumnDefinition.setDescription(columnDefinitionVo.getDescription());
-
+			
+			log.info("***************Rate Column Definition Object in Rate Column Definition Convert:::" + rateColumnDefinition);
 			return rateColumnDefinition;
 		}else {
 			throw new Exception("Problem with input");

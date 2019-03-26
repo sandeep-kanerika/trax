@@ -1,15 +1,19 @@
 package com.trax.ratemanager.amendment;
 
+
 import com.trax.ratemanager.orgnization.Organization;
 import com.trax.ratemanager.orgnization.OrganizationType;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class AmendmentConverter {
 
 	public static Amendment convertToAmendment(AmendmentVo amendmentVo) throws Exception {
 		Amendment amendment = null;
 		if (amendmentVo != null) {
 			amendment = new Amendment();
-			System.out.println("existing id:::" + amendmentVo.getId());
+			log.info("***************Amendment id in convertor ::::" + amendmentVo.getId());
 			
 			amendment.setId(amendmentVo.getId());
 			
@@ -43,7 +47,8 @@ public class AmendmentConverter {
 			amendment.setDefaultEffectiveDateThru(amendmentVo.getDefaultEffectiveDateThru());
 			amendment.setDateReviewed(amendmentVo.getDateReviewed());
 			amendment.setDateAssigned(amendmentVo.getDateAssigned());
-
+			
+			log.info("***************Amendment Object in Amendment Convert :::" + amendment);
 			return amendment;
 
 		}

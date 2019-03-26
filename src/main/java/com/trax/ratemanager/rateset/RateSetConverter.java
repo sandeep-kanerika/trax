@@ -9,13 +9,16 @@ import com.trax.ratemanager.ratetable.RateTable;
 import com.trax.ratemanager.ratetable.RateTableConverter;
 import com.trax.ratemanager.ratetable.RateTableVo;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class RateSetConverter {
 
 	public static RateSet convertToRateSet(RateSetVo rateSetVo) throws Exception {
 		RateSet rateSet = null;
 		if (rateSetVo != null) {
 			rateSet = new RateSet();
-			System.out.println("existing id:::" + rateSetVo.getId());
+			log.info("***************existing id in convertor ::::" + rateSetVo.getId());
 
 			rateSet.setId(rateSetVo.getId());
 			rateSet.setApprovers(rateSetVo.getApprovers());
@@ -37,7 +40,7 @@ public class RateSetConverter {
 			List<RateTable> rateTables = new ArrayList<RateTable>();
 			for (RateTableVo rateTableVo : rateTableVos) {
 				RateTable table =  RateTableConverter.convertToRateTable(rateTableVo);
-				System.out.println("---table---" + table);
+				log.info("*************** table ::::" + table);
 				table.setRateSetId(rateSet.getId());
 				rateTables.add(table);
 			}

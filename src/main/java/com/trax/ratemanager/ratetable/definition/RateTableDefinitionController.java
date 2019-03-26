@@ -29,10 +29,10 @@ public class RateTableDefinitionController {
 	@ResponseBody
 	public ResponseEntity<Object> createRateTablesDefinition(@RequestBody RateTableDefinitionVo rateTablesDefinitionVo) throws Exception {
 
-		log.info("***************Create rateTablesDefinition(PostRequest) ");
-		log.info("***************rateTablesDefinitionValue Object:::" + rateTablesDefinitionVo);
+		log.info("***************Create Rate Tables Definition(PostRequest) ");
+		log.info("***************Rate Tables Definition Value Object ::::" + rateTablesDefinitionVo);
 		RateTableDefinition rateTablesDefinition = RateTableDefinitionConverter.convertToRateTable(rateTablesDefinitionVo);
-		log.info("***************rateTablesDefinition Object After VO--to-->BO:::" + rateTablesDefinition);
+		log.info("***************Rate Tables Definition Object After VO--to-->BO ::::" + rateTablesDefinition);
 		RateTableDefinition createdRateTablesDefinition = null;
 		try 
 		{
@@ -47,15 +47,15 @@ public class RateTableDefinitionController {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<RateTableDefinition> getRateTablesDefinition(@PathVariable String id) {
-		log.info("getRateTablesDefinition invoked");
+		log.info("***************Get Rate Tables Definition");
 		HttpStatus returnStatus = HttpStatus.OK;
 		try {
-			RateTableDefinition getAmendmentsDetail = rateTablesDefinitionService.getById(id);
-
-			if (getAmendmentsDetail != null) {
-				return new ResponseEntity<>(getAmendmentsDetail, returnStatus);
+			RateTableDefinition getRateTableDefinitionDetail = rateTablesDefinitionService.getById(id);
+			log.info("***************Rate Table Definition Object ::::" + getRateTableDefinitionDetail);
+			if (getRateTableDefinitionDetail != null) {
+				return new ResponseEntity<>(getRateTableDefinitionDetail, returnStatus);
 			} else {
-				throw new ResourceNotFoundException("RateTableDefinition Id doesn't exist !");
+				throw new ResourceNotFoundException("Rate Table Definition Id doesn't exist !");
 			}
 		} catch (ResourceNotFoundException e) {
 			log.error(e.getMessage());
@@ -70,7 +70,7 @@ public class RateTableDefinitionController {
 	@RequestMapping(method = { RequestMethod.PUT, RequestMethod.PATCH })
 	public ResponseEntity<Object> updateRateTablesDefinition(@RequestBody RateTableDefinitionVo rateTablesDefinitionVo) throws Exception {
 
-		log.info("updateRateTablesDefinition invoked");
+		log.info("***************Update Rate Tables Definition ::::" +rateTablesDefinitionVo);
 		return createRateTablesDefinition(rateTablesDefinitionVo);
 	}
 

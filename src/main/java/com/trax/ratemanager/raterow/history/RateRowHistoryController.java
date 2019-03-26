@@ -18,55 +18,68 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.trax.ratemanager.exception.ResourceNotFoundException;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
+@Slf4j
 @RequestMapping("/rate-rows/history")
 public class RateRowHistoryController {
 
 	@Autowired
 	RateRowHistoryService rateRowsHistorySer;
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(RateRowHistoryController.class);
-
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE}, produces = { MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public RateRowHistory createRateRowsHistory(@RequestBody RateRowHistory rateRowsHistory) {
+	public ResponseEntity<Object> createRateRowsHistory(@RequestBody RateRowHistory rateRowsHistory) {
 
-		LOGGER.info("addRateRowsHistory invoked");
-		return rateRowsHistorySer.create(rateRowsHistory);
+		log.info("***************Create Rate Rows History(PostRequest) ");
+		log.info("***************Rate Rows History Object ::::" + rateRowsHistory);
+		
+		RateRowHistory createdRateRowHistory = null;
+		try {
+			createdRateRowHistory = rateRowsHistorySer.create(rateRowsHistory);
+			log.info("***************Rate Rows History Object Created ::::" + createdRateRowHistory);
+			return ResponseEntity.ok(createdRateRowHistory);
+		} catch (Exception ex) {
+			log.error("Error occured ::::" + ex.getMessage());
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResourceNotFoundException("error", ex));
+		}
+//		return rateRowsHistorySer.create(rateRowsHistory);
 	}
 
 	
 
 	@GetMapping("/rate-rows/history/latest")
 	public ResponseEntity<RateRowHistory> getRateRowstHistoryLatest(@PathVariable String rootParentId) {
-		LOGGER.info("getRateRowsHistory invoked");
+		log.info("***************Get Rate Rows History");
 		return null;
 	}
 
 	@GetMapping("/rate-rows/{rootParentId}/history")
 
 	public ResponseEntity<RateRowHistory> getRateRowsParentHistory(@PathVariable String rootParentId) {
-		LOGGER.info("getRateRowsParentHistory invoked");
+		log.info("***************Get Rate Rows Parent History");
 		return null;
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<RateRowHistory> getRateRowsHistory(@PathVariable String id) {
-		LOGGER.info("getRateRowsHistory invoked");
+		log.info("***************Get Rate Rows History(GETREQUEST) ");
 		HttpStatus returnStatus = HttpStatus.OK;
 		try {
-			RateRowHistory getAmendmentsDetail = rateRowsHistorySer.getById(id);
-			if (getAmendmentsDetail != null) {
-				return new ResponseEntity<>(getAmendmentsDetail, returnStatus);
+			RateRowHistory getRateRowHistoryDetail = rateRowsHistorySer.getById(id);
+			log.info("***************Get Rate Row History Object ::::" + getRateRowHistoryDetail);
+			if (getRateRowHistoryDetail != null) {
+				return new ResponseEntity<>(getRateRowHistoryDetail, returnStatus);
 			} else {
-				throw new ResourceNotFoundException("RateRowsHistory Id doesn't exist !");
+				throw new ResourceNotFoundException("Rate Rows History Id doesn't exist !");
 			}
 		} catch (ResourceNotFoundException e) {
-			LOGGER.error(e.getMessage());
+			log.error(e.getMessage());
 			returnStatus = HttpStatus.NOT_FOUND;
 		} catch (Exception e) {
 			returnStatus = HttpStatus.INTERNAL_SERVER_ERROR;
-			LOGGER.error(e.getMessage());
+			log.error(e.getMessage());
 		}
 		return new ResponseEntity<>(returnStatus);
 	}
@@ -74,14 +87,28 @@ public class RateRowHistoryController {
 	@RequestMapping(method = { RequestMethod.PUT, RequestMethod.PATCH })
 	public RateRowHistory updateRateRowsHistory(@RequestBody RateRowHistory rateRowsHistory) {
 
-		LOGGER.info("updateRateRowsHistory invoked");
+		log.info("***************Update Rate Rows History");
 		return rateRowsHistorySer.update(rateRowsHistory);
 	}
 
 	@DeleteMapping(value = "/{id}")
-	public RateRowHistory deleteRateRowsHistory(@PathVariable String id) {
+	public ResponseEntity<RateRowHistory> deleteRateRowsHistory(@PathVariable String id) {
 
-		LOGGER.info("deleteRateRowsHistory invoked");
-		return null/* rateRowsHistorySer.delete(id) */;
+		log.info("***************Delete Rate Rows History(DELETEREQUEST) ");
+		ResponseEntity<RateRowHistory> responseEntity = null;
+		RateRowHistory rateRowHistory = rateRowsHistorySer.getById(id);
+		log.info("**************found the Rate Rows History Id in DB ::::" + rateRowHistory);
+		if (rateRowHistory != null) {
+			try {
+				rateRowsHistorySer.delete(rateRowHistory);
+				log.info("Deleted the Rate Rows History Id from database ::::" + rateRowHistory.getId());
+				return ResponseEntity.ok(rateRowHistory);
+			} catch (Exception ex) {
+				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+			}
+
+		} else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		}
 	}
 }

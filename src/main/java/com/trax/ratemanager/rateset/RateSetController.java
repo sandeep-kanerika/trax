@@ -21,6 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @Slf4j
 public class RateSetController {
+	
 	@Autowired
 	RateSetsService rateSetsService;
 
@@ -28,9 +29,9 @@ public class RateSetController {
 			MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<Object> createRateSets(@RequestBody RateSetVo rateSetVo) throws Exception {
 		log.info("***************Create RateSet(PostRequest) ");
-		log.info("***************RateSetValue Object:::" + rateSetVo);
+		log.info("***************RateSetValue Object ::::" + rateSetVo);
 		RateSet rateSet = RateSetConverter.convertToRateSet(rateSetVo);
-		log.info("***************RateSet Object After VO--to-->BO:::" + rateSet);
+		log.info("***************RateSet Object After VO--to-->BO ::::" + rateSet);
 		RateSet createdRateSet = null;
 		try 
 		{
@@ -38,14 +39,14 @@ public class RateSetController {
 			return ResponseEntity.ok(createdRateSet);
 		} catch (Exception ex) 
 		{
-			log.error("Error occured:::" + ex.getMessage());
+			log.error("Error occured ::::" + ex.getMessage());
 		     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResourceNotFoundException("error",ex));
 		}
 	}
 
 	@GetMapping(value = "/rate-sets/{id}")
 	public ResponseEntity<RateSet> getRateSets(@PathVariable String id) {
-		log.info("***************Retrive rateset by id:::" + id);
+		log.info("*************** Get Rate Set by id ::::" + id);
 		HttpStatus status = HttpStatus.OK;
 		RateSet retrivedRateSet = rateSetsService.getById(id);
 		if(retrivedRateSet!= null)
@@ -60,7 +61,7 @@ public class RateSetController {
 
 	@GetMapping(value = "/rate-sets/all")
 	public ResponseEntity<Object> findAllRateSets() {
-		log.info("**************fetch all rateset objects");
+		log.info("**************fetch all rate Set objects");
 		try {
 			List<RateSet> allRateSets = rateSetsService.findAll();
 			if (allRateSets != null && !allRateSets.isEmpty()) 
@@ -83,22 +84,22 @@ public class RateSetController {
 	@PutMapping(value = "/rate-sets", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<Object> updateRateSets(@RequestBody RateSetVo rateSetVo) throws Exception {
-		log.info("***************updateRateSets invoked, internally its going to call post method only...");
+		log.info("***************Update Rate Sets , internally its going to call post method only...");
 		return createRateSets(rateSetVo);
 	}
 
 	@DeleteMapping(value = "/rate-sets/{id}")
 	public ResponseEntity<RateSet> deleteRateSet(@PathVariable String id) {
 		ResponseEntity<RateSet> responseEntity = null;
-		log.info("**************deleteRateSets invoked with id:::" + id);
+		log.info("**************Delete RateSets invoked with id ::::" + id);
 		RateSet rateSet = rateSetsService.getById(id);
-		log.info("**************found the rateset id in DB:::" + rateSet);
+		log.info("**************found the rateset id in DB ::::" + rateSet);
 		if (rateSet != null) 
 		{
 			try 
 			{
 				rateSetsService.delete(rateSet);
-				log.info("deleted the ratesetid from database..." + rateSet.getId());
+				log.info("Deleted the ratesetid from database ::::" + rateSet.getId());
 				return ResponseEntity.ok(rateSet);
 			} catch (Exception ex) 
 			{

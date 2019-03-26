@@ -34,16 +34,17 @@ public class AmendmentController {
 	public ResponseEntity<Object> createAmandments(@RequestBody AmendmentVo amendmentVo) throws Exception {
 		
 		log.info("***************Create Amendments(PostRequest) ");
-		log.info("***************AmendmentsValue Object:::" + amendmentVo);
+		log.info("***************AmendmentsValue Object ::::" + amendmentVo);
 
 		Amendment amendment = AmendmentConverter.convertToAmendment(amendmentVo);
-		log.info("***************Amendments Object After VO--to-->BO:::" + amendment);
+		log.info("***************Amendments Object After VO--to-->BO ::::" + amendment);
 		Amendment createdAmendment = null;
 		try {
 			createdAmendment = amendmentsSer.create(amendment);
+			log.info("***************Amendments Object Created ::::" + createdAmendment);
 			return ResponseEntity.ok(createdAmendment);
 		} catch (Exception ex) {
-			log.error("Error occured:::" + ex.getMessage());
+			log.error("Error occured ::::" + ex.getMessage());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
 					.body(new ResourceNotFoundException("error", ex));
 		}
@@ -51,10 +52,11 @@ public class AmendmentController {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Amendment> getAmandments(@PathVariable String id) {
-		log.info("getAmandments invoked");
+		log.info("***************Get Amandments(GETREQUEST) ");
 		HttpStatus returnStatus = HttpStatus.OK;
 		try {
 			Amendment getAmendmentsDetail = amendmentsSer.getById(id);
+			log.info("***************Get Amandments Object ::::" + getAmendmentsDetail);
 			if (getAmendmentsDetail != null) {
 				return new ResponseEntity<>(getAmendmentsDetail, returnStatus);
 			} else {
@@ -73,21 +75,20 @@ public class AmendmentController {
 	@RequestMapping(method = { RequestMethod.PUT, RequestMethod.PATCH })
 	public ResponseEntity<Object> updateAmandments(@RequestBody AmendmentVo amendmentVo) throws Exception {
 
-		log.info("updateAmandment invoked");
+		log.info("***************Update Amandment ::::" + amendmentVo);
 		return createAmandments(amendmentVo);
 	}
 
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Amendment> deleteAmandments(@PathVariable String id) {
-
+		log.info("***************Delete Amendments(DeleteRequest) ");
 		ResponseEntity<Amendment> responseEntity = null;
-		log.info("**************deleteAmendment invoked with id:::" + id);
 		Amendment amendment = amendmentsSer.getById(id);
-		log.info("**************found the amendment id in DB:::" + amendment);
+		log.info("**************found the amendment id in DB ::::" + amendment);
 		if (amendment != null) {
 			try {
 				amendmentsSer.delete(amendment);
-				log.info("deleted the amendmentId from database..." + amendment.getId());
+				log.info("Deleted the amendmentId from database ::::" + amendment.getId());
 				return ResponseEntity.ok(amendment);
 			} catch (Exception ex) {
 				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
@@ -102,7 +103,8 @@ public class AmendmentController {
 			MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<Amendment> saveAsDraft(@RequestBody AmendmentWithRateRows amendmentWithRateRows) {
 		ResponseEntity<Amendment> saveAsDraft = null;
-		log.info("**************deleteAmendment invoked with id:::");
+		log.info("**************Save Draft Amendment(PostRequest) ::::"); 
+		log.info("***************AmendmentsValue Object ::::" + amendmentWithRateRows);
 		return null; // some response , need to be implemented.
 
 	}
@@ -111,7 +113,8 @@ public class AmendmentController {
 			MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<Amendment> submitForApproval(@RequestBody AmendmentWithMeta amendmentWithMeta) {
 		ResponseEntity<Amendment> responseEntity = null;
-		log.info("**************submitForApproval invoked with id:::");
+		log.info("**************submitForApproval invoked ::::");
+		log.info("***************AmendmentsValue Object ::::" +amendmentWithMeta);
 		return null; // some response , need to be implemented.
 
 	}
@@ -120,7 +123,8 @@ public class AmendmentController {
 			MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<Amendment> approveRates(@RequestBody AmendmentWithRateRows amendmentWithMeta) {
 		ResponseEntity<Amendment> responseEntity = null;
-		log.info("**************approveRates invoked with id:::");
+		log.info("**************Approve Rates invoked(PostRequest) ::::");
+		log.info("***************AmendmentsValue Object ::::" +amendmentWithMeta);
 		return null; // some response , need to be implemented.
 
 	}

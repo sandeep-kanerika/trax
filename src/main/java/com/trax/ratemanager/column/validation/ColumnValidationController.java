@@ -16,40 +16,44 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.trax.ratemanager.exception.ResourceNotFoundException;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
+@Slf4j
 @RequestMapping("/column-validations")
 public class ColumnValidationController {
 	
 	@Autowired
 	ColumnValidationService columnValidationSer;
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(ColumnValidationController.class);
-
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE}, produces = { MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
 	public ColumnValidation createColumnValidations(@RequestBody ColumnValidation columnValidations) {
 
-		LOGGER.info("addColumnValidations invoked");
+		log.info("***************Create Add Column Validations(PostRequest) ::::");
+		log.info("***************Column Validations Object:::" + columnValidations);
 		return columnValidationSer.create(columnValidations);
 	}
 
 	@RequestMapping("/{id}")
 	public ResponseEntity<ColumnValidation> getColumnValidations(@PathVariable String id) {
-		LOGGER.info("getColumnValidations invoked");
+		log.info("***************Get Column Validations(GETREQUEST) ");
+		
 		HttpStatus returnStatus = HttpStatus.OK;
 		try {
-			ColumnValidation getAmendmentsDetail = columnValidationSer.getById(id);
-			if (getAmendmentsDetail != null) {
-				return new ResponseEntity<>(getAmendmentsDetail, returnStatus);
+			ColumnValidation columnValidationDetail = columnValidationSer.getById(id);
+			log.info("***************Get Column Validations Object ::::" + columnValidationDetail);
+			if (columnValidationDetail != null) {
+				return new ResponseEntity<>(columnValidationDetail, returnStatus);
 			} else {
 				throw new ResourceNotFoundException("ColumnValidations Id doesn't exist !");
 			}
 		} catch (ResourceNotFoundException e) {
-			LOGGER.error(e.getMessage());
+			log.error(e.getMessage());
 			returnStatus = HttpStatus.NOT_FOUND;
 		} catch (Exception e) {
 			returnStatus = HttpStatus.INTERNAL_SERVER_ERROR;
-			LOGGER.error(e.getMessage());
+			log.error(e.getMessage());
 		}
 		return new ResponseEntity<>(returnStatus);
 	}
@@ -57,14 +61,14 @@ public class ColumnValidationController {
 	@RequestMapping(method = {RequestMethod.PUT, RequestMethod.PATCH})
 	public ColumnValidation updateAmandments(@RequestBody ColumnValidation columnValidations) {
 
-		LOGGER.info("updateColumnValidations invoked");
+		log.info("***************Update Column Validations ::::" +columnValidations);
 		return columnValidationSer.update(columnValidations);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public ColumnValidation deleteColumnValidations(@PathVariable String id) {
 
-		LOGGER.info("deleteColumnValidations invoked");
+		log.info("***************Delete Column Validations(DeleteRequest) ");
 		return null/* ColumnValidationSer.delete(id) */;
 	}
 
