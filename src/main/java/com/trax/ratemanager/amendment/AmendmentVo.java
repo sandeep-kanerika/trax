@@ -24,35 +24,32 @@ public class AmendmentVo {
 
 	private String id;
 	private String buyerOrgId;
-	private String status;
+	private Integer status;
 	private String sellerOrgId;
 	private String ratesetId;
-//	private String isSpotQuote;
+	private Boolean isSpotQuote;
 
 	private UserAuditor createdBy;
+	private UserAuditor lastUpdatedBy;
+	
 	private ZonedDateTime dateCreated;
 	private ZonedDateTime dateUpdated;
 	private Date defaultEffectiveDateFrom;
 	private Date defaultEffectiveDateThru;
-	
 	private String description;
-	private UserAuditor lastUpdatedBy;
 	private String ratesetReferenceId;
 	private String referenceId;
 	private String reviewedBy;
 	private String type;
-	
 	private String buyerOrgName;
 	private String sellerOrgName;
 	private String ratesetName;
 	private String region;
 	private String mode;
-
 	private List<RateRow> rateRows;
-
-	private String lastAssignedBy;
-	private String approvers;
-	private String currentApprover;
+	private UserAuditor lastAssignedBy;
+	private List<UserAuditor> approvers;
+	private UserAuditor currentApprover;
 
 	private ZonedDateTime dateApproved;
 

@@ -33,7 +33,7 @@ public class RateSetDefinition {
 	@Id
 	private String id;
 
-	private String status;
+	private Integer status;
 
 	private String creatorOrgId;
 

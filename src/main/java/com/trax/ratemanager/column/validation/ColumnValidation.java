@@ -6,6 +6,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.trax.ratemanager.column.defination.RateColumnDefinition;
@@ -32,8 +33,9 @@ public class ColumnValidation {
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "columnDefinitionId")
-	private RateColumnDefinition columnDefinition;
-
+	private RateColumnDefinition columnDefinition;  // need to replace with RateColumn now.
+	
+	
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "rateSetId")
 	private RateSet rateSet;
@@ -42,7 +44,7 @@ public class ColumnValidation {
 	@JoinColumn(name = "tableId")
 	private RateTable table;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)  // okay, the one to one  rel need to be impl
 	@JoinColumn(name = "validationId")
 	private Validation validation;
 }

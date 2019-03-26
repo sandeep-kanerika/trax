@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.trax.ratemanager.orgnization.Organization;
 import com.trax.ratemanager.orgnization.OrganizationType;
-import com.trax.ratemanager.ratecolumn.RateColumn;
 import com.trax.ratemanager.ratetable.RateTable;
 import com.trax.ratemanager.ratetable.RateTableConverter;
 import com.trax.ratemanager.ratetable.RateTableVo;

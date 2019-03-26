@@ -16,14 +16,14 @@ import com.trax.ratemanager.exception.ResourceNotFoundException;
 
 import lombok.extern.slf4j.Slf4j;
 
-@RestController("/rate/column")
+@RestController
 @Slf4j
 public class RateColumnController {
 
 	@Autowired
 	RateColumnService rateColumnService;
 
-	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
+	@PostMapping(value="/rate-column", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<Object> createRateColumn(@RequestBody RateColumnVo rateColumnVo) throws Exception 
 	{
 		log.info("***************Create RateColumn(PostRequest) ");

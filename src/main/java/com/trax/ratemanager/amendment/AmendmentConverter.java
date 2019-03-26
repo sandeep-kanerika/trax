@@ -14,11 +14,9 @@ public class AmendmentConverter {
 			amendment.setId(amendmentVo.getId());
 			
 			amendment.setBuyerOrg(new Organization(amendmentVo.getBuyerOrgId(), amendmentVo.getBuyerOrgName(), OrganizationType.BUYER));
-			amendment.setStatus(Integer.parseInt(amendmentVo.getStatus()));
+			amendment.setStatus(amendmentVo.getStatus());
 			amendment.setSellerOrg(new Organization(amendmentVo.getSellerOrgId(), amendmentVo.getSellerOrgName(), OrganizationType.SELLER));
 
-			//			amendment.setRatesetId(amendmentVo.getRatesetId());
-			
 			amendment.setDescription(amendmentVo.getDescription());
 			amendment.setLastUpdatedBy(amendmentVo.getLastUpdatedBy());
 			amendment.setRatesetReferenceId(amendmentVo.getRatesetReferenceId());
@@ -31,7 +29,10 @@ public class AmendmentConverter {
 			
 			amendment.setRateRows(amendmentVo.getRateRows());
 			amendment.setLastAssignedBy(amendmentVo.getLastAssignedBy());
-			amendment.setApprovers(amendmentVo.getApprovers());
+			
+			// Setting list of approvers is having issue. will be fixed later.
+			//amendment.setApprovers(amendmentVo.getApprovers());
+			
 			amendment.setCurrentApprover(amendmentVo.getCurrentApprover());
 			amendment.setDateApproved(amendmentVo.getDateApproved());
 			

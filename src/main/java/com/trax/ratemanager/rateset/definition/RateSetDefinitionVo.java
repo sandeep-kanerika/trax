@@ -29,7 +29,7 @@ public class RateSetDefinitionVo {
 	// @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String id;
 
-	private String status;
+	private Integer status;
 
 	private String creatorOrgId;
 

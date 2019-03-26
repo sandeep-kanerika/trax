@@ -34,6 +34,8 @@ public class UserAuditor {
 	private String orgId;
 	private String userEmail;
 	private String comment;
+	private String rateSetId;
+	private String tableId;
 
 	@OneToMany(targetEntity = Amendment.class, mappedBy = "createdBy", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	// @JoinColumn(name = "createdById")
@@ -42,5 +44,18 @@ public class UserAuditor {
 	@OneToMany(targetEntity = Amendment.class, mappedBy = "lastUpdatedBy", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	// @JoinColumn(name = "lastModifiedById")
 	private List<UserAuditor> lastModifiedBy;
+	
+	@OneToMany(targetEntity = Amendment.class, mappedBy = "lastUpdatedBy", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	// @JoinColumn(name = "lastModifiedById")
+	private List<UserAuditor> approvers;
+	
+
+	@OneToMany(targetEntity = Amendment.class, mappedBy = "lastUpdatedBy", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	// @JoinColumn(name = "lastModifiedById")
+	private List<UserAuditor> lastApprovedBy;
+	
+	@OneToMany(targetEntity = Amendment.class, mappedBy = "lastUpdatedBy", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	// @JoinColumn(name = "lastModifiedById")
+	private List<UserAuditor> currentApprover;
 
 }

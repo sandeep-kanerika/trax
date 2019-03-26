@@ -11,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Positive;
 
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
@@ -43,7 +46,9 @@ public class Amendment {
 	private String id;
 	private Integer status;
 	private String referenceId;
+	@Positive
 	private Integer type;
+	@NotEmpty
 	private String description;
 //	private String ratesetId;
 	private String ratesetReferenceId;
@@ -68,26 +73,40 @@ public class Amendment {
 
 	@JsonFormat(pattern = AppConstants.DEFAULT_DATE_FORMAT)
 	private Date defaultEffectiveDateFrom;
-	
+
 	@JsonFormat(pattern = AppConstants.DEFAULT_DATE_FORMAT)
 	private Date defaultEffectiveDateThru;
 
 	private String reviewedBy;
 
 	@NotFound(action = NotFoundAction.IGNORE)
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "createdById")
 	private UserAuditor createdBy;
 
 	@NotFound(action = NotFoundAction.IGNORE)
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "lastUpdatedById")
 	private UserAuditor lastUpdatedBy;
 
-	// its userAuditor field lastAssignedBy, approvers and currentApprover
-	private String lastAssignedBy;
-	private String approvers;
-	private String currentApprover;
+
+	@NotFound(action = NotFoundAction.IGNORE)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "lastAssignedById")
+	private UserAuditor lastAssignedBy;
+	
+	// Need to implement list of approvers yet..
+	/*
+	 * @NotFound(action = NotFoundAction.IGNORE)
+	 * 
+	 * @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	 * 
+	 * @JoinColumn(name = "approvers") private List<UserAuditor> approvers;
+	 */	
+	@NotFound(action = NotFoundAction.IGNORE)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "currentApproverId")
+	private UserAuditor currentApprover;
 
 	@JsonFormat(pattern = AppConstants.DEFAULT_ZONED_DATETIME_FORMAT)
 	private ZonedDateTime dateApproved;
