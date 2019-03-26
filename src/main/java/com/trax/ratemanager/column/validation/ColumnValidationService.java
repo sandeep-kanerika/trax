@@ -17,16 +17,14 @@ public class ColumnValidationService extends AbstractJpaService<ColumnValidation
 	
 	@Override
 	protected ColumnValidation create(ColumnValidation columnValidations) {
-		// TODO Auto-generated method stub
 		return save(columnValidations);
 	}
 
 	@Override
-	protected ColumnValidation update(ColumnValidation _columnValidations) {
-		// TODO Auto-generated method stub
-		ColumnValidation columnValidations = getById(_columnValidations.getId());
+	protected ColumnValidation update(ColumnValidation colVal) {
+		ColumnValidation columnValidations = getById(colVal.getId());
         if (columnValidations != null) {
-        	return save(_columnValidations);
+        	return save(colVal);
         }else {
         	throw new ResourceNotFoundException("columnValidations Id Not Found !");
         }

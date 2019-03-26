@@ -16,12 +16,13 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.trax.ratemanager.config.AppConstants;
 import com.trax.ratemanager.ratecolumn.RateColumn;
 import com.trax.ratemanager.raterow.RateRow;
-import com.trax.ratemanager.ratetable.definition.RateTableDefinition;
+import com.trax.ratemanager.rateset.RateSet;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
@@ -29,16 +30,13 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class RateTable {
 
 	@Id
 	private String id;
 	private String creatorOrgId;
-	
-	@ManyToOne
-	@JoinColumn(name="rateTableDefinitionId")
-	private RateTableDefinition rateTableDefinition;
-	
+
 	private String name;
 
 	@JsonFormat(pattern = AppConstants.DEFAULT_ZONED_DATETIME_FORMAT)
@@ -47,7 +45,8 @@ public class RateTable {
 	private String tableGroup;
 	private String tableType;
 	private String columnHash;
-
+	private String rateSetId;
+	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "rateTableId")
 	private List<RateColumn> columns;

@@ -30,7 +30,6 @@ public class RateColumnConverter {
 		} else {
 			throw new Exception("Problem with input");
 		}
-
 	}
 
 	public static RateColumnVo convertToRateSetVo(RateColumn rateColumn) {

@@ -12,7 +12,6 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.trax.ratemanager.column.defination.RateColumnDefinition;
 import com.trax.ratemanager.config.AppConstants;
 import com.trax.ratemanager.ratetable.definition.RateTableDefinition;
 
@@ -20,12 +19,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
 @AllArgsConstructor
 public class RateSetDefinition {
 
@@ -53,13 +54,5 @@ public class RateSetDefinition {
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "rateSetDefinitionId")
 	private List<RateTableDefinition> tables;
-	
-	@Override
-	public String toString() {
-		return "RateSetDefinition [id=" + id + ", status=" + status + ", creatorOrgId=" + creatorOrgId + ", region="
-				+ region + ", mode=" + mode + ", name=" + name + ", dateCreated=" + dateCreated + ", dateUpdated="
-				+ dateUpdated + ", tableHash=" + tableHash + ", tables=" + tables + "]";
-	}
-	
 	
 }

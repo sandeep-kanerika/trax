@@ -25,6 +25,6 @@ public class ColumnValidationVo {
 	private String rateSetId;
 	
 	@OneToOne
-	private ColumnValidation validation;
+	private Validation validation;
 
 }

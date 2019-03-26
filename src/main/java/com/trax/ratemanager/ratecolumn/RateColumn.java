@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
@@ -16,11 +17,12 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class RateColumn {
 
 	@Id
 	private String id;
-	
+
 	private String concept;
 	private String dataFieldId;
 	private String dataSourceId;
@@ -36,5 +38,5 @@ public class RateColumn {
 	private String type;
 	private String hasAlias;
 	private String reference;
-	
+	private String rateTableId;
 }

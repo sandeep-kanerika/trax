@@ -24,9 +24,7 @@ public class RateSetController {
 	@Autowired
 	RateSetsService rateSetsService;
 
-	private HttpStatus returnStatus = HttpStatus.OK;
-
-	@PostMapping(value = "/rate/sets", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
+	@PostMapping(value = "/rate-sets", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<Object> createRateSets(@RequestBody RateSetVo rateSetVo) throws Exception {
 		log.info("***************Create RateSet(PostRequest) ");
@@ -45,7 +43,7 @@ public class RateSetController {
 		}
 	}
 
-	@GetMapping(value = "/rate/sets/{id}")
+	@GetMapping(value = "/rate-sets/{id}")
 	public ResponseEntity<RateSet> getRateSets(@PathVariable String id) {
 		log.info("***************Retrive rateset by id:::" + id);
 		HttpStatus status = HttpStatus.OK;
@@ -60,7 +58,7 @@ public class RateSetController {
 		}
 	}
 
-	@GetMapping(value = "/rate/sets/all")
+	@GetMapping(value = "/rate-sets/all")
 	public ResponseEntity<Object> findAllRateSets() {
 		log.info("**************fetch all rateset objects");
 		try {
@@ -82,14 +80,14 @@ public class RateSetController {
 		}
 	}
 
-	@PutMapping(value = "/rate/sets", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
+	@PutMapping(value = "/rate-sets", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<Object> updateRateSets(@RequestBody RateSetVo rateSetVo) throws Exception {
 		log.info("***************updateRateSets invoked, internally its going to call post method only...");
 		return createRateSets(rateSetVo);
 	}
 
-	@DeleteMapping(value = "/rate/sets/{id}")
+	@DeleteMapping(value = "/rate-sets/{id}")
 	public ResponseEntity<RateSet> deleteRateSet(@PathVariable String id) {
 		ResponseEntity<RateSet> responseEntity = null;
 		log.info("**************deleteRateSets invoked with id:::" + id);

@@ -21,13 +21,13 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.trax.ratemanager.amendment.Amendment;
 import com.trax.ratemanager.config.AppConstants;
 import com.trax.ratemanager.orgnization.Organization;
-import com.trax.ratemanager.rateset.definition.RateSetDefinition;
 import com.trax.ratemanager.ratetable.RateTable;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
@@ -35,6 +35,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class RateSet {
 
 	@Id
@@ -72,7 +73,7 @@ public class RateSet {
 
 	@JsonFormat(pattern = AppConstants.DEFAULT_DATE_FORMAT)
 	private Date effectiveDateFrom;
-	
+
 	@JsonFormat(pattern = AppConstants.DEFAULT_DATE_FORMAT)
 	private Date effectiveDateThru;
 
@@ -88,12 +89,12 @@ public class RateSet {
 	private List<Amendment> amendments;
 
 	private String createdBy;
-	
+
 	private String reviewedBy;
 
 	private String lastAssignedBy;
-	
-	private String LastUpdatedBy;
+
+	private String lastUpdatedBy;
 
 	private String approvers;
 

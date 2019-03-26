@@ -1,7 +1,14 @@
 package com.trax.ratemanager.rateset;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.trax.ratemanager.orgnization.Organization;
 import com.trax.ratemanager.orgnization.OrganizationType;
+import com.trax.ratemanager.ratecolumn.RateColumn;
+import com.trax.ratemanager.ratetable.RateTable;
+import com.trax.ratemanager.ratetable.RateTableConverter;
+import com.trax.ratemanager.ratetable.RateTableVo;
 
 public class RateSetConverter {
 
@@ -25,7 +32,17 @@ public class RateSetConverter {
 			rateSet.setStatus(Integer.parseInt(rateSetVo.getStatus()));
 			rateSet.setRegion(rateSetVo.getRegion());
 			rateSet.setTableHash(rateSetVo.getTableHash());
-			rateSet.setTables(rateSetVo.getTables());
+			
+			List<RateTableVo> rateTableVos = rateSetVo.getTables();
+			
+			List<RateTable> rateTables = new ArrayList<RateTable>();
+			for (RateTableVo rateTableVo : rateTableVos) {
+				RateTable table =  RateTableConverter.convertToRateTable(rateTableVo);
+				System.out.println("---table---" + table);
+				table.setRateSetId(rateSet.getId());
+				rateTables.add(table);
+			}
+			rateSet.setTables(rateTables);
 			
 			rateSet.setCreatedBy(rateSetVo.getCreatedBy());
 			rateSet.setLastUpdatedBy(rateSetVo.getLastUpdatedBy());
