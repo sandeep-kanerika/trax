@@ -1,22 +1,15 @@
 package com.trax.ratemanager.ratecolumn;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.trax.ratemanager.column.defination.RateColumnDefinition;
-import com.trax.ratemanager.column.validation.RateColumnValidation;
-import com.trax.ratemanager.rateset.RateSet;
-import com.trax.ratemanager.ratetable.RateTable;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
@@ -24,25 +17,26 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class RateColumn {
 
 	@Id
 	private String id;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "columnDefinitionId")
-	private RateColumnDefinition columnDefinition;
-
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "rateSetId")
-	private RateSet rateSet;
-
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "tableId")
-	private RateTable table;
-
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "rateColumnId")
-	private RateColumnValidation validation;
-
+	private String concept;
+	private String dataFieldId;
+	private String dataSourceId;
+	private String description;
+	private String displayName;
+	private Boolean isActive;
+	private Boolean isKey;
+	private String name;
+	private String pivotCharge;
+	private String pivotField;
+	private String propertyName;
+	private Integer sortOrder;
+	private String type;
+	private String hasAlias;
+	private String reference;
+	private String rateTableId;
 }

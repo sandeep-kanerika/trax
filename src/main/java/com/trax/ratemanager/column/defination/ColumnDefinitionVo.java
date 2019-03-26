@@ -1,20 +1,19 @@
 package com.trax.ratemanager.column.defination;
 
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.trax.ratemanager.column.validation.RateColumnValidation;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class ColumnDefinitionVo {
 
 	private String id;
@@ -27,9 +26,9 @@ public class ColumnDefinitionVo {
 
 	private String type;
 
-	private String dateSourceId;
+	private String dataSourceId;
 
-	private String dateFieldId;
+	private String dataFieldId;
 
 	private String hasAlias;
 

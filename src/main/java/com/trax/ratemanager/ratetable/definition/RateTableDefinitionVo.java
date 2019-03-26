@@ -5,20 +5,21 @@ import java.util.List;
 
 import javax.persistence.Id;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.trax.ratemanager.column.defination.RateColumnDefinition;
-import com.trax.ratemanager.config.AppConstants;
-import com.trax.ratemanager.ratecolumn.RateColumn;
-import com.trax.ratemanager.raterow.RateRow;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
+
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
+@AllArgsConstructor
 public class RateTableDefinitionVo {
 
 	@Id

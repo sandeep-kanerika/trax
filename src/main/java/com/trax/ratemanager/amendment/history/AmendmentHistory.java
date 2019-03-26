@@ -1,9 +1,8 @@
 package com.trax.ratemanager.amendment.history;
 
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
-import java.sql.Timestamp;
-import java.time.ZonedDateTime;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -28,6 +27,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  * Created by sudhakar.rao on 2/18/2019.
@@ -38,6 +38,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class AmendmentHistory {
 
 	@Id

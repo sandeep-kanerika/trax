@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trax.ratemanager.amendment.Amendment;
-import com.trax.ratemanager.amendment.AmendmentConverter;
 import com.trax.ratemanager.amendment.AmendmentVo;
 import com.trax.ratemanager.exception.ResourceNotFoundException;
 
@@ -84,7 +83,7 @@ public class AmendmentHistoryController {
 		}
 	}
 
-	@GetMapping("/history/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<AmendmentHistory> getAmendmentsHistoryByTheId(@PathVariable String id) {
 		LOGGER.info("getAmandmentsHistory invoked");
 		HttpStatus returnStatus = HttpStatus.OK;
@@ -114,7 +113,7 @@ public class AmendmentHistoryController {
 
 	}
 
-	@GetMapping("/history/summary/submission-to-review")
+	@GetMapping("/summary/submission-to-review")
 	public ResponseEntity<Amendment> getAmandmentSubmissionToReview(@PathVariable String id) {
 		System.out.println("---getAmandmentSubmissionToReview---ID---->" + id);
 		return null;

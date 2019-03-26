@@ -1,13 +1,13 @@
 package com.trax.ratemanager.amendment.history;
 
-import com.trax.ratemanager.exception.ResourceNotFoundException;
-import com.trax.ratemanager.jpa.AbstractJpaRepository;
-import com.trax.ratemanager.jpa.AbstractJpaService;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.trax.ratemanager.exception.ResourceNotFoundException;
+import com.trax.ratemanager.jpa.AbstractJpaRepository;
+import com.trax.ratemanager.jpa.AbstractJpaService;
 
 /**
  * Created by sudhakar.rao on 2/19/2019.

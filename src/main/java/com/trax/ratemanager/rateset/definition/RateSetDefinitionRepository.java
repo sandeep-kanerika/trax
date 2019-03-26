@@ -1,7 +1,5 @@
 package com.trax.ratemanager.rateset.definition;
 
-import java.math.BigInteger;
-
 import org.springframework.stereotype.Repository;
 
 import com.trax.ratemanager.jpa.AbstractJpaRepository;

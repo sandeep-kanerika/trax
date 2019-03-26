@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import com.trax.ratemanager.exception.ResourceNotFoundException;
 import com.trax.ratemanager.jpa.AbstractJpaRepository;
 import com.trax.ratemanager.jpa.AbstractJpaService;
-import com.trax.ratemanager.rateset.RateSet;
 
 @Service
 public class RateSetDefinitionService extends AbstractJpaService<RateSetDefinition> {
