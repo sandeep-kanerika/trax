@@ -48,7 +48,8 @@ public class AmendmentVo {
 	private String mode;
 	private List<RateRow> rateRows;
 	private UserAuditor lastAssignedBy;
-	private List<UserAuditor> approvers;
+	// to be implemented later.
+	//private List<UserAuditor> approvers;
 	private UserAuditor currentApprover;
 
 	private ZonedDateTime dateApproved;
