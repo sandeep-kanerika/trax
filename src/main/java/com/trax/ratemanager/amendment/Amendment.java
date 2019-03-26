@@ -14,10 +14,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
 
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -46,7 +48,7 @@ public class Amendment {
 	private String id;
 	private Integer status;
 	private String referenceId;
-	@Positive
+	@PositiveOrZero(message="Provided Amendment Type must be a zero or positive number.")
 	private Integer type;
 	@NotEmpty
 	private String description;
@@ -79,17 +81,20 @@ public class Amendment {
 
 	private String reviewedBy;
 
+	@JsonBackReference
 	@NotFound(action = NotFoundAction.IGNORE)
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "createdById")
 	private UserAuditor createdBy;
 
+	@JsonBackReference
 	@NotFound(action = NotFoundAction.IGNORE)
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "lastUpdatedById")
 	private UserAuditor lastUpdatedBy;
 
 
+	@JsonBackReference
 	@NotFound(action = NotFoundAction.IGNORE)
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "lastAssignedById")
@@ -103,6 +108,7 @@ public class Amendment {
 	 * 
 	 * @JoinColumn(name = "approvers") private List<UserAuditor> approvers;
 	 */	
+	@JsonBackReference
 	@NotFound(action = NotFoundAction.IGNORE)
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "currentApproverId")
