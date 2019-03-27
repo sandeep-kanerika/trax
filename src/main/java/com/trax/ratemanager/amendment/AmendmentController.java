@@ -93,32 +93,31 @@ public class AmendmentController {
 		return responseEntity;
 	}
 
-	@PostMapping(value = "/save-as-draft", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<Amendment> saveAsDraft(@RequestBody AmendmentWithRateRows amendmentWithRateRows) {
-		ResponseEntity<Amendment> saveAsDraft = null;
+	@PostMapping(value = "/amendments/save-as-draft", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<Amendment> saveAmendmentAsDraft(@RequestBody AmendmentWithRateRows amendmentWithRateRows) {
 		log.info("**************Save Draft Amendment(PostRequest) ::::"); 
 		log.info("***************AmendmentsValue Object ::::" + amendmentWithRateRows);
-		return null; // some response , need to be implemented.
-
+		return null; 
+		// some response , need to be implemented.
 	}
 
-	@PostMapping(value = "/submit-for-approval", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
+	@PostMapping(value = "/amendments/submit-for-approval", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<Amendment> submitForApproval(@RequestBody AmendmentWithMeta amendmentWithMeta) {
-		ResponseEntity<Amendment> responseEntity = null;
+	public ResponseEntity<Amendment> submitAmendmentForApproval(@RequestBody AmendmentWithMeta amendmentWithMeta) {
 		log.info("**************submitForApproval invoked ::::");
 		log.info("***************AmendmentsValue Object ::::" +amendmentWithMeta);
-		return null; // some response , need to be implemented.
+		return null; 
+		// some response , need to be implemented.
 
 	}
 
-	@PostMapping(value = "/approve-rates", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
+	@PostMapping(value = "/amendments/approve-rates", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<Amendment> approveRates(@RequestBody AmendmentWithRateRows amendmentWithMeta) {
-		ResponseEntity<Amendment> responseEntity = null;
+	public ResponseEntity<Amendment> approveAnAmendment(@RequestBody AmendmentWithRateRows amendmentWithMeta) {
 		log.info("**************Approve Rates invoked(PostRequest) ::::");
 		log.info("***************AmendmentsValue Object ::::" +amendmentWithMeta);
-		return null; // some response , need to be implemented.
+		return null; 
+		// some response , need to be implemented.
 
 	}
 }

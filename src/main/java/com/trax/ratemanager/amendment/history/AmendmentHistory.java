@@ -58,12 +58,12 @@ public class AmendmentHistory {
 	
 	@JsonIgnoreProperties("buyer")
 	@NotFound(action = NotFoundAction.IGNORE)
-	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	private Organization buyerOrg;
 	
 	@JsonIgnoreProperties("seller")
 	@NotFound(action = NotFoundAction.IGNORE)
-	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	private Organization sellerOrg;
 //	private String buyerOrgName;
 //	private String sellerOrgName;
@@ -99,12 +99,12 @@ public class AmendmentHistory {
 	private String reviewedBy;
 	
 	@NotFound(action = NotFoundAction.IGNORE)
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "createdById")
 	private UserAuditor createdBy;
 	
 	@NotFound(action = NotFoundAction.IGNORE)
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "lastUpdatedById")
 	private UserAuditor lastUpdatedBy;
 	

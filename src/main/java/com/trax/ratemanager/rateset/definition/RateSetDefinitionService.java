@@ -17,13 +17,11 @@ public class RateSetDefinitionService extends AbstractJpaService<RateSetDefiniti
 	
 	@Override
 	protected RateSetDefinition create(RateSetDefinition rateSetsDefinition) {
-		// TODO Auto-generated method stub
 		return save(rateSetsDefinition);
 	}
 
 	@Override
 	protected RateSetDefinition update(RateSetDefinition _rateSetsDefinition) {
-		// TODO Auto-generated method stub
 		RateSetDefinition rateSetsDefinition = getById(_rateSetsDefinition.getId());
 		if(rateSetsDefinition != null)
 			return save(_rateSetsDefinition);
@@ -34,26 +32,26 @@ public class RateSetDefinitionService extends AbstractJpaService<RateSetDefiniti
 
 	@Override
 	protected RateSetDefinition delete(RateSetDefinition rateSetsDefinition) {
-		// TODO Auto-generated method stub
 		rateSetsDefinitionRepository.delete(rateSetsDefinition);
 		return rateSetsDefinition;
 	}
 
 	@Override
 	protected List<RateSetDefinition> search(RateSetDefinition rateSetsDefinition) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	protected AbstractJpaRepository<RateSetDefinition, String> getRepository() {
-		// TODO Auto-generated method stub
 		return rateSetsDefinitionRepository;
 	}
 
 	public RateSetDefinition getById(String id) {
-		// TODO Auto-generated method stub
 		return rateSetsDefinitionRepository.getById(id);
+	}
+	
+	public List<RateSetDefinition> findAll() {
+		return rateSetsDefinitionRepository.findAll();
 	}
 	
 }

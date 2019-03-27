@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -31,31 +32,28 @@ public class UserAuditor {
 	@GeneratedValue(generator = "uuid")
 	@GenericGenerator(name = "uuid", strategy = "uuid2")
 	private String id;
+
 	private String orgId;
 	private String userEmail;
 	private String comment;
 	private String rateSetId;
 	private String tableId;
 
-	@OneToMany(targetEntity = Amendment.class, mappedBy = "createdBy", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	// @JoinColumn(name = "createdById")
+	@OneToMany(targetEntity = Amendment.class, mappedBy = "createdBy", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<UserAuditor> createdBy;
 
-	@OneToMany(targetEntity = Amendment.class, mappedBy = "lastUpdatedBy", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	// @JoinColumn(name = "lastModifiedById")
+	@OneToMany(targetEntity = Amendment.class, mappedBy = "lastUpdatedBy", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<UserAuditor> lastModifiedBy;
-	
-	@OneToMany(targetEntity = Amendment.class, mappedBy = "lastUpdatedBy", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	// @JoinColumn(name = "lastModifiedById")
-	private List<UserAuditor> approvers;
-	
 
-	@OneToMany(targetEntity = Amendment.class, mappedBy = "lastUpdatedBy", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	// @JoinColumn(name = "lastModifiedById")
+	/*
+	 * @ManyToMany(targetEntity = Amendment.class, mappedBy = "lastUpdatedBy",
+	 * cascade = CascadeType.ALL, fetch = FetchType.LAZY) private List<UserAuditor>
+	 * approvers;
+	 */
+	@OneToMany(targetEntity = Amendment.class, mappedBy = "lastUpdatedBy", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<UserAuditor> lastApprovedBy;
-	
-	@OneToMany(targetEntity = Amendment.class, mappedBy = "lastUpdatedBy", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	// @JoinColumn(name = "lastModifiedById")
+
+	@OneToMany(targetEntity = Amendment.class, mappedBy = "lastUpdatedBy", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<UserAuditor> currentApprover;
 
 }

@@ -24,52 +24,17 @@ public class RateSetDownloadController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(RateSetDownloadController.class);
 
-	@GetMapping("/{id}")
-	public  ResponseEntity<RateSet>  getRateSets(@PathVariable String id) {
-		log.info("getRateSets invoked :::::-------------- " + id);
-		HttpStatus returnStatus = HttpStatus.OK;
-		
-		try {
-			RateSet getAmendmentsDetail = rateSetsSer.getById(id);
-			if (getAmendmentsDetail != null) {
-				return new ResponseEntity<>( getAmendmentsDetail , returnStatus) ;
-			} else {
-				return ResponseEntity.notFound().build();
-			}
-
-		} catch (ResourceNotFoundException e) {
-			LOGGER.error(e.getMessage());
-			returnStatus = HttpStatus.NOT_FOUND;
-		} catch (Exception e) {
-			returnStatus = HttpStatus.INTERNAL_SERVER_ERROR;
-			LOGGER.error(e.getMessage());
-		}
-		return new ResponseEntity<>(returnStatus);
+	@GetMapping("/downloads/rate-sets/{rateSetId}")
+	public ResponseEntity<RateSet> getRateSets(@PathVariable String rateSetId) {
+		log.info("getRateSets invoked :::::-------------- " + rateSetId);
+		// get rateset and tables then convert into excel and return
+		return null;
 	}
-	
-	@GetMapping("/{rateSetId}/rate-tables/{tableId}")
-	public  ResponseEntity<RateSet>  getRateSetsByTables(@PathVariable String rateSetId, @PathVariable String tableId) {
+
+	@GetMapping("/downloads/rate-sets/{rateSetId}/rate-tables/{tableId}")
+	public ResponseEntity<RateSet> getRateSetsByTables(@PathVariable String rateSetId, @PathVariable String tableId) {
 		LOGGER.info("getRateSets invoked :::::-------------- " + rateSetId);
-		HttpStatus returnStatus = HttpStatus.OK;
-		try {
-			RateSet getAmendmentsDetail = rateSetsSer.getByIdAndTableId(rateSetId , tableId);
-			
-//			LOGGER.info("getAmendmentsDetail ::: " + getAmendmentsDetail.getBuyerOrg().getOrgName());
-//			LOGGER.info("rateSet ::: " + rateSet);
-
-			if (getAmendmentsDetail != null) {
-				return  new ResponseEntity<>( getAmendmentsDetail , returnStatus) ;
-			} else {
-				throw new ResourceNotFoundException("RateSets Id doesn't exist !");
-			}
-
-		} catch (ResourceNotFoundException e) {
-			LOGGER.error(e.getMessage());
-			returnStatus = HttpStatus.NOT_FOUND;
-		} catch (Exception e) {
-			returnStatus = HttpStatus.INTERNAL_SERVER_ERROR;
-			LOGGER.error(e.getMessage());
-		}
-		return new ResponseEntity<>(returnStatus);
+		// get rateset and tables then convert into excel and return 
+		return null;
 	}
 }

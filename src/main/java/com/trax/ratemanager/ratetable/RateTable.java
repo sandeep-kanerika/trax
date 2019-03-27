@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -16,7 +15,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.trax.ratemanager.config.AppConstants;
 import com.trax.ratemanager.ratecolumn.RateColumn;
 import com.trax.ratemanager.raterow.RateRow;
-import com.trax.ratemanager.rateset.RateSet;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

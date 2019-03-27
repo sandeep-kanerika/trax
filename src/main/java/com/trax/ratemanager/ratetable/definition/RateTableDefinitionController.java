@@ -7,10 +7,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trax.ratemanager.exception.ResourceNotFoundException;
@@ -19,14 +18,12 @@ import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @Slf4j
-@RequestMapping("/rate-tables-definition")
 public class RateTableDefinitionController {
 
 	@Autowired
 	RateTableDefinitionService rateTablesDefinitionService;
 
-	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
-	@ResponseBody
+	@PostMapping(value="/rate-tables-definition", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<Object> createRateTablesDefinition(@RequestBody RateTableDefinitionVo rateTablesDefinitionVo) throws Exception {
 
 		log.info("***************Create Rate Tables Definition(PostRequest) ");
@@ -45,7 +42,7 @@ public class RateTableDefinitionController {
 		}
 	}
 
-	@GetMapping("/{id}")
+	@GetMapping("/rate-tables-definition/{id}")
 	public ResponseEntity<RateTableDefinition> getRateTablesDefinition(@PathVariable String id) {
 		log.info("***************Get Rate Tables Definition");
 		HttpStatus returnStatus = HttpStatus.OK;
@@ -67,7 +64,7 @@ public class RateTableDefinitionController {
 		return new ResponseEntity<>(returnStatus);
 	}
 
-	@RequestMapping(method = { RequestMethod.PUT, RequestMethod.PATCH })
+	@PutMapping(value="/rate-tables-definition", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<Object> updateRateTablesDefinition(@RequestBody RateTableDefinitionVo rateTablesDefinitionVo) throws Exception {
 
 		log.info("***************Update Rate Tables Definition ::::" +rateTablesDefinitionVo);

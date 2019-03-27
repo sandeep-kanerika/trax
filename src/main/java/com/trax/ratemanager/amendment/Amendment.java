@@ -13,7 +13,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 
 import org.hibernate.annotations.NotFound;
@@ -48,7 +47,7 @@ public class Amendment {
 	private String id;
 	private Integer status;
 	private String referenceId;
-	@PositiveOrZero(message="Provided Amendment Type must be a zero or positive number.")
+	@PositiveOrZero(message = "Provided Amendment Type must be a zero or positive number.")
 	private Integer type;
 	@NotEmpty
 	private String description;
@@ -57,12 +56,12 @@ public class Amendment {
 
 	@JsonIgnoreProperties("buyer")
 	@NotFound(action = NotFoundAction.IGNORE)
-	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	private Organization buyerOrg;
 
 	@JsonIgnoreProperties("seller")
 	@NotFound(action = NotFoundAction.IGNORE)
-	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	private Organization sellerOrg;
 
 	private String ratesetName;
@@ -83,34 +82,35 @@ public class Amendment {
 
 	@JsonBackReference
 	@NotFound(action = NotFoundAction.IGNORE)
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "createdById")
 	private UserAuditor createdBy;
 
 	@JsonBackReference
 	@NotFound(action = NotFoundAction.IGNORE)
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "lastUpdatedById")
 	private UserAuditor lastUpdatedBy;
 
-
 	@JsonBackReference
 	@NotFound(action = NotFoundAction.IGNORE)
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "lastAssignedById")
 	private UserAuditor lastAssignedBy;
-	
+
 	// Need to implement list of approvers yet..
+
 	/*
 	 * @NotFound(action = NotFoundAction.IGNORE)
 	 * 
-	 * @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	 * @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	 * 
 	 * @JoinColumn(name = "approvers") private List<UserAuditor> approvers;
-	 */	
+	 */
+
 	@JsonBackReference
 	@NotFound(action = NotFoundAction.IGNORE)
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "currentApproverId")
 	private UserAuditor currentApprover;
 

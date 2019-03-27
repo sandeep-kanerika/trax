@@ -1,7 +1,7 @@
 package com.trax.ratemanager.amendment.history;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -10,9 +10,8 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,14 +26,15 @@ import lombok.extern.slf4j.Slf4j;
  */
 @RestController
 @Slf4j
-@RequestMapping("/amendments/history")
+
 public class AmendmentHistoryController {
 
 	@Autowired
-	AmendmentHistoryService amendmentsHistorySer;
+	AmendmentHistoryService amendmenHistService;
 
-	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
-	@ResponseBody
+	@PostMapping(value="/amendments/history",consumes={MediaType.APPLICATION_JSON_VALUE},
+			produces = { MediaType.APPLICATION_JSON_VALUE })
+
 	public ResponseEntity<Object> createAmendmentsHistory(@RequestBody AmendmentHistoryVo amendmentsHistoryVo)
 			throws Exception {
 
@@ -44,7 +44,7 @@ public class AmendmentHistoryController {
 		log.info("***************Amendments History Object After VO--to-->BO :::" + amendmentsHistory);
 		AmendmentHistory createdAmendmentHistory = null;
 		try {
-			createdAmendmentHistory = amendmentsHistorySer.create(amendmentsHistory);
+			createdAmendmentHistory = amendmenHistService.create(amendmentsHistory);
 			return ResponseEntity.ok(createdAmendmentHistory);
 		} catch (Exception ex) {
 			log.error("Error occured:::" + ex.getMessage());
@@ -53,41 +53,13 @@ public class AmendmentHistoryController {
 		}
 	}
 
-	@RequestMapping(method = { RequestMethod.PUT, RequestMethod.PATCH })
-	public ResponseEntity<Object> updateAmendmentsHistory(@RequestBody AmendmentHistoryVo amendmentsHistoryVo)
-			throws Exception {
-		log.info("***************Update Amandment History ::::" +amendmentsHistoryVo);
-		return createAmendmentsHistory(amendmentsHistoryVo);
-	}
-
-	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<AmendmentHistory> deleteAmendmentsHistory(@PathVariable String id) {
-
-		ResponseEntity<AmendmentHistory> responseEntity = null;
-		log.info("**************Delete Amendment History invoked with id :::" + id);
-		AmendmentHistory amendmentHistory = amendmentsHistorySer.getById(id);
-		log.info("**************found the Amendment History id in DB :::" + amendmentHistory);
-		if (amendmentHistory != null) {
-			try {
-				amendmentsHistorySer.delete(amendmentHistory);
-				log.info("**************Deleted the Amendment History id from database ::::" + amendmentHistory.getId());
-				return ResponseEntity.ok(amendmentHistory);
-			} catch (Exception ex) {
-				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-			}
-
-		} else {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-		}
-	}
-
-	@GetMapping("/{id}")
-	public ResponseEntity<AmendmentHistory> getAmendmentsHistoryByTheId(@PathVariable String id) {
-		log.info("**************get Amandments History(GETREQUEST)");
+	@GetMapping("/amendments/history/{id}")
+	public ResponseEntity<AmendmentHistory> findAmendmentHistoryById(@PathVariable String id) {
+		log.info("**************get Amandments History(GET REQUEST)");
 		HttpStatus returnStatus = HttpStatus.OK;
 
 		try {
-			AmendmentHistory getAmendmentHistoryDetail = amendmentsHistorySer.getById(id);
+			AmendmentHistory getAmendmentHistoryDetail = amendmenHistService.getById(id);
 			log.info("***************Get Amandments History Object ::::" + getAmendmentHistoryDetail);
 			if (getAmendmentHistoryDetail != null) {
 				return new ResponseEntity<>(getAmendmentHistoryDetail, returnStatus);
@@ -104,15 +76,15 @@ public class AmendmentHistoryController {
 		return new ResponseEntity<>(returnStatus);
 	}
 
-	@GetMapping("/history")
-	public ResponseEntity<Amendment> getAmandmentHistory(@RequestBody AmendmentVo amendmentVo) {
+	@GetMapping("/amendments/history")
+	public ResponseEntity<List<AmendmentHistory>> getAmandmentHistory(@RequestBody AmendmentVo amendmentVo) {
 		log.info("***************Get Amandment History ::::" + amendmentVo);
-
-		return null; // some response , need to be implemented.
+		return null;
+		// some response , need to be implemented.
 
 	}
 
-	@GetMapping("/summary/submission-to-review")
+	@GetMapping("/amendments/history/summary/submission-to-review")
 	public ResponseEntity<Amendment> getAmandmentHistorySubmissionToReview(@PathVariable String id) {
 		log.info("***************Get Amandment History Submission Review ID ::::" + id);
 		return null;

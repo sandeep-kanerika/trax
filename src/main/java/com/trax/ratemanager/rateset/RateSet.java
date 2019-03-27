@@ -45,12 +45,12 @@ public class RateSet {
 
 	@JsonIgnoreProperties("buyer")
 	@NotFound(action = NotFoundAction.IGNORE)
-	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	private Organization buyerOrg;
 
 	@JsonIgnoreProperties("seller")
 	@NotFound(action = NotFoundAction.IGNORE)
-	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	private Organization sellerOrg;
 
 	private String name;

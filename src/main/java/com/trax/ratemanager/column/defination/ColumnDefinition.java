@@ -18,7 +18,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class RateColumnDefinition {
+public class ColumnDefinition {
 
 	@Id
 	private String id;

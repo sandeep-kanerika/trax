@@ -5,11 +5,11 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ColumnDefinitionConverter {
 
-	public static RateColumnDefinition convertToRateColumnDefinition(ColumnDefinitionVo columnDefinitionVo) throws Exception{
+	public static ColumnDefinition convertToRateColumnDefinition(ColumnDefinitionVo columnDefinitionVo) throws Exception{
 		
-		RateColumnDefinition rateColumnDefinition = null;
+		ColumnDefinition rateColumnDefinition = null;
 		if(columnDefinitionVo != null) {
-			rateColumnDefinition = new RateColumnDefinition();
+			rateColumnDefinition = new ColumnDefinition();
 			
 			log.info("***************existing id in convertor ::::" + columnDefinitionVo.getId());
 			
@@ -37,7 +37,7 @@ public class ColumnDefinitionConverter {
 		
 	}
 	
-	public static ColumnDefinitionVo convertToRateSetVo(RateColumnDefinition rateColumnDefinition) 
+	public static ColumnDefinitionVo convertToRateSetVo(ColumnDefinition rateColumnDefinition) 
 	{
 		String id = rateColumnDefinition.getId();
 		ColumnDefinitionVo columnDefinitionVo = new ColumnDefinitionVo();
