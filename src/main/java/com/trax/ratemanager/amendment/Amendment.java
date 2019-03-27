@@ -80,19 +80,16 @@ public class Amendment {
 
 	private String reviewedBy;
 
-	@JsonBackReference
 	@NotFound(action = NotFoundAction.IGNORE)
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "createdById")
 	private UserAuditor createdBy;
 
-	@JsonBackReference
 	@NotFound(action = NotFoundAction.IGNORE)
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "lastUpdatedById")
 	private UserAuditor lastUpdatedBy;
 
-	@JsonBackReference
 	@NotFound(action = NotFoundAction.IGNORE)
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "lastAssignedById")
@@ -107,8 +104,6 @@ public class Amendment {
 	 * 
 	 * @JoinColumn(name = "approvers") private List<UserAuditor> approvers;
 	 */
-
-	@JsonBackReference
 	@NotFound(action = NotFoundAction.IGNORE)
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "currentApproverId")
