@@ -84,7 +84,7 @@ public class RateSet {
 	private List<RateTable> tables;
 
 	@NotFound(action = NotFoundAction.IGNORE)
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "rateSetId")
 	private List<Amendment> amendments;
 

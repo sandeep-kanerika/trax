@@ -97,7 +97,7 @@ public class RateSetDefinitionController
 	}
 
 	@DeleteMapping(value = "/rate-set-definitions/{id}")
-	public ResponseEntity<RateSetDefinition> deleteRateSetsDefinition(@PathVariable String id) {
+	public Boolean deleteRateSetsDefinition(@PathVariable String id) {
 
 		log.info("**************Delete Rate Set Definition invoked with id ::::" + id);
 		RateSetDefinition rateSetDefinition = rateSetDefService.getById(id);
@@ -106,13 +106,13 @@ public class RateSetDefinitionController
 			try {
 				rateSetDefService.delete(rateSetDefinition);
 				log.info("deleted the ratesetid from database ::::" + rateSetDefinition.getId());
-				return ResponseEntity.ok(rateSetDefinition);
+				return true;
 			} catch (Exception ex) {
-				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+				return false;
 			}
 
 		} else {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+			return false;
 		}
 	}
 }

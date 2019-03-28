@@ -49,7 +49,7 @@ public class RateTable {
 	@JoinColumn(name = "rateTableId")
 	private List<RateColumn> columns;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "rateTableId")
 	private List<RateRow> rateRows;
 
