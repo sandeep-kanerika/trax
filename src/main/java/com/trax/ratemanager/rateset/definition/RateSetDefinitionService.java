@@ -13,36 +13,37 @@ import com.trax.ratemanager.jpa.AbstractJpaService;
 public class RateSetDefinitionService extends AbstractJpaService<RateSetDefinition> {
 
 	@Autowired
-	RateSetDefinitionRepository rateSetsDefinitionRepository; 
+	private RateSetDefinitionRepository rateSetsDefinitionRepository; 
 	
 	@Override
-	protected RateSetDefinition create(RateSetDefinition rateSetsDefinition) {
+	public RateSetDefinition create(RateSetDefinition rateSetsDefinition) {
 		return save(rateSetsDefinition);
 	}
 
 	@Override
-	protected RateSetDefinition update(RateSetDefinition _rateSetsDefinition) {
-		RateSetDefinition rateSetsDefinition = getById(_rateSetsDefinition.getId());
+	public RateSetDefinition update(RateSetDefinition rateSetDefination) {
+		System.out.println("RateSetDefinitionService.update()--->"+rateSetDefination.getId());
+		RateSetDefinition rateSetsDefinition = getById(rateSetDefination.getId());
 		if(rateSetsDefinition != null)
-			return save(_rateSetsDefinition);
+			return save(rateSetDefination);
 		else {
 			throw new ResourceNotFoundException("RateSetsDefinition Id Doesn't Exists !");
 		}
 	}
 
 	@Override
-	protected RateSetDefinition delete(RateSetDefinition rateSetsDefinition) {
+	public RateSetDefinition delete(RateSetDefinition rateSetsDefinition) {
 		rateSetsDefinitionRepository.delete(rateSetsDefinition);
 		return rateSetsDefinition;
 	}
 
 	@Override
-	protected List<RateSetDefinition> search(RateSetDefinition rateSetsDefinition) {
+	public List<RateSetDefinition> search(RateSetDefinition rateSetsDefinition) {
 		return null;
 	}
 
 	@Override
-	protected AbstractJpaRepository<RateSetDefinition, String> getRepository() {
+	public AbstractJpaRepository<RateSetDefinition, String> getRepository() {
 		return rateSetsDefinitionRepository;
 	}
 

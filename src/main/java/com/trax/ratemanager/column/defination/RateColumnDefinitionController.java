@@ -16,15 +16,15 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
-public class ColumnDefinitionController {
+public class RateColumnDefinitionController {
 
 	@Autowired
-	ColumnDefinitionService columnDefinitionSer;
+	RateColumnDefinitionService columnDefinitionSer;
 
 	@GetMapping("/column-definitions")
-	public ColumnDefinition getColumnDefinitions(@PathVariable String id) {
+	public RateColumnDefinition getColumnDefinitions(@PathVariable String id) {
 		log.info("getColumnDefinitions invoked");
-		ColumnDefinition getcolumnDefinitionDetail = columnDefinitionSer.getById(id);
+		RateColumnDefinition getcolumnDefinitionDetail = columnDefinitionSer.getById(id);
 		if (getcolumnDefinitionDetail != null) {
 			return getcolumnDefinitionDetail;
 		} else {
@@ -33,15 +33,15 @@ public class ColumnDefinitionController {
 	}
 
 	@PostMapping(value = "/column-definitions", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<Object> createColumnDefinitions(@RequestBody ColumnDefinitionVo columnDefinitionsVo)
+	public ResponseEntity<Object> createColumnDefinitions(@RequestBody RateColumnDefinitionVo columnDefinitionsVo)
 			throws Exception {
 
 		log.info("***************Create ColumnDefinitions(PostRequest) ");
 		log.info("***************ColumnDefinitionsValue Object:::" + columnDefinitionsVo);
 
-		ColumnDefinition colDefinition = ColumnDefinitionConverter.convertToRateColumnDefinition(columnDefinitionsVo);
+		RateColumnDefinition colDefinition = RateColumnDefinitionConverter.convertToRateColumnDefinition(columnDefinitionsVo);
 		log.info("***************ColumnDefinitions Object After VO--to-->BO:::" + colDefinition);
-		ColumnDefinition createdRateColumnDefinition = null;
+		RateColumnDefinition createdRateColumnDefinition = null;
 		try {
 			createdRateColumnDefinition = columnDefinitionSer.create(colDefinition);
 			return ResponseEntity.ok(createdRateColumnDefinition);

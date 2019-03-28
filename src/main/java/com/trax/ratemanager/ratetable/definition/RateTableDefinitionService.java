@@ -16,15 +16,15 @@ public class RateTableDefinitionService extends AbstractJpaService<RateTableDefi
 	RateTableDefinitionRepository rateTablesDefinitionRepository;
 
 	@Override
-	protected RateTableDefinition create(RateTableDefinition rateTablesDefinition) {
+	public RateTableDefinition create(RateTableDefinition rateTablesDefinition) {
 		return save(rateTablesDefinition);
 	}
 
 	@Override
-	protected RateTableDefinition update(RateTableDefinition _rateTables) {
+	public RateTableDefinition update(RateTableDefinition _rateTables) {
 //		return update(rateTables);
 		RateTableDefinition rateTablesDefinition = getById(_rateTables.getId());
-		if(rateTablesDefinition != null)
+		if (rateTablesDefinition != null)
 			return save(_rateTables);
 		else {
 			throw new ResourceNotFoundException("RateTablesDefinition Id Doesn't Exists !");
@@ -32,23 +32,31 @@ public class RateTableDefinitionService extends AbstractJpaService<RateTableDefi
 	}
 
 	@Override
-	protected RateTableDefinition delete(RateTableDefinition rateTablesDefinition) {
+	public RateTableDefinition delete(RateTableDefinition rateTablesDefinition) {
 		rateTablesDefinitionRepository.delete(rateTablesDefinition);
 		return rateTablesDefinition;
 	}
 
 	@Override
-	protected List<RateTableDefinition> search(RateTableDefinition rateTablesDefinition) {
+	public List<RateTableDefinition> search(RateTableDefinition rateTablesDefinition) {
 		return this.search(rateTablesDefinition);
 	}
 
 	@Override
-	protected AbstractJpaRepository<RateTableDefinition, String> getRepository() {
+	public AbstractJpaRepository<RateTableDefinition, String> getRepository() {
 		return this.rateTablesDefinitionRepository;
 	}
 
 	public RateTableDefinition getById(String id) {
 		return rateTablesDefinitionRepository.getById(id);
+	}
+
+	public void deleteById(String id) {
+		rateTablesDefinitionRepository.deleteById(id);
+	}
+
+	public List<RateTableDefinition> findAll() {
+		return rateTablesDefinitionRepository.findAll();
 	}
 
 }

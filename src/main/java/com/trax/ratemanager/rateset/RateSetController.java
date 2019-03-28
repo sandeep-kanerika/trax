@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trax.ratemanager.amendment.AmendmentVo;
-import com.trax.ratemanager.column.defination.ColumnDefinition;
-import com.trax.ratemanager.column.defination.ColumnDefinitionConverter;
-import com.trax.ratemanager.column.defination.ColumnDefinitionService;
-import com.trax.ratemanager.column.defination.ColumnDefinitionVo;
+import com.trax.ratemanager.column.defination.RateColumnDefinition;
+import com.trax.ratemanager.column.defination.RateColumnDefinitionConverter;
+import com.trax.ratemanager.column.defination.RateColumnDefinitionService;
+import com.trax.ratemanager.column.defination.RateColumnDefinitionVo;
 import com.trax.ratemanager.exception.ResourceNotFoundException;
 
 import lombok.extern.slf4j.Slf4j;
@@ -32,7 +32,7 @@ public class RateSetController {
 	private RateSetsService rateSetsService;
 
 	@Autowired
-	private ColumnDefinitionService columnDefService;
+	private RateColumnDefinitionService columnDefService;
 
 	@PostMapping(value = "/rate-sets", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
@@ -85,7 +85,7 @@ public class RateSetController {
 	}
 
 	// find all rate sets
-	@GetMapping(value = { "/rates/active", "/rate-sets/" })
+	@GetMapping(value = { "/rates/active", "/rate-sets"})
 	public ResponseEntity<Object> findAllRateSets(@RequestParam("org") String orgId) {
 		log.info("**************fetch all rate Set objects");
 		try {
@@ -165,36 +165,36 @@ public class RateSetController {
 
 	@GetMapping(value = "/rate-sets/{rateSetId}/{tableId}/columns/{columnDefinitionId}", produces = {
 			MediaType.APPLICATION_JSON_VALUE })
-	public ColumnDefinitionVo getColumnDefByI(@PathVariable String rateSetId, @PathVariable String tableId,
+	public RateColumnDefinitionVo getColumnDefByI(@PathVariable String rateSetId, @PathVariable String tableId,
 			@PathVariable String columnDefinitionId) {
-		ColumnDefinition rateColumnDefinition = columnDefService.getById(columnDefinitionId);
-		ColumnDefinitionVo colDefVo = ColumnDefinitionConverter.convertToRateSetVo(rateColumnDefinition);
+		RateColumnDefinition rateColumnDefinition = columnDefService.getById(columnDefinitionId);
+		RateColumnDefinitionVo colDefVo = RateColumnDefinitionConverter.convertToRateSetVo(rateColumnDefinition);
 		return colDefVo;
 	}
 	
 	@PostMapping(value = "/rate-sets/{rateSetId}/{tableId}/columns/{columnDefinitionId}", produces = {
 			MediaType.APPLICATION_JSON_VALUE })
-	public ColumnDefinitionVo updateColDefById(@PathVariable String rateSetId, @PathVariable String tableId,
+	public RateColumnDefinitionVo updateColDefById(@PathVariable String rateSetId, @PathVariable String tableId,
 			@PathVariable String columnDefinitionId) 
 	{    // valid values??
 		 // is required??
 		
-		ColumnDefinition rateColumnDefinition = columnDefService.getById(columnDefinitionId);
-		ColumnDefinitionVo colDefVo = ColumnDefinitionConverter.convertToRateSetVo(rateColumnDefinition);
+		RateColumnDefinition rateColumnDefinition = columnDefService.getById(columnDefinitionId);
+		RateColumnDefinitionVo colDefVo = RateColumnDefinitionConverter.convertToRateSetVo(rateColumnDefinition);
 		return colDefVo;
 	}
 	
 	
 	
 	@PostMapping(value = "/rate-sets/{rateSetId}/{upload}", produces = {MediaType.APPLICATION_JSON_VALUE })
-	public ColumnDefinitionVo uploadRateSet(@RequestBody AmendmentVo amendmentVo) 
+	public RateColumnDefinitionVo uploadRateSet(@RequestBody AmendmentVo amendmentVo) 
 	{   		
 		// upload the file and create amendment/rateset
 		return null;
 	}
 	
 	@PostMapping(value = "/rate-sets/{id}/{assign-approvers}", produces = {MediaType.APPLICATION_JSON_VALUE })
-	public ColumnDefinitionVo uploadRateSet(@PathVariable String rateSetId,@PathVariable(name="assign-approvers") String assignApprover ) 
+	public RateColumnDefinitionVo uploadRateSet(@PathVariable String rateSetId,@PathVariable(name="assign-approvers") String assignApprover ) 
 	{   		
 		// upload the file and create amendment/rateset
 		return null;

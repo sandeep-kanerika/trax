@@ -16,12 +16,12 @@ public class ColumnValidationService extends AbstractJpaService<ColumnValidation
 	ColumnValidationRepository columnValidationsRepository;
 	
 	@Override
-	protected ColumnValidation create(ColumnValidation columnValidations) {
+	public ColumnValidation create(ColumnValidation columnValidations) {
 		return save(columnValidations);
 	}
 
 	@Override
-	protected ColumnValidation update(ColumnValidation colVal) {
+	public ColumnValidation update(ColumnValidation colVal) {
 		ColumnValidation columnValidations = getById(colVal.getId());
         if (columnValidations != null) {
         	return save(colVal);
@@ -31,19 +31,19 @@ public class ColumnValidationService extends AbstractJpaService<ColumnValidation
 	}
 
 	@Override
-	protected ColumnValidation delete(ColumnValidation columnValidations) {
+	public ColumnValidation delete(ColumnValidation columnValidations) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	protected List<ColumnValidation> search(ColumnValidation columnValidations) {
+	public List<ColumnValidation> search(ColumnValidation columnValidations) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	protected AbstractJpaRepository<ColumnValidation, String> getRepository() {
+	public AbstractJpaRepository<ColumnValidation, String> getRepository() {
 		// TODO Auto-generated method stub
 		return columnValidationsRepository;
 	}

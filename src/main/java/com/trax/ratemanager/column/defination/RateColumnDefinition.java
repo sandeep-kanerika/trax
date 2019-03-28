@@ -18,7 +18,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class ColumnDefinition {
+public class RateColumnDefinition {
 
 	@Id
 	private String id;
@@ -32,7 +32,7 @@ public class ColumnDefinition {
 	private String type;
 
 	private String dataSourceId;
-
+	
 	private String dataFieldId;
 
 	private Boolean hasAlias;
@@ -50,5 +50,4 @@ public class ColumnDefinition {
 	private String pivotCharge;
 
 	private String description;
-	
 }

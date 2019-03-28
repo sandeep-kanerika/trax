@@ -82,7 +82,7 @@
 ////    public void testAmendment() throws Exception {
 ////        assertThat(RateManagerMainTests.class).isNotNull();
 ////        when(amendmentServiceMock.getById((long) 6)).thenReturn(amendmentTest);
-////        MvcResult result= mvc.perform(get("/amendments/{id}/", 5))
+////        MvcResult result= mvc.perform(get("/amendments/{id}", 5))
 ////                .andExpect(status().isOk())
 //////                .andExpect(view().name("Amendment"))
 //////                .andExpect(MockMvcResultMatchers.model().attributeExists("product"))

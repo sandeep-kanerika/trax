@@ -45,12 +45,12 @@ public class RateSet {
 
 	@JsonIgnoreProperties("buyer")
 	@NotFound(action = NotFoundAction.IGNORE)
-	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	private Organization buyerOrg;
 
 	@JsonIgnoreProperties("seller")
 	@NotFound(action = NotFoundAction.IGNORE)
-	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	private Organization sellerOrg;
 
 	private String name;
@@ -79,12 +79,12 @@ public class RateSet {
 
 	private String tableHash;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "rateSetId")
 	private List<RateTable> tables;
 
 	@NotFound(action = NotFoundAction.IGNORE)
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "rateSetId")
 	private List<Amendment> amendments;
 

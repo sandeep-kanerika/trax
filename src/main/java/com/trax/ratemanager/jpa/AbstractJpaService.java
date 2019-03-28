@@ -19,34 +19,36 @@ public abstract class AbstractJpaService<T> extends BaseJpaService<T> {
         return LocalDateTime.now();
     }
 
-    protected T save(T t) {
-        T result = getRepository().saveAndFlush(t);
+    public T save(T t) {
+        T result = getRepository().save(t);
         getRepository().refresh(result);
         return result;
     }
 
-    protected abstract T create(T t);
+    public abstract T create(T t);
 
-    protected abstract T update(T t);
+    public abstract T update(T t);
 
-    protected abstract T delete(T t);
+    public abstract T delete(T t);
     
-    protected abstract List<T> search(T t);
+    public abstract List<T> search(T t);
 
-    protected List<T> searchBySpecification(Specification<T> specification) {
+    public List<T> searchBySpecification(Specification<T> specification) {
         return getRepository().findAll(specification);
     }
 
-    protected Specification<T> getDefaultSearchSpecification(T t) {
+    public Specification<T> getDefaultSearchSpecification(T t) {
         return new Specification<T>() {
-            @Override
+			private static final long serialVersionUID = -9036852032496186842L;
+
+			@Override
             public Predicate toPredicate(Root<T> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder cb) {
                 return getPredicateForDefaultSearch(root, criteriaQuery, cb, t);
             }
         };
     }
 
-    protected Predicate getPredicateForDefaultSearch(Root<T> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder cb, T t) {
+    public Predicate getPredicateForDefaultSearch(Root<T> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder cb, T t) {
         return null;
     }
 

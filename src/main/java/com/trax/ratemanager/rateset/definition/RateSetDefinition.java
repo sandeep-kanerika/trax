@@ -51,7 +51,7 @@ public class RateSetDefinition {
 
 	private String tableHash;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "rateSetDefinitionId")
 	private List<RateTableDefinition> tables;
 	

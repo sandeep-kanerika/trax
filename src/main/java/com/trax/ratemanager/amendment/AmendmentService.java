@@ -49,7 +49,7 @@ public class AmendmentService extends AbstractJpaService<Amendment> {
 
 	@Override
 	@Transactional
-	protected Amendment delete(Amendment amendments) {
+	public Amendment delete(Amendment amendments) {
 		amendmentsRepository.delete(amendments);
 		return amendments;
 	}
@@ -64,12 +64,12 @@ public class AmendmentService extends AbstractJpaService<Amendment> {
 	}
 
 	@Override
-	protected List<Amendment> search(Amendment amendments) {
+	public List<Amendment> search(Amendment amendments) {
 		return amendmentsRepository.findAll();
 	}
 
 	@Override
-	protected AbstractJpaRepository<Amendment, String> getRepository() {
+	public AbstractJpaRepository<Amendment, String> getRepository() {
 		return amendmentsRepository;
 	}
 }

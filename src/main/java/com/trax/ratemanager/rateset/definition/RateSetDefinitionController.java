@@ -24,8 +24,14 @@ public class RateSetDefinitionController
 {
 
 	@Autowired
-	RateSetDefinitionService rateSetsDefinitionSer;
+	private RateSetDefinitionService rateSetDefService;
 
+	@PutMapping(value="/rate-set-definitions", 
+			consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<Object> updateRateSetsDefinition(@RequestBody RateSetDefinitionVo rateSetsDefinitionVo) throws Exception {
+		return createRateSetsDefinition(rateSetsDefinitionVo);
+	}
+	
 	// store single object of rateset definition
 	@PostMapping(value="/rate-set-definitions", 
 			consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
@@ -39,7 +45,7 @@ public class RateSetDefinitionController
 		log.info("***************RateSetDefinition Object After VO--to-->BO ::::" + rateSetDefinition);
 		RateSetDefinition createdRateSetDefinition = null;
 		try {
-			createdRateSetDefinition = rateSetsDefinitionSer.create(rateSetDefinition);
+			createdRateSetDefinition = rateSetDefService.create(rateSetDefinition);
 			return ResponseEntity.ok(createdRateSetDefinition);
 		} catch (Exception ex) {
 			log.error("Error occured:::" + ex.getMessage());
@@ -53,7 +59,7 @@ public class RateSetDefinitionController
 		log.info("***************Get Rate Sets Definition ");
 		HttpStatus returnStatus = HttpStatus.OK;
 		try {
-			RateSetDefinition getRateSetsDefinitionDetail = rateSetsDefinitionSer.getById(id);
+			RateSetDefinition getRateSetsDefinitionDetail = rateSetDefService.getById(id);
 			if (getRateSetsDefinitionDetail != null) {
 				return new ResponseEntity<>(getRateSetsDefinitionDetail, returnStatus);
 			} else {
@@ -74,7 +80,7 @@ public class RateSetDefinitionController
 		log.info("***************Get Rate Sets Definition ");
 		HttpStatus returnStatus = HttpStatus.OK;
 		try {
-			List<RateSetDefinition> totalRateSetDefs = rateSetsDefinitionSer.findAll();
+			List<RateSetDefinition> totalRateSetDefs = rateSetDefService.findAll();
 			if (totalRateSetDefs != null) {
 				return new ResponseEntity<>(totalRateSetDefs, returnStatus);
 			} else {
@@ -90,23 +96,15 @@ public class RateSetDefinitionController
 		return new ResponseEntity<>(returnStatus);
 	}
 
-	@PutMapping(value="/rate-set-definitions/", 
-			consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
-	public RateSetDefinition updateRateSetsDefinition(@RequestBody RateSetDefinition rateSetsDefinition) {
-
-		log.info("***************Update Rate Sets Definition invoked");
-		return rateSetsDefinitionSer.update(rateSetsDefinition);
-	}
-
 	@DeleteMapping(value = "/rate-set-definitions/{id}")
 	public ResponseEntity<RateSetDefinition> deleteRateSetsDefinition(@PathVariable String id) {
 
 		log.info("**************Delete Rate Set Definition invoked with id ::::" + id);
-		RateSetDefinition rateSetDefinition = rateSetsDefinitionSer.getById(id);
+		RateSetDefinition rateSetDefinition = rateSetDefService.getById(id);
 		log.info("**************found the Rate Set Definition id in DB ::::" + rateSetDefinition);
 		if (rateSetDefinition != null) {
 			try {
-				rateSetsDefinitionSer.delete(rateSetDefinition);
+				rateSetDefService.delete(rateSetDefinition);
 				log.info("deleted the ratesetid from database ::::" + rateSetDefinition.getId());
 				return ResponseEntity.ok(rateSetDefinition);
 			} catch (Exception ex) {

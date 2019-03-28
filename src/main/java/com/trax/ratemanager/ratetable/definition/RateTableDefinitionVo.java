@@ -6,7 +6,7 @@ import java.util.List;
 import javax.persistence.Id;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.trax.ratemanager.column.defination.ColumnDefinition;
+import com.trax.ratemanager.column.defination.RateColumnDefinition;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,12 +26,11 @@ public class RateTableDefinitionVo {
 	private String id;
 	private String creatorOrgId;
 	private String name;
-
+	private String rateSetDefinitionId;
 	private ZonedDateTime dateCreated;
-
 	private String tableGroup;
 	private String tableType;
 	private String columnHash;
-	private List<ColumnDefinition> columns;
+	private List<RateColumnDefinition> columns;
 
 }

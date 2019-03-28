@@ -19,7 +19,7 @@ public class AmendmentHistoryService extends AbstractJpaService<AmendmentHistory
     AmendmentHistoryRepository amendmentsHistoryRepository;
 
     @Override
-    protected AmendmentHistory create(AmendmentHistory amendmentsHistory ) {
+    public AmendmentHistory create(AmendmentHistory amendmentsHistory ) {
         return save(amendmentsHistory );
     }
 
@@ -29,7 +29,7 @@ public class AmendmentHistoryService extends AbstractJpaService<AmendmentHistory
     }
 
     @Override
-    protected AmendmentHistory update(AmendmentHistory  _amendmentsHistory ) {
+    public AmendmentHistory update(AmendmentHistory  _amendmentsHistory ) {
         //Get the data from DB and update the fields and information from request data
 		
 		  AmendmentHistory amendmentsHistory = amendmentsHistoryRepository.getById(_amendmentsHistory .getId());
@@ -76,18 +76,18 @@ public class AmendmentHistoryService extends AbstractJpaService<AmendmentHistory
     }
 
     @Override
-    protected AmendmentHistory delete(AmendmentHistory amendmentsHistory ) {
+    public AmendmentHistory delete(AmendmentHistory amendmentsHistory ) {
     	amendmentsHistoryRepository.delete(amendmentsHistory);
 		return amendmentsHistory;
     }
 
     @Override
-    protected List<AmendmentHistory > search(AmendmentHistory amendmentsHistory ) {
+    public List<AmendmentHistory > search(AmendmentHistory amendmentsHistory ) {
         return amendmentsHistoryRepository.findAll();
     }
 
     @Override
-    protected AbstractJpaRepository<AmendmentHistory , String> getRepository() {
+    public AbstractJpaRepository<AmendmentHistory , String> getRepository() {
 		return amendmentsHistoryRepository;
     }
 }

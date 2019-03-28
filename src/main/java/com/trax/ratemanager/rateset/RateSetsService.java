@@ -14,12 +14,12 @@ public class RateSetsService/* extends AbstractJpaService<RateSet> */ {
 	@Autowired
 	private RateSetRepository rateSetsRepository;
 
-	protected RateSet create(RateSet rateSet) {
+	public RateSet create(RateSet rateSet) {
 		System.out.println("trying to store rateSets:::");
 		return rateSetsRepository.save(rateSet);
 	}
 
-	protected RateSet update(RateSet _rateSets) {
+	public RateSet update(RateSet _rateSets) {
 		Optional<RateSet> rateSet = rateSetsRepository.findById(_rateSets.getId());
 		if (rateSet.isPresent())
 			return rateSetsRepository.save(rateSet.get());
@@ -28,7 +28,7 @@ public class RateSetsService/* extends AbstractJpaService<RateSet> */ {
 		}
 	}
 
-	protected RateSet delete(RateSet rateSets) {
+	public RateSet delete(RateSet rateSets) {
 		rateSetsRepository.delete(rateSets);
 		return rateSets;
 	}

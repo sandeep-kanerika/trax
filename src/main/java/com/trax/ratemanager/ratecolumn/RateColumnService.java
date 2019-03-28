@@ -16,12 +16,12 @@ public class RateColumnService extends AbstractJpaService<RateColumn>{
 	RateColumnRepository rateColumnRepository;
 	
 	@Override
-	protected RateColumn create(RateColumn rateColumn) {
+	public RateColumn create(RateColumn rateColumn) {
 		return save(rateColumn);
 	}
 
 	@Override
-	protected RateColumn update(RateColumn _rateColumn) {
+	public RateColumn update(RateColumn _rateColumn) {
 		RateColumn RateColumn = getById(_rateColumn.getId());
         if (RateColumn != null) {
         	return save(_rateColumn);
@@ -31,18 +31,18 @@ public class RateColumnService extends AbstractJpaService<RateColumn>{
 	}
 
 	@Override
-	protected RateColumn delete(RateColumn rateColumn) {
+	public RateColumn delete(RateColumn rateColumn) {
 		return delete(rateColumn);
 		
 	}
 
 	@Override
-	protected List<RateColumn> search(RateColumn rateColumn) {
+	public List<RateColumn> search(RateColumn rateColumn) {
 		return null;
 	}
 
 	@Override
-	protected AbstractJpaRepository<RateColumn, String> getRepository() {
+	public AbstractJpaRepository<RateColumn, String> getRepository() {
 		return rateColumnRepository;
 	}
 

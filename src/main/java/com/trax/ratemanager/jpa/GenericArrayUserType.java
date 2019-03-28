@@ -16,7 +16,7 @@ import org.hibernate.usertype.UserType;
  * Created by sudhakar.rao on 2/18/2019.
  */
 public class GenericArrayUserType<T extends Serializable> implements UserType {
-    protected static final int[] SQL_TYPES = {Types.ARRAY};
+    public static final int[] SQL_TYPES = {Types.ARRAY};
     private Class<T> typeParameterClass;
 
     @Override

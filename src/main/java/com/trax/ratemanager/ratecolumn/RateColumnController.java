@@ -65,9 +65,10 @@ public class RateColumnController {
 	}
 
 	@PutMapping(consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<RateColumn> updateRateColumn(@RequestBody RateColumn rateColumn) {
-
-		log.info("update rate column invoked");
+	public ResponseEntity<RateColumn> updateRateColumn(@RequestBody RateColumnVo rateColumnVo) throws Exception 
+	{
+        RateColumn rateColumn = RateColumnConverter.convertToRateColumn(rateColumnVo);
+		log.info("update rate column invoked"+rateColumn);
 		return new ResponseEntity<RateColumn>(rateColumnService.update(rateColumn), HttpStatus.OK);
 	}
 

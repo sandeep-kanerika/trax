@@ -45,11 +45,11 @@ public class RateTable {
 	private String columnHash;
 	private String rateSetId;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "rateTableId")
 	private List<RateColumn> columns;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "rateTableId")
 	private List<RateRow> rateRows;
 

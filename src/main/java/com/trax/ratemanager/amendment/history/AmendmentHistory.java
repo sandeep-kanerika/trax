@@ -58,12 +58,12 @@ public class AmendmentHistory {
 	
 	@JsonIgnoreProperties("buyer")
 	@NotFound(action = NotFoundAction.IGNORE)
-	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	private Organization buyerOrg;
 	
 	@JsonIgnoreProperties("seller")
 	@NotFound(action = NotFoundAction.IGNORE)
-	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	private Organization sellerOrg;
 //	private String buyerOrgName;
 //	private String sellerOrgName;
@@ -71,7 +71,7 @@ public class AmendmentHistory {
 	private String region;
 	private String mode;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "amendmentHistoryId")
 	private List<RateRow> rateRows;
 
@@ -99,12 +99,12 @@ public class AmendmentHistory {
 	private String reviewedBy;
 	
 	@NotFound(action = NotFoundAction.IGNORE)
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "createdById")
 	private UserAuditor createdBy;
 	
 	@NotFound(action = NotFoundAction.IGNORE)
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "lastUpdatedById")
 	private UserAuditor lastUpdatedBy;
 	

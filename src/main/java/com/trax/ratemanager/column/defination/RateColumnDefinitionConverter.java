@@ -3,13 +3,13 @@ package com.trax.ratemanager.column.defination;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class ColumnDefinitionConverter {
+public class RateColumnDefinitionConverter {
 
-	public static ColumnDefinition convertToRateColumnDefinition(ColumnDefinitionVo columnDefinitionVo) throws Exception{
+	public static RateColumnDefinition convertToRateColumnDefinition(RateColumnDefinitionVo columnDefinitionVo) throws Exception{
 		
-		ColumnDefinition rateColumnDefinition = null;
+		RateColumnDefinition rateColumnDefinition = null;
 		if(columnDefinitionVo != null) {
-			rateColumnDefinition = new ColumnDefinition();
+			rateColumnDefinition = new RateColumnDefinition();
 			
 			log.info("***************existing id in convertor ::::" + columnDefinitionVo.getId());
 			
@@ -37,10 +37,10 @@ public class ColumnDefinitionConverter {
 		
 	}
 	
-	public static ColumnDefinitionVo convertToRateSetVo(ColumnDefinition rateColumnDefinition) 
+	public static RateColumnDefinitionVo convertToRateSetVo(RateColumnDefinition rateColumnDefinition) 
 	{
 		String id = rateColumnDefinition.getId();
-		ColumnDefinitionVo columnDefinitionVo = new ColumnDefinitionVo();
+		RateColumnDefinitionVo columnDefinitionVo = new RateColumnDefinitionVo();
 		columnDefinitionVo.setId(id);
 		return columnDefinitionVo;
 	}

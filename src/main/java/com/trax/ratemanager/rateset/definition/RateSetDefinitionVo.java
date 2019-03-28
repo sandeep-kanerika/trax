@@ -47,6 +47,6 @@ public class RateSetDefinitionVo {
 
 	private String tableHash;
 
-	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	private List<RateTableDefinition> tables;
 }
