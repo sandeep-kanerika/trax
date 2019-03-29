@@ -22,6 +22,7 @@ import com.trax.ratemanager.column.defination.RateColumnDefinitionService;
 import com.trax.ratemanager.column.defination.RateColumnDefinitionVo;
 import com.trax.ratemanager.exception.ResourceNotFoundException;
 import com.trax.ratemanager.orgnization.OrganizationService;
+import com.trax.ratemanager.ratetable.RateTableService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -39,13 +40,16 @@ public class RateSetController
 	@Autowired(required = true)
 	private OrganizationService organizationService;
 
+	@Autowired(required = true)
+	private RateTableService rateTableService;
+
 	@PostMapping(value = "/rate-sets", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<Object> createRateSets(@RequestBody RateSetVo rateSetVo) throws Exception
 	{
 		log.info("***************Create RateSet(PostRequest) ");
 		log.info("***************RateSetValue Object ::::" + rateSetVo);
 		RateSetConverter rateSetConverter = new RateSetConverter();
-		RateSet rateSet = rateSetConverter.convertToRateSet(rateSetVo, organizationService);
+		RateSet rateSet = rateSetConverter.convertToRateSet(rateSetVo, organizationService, rateTableService);
 		log.info("***************RateSet Object After VO--to-->BO ::::" + rateSet);
 		RateSet createdRateSet = null;
 		try
