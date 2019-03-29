@@ -18,32 +18,18 @@ public class RateColumnDefinitionVo
 {
 
 	private String id;
-
 	private String concept;
-
 	private String name;
-
 	private String sortOrder;
-
 	private String type;
-
 	private String dataSourceId;
-
 	private String dataFieldId;
-
 	private String hasAlias;
-
 	private String isKey;
-
 	private String reference;
-
 	private String pivotField;
-
 	private String displayName;
-
 	private String propertyName;
-
 	private String pivotCharge;
-
 	private String description;
 }

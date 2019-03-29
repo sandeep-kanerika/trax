@@ -4,8 +4,11 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.trax.ratemanager.rateset.RateSet;
@@ -24,9 +27,11 @@ import lombok.ToString;
 @ToString
 public class Organization
 {
-
 	@Id
+	@GeneratedValue(generator = "uuid")
+	@GenericGenerator(name = "uuid", strategy = "uuid2")
 	private String id;
+	
 	private String orgName;
 	private Enum<OrganizationType> orgType;
 

@@ -1,7 +1,5 @@
 package com.trax.ratemanager.ratecolumn;
 
-import javax.persistence.Id;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import lombok.AllArgsConstructor;
@@ -19,9 +17,7 @@ import lombok.ToString;
 public class RateColumnVo
 {
 
-	@Id
 	private String id;
-
 	private String concept;
 	private String dataFieldId;
 	private String dataSourceId;

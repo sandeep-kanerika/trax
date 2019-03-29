@@ -38,15 +38,10 @@ public class RateSetDefinition
 	@GeneratedValue(generator = "uuid")
 	@GenericGenerator(name = "uuid", strategy = "uuid2")
 	private String id;
-
 	private Integer status;
-
 	private String creatorOrgId;
-
 	private String region;
-
 	private String mode;
-
 	private String name;
 
 	@JsonFormat(pattern = AppConstants.DEFAULT_ZONED_DATETIME_FORMAT)

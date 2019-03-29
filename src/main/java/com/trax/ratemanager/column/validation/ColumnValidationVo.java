@@ -18,11 +18,8 @@ public class ColumnValidationVo
 {
 
 	private String id;
-
 	private String tableId;
-
 	private String columnDefinitionId;
-
 	private String rateSetId;
 
 	@OneToOne

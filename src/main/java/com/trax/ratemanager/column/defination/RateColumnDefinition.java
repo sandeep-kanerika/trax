@@ -30,30 +30,17 @@ public class RateColumnDefinition
 	private String id;
 
 	private String concept;
-
 	private String name;
-
 	private Long sortOrder;
-
 	private String type;
-
 	private String dataSourceId;
-
 	private String dataFieldId;
-
 	private Boolean hasAlias;
-
 	private Boolean isKey;
-
 	private String reference;
-
 	private String pivotField;
-
 	private String displayName;
-
 	private String propertyName;
-
 	private String pivotCharge;
-
 	private String description;
 }

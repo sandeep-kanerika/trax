@@ -7,11 +7,13 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 
@@ -38,10 +40,10 @@ import lombok.ToString;
 @ToString
 public class RateSet
 {
-
 	@Id
+	@GeneratedValue(generator = "uuid")
+	@GenericGenerator(name = "uuid", strategy = "uuid2")
 	private String id;
-
 	private Integer status;
 
 	@JsonIgnoreProperties("buyer")
@@ -53,11 +55,8 @@ public class RateSet
 	@NotFound(action = NotFoundAction.IGNORE)
 	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	private Organization sellerOrg;
-
 	private String name;
-
 	private String region;
-
 	private String mode;
 
 	@JsonFormat(pattern = AppConstants.DEFAULT_ZONED_DATETIME_FORMAT)
@@ -90,13 +89,8 @@ public class RateSet
 	private List<Amendment> amendments;
 
 	private String createdBy;
-
 	private String reviewedBy;
-
 	private String lastAssignedBy;
-
 	private String lastUpdatedBy;
-
 	private String approvers;
-
 }
