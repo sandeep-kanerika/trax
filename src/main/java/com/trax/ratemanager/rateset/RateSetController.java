@@ -40,7 +40,8 @@ public class RateSetController
 	{
 		log.info("***************Create RateSet(PostRequest) ");
 		log.info("***************RateSetValue Object ::::" + rateSetVo);
-		RateSet rateSet = RateSetConverter.convertToRateSet(rateSetVo);
+		RateSetConverter rateSetConverter = new RateSetConverter();
+		RateSet rateSet = rateSetConverter.convertToRateSet(rateSetVo);
 		log.info("***************RateSet Object After VO--to-->BO ::::" + rateSet);
 		RateSet createdRateSet = null;
 		try
