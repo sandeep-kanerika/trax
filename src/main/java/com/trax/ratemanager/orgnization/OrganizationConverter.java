@@ -15,21 +15,21 @@ public class OrganizationConverter
 		if (orgVo != null)
 		{
 			org = new Organization();
-			log.info("***************existing id in convertor ::::" + orgVo.getId());
+			log.info("***************existing org vo in  convertor ::::" + orgVo);
 			String id = orgVo.getId();
 			if (id == null)
 			{
 				id = UUIDGenerator.generateUUID().toString();
 				orgVo.setId(id);
 			}
-
 			org.setId(orgVo.getId());
-			log.info("***************Column Validation Object in Amendment Convert:::" + org);
+			org.setOrgName(orgVo.getOrgName());
+			log.info("*************** orgnization details::::" + org);
 			return org;
 		}
 		else
 		{
-			throw new Exception("Problem with input");
+			throw new Exception("Invalid organization details");
 		}
 	}
 

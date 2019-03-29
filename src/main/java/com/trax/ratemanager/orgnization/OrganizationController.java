@@ -2,6 +2,8 @@ package com.trax.ratemanager.orgnization;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,7 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @Slf4j
-public class OrgnizationController
+public class OrganizationController
 {
 
 	@Autowired
@@ -26,19 +28,19 @@ public class OrgnizationController
 	public Organization createOrganization(@RequestBody OrganizationVo orgVo) throws Exception
 	{
 		log.info("***************Create Add org (PostRequest) ::::");
-		log.info("***************Column Validations Object:::" + orgVo);
+		log.info("***************Org VO Object:::" + orgVo);
 		Organization org = OrganizationConverter.convertToOrganization(orgVo);
 		return organizationService.create(org);
 	}
 
-	@GetMapping(value = "/organizations", produces = {MediaType.APPLICATION_JSON_VALUE})
+	@GetMapping(value = "/organization", produces = {MediaType.APPLICATION_JSON_VALUE})
 	public List<Organization> getAllOrganizations() throws Exception
 	{
 		log.info("***************Create ALL ORGS get method::::");
 		return organizationService.findAll();
 	}
 
-	@GetMapping(value = "/organizations/{id}", produces = {MediaType.APPLICATION_JSON_VALUE})
+	@GetMapping(value = "/organization/{id}", produces = {MediaType.APPLICATION_JSON_VALUE})
 	public Organization getAnOrgById(@PathVariable String id) throws Exception
 	{
 		log.info("***************Create ALL ORGS get method::::");

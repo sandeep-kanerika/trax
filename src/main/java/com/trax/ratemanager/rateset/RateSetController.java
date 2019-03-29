@@ -21,6 +21,7 @@ import com.trax.ratemanager.column.defination.RateColumnDefinitionConverter;
 import com.trax.ratemanager.column.defination.RateColumnDefinitionService;
 import com.trax.ratemanager.column.defination.RateColumnDefinitionVo;
 import com.trax.ratemanager.exception.ResourceNotFoundException;
+import com.trax.ratemanager.orgnization.OrganizationService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,13 +36,16 @@ public class RateSetController
 	@Autowired
 	private RateColumnDefinitionService columnDefService;
 
+	@Autowired(required = true)
+	private OrganizationService organizationService;
+
 	@PostMapping(value = "/rate-sets", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<Object> createRateSets(@RequestBody RateSetVo rateSetVo) throws Exception
 	{
 		log.info("***************Create RateSet(PostRequest) ");
 		log.info("***************RateSetValue Object ::::" + rateSetVo);
 		RateSetConverter rateSetConverter = new RateSetConverter();
-		RateSet rateSet = rateSetConverter.convertToRateSet(rateSetVo);
+		RateSet rateSet = rateSetConverter.convertToRateSet(rateSetVo, organizationService);
 		log.info("***************RateSet Object After VO--to-->BO ::::" + rateSet);
 		RateSet createdRateSet = null;
 		try
@@ -56,16 +60,6 @@ public class RateSetController
 		}
 	}
 
-	// can be removed
-	@PostMapping(value = "/rates/active/{rateSetId}", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<Object> viewActiveRates(@PathVariable String rateSetId, @RequestParam("org") String orgId) throws Exception
-	{
-		log.info("***************View Active Rate(PostRequest) ");
-		log.info("***************RateSet :::: " + rateSetId + " :::: OrgId ::::" + orgId);
-
-		return ResponseEntity.ok("");
-	}
-
 	@PostMapping(value = "/rates/submit/{rateSetId}", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<Object> operationsActiveRates(@PathVariable String rateSetId, @RequestParam("amendmentType") String amendmentType, @RequestParam("org") String orgId)
 			throws Exception
@@ -76,7 +70,7 @@ public class RateSetController
 	}
 
 	@GetMapping(value = {"/rates/active/{rateSetId}", "/rate-sets/{rateSetId}"})
-	public ResponseEntity<RateSet> getRateSets(@PathVariable String rateSetId, @RequestParam("org") String orgId)
+	public ResponseEntity<RateSet> getRateSets(@PathVariable String rateSetId, @RequestParam(value = "org", required = false) String org)
 	{
 		log.info("*************** Get Rate Set by id ::::" + rateSetId);
 		RateSet retrivedRateSet = rateSetsService.getById(rateSetId);
@@ -86,13 +80,13 @@ public class RateSetController
 		}
 		else
 		{
-			return ResponseEntity.notFound().build();
+			throw new ResourceNotFoundException("Rate Set is not found with "+rateSetId);
 		}
 	}
 
 	// find all rate sets
 	@GetMapping(value = {"/rates/active", "/rate-sets"})
-	public ResponseEntity<Object> findAllRateSets(@RequestParam("org") String orgId)
+	public ResponseEntity<Object> findAllRateSets(@RequestParam(value = "org", required = false) String orgId) throws Exception
 	{
 		log.info("**************fetch all rate Set objects");
 		try
@@ -105,17 +99,16 @@ public class RateSetController
 			else
 			{
 				log.error("**********No object(s) found!!!");
-				return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+				throw new ResourceNotFoundException("No RateSet Found");
 			}
 		}
 		catch (Exception e)
 		{
 			log.error("**********Error occured:::" + e.getMessage());
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+			throw new Exception("Problem occured while finding active rateset");
 		}
 	}
 
-	// impl meta
 	@PutMapping(value = "/rate-sets", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<Object> updateRateSets(@RequestBody RateSetVo rateSetVo) throws Exception
 	{
@@ -123,8 +116,9 @@ public class RateSetController
 		return createRateSets(rateSetVo);
 	}
 
+	
 	@DeleteMapping(value = "/rate-sets/{id}")
-	public ResponseEntity<RateSet> deleteRateSet(@PathVariable String id)
+	public ResponseEntity<String> deleteRateSet(@PathVariable String id) throws Exception
 	{
 		log.info("**************Delete RateSets invoked with id ::::" + id);
 		RateSet rateSet = rateSetsService.getById(id);
@@ -135,17 +129,17 @@ public class RateSetController
 			{
 				rateSetsService.delete(rateSet);
 				log.info("Deleted the ratesetid from database ::::" + rateSet.getId());
-				return ResponseEntity.ok(rateSet);
+				return ResponseEntity.ok("Deleted RateSet Successfully: "+id);
 			}
 			catch (Exception ex)
 			{
-				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+				throw new Exception("Error occured while deleting the RateSet "+id);
 			}
 
 		}
 		else
 		{
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+			throw new ResourceNotFoundException("RateSet with given ID is not present:"+id);
 		}
 	}
 

@@ -1,9 +1,10 @@
 package com.trax.ratemanager.orgnization;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -25,10 +26,11 @@ public class Organization
 	@GeneratedValue(generator = "uuid")
 	@GenericGenerator(name = "uuid", strategy = "uuid2")
 	private String id;
-	
-	@NotEmpty(message="Orgnization name is required!")
+
+	@Size(min = 1, max = 200, message = "Valid organization name is required!")
+	@Column(unique = true)
 	private String orgName;
-	
+
 	private Enum<OrganizationType> orgType;
 
 }

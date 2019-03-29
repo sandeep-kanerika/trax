@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.web.context.request.WebRequest;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -17,52 +18,26 @@ public class ErrorResponse
 	private HttpStatus status;
 	private String message;
 	private String debugMessage;
-	
+	private String path;
+
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
 	private LocalDateTime timestamp;
-	
-	private List<String> errors;
 
+	private List<String> details;
 
 	private ErrorResponse()
 	{
 		timestamp = LocalDateTime.now();
 	}
 
-	public ErrorResponse(HttpStatus status)
-	{
-		this();
-		this.status = status;
-	}
-	public ErrorResponse(HttpStatus status, List<String> errors)
-	{
-		this();
-		this.status = status;
-		this.errors = errors;
-	}
-
-	public ErrorResponse(HttpStatus status, Throwable ex)
-	{
-		this();
-		this.status = status;
-		this.message = "Unexpected error";
-		this.debugMessage = ex.getLocalizedMessage();
-	}
-
-	public ErrorResponse(HttpStatus status, String message, Throwable ex)
-	{
-		this(status, ex);
-		this.message = message;
-		this.debugMessage = ex.getLocalizedMessage();
-	}
-
-	public ErrorResponse(String message, List<String> details, Throwable ex, HttpStatus status)
+	public ErrorResponse(String message, List<String> details, Throwable ex, HttpStatus status, WebRequest request)
 	{
 		this();
 		this.message = message;
-		this.errors = details;
-		this.debugMessage = ex.getMessage();
+		this.details = details;
+		this.debugMessage = ex.getLocalizedMessage();
 		this.status = status;
+		this.path = request.getDescription(false);
 	}
 
 }

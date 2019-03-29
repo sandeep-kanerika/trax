@@ -23,6 +23,7 @@ public class RateTableVo
 {
 	private String id;
 	private String creatorOrgId;
+	private String rateSetId;
 	private String name;
 	private ZonedDateTime dateCreated;
 	private String tableGroup;

@@ -2,6 +2,8 @@ package com.trax.ratemanager.orgnization;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +19,7 @@ public class OrganizationService extends AbstractJpaService<Organization>
 	OrganizationRepository organizationRepository;
 
 	@Override
-	public Organization create(Organization orgnization)
+	public Organization create(@Valid Organization orgnization)
 	{
 		return save(orgnization);
 	}

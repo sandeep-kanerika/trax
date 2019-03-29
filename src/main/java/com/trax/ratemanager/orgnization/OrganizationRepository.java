@@ -8,6 +8,6 @@ import com.trax.ratemanager.jpa.AbstractJpaRepository;
 public interface OrganizationRepository extends AbstractJpaRepository<Organization, String>
 {
 
-	Organization getById(String id);
+	public Organization getById(String id);
 
 }

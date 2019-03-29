@@ -3,13 +3,13 @@ package com.trax.ratemanager.rateset;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
+import com.trax.ratemanager.exception.ApplicationServicesDownException;
 import com.trax.ratemanager.exception.OrganizationNotFoundException;
 import com.trax.ratemanager.orgnization.Organization;
 import com.trax.ratemanager.orgnization.OrganizationService;
 import com.trax.ratemanager.ratetable.RateTable;
 import com.trax.ratemanager.ratetable.RateTableConverter;
+import com.trax.ratemanager.ratetable.RateTableService;
 import com.trax.ratemanager.ratetable.RateTableVo;
 
 import lombok.extern.slf4j.Slf4j;
@@ -17,10 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class RateSetConverter
 {
-	@Autowired
-	private OrganizationService orgService;
-
-	public RateSet convertToRateSet(RateSetVo rateSetVo) throws Exception
+	public RateSet convertToRateSet(RateSetVo rateSetVo, OrganizationService organizationService, RateTableService rateTableService) throws Exception
 	{
 		RateSet rateSet = null;
 		if (rateSetVo != null)
@@ -30,11 +27,12 @@ public class RateSetConverter
 
 			String buyerOrgId = rateSetVo.getBuyerOrgId();
 			String sellerOrgId = rateSetVo.getSellerOrgId();
-
+			if(organizationService == null)
+				throw new ApplicationServicesDownException("Organization service is down...");
 			if (buyerOrgId != null)
 			{
 				System.out.println("buyerorgId:" + buyerOrgId);
-				Organization buyerOrg = orgService.getById(buyerOrgId);
+				Organization buyerOrg = organizationService.getById(buyerOrgId);
 				System.out.println("buyerOrg:" + buyerOrg);
 				if (buyerOrg == null)
 				{
@@ -48,7 +46,7 @@ public class RateSetConverter
 
 			if (sellerOrgId != null)
 			{
-				Organization sellerOrg = orgService.getById(sellerOrgId);
+				Organization sellerOrg = organizationService.getById(sellerOrgId);
 
 				if (sellerOrg == null)
 				{
