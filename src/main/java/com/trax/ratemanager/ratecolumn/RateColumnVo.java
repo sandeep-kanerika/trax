@@ -16,11 +16,12 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class RateColumnVo {
+public class RateColumnVo
+{
 
 	@Id
 	private String id;
-	
+
 	private String concept;
 	private String dataFieldId;
 	private String dataSourceId;

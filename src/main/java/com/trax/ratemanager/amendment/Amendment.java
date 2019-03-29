@@ -39,10 +39,11 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Amendment {
+public class Amendment
+{
 
 	@Id
-//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	// @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String id;
 	private Integer status;
 	private String referenceId;
@@ -50,7 +51,7 @@ public class Amendment {
 	private Integer type;
 	@NotEmpty
 	private String description;
-//	private String ratesetId;
+	// private String ratesetId;
 	private String ratesetReferenceId;
 
 	@JsonIgnoreProperties("buyer")

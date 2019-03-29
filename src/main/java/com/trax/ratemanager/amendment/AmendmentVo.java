@@ -20,7 +20,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @AllArgsConstructor
-public class AmendmentVo {
+public class AmendmentVo
+{
 
 	private String id;
 	private String buyerOrgId;
@@ -31,7 +32,7 @@ public class AmendmentVo {
 
 	private UserAuditor createdBy;
 	private UserAuditor lastUpdatedBy;
-	
+
 	private ZonedDateTime dateCreated;
 	private ZonedDateTime dateUpdated;
 	private Date defaultEffectiveDateFrom;
@@ -49,7 +50,7 @@ public class AmendmentVo {
 	private List<RateRow> rateRows;
 	private UserAuditor lastAssignedBy;
 	// to be implemented later.
-	//private List<UserAuditor> approvers;
+	// private List<UserAuditor> approvers;
 	private UserAuditor currentApprover;
 
 	private ZonedDateTime dateApproved;

@@ -20,7 +20,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @AllArgsConstructor
-public class RateTableDefinitionVo {
+public class RateTableDefinitionVo
+{
 
 	@Id
 	private String id;

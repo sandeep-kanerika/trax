@@ -15,34 +15,36 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
-public class ExcelFileCreationUtility {
-	public static void main(String[] args) throws FileNotFoundException, IOException {
+public class ExcelFileCreationUtility
+{
+	public static void main(String[] args) throws FileNotFoundException, IOException
+	{
 
 		Workbook workbook = new HSSFWorkbook();
-		OutputStream outputFile = new FileOutputStream("RateSets_"+LocalDateTime.now().toString().replace(':', '_')+".xlsx");
-		
+		OutputStream outputFile = new FileOutputStream("RateSets_" + LocalDateTime.now().toString().replace(':', '_') + ".xlsx");
+
 		Sheet sheet1 = workbook.createSheet("Array");
 
 		Map<String, Object[]> data = new TreeMap<String, Object[]>();
-		data.put("1", new Object[] { "ID", "NAME", "LASTNAME" });
-		data.put("2", new Object[] { 1, "Pankaj", "Kumar" });
-		data.put("3", new Object[] { 2, "Prakashni", "Yadav" });
-		data.put("4", new Object[] { 3, "Ayan", "Mondal" });
-		data.put("5", new Object[] { 4, "Virat", "kohli" });
+		data.put("1", new Object[]{"ID", "NAME", "LASTNAME"});
+		data.put("2", new Object[]{1, "Pankaj", "Kumar"});
+		data.put("3", new Object[]{2, "Prakashni", "Yadav"});
+		data.put("4", new Object[]{3, "Ayan", "Mondal"});
+		data.put("5", new Object[]{4, "Virat", "kohli"});
 
 		// Iterate over data and write to sheet
 		Set<String> keyset = data.keySet();
 		int rownum = 0;
-		for (String key : keyset) {
+		for (String key : keyset)
+		{
 			Row row = sheet1.createRow(rownum++);
 			Object[] objArr = data.get(key);
 			int cellnum = 0;
-			for (Object obj : objArr) {
+			for (Object obj : objArr)
+			{
 				Cell cell = row.createCell(cellnum++);
-				if (obj instanceof String)
-					cell.setCellValue((String) obj);
-				else if (obj instanceof Integer)
-					cell.setCellValue((Integer) obj);
+				if (obj instanceof String) cell.setCellValue((String) obj);
+				else if (obj instanceof Integer) cell.setCellValue((Integer) obj);
 			}
 		}
 
@@ -55,7 +57,7 @@ public class ExcelFileCreationUtility {
 		workbook.write(outputFile);
 		workbook.close();
 		outputFile.close();
-		
+
 		System.out.println("Sheets Has been Created successfully");
 
 	}

@@ -21,7 +21,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class RateColumn {
+public class RateColumn
+{
 
 	@Id
 	@GeneratedValue(generator = "uuid")

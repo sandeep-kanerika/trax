@@ -18,62 +18,74 @@ import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @Slf4j
-public class RateColumnController {
+public class RateColumnController
+{
 
 	@Autowired
 	RateColumnService rateColumnService;
 
-	@PostMapping(value="/rate-column", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<Object> createRateColumn(@RequestBody RateColumnVo rateColumnVo) throws Exception 
+	@PostMapping(value = "/rate-column", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<Object> createRateColumn(@RequestBody RateColumnVo rateColumnVo) throws Exception
 	{
 		log.info("***************Create Rate Column(PostRequest) ");
 		log.info("***************Rate Column Value Object ::::" + rateColumnVo);
 		RateColumn rateColumn = RateColumnConverter.convertToRateColumn(rateColumnVo);
 		log.info("***************Rate Column Object After VO--to-->BO ::::" + rateColumn);
 		RateColumn createdRateColumn = null;
-		try 
+		try
 		{
 			createdRateColumn = rateColumnService.create(rateColumn);
 			return ResponseEntity.ok(createdRateColumn);
-		} catch (Exception ex) 
+		}
+		catch (Exception ex)
 		{
 			log.error("Error occured ::::" + ex.getMessage());
-		     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResourceNotFoundException("error",ex));
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResourceNotFoundException("error", ex));
 		}
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<RateColumn> getRateColumn(@PathVariable String id) {
+	public ResponseEntity<RateColumn> getRateColumn(@PathVariable String id)
+	{
 		log.info("***************Get Rate Column(GETREQUEST) ");
 		HttpStatus returnStatus = HttpStatus.OK;
-		try {
+		try
+		{
 			RateColumn getRateColumnDetail = rateColumnService.getById(id);
 			log.info("***************Get Rate Column Object ::::" + getRateColumnDetail);
-			if (getRateColumnDetail != null) {
+			if (getRateColumnDetail != null)
+			{
 				return new ResponseEntity<>(getRateColumnDetail, returnStatus);
-			} else {
+			}
+			else
+			{
 				throw new ResourceNotFoundException("RateColumn Id doesn't exist !");
 			}
-		} catch (ResourceNotFoundException e) {
+		}
+		catch (ResourceNotFoundException e)
+		{
 			log.error(e.getMessage());
 			returnStatus = HttpStatus.NOT_FOUND;
-		} catch (Exception e) {
+		}
+		catch (Exception e)
+		{
 			returnStatus = HttpStatus.INTERNAL_SERVER_ERROR;
 			log.error(e.getMessage());
 		}
 		return new ResponseEntity<>(returnStatus);
 	}
 
-	@PutMapping(consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<RateColumn> updateRateColumn(@RequestBody RateColumnVo rateColumnVo) throws Exception 
+	@PutMapping(consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<RateColumn> updateRateColumn(@RequestBody RateColumnVo rateColumnVo) throws Exception
 	{
-        RateColumn rateColumn = RateColumnConverter.convertToRateColumn(rateColumnVo);
-		log.info("update rate column invoked"+rateColumn);
+		RateColumn rateColumn = RateColumnConverter.convertToRateColumn(rateColumnVo);
+		log.info("update rate column invoked" + rateColumn);
 		return new ResponseEntity<RateColumn>(rateColumnService.update(rateColumn), HttpStatus.OK);
 	}
 
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<RateColumn> deleteColumnValidations(@PathVariable String id) {
+	public ResponseEntity<RateColumn> deleteColumnValidations(@PathVariable String id)
+	{
 
 		log.info("delete rate column invoked");
 		rateColumnService.getRepository().deleteById(id);

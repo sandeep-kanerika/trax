@@ -21,13 +21,14 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class RateColumnDefinition {
+public class RateColumnDefinition
+{
 
 	@Id
 	@GeneratedValue(generator = "uuid")
 	@GenericGenerator(name = "uuid", strategy = "uuid2")
 	private String id;
-	
+
 	private String concept;
 
 	private String name;
@@ -37,7 +38,7 @@ public class RateColumnDefinition {
 	private String type;
 
 	private String dataSourceId;
-	
+
 	private String dataFieldId;
 
 	private Boolean hasAlias;

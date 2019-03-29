@@ -23,7 +23,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class RateSetDefinitionVo {
+public class RateSetDefinitionVo
+{
 
 	@Id
 	// @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,6 +48,6 @@ public class RateSetDefinitionVo {
 
 	private String tableHash;
 
-	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<RateTableDefinition> tables;
 }

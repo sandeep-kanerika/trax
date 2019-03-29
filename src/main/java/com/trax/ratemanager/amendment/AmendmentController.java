@@ -21,102 +21,118 @@ import lombok.extern.slf4j.Slf4j;
  */
 @RestController
 @Slf4j
-public class AmendmentController {
+public class AmendmentController
+{
 
 	@Autowired
 	AmendmentService amendmentService;
 
-	@PostMapping(path="/amendments", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<Object> createAmandments(@RequestBody AmendmentVo amendmentVo) throws Exception {
-		
+	@PostMapping(path = "/amendments", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<Object> createAmandments(@RequestBody AmendmentVo amendmentVo) throws Exception
+	{
+
 		log.info("***************Create Amendments(PostRequest) ");
 		log.info("***************AmendmentsValue Object ::::" + amendmentVo);
 
 		Amendment amendment = AmendmentConverter.convertToAmendment(amendmentVo);
 		log.info("***************Amendments Object After VO--to-->BO ::::" + amendment);
 		Amendment createdAmendment = null;
-		try {
+		try
+		{
 			createdAmendment = amendmentService.create(amendment);
 			log.info("***************Amendments Object Created ::::" + createdAmendment);
 			return ResponseEntity.ok(createdAmendment);
-		} catch (Exception ex) {
+		}
+		catch (Exception ex)
+		{
 			log.error("Error occured ::::" + ex.getMessage());
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-					.body(new ResourceNotFoundException("error", ex));
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResourceNotFoundException("error", ex));
 		}
 	}
 
-	@GetMapping(path="/amendments/{id}")
-	public ResponseEntity<Amendment> getAmandments(@PathVariable String id) {
+	@GetMapping(path = "/amendments/{id}")
+	public ResponseEntity<Amendment> getAmandments(@PathVariable String id)
+	{
 		log.info("***************Get Amandments(GETREQUEST) ");
 		HttpStatus returnStatus = HttpStatus.OK;
-		try {
+		try
+		{
 			Amendment getAmendmentsDetail = amendmentService.getById(id);
 			log.info("***************Get Amandments Object ::::" + getAmendmentsDetail);
-			if (getAmendmentsDetail != null) {
+			if (getAmendmentsDetail != null)
+			{
 				return new ResponseEntity<>(getAmendmentsDetail, returnStatus);
-			} else {
+			}
+			else
+			{
 				throw new ResourceNotFoundException("Amendment Id doesn't exist !");
 			}
-		} catch (ResourceNotFoundException e) {
+		}
+		catch (ResourceNotFoundException e)
+		{
 			log.error(e.getMessage());
 			returnStatus = HttpStatus.NOT_FOUND;
-		} catch (Exception e) {
+		}
+		catch (Exception e)
+		{
 			returnStatus = HttpStatus.INTERNAL_SERVER_ERROR;
 			log.error(e.getMessage());
 		}
 		return new ResponseEntity<>(returnStatus);
 	}
 
-	@PutMapping(path="/amendments")
-	public ResponseEntity<Object> updateAmandments(@RequestBody AmendmentVo amendmentVo) throws Exception {
+	@PutMapping(path = "/amendments")
+	public ResponseEntity<Object> updateAmandments(@RequestBody AmendmentVo amendmentVo) throws Exception
+	{
 
 		log.info("***************Update Amandment ::::" + amendmentVo);
 		return createAmandments(amendmentVo);
 	}
 
-	@DeleteMapping(path="/amendments/{id}")
-	public ResponseEntity deleteAmandments(@PathVariable String id) {
+	@DeleteMapping(path = "/amendments/{id}")
+	public ResponseEntity deleteAmandments(@PathVariable String id)
+	{
 
 		ResponseEntity responseEntity = null;
 		log.info("**************deleteAmendment invoked with id:::" + id);
 		Boolean flag = amendmentService.delete(id);
 		log.info("**************delete the amendment result:::" + flag);
-		if (flag) 
+		if (flag)
 		{
-			responseEntity =  ResponseEntity.status(HttpStatus.OK).build();
-		} 
-		else 
+			responseEntity = ResponseEntity.status(HttpStatus.OK).build();
+		}
+		else
 		{
-			responseEntity =  ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+			responseEntity = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
 		return responseEntity;
 	}
 
-	@PostMapping(value = "/amendments/save-as-draft", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<Amendment> saveAmendmentAsDraft(@RequestBody AmendmentWithRateRows amendmentWithRateRows) {
-		log.info("**************Save Draft Amendment(PostRequest) ::::"); 
+	@PostMapping(value = "/amendments/save-as-draft", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<Amendment> saveAmendmentAsDraft(@RequestBody AmendmentWithRateRows amendmentWithRateRows)
+	{
+		log.info("**************Save Draft Amendment(PostRequest) ::::");
 		log.info("***************AmendmentsValue Object ::::" + amendmentWithRateRows);
-		return null; 
+		return null;
 		// some response , need to be implemented.
 	}
 
-	@PostMapping(value = "/amendments/submit-for-approval", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
-			MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<Amendment> submitAmendmentForApproval(@RequestBody AmendmentWithMeta amendmentWithMeta) {
+	@PostMapping(value = "/amendments/submit-for-approval", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<Amendment> submitAmendmentForApproval(@RequestBody AmendmentWithMeta amendmentWithMeta)
+	{
 		log.info("**************submitForApproval invoked ::::");
-		log.info("***************AmendmentsValue Object ::::" +amendmentWithMeta);
-		return null; 
+		log.info("***************AmendmentsValue Object ::::" + amendmentWithMeta);
+		return null;
 		// some response , need to be implemented.
 
 	}
 
-	@PostMapping(value = "/amendments/approve-rates", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
-			MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<Amendment> approveAnAmendment(@RequestBody AmendmentWithRateRows amendmentWithMeta) {
+	@PostMapping(value = "/amendments/approve-rates", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<Amendment> approveAnAmendment(@RequestBody AmendmentWithRateRows amendmentWithMeta)
+	{
 		log.info("**************Approve Rates invoked(PostRequest) ::::");
-		log.info("***************AmendmentsValue Object ::::" +amendmentWithMeta);
-		return null; 
+		log.info("***************AmendmentsValue Object ::::" + amendmentWithMeta);
+		return null;
 		// some response , need to be implemented.
 
 	}

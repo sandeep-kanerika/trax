@@ -17,7 +17,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class RateRowVo {
+public class RateRowVo
+{
 
 	private String id;
 

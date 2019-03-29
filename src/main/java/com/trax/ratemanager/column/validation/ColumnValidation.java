@@ -26,16 +26,16 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class ColumnValidation {
+public class ColumnValidation
+{
 
 	@Id
 	private String id;
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "columnDefinitionId")
-	private RateColumnDefinition columnDefinition;  // need to replace with RateColumn now.
-	
-	
+	private RateColumnDefinition columnDefinition;
+
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "rateSetId")
 	private RateSet rateSet;
@@ -44,7 +44,7 @@ public class ColumnValidation {
 	@JoinColumn(name = "tableId")
 	private RateTable table;
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)  // okay, the one to one  rel need to be impl
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "validationId")
 	private Validation validation;
 }

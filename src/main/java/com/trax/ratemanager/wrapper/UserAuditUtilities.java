@@ -5,6 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class UserAuditUtilities {
+public class UserAuditUtilities
+{
 
 }

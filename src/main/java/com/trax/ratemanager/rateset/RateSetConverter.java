@@ -12,11 +12,14 @@ import com.trax.ratemanager.ratetable.RateTableVo;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class RateSetConverter {
+public class RateSetConverter
+{
 
-	public static RateSet convertToRateSet(RateSetVo rateSetVo) throws Exception {
+	public static RateSet convertToRateSet(RateSetVo rateSetVo) throws Exception
+	{
 		RateSet rateSet = null;
-		if (rateSetVo != null) {
+		if (rateSetVo != null)
+		{
 			rateSet = new RateSet();
 			log.info("***************existing id in convertor ::::" + rateSetVo.getId());
 
@@ -28,48 +31,49 @@ public class RateSetConverter {
 			rateSet.setDateAssigned(rateSetVo.getDateAssigned());
 			rateSet.setEffectiveDateFrom(rateSetVo.getEffectiveDateFrom());
 			rateSet.setEffectiveDateThru(rateSetVo.getEffectiveDateThru());
-			
+
 			rateSet.setMode(rateSetVo.getMode());
 			rateSet.setName(rateSetVo.getName());
 			rateSet.setStatus(Integer.parseInt(rateSetVo.getStatus()));
 			rateSet.setRegion(rateSetVo.getRegion());
 			rateSet.setTableHash(rateSetVo.getTableHash());
-			
+
 			List<RateTableVo> rateTableVos = rateSetVo.getTables();
-			
+
 			List<RateTable> rateTables = new ArrayList<RateTable>();
-			for (RateTableVo rateTableVo : rateTableVos) {
-				RateTable table =  RateTableConverter.convertToRateTable(rateTableVo);
+			for (RateTableVo rateTableVo : rateTableVos)
+			{
+				RateTable table = RateTableConverter.convertToRateTable(rateTableVo);
 				log.info("*************** table ::::" + table);
 				table.setRateSetId(rateSet.getId());
 				rateTables.add(table);
 			}
 			rateSet.setTables(rateTables);
-			
+
 			rateSet.setCreatedBy(rateSetVo.getCreatedBy());
 			rateSet.setLastUpdatedBy(rateSetVo.getLastUpdatedBy());
 			rateSet.setReviewedBy(rateSetVo.getReviewedBy());
 			rateSet.setLastAssignedBy(rateSetVo.getLastAssignedBy());
 			rateSet.setApprovers(rateSetVo.getApprovers());
-			
+
 			rateSet.setBuyerOrg(new Organization(rateSetVo.getBuyerOrgId(), rateSetVo.getBuyerOrgName(), OrganizationType.BUYER));
 			rateSet.setSellerOrg(new Organization(rateSetVo.getSellerOrgId(), rateSetVo.getSellerOrgName(), OrganizationType.SELLER));
 
 			return rateSet;
 
 		}
-		else 
+		else
 		{
 			throw new Exception("Problem with input");
 		}
 
 	}
 
-	public static RateSetVo convertToRateSetVo(RateSet rateSet) 
+	public static RateSetVo convertToRateSetVo(RateSet rateSet)
 	{
 		String id = rateSet.getId();
-		 RateSetVo rateSetVo = new RateSetVo();
-		 rateSetVo.setId(id);
+		RateSetVo rateSetVo = new RateSetVo();
+		rateSetVo.setId(id);
 		return rateSetVo;
 	}
 

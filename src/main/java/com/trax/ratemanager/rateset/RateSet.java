@@ -36,7 +36,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class RateSet {
+public class RateSet
+{
 
 	@Id
 	private String id;

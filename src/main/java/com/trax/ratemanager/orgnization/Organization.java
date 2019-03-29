@@ -22,7 +22,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Organization {
+public class Organization
+{
 
 	@Id
 	private String id;
@@ -37,7 +38,8 @@ public class Organization {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "sellerOrg")
 	List<RateSet> seller;
 
-	public Organization(String id, String orgName, Enum<OrganizationType> orgType) {
+	public Organization(String id, String orgName, Enum<OrganizationType> orgType)
+	{
 		super();
 		this.id = id;
 		this.orgName = orgName;

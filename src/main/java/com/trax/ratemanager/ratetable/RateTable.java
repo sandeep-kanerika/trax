@@ -29,7 +29,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class RateTable {
+public class RateTable
+{
 
 	@Id
 	private String id;
@@ -44,7 +45,7 @@ public class RateTable {
 	private String tableType;
 	private String columnHash;
 	private String rateSetId;
-	
+
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "rateTableId")
 	private List<RateColumn> columns;

@@ -10,47 +10,54 @@ import com.trax.ratemanager.jpa.AbstractJpaRepository;
 import com.trax.ratemanager.jpa.AbstractJpaService;
 
 @Service
-public class RateRowHistoryService extends AbstractJpaService<RateRowHistory> {
+public class RateRowHistoryService extends AbstractJpaService<RateRowHistory>
+{
 
 	@Autowired
 	RateRowHistoryRepository rateRowsHistoryRepository;
 
 	@Override
-	public RateRowHistory create(RateRowHistory rateRowsHistory) {
+	public RateRowHistory create(RateRowHistory rateRowsHistory)
+	{
 		// TODO Auto-generated method stub
 		return save(rateRowsHistory);
 	}
 
 	@Override
-	public RateRowHistory update(RateRowHistory _rateRowsHistory) {
+	public RateRowHistory update(RateRowHistory _rateRowsHistory)
+	{
 		// TODO Auto-generated method stub
 		RateRowHistory rateRowsHistory = getById(_rateRowsHistory.getId());
-		if (rateRowsHistory != null)
-			return save(_rateRowsHistory);
-		else {
+		if (rateRowsHistory != null) return save(_rateRowsHistory);
+		else
+		{
 			throw new ResourceNotFoundException("RateRowsHistory Id Doesn't Exists !");
 		}
 	}
 
 	@Override
-	public RateRowHistory delete(RateRowHistory rateRowsHistory) {
+	public RateRowHistory delete(RateRowHistory rateRowsHistory)
+	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<RateRowHistory> search(RateRowHistory rateRowsHistory) {
+	public List<RateRowHistory> search(RateRowHistory rateRowsHistory)
+	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public RateRowHistory getById(String id) {
+	public RateRowHistory getById(String id)
+	{
 		// TODO Auto-generated method stub
 		return rateRowsHistoryRepository.getById(id);
 	}
 
 	@Override
-	public AbstractJpaRepository<RateRowHistory, String> getRepository() {
+	public AbstractJpaRepository<RateRowHistory, String> getRepository()
+	{
 		return rateRowsHistoryRepository;
 	}
 

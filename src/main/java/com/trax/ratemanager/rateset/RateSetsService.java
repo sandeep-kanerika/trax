@@ -9,43 +9,51 @@ import org.springframework.stereotype.Service;
 import com.trax.ratemanager.exception.ResourceNotFoundException;
 
 @Service
-public class RateSetsService/* extends AbstractJpaService<RateSet> */ {
+public class RateSetsService
+/* extends AbstractJpaService<RateSet> */ {
 
 	@Autowired
 	private RateSetRepository rateSetsRepository;
 
-	public RateSet create(RateSet rateSet) {
+	public RateSet create(RateSet rateSet)
+	{
 		System.out.println("trying to store rateSets:::");
 		return rateSetsRepository.save(rateSet);
 	}
 
-	public RateSet update(RateSet _rateSets) {
+	public RateSet update(RateSet _rateSets)
+	{
 		Optional<RateSet> rateSet = rateSetsRepository.findById(_rateSets.getId());
-		if (rateSet.isPresent())
-			return rateSetsRepository.save(rateSet.get());
-		else {
+		if (rateSet.isPresent()) return rateSetsRepository.save(rateSet.get());
+		else
+		{
 			throw new ResourceNotFoundException("RateSets Id Doesn't Exists !");
 		}
 	}
 
-	public RateSet delete(RateSet rateSets) {
+	public RateSet delete(RateSet rateSets)
+	{
 		rateSetsRepository.delete(rateSets);
 		return rateSets;
 	}
 
-	public List<RateSet> search(RateSet rateSets) {
+	public List<RateSet> search(RateSet rateSets)
+	{
 		return rateSetsRepository.findAll();
 	}
 
-	public RateSet getById(String id) {
+	public RateSet getById(String id)
+	{
 		return rateSetsRepository.getById(id);
 	}
-	
-	public RateSet getByIdAndTableId(String id , String tableId) {
-		return rateSetsRepository.getByIdAndTableId(id, tableId );
+
+	public RateSet getByIdAndTableId(String id, String tableId)
+	{
+		return rateSetsRepository.getByIdAndTableId(id, tableId);
 	}
 
-	public List<RateSet> findAll() {
+	public List<RateSet> findAll()
+	{
 		return rateSetsRepository.findAll();
 	}
 

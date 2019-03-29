@@ -26,7 +26,8 @@ import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @Slf4j
-public class RateSetController {
+public class RateSetController
+{
 
 	@Autowired
 	private RateSetsService rateSetsService;
@@ -34,175 +35,185 @@ public class RateSetController {
 	@Autowired
 	private RateColumnDefinitionService columnDefService;
 
-	@PostMapping(value = "/rate-sets", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
-			MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<Object> createRateSets(@RequestBody RateSetVo rateSetVo) throws Exception {
+	@PostMapping(value = "/rate-sets", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<Object> createRateSets(@RequestBody RateSetVo rateSetVo) throws Exception
+	{
 		log.info("***************Create RateSet(PostRequest) ");
 		log.info("***************RateSetValue Object ::::" + rateSetVo);
 		RateSet rateSet = RateSetConverter.convertToRateSet(rateSetVo);
 		log.info("***************RateSet Object After VO--to-->BO ::::" + rateSet);
 		RateSet createdRateSet = null;
-		try {
+		try
+		{
 			createdRateSet = rateSetsService.create(rateSet);
 			return ResponseEntity.ok(createdRateSet);
-		} catch (Exception ex) {
+		}
+		catch (Exception ex)
+		{
 			log.error("Error occured ::::" + ex.getMessage());
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-					.body(new ResourceNotFoundException("error", ex));
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResourceNotFoundException("error", ex));
 		}
 	}
 
 	// can be removed
-	@PostMapping(value = "/rates/active/{rateSetId}", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
-			MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<Object> viewActiveRates(@PathVariable String rateSetId, @RequestParam("org") String orgId)
-			throws Exception {
+	@PostMapping(value = "/rates/active/{rateSetId}", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<Object> viewActiveRates(@PathVariable String rateSetId, @RequestParam("org") String orgId) throws Exception
+	{
 		log.info("***************View Active Rate(PostRequest) ");
 		log.info("***************RateSet :::: " + rateSetId + " :::: OrgId ::::" + orgId);
 
 		return ResponseEntity.ok("");
 	}
 
-	@PostMapping(value = "/rates/submit/{rateSetId}", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
-			MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<Object> operationsActiveRates(@PathVariable String rateSetId,
-			@RequestParam("amendmentType") String amendmentType, @RequestParam("org") String orgId) throws Exception {
+	@PostMapping(value = "/rates/submit/{rateSetId}", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<Object> operationsActiveRates(@PathVariable String rateSetId, @RequestParam("amendmentType") String amendmentType, @RequestParam("org") String orgId)
+			throws Exception
+	{
 		log.info("***************add Active Rate(PostRequest) ");
-		log.info("***************RateSet :::: " + rateSetId + " :::: amendmentType :::: " + amendmentType
-				+ " :::: OrgId :::: " + orgId);
+		log.info("***************RateSet :::: " + rateSetId + " :::: amendmentType :::: " + amendmentType + " :::: OrgId :::: " + orgId);
 		return ResponseEntity.ok("");
 	}
 
-	@GetMapping(value = { "/rates/active/{rateSetId}", "/rate-sets/{rateSetId}" })
-	public ResponseEntity<RateSet> getRateSets(@PathVariable String rateSetId, @RequestParam("org") String orgId) {
+	@GetMapping(value = {"/rates/active/{rateSetId}", "/rate-sets/{rateSetId}"})
+	public ResponseEntity<RateSet> getRateSets(@PathVariable String rateSetId, @RequestParam("org") String orgId)
+	{
 		log.info("*************** Get Rate Set by id ::::" + rateSetId);
 		RateSet retrivedRateSet = rateSetsService.getById(rateSetId);
-		if (retrivedRateSet != null) {
+		if (retrivedRateSet != null)
+		{
 			return new ResponseEntity<RateSet>(retrivedRateSet, HttpStatus.OK);
-		} else {
+		}
+		else
+		{
 			return ResponseEntity.notFound().build();
 		}
 	}
 
 	// find all rate sets
-	@GetMapping(value = { "/rates/active", "/rate-sets"})
-	public ResponseEntity<Object> findAllRateSets(@RequestParam("org") String orgId) {
+	@GetMapping(value = {"/rates/active", "/rate-sets"})
+	public ResponseEntity<Object> findAllRateSets(@RequestParam("org") String orgId)
+	{
 		log.info("**************fetch all rate Set objects");
-		try {
+		try
+		{
 			List<RateSet> allRateSets = rateSetsService.findAll();
-			if (allRateSets != null && !allRateSets.isEmpty()) {
+			if (allRateSets != null && !allRateSets.isEmpty())
+			{
 				return ResponseEntity.ok(allRateSets);
-			} else {
+			}
+			else
+			{
 				log.error("**********No object(s) found!!!");
 				return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 			}
-		} catch (Exception e) {
+		}
+		catch (Exception e)
+		{
 			log.error("**********Error occured:::" + e.getMessage());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
 	}
 
-// impl meta
-	@PutMapping(value = "/rate-sets", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
-			MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<Object> updateRateSets(@RequestBody RateSetVo rateSetVo) throws Exception {
+	// impl meta
+	@PutMapping(value = "/rate-sets", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<Object> updateRateSets(@RequestBody RateSetVo rateSetVo) throws Exception
+	{
 		log.info("***************Update Rate Sets , internally its going to call post method only...");
 		return createRateSets(rateSetVo);
 	}
 
 	@DeleteMapping(value = "/rate-sets/{id}")
-	public ResponseEntity<RateSet> deleteRateSet(@PathVariable String id) {
+	public ResponseEntity<RateSet> deleteRateSet(@PathVariable String id)
+	{
 		log.info("**************Delete RateSets invoked with id ::::" + id);
 		RateSet rateSet = rateSetsService.getById(id);
 		log.info("**************found the rateset id in DB ::::" + rateSet);
-		if (rateSet != null) {
-			try {
+		if (rateSet != null)
+		{
+			try
+			{
 				rateSetsService.delete(rateSet);
 				log.info("Deleted the ratesetid from database ::::" + rateSet.getId());
 				return ResponseEntity.ok(rateSet);
-			} catch (Exception ex) {
+			}
+			catch (Exception ex)
+			{
 				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 			}
 
-		} else {
+		}
+		else
+		{
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
 	}
 
 	@GetMapping(value = "/rate-sets/{rateSetId}/row-validations")
-	public Boolean getRateSetForRowValidation(@PathVariable String rateSetId) {
+	public Boolean getRateSetForRowValidation(@PathVariable String rateSetId)
+	{
 		return false;
 	}
 
 	@GetMapping(value = "/rate-sets/{rateSetId}/rates-summary")
-	public Boolean getRateSetSummary(@PathVariable String rateSetId) {
+	public Boolean getRateSetSummary(@PathVariable String rateSetId)
+	{
 		return false;
 	}
 
-	@PostMapping(value = "/rate-sets/{id}/save-as-draft", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
-			MediaType.APPLICATION_JSON_VALUE })
-	public Boolean saveRateSetAsDraft(@PathVariable String id, @RequestBody AmendmentVo amendmentVo) {
+	@PostMapping(value = "/rate-sets/{id}/save-as-draft", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
+	public Boolean saveRateSetAsDraft(@PathVariable String id, @RequestBody AmendmentVo amendmentVo)
+	{
 		return false;
 	}
 
-	@PostMapping(value = "/rate-sets/{id}/submit-for-approval", consumes = {
-			MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
-	public Boolean submitRateSetForApproval(@PathVariable String id, @RequestBody AmendmentVo amendmentVo) {
+	@PostMapping(value = "/rate-sets/{id}/submit-for-approval", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
+	public Boolean submitRateSetForApproval(@PathVariable String id, @RequestBody AmendmentVo amendmentVo)
+	{
 		return false;
 	}
 
-	@PostMapping(value = "/rate-sets/{id}/approve-rates", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
-			MediaType.APPLICATION_JSON_VALUE })
-	public Boolean approveRateSet(@PathVariable String id, @RequestBody AmendmentVo amendmentVo) {
+	@PostMapping(value = "/rate-sets/{id}/approve-rates", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
+	public Boolean approveRateSet(@PathVariable String id, @RequestBody AmendmentVo amendmentVo)
+	{
 		return false;
 	}
 
-	@PostMapping(value = "/rate-sets/{id}/reject-rates", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
-			MediaType.APPLICATION_JSON_VALUE })
-	public Boolean rejectTheRateSet(@PathVariable String id, @RequestBody AmendmentVo amendmentVo) {
+	@PostMapping(value = "/rate-sets/{id}/reject-rates", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
+	public Boolean rejectTheRateSet(@PathVariable String id, @RequestBody AmendmentVo amendmentVo)
+	{
 		return false;
 	}
 
-	@GetMapping(value = "/rate-sets/{rateSetId}/{tableId}/columns/{columnDefinitionId}", produces = {
-			MediaType.APPLICATION_JSON_VALUE })
-	public RateColumnDefinitionVo getColumnDefByI(@PathVariable String rateSetId, @PathVariable String tableId,
-			@PathVariable String columnDefinitionId) {
+	@GetMapping(value = "/rate-sets/{rateSetId}/{tableId}/columns/{columnDefinitionId}", produces = {MediaType.APPLICATION_JSON_VALUE})
+	public RateColumnDefinitionVo getColumnDefByI(@PathVariable String rateSetId, @PathVariable String tableId, @PathVariable String columnDefinitionId)
+	{
 		RateColumnDefinition rateColumnDefinition = columnDefService.getById(columnDefinitionId);
 		RateColumnDefinitionVo colDefVo = RateColumnDefinitionConverter.convertToRateSetVo(rateColumnDefinition);
 		return colDefVo;
 	}
-	
-	@PostMapping(value = "/rate-sets/{rateSetId}/{tableId}/columns/{columnDefinitionId}", produces = {
-			MediaType.APPLICATION_JSON_VALUE })
-	public RateColumnDefinitionVo updateColDefById(@PathVariable String rateSetId, @PathVariable String tableId,
-			@PathVariable String columnDefinitionId) 
-	{    // valid values??
-		 // is required??
-		
+
+	@PostMapping(value = "/rate-sets/{rateSetId}/{tableId}/columns/{columnDefinitionId}", produces = {MediaType.APPLICATION_JSON_VALUE})
+	public RateColumnDefinitionVo updateColDefById(@PathVariable String rateSetId, @PathVariable String tableId, @PathVariable String columnDefinitionId)
+	{ // valid values??
+		// is required??
+
 		RateColumnDefinition rateColumnDefinition = columnDefService.getById(columnDefinitionId);
 		RateColumnDefinitionVo colDefVo = RateColumnDefinitionConverter.convertToRateSetVo(rateColumnDefinition);
 		return colDefVo;
 	}
-	
-	
-	
-	@PostMapping(value = "/rate-sets/{rateSetId}/{upload}", produces = {MediaType.APPLICATION_JSON_VALUE })
-	public RateColumnDefinitionVo uploadRateSet(@RequestBody AmendmentVo amendmentVo) 
-	{   		
-		// upload the file and create amendment/rateset
-		return null;
-	}
-	
-	@PostMapping(value = "/rate-sets/{id}/{assign-approvers}", produces = {MediaType.APPLICATION_JSON_VALUE })
-	public RateColumnDefinitionVo uploadRateSet(@PathVariable String rateSetId,@PathVariable(name="assign-approvers") String assignApprover ) 
-	{   		
-		// upload the file and create amendment/rateset
-		return null;
-	}
-	
-	
-	
-	
 
+	@PostMapping(value = "/rate-sets/{rateSetId}/{upload}", produces = {MediaType.APPLICATION_JSON_VALUE})
+	public RateColumnDefinitionVo uploadRateSet(@RequestBody AmendmentVo amendmentVo)
+	{
+		// upload the file and create amendment/rateset
+		return null;
+	}
+
+	@PostMapping(value = "/rate-sets/{id}/{assign-approvers}", produces = {MediaType.APPLICATION_JSON_VALUE})
+	public RateColumnDefinitionVo uploadRateSet(@PathVariable String rateSetId, @PathVariable(name = "assign-approvers") String assignApprover)
+	{
+		// upload the file and create amendment/rateset
+		return null;
+	}
 
 }

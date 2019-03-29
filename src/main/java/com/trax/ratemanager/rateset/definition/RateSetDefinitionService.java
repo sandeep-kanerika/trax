@@ -10,49 +10,57 @@ import com.trax.ratemanager.jpa.AbstractJpaRepository;
 import com.trax.ratemanager.jpa.AbstractJpaService;
 
 @Service
-public class RateSetDefinitionService extends AbstractJpaService<RateSetDefinition> {
+public class RateSetDefinitionService extends AbstractJpaService<RateSetDefinition>
+{
 
 	@Autowired
-	private RateSetDefinitionRepository rateSetsDefinitionRepository; 
-	
+	private RateSetDefinitionRepository rateSetsDefinitionRepository;
+
 	@Override
-	public RateSetDefinition create(RateSetDefinition rateSetsDefinition) {
+	public RateSetDefinition create(RateSetDefinition rateSetsDefinition)
+	{
 		return save(rateSetsDefinition);
 	}
 
 	@Override
-	public RateSetDefinition update(RateSetDefinition rateSetDefination) {
-		System.out.println("RateSetDefinitionService.update()--->"+rateSetDefination.getId());
+	public RateSetDefinition update(RateSetDefinition rateSetDefination)
+	{
+		System.out.println("RateSetDefinitionService.update()--->" + rateSetDefination.getId());
 		RateSetDefinition rateSetsDefinition = getById(rateSetDefination.getId());
-		if(rateSetsDefinition != null)
-			return save(rateSetDefination);
-		else {
+		if (rateSetsDefinition != null) return save(rateSetDefination);
+		else
+		{
 			throw new ResourceNotFoundException("RateSetsDefinition Id Doesn't Exists !");
 		}
 	}
 
 	@Override
-	public RateSetDefinition delete(RateSetDefinition rateSetsDefinition) {
+	public RateSetDefinition delete(RateSetDefinition rateSetsDefinition)
+	{
 		rateSetsDefinitionRepository.delete(rateSetsDefinition);
 		return rateSetsDefinition;
 	}
 
 	@Override
-	public List<RateSetDefinition> search(RateSetDefinition rateSetsDefinition) {
+	public List<RateSetDefinition> search(RateSetDefinition rateSetsDefinition)
+	{
 		return null;
 	}
 
 	@Override
-	public AbstractJpaRepository<RateSetDefinition, String> getRepository() {
+	public AbstractJpaRepository<RateSetDefinition, String> getRepository()
+	{
 		return rateSetsDefinitionRepository;
 	}
 
-	public RateSetDefinition getById(String id) {
+	public RateSetDefinition getById(String id)
+	{
 		return rateSetsDefinitionRepository.getById(id);
 	}
-	
-	public List<RateSetDefinition> findAll() {
+
+	public List<RateSetDefinition> findAll()
+	{
 		return rateSetsDefinitionRepository.findAll();
 	}
-	
+
 }

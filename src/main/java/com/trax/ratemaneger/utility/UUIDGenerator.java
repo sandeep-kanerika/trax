@@ -2,9 +2,11 @@ package com.trax.ratemaneger.utility;
 
 import java.util.UUID;
 
-public class UUIDGenerator {
+public class UUIDGenerator
+{
 
-	public static UUID generateUUID() {
+	public static UUID generateUUID()
+	{
 		return UUID.randomUUID();
 	}
 

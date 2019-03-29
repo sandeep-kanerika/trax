@@ -31,7 +31,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @AllArgsConstructor
-public class RateSetDefinition {
+public class RateSetDefinition
+{
 
 	@Id
 	@GeneratedValue(generator = "uuid")
@@ -59,5 +60,5 @@ public class RateSetDefinition {
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "rateSetDefinitionId")
 	private List<RateTableDefinition> tables;
-	
+
 }

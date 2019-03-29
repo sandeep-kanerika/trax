@@ -16,25 +16,30 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
-public class RateColumnDefinitionController {
+public class RateColumnDefinitionController
+{
 
 	@Autowired
 	RateColumnDefinitionService columnDefinitionSer;
 
 	@GetMapping("/column-definitions")
-	public RateColumnDefinition getColumnDefinitions(@PathVariable String id) {
+	public RateColumnDefinition getColumnDefinitions(@PathVariable String id)
+	{
 		log.info("getColumnDefinitions invoked");
 		RateColumnDefinition getcolumnDefinitionDetail = columnDefinitionSer.getById(id);
-		if (getcolumnDefinitionDetail != null) {
+		if (getcolumnDefinitionDetail != null)
+		{
 			return getcolumnDefinitionDetail;
-		} else {
+		}
+		else
+		{
 			throw new ResourceNotFoundException("ColumnDefinition Id Doesn't Exists !");
 		}
 	}
 
-	@PostMapping(value = "/column-definitions", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<Object> createColumnDefinitions(@RequestBody RateColumnDefinitionVo columnDefinitionsVo)
-			throws Exception {
+	@PostMapping(value = "/column-definitions", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<Object> createColumnDefinitions(@RequestBody RateColumnDefinitionVo columnDefinitionsVo) throws Exception
+	{
 
 		log.info("***************Create ColumnDefinitions(PostRequest) ");
 		log.info("***************ColumnDefinitionsValue Object:::" + columnDefinitionsVo);
@@ -42,13 +47,15 @@ public class RateColumnDefinitionController {
 		RateColumnDefinition colDefinition = RateColumnDefinitionConverter.convertToRateColumnDefinition(columnDefinitionsVo);
 		log.info("***************ColumnDefinitions Object After VO--to-->BO:::" + colDefinition);
 		RateColumnDefinition createdRateColumnDefinition = null;
-		try {
+		try
+		{
 			createdRateColumnDefinition = columnDefinitionSer.create(colDefinition);
 			return ResponseEntity.ok(createdRateColumnDefinition);
-		} catch (Exception ex) {
+		}
+		catch (Exception ex)
+		{
 			log.error("Error occured:::" + ex.getMessage());
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-					.body(new ResourceNotFoundException("error", ex));
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResourceNotFoundException("error", ex));
 		}
 	}
 

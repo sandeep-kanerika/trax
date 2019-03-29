@@ -18,63 +18,79 @@ import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @Slf4j
-public class RateRowHistoryController {
+public class RateRowHistoryController
+{
 
 	@Autowired
 	RateRowHistoryService rateRowsHistoryService;
 
-	@PostMapping(value="/rate-rows/history", consumes = { MediaType.APPLICATION_JSON_VALUE}, produces = { MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<Object> createRateRowsHistory(@RequestBody RateRowHistory rateRowsHistory) {
+	@PostMapping(value = "/rate-rows/history", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<Object> createRateRowsHistory(@RequestBody RateRowHistory rateRowsHistory)
+	{
 
 		log.info("***************Create Rate Rows History(PostRequest) ");
 		log.info("***************Rate Rows History Object ::::" + rateRowsHistory);
-		
+
 		RateRowHistory createdRateRowHistory = null;
-		try {
+		try
+		{
 			createdRateRowHistory = rateRowsHistoryService.create(rateRowsHistory);
 			log.info("***************Rate Rows History Object Created ::::" + createdRateRowHistory);
 			return ResponseEntity.ok(createdRateRowHistory);
-		} catch (Exception ex) {
+		}
+		catch (Exception ex)
+		{
 			log.error("Error occured ::::" + ex.getMessage());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResourceNotFoundException("error", ex));
 		}
 	}
 
 	@GetMapping("/rate-rows/history/latest")
-	public ResponseEntity<RateRowHistory> getRateRowstHistoryLatest(@PathVariable String rootParentId) {
+	public ResponseEntity<RateRowHistory> getRateRowstHistoryLatest(@PathVariable String rootParentId)
+	{
 		log.info("***************Get Rate Rows History latest");
 		return null;
 	}
 
 	@GetMapping("/rate-rows/{rootParentId}/history")
-	public ResponseEntity<RateRowHistory> getRateRowsParentHistory(@PathVariable String rootParentId) {
+	public ResponseEntity<RateRowHistory> getRateRowsParentHistory(@PathVariable String rootParentId)
+	{
 		log.info("***************Get Rate Rows by Parent History");
 		return null;
 	}
 
-
 	@GetMapping("/rate-rows/history")
-	public ResponseEntity<List<RateRowHistory>> getCompleteRateRowHistory() {
+	public ResponseEntity<List<RateRowHistory>> getCompleteRateRowHistory()
+	{
 		log.info("***************Get Rate Rows Parent History List");
 		return null;
 	}
 
 	@GetMapping("/rate-rows/history/{id}")
-	public ResponseEntity<RateRowHistory> getRateRowsHistory(@PathVariable String id) {
+	public ResponseEntity<RateRowHistory> getRateRowsHistory(@PathVariable String id)
+	{
 		log.info("***************Get Rate Rows History(GETREQUEST) ");
 		HttpStatus returnStatus = HttpStatus.OK;
-		try {
+		try
+		{
 			RateRowHistory getRateRowHistoryDetail = rateRowsHistoryService.getById(id);
 			log.info("***************Get Rate Row History Object ::::" + getRateRowHistoryDetail);
-			if (getRateRowHistoryDetail != null) {
+			if (getRateRowHistoryDetail != null)
+			{
 				return new ResponseEntity<>(getRateRowHistoryDetail, returnStatus);
-			} else {
+			}
+			else
+			{
 				throw new ResourceNotFoundException("Rate Rows History Id doesn't exist !");
 			}
-		} catch (ResourceNotFoundException e) {
+		}
+		catch (ResourceNotFoundException e)
+		{
 			log.error(e.getMessage());
 			returnStatus = HttpStatus.NOT_FOUND;
-		} catch (Exception e) {
+		}
+		catch (Exception e)
+		{
 			returnStatus = HttpStatus.INTERNAL_SERVER_ERROR;
 			log.error(e.getMessage());
 		}

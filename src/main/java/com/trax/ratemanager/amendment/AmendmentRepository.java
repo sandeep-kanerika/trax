@@ -8,7 +8,8 @@ import com.trax.ratemanager.jpa.AbstractJpaRepository;
  * Created by sudhakar.rao on 2/19/2019.
  */
 @Repository
-public interface AmendmentRepository extends AbstractJpaRepository<Amendment, String> {
+public interface AmendmentRepository extends AbstractJpaRepository<Amendment, String>
+{
 
 	Amendment getById(String id);
 	/*

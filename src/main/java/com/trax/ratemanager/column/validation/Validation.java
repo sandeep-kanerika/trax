@@ -11,7 +11,8 @@ import lombok.ToString;
 @Setter
 @Entity
 @ToString
-public class Validation {
+public class Validation
+{
 
 	@Id
 	private String id;

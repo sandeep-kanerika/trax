@@ -9,7 +9,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -18,7 +17,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.trax.ratemanager.column.defination.RateColumnDefinition;
 import com.trax.ratemanager.config.AppConstants;
-import com.trax.ratemanager.rateset.definition.RateSetDefinition;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -31,13 +29,14 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class RateTableDefinition {
+public class RateTableDefinition
+{
 
 	@Id
 	@GeneratedValue(generator = "uuid")
 	@GenericGenerator(name = "uuid", strategy = "uuid2")
 	private String id;
-	
+
 	private String creatorOrgId;
 	private String name;
 
@@ -47,16 +46,16 @@ public class RateTableDefinition {
 	private String tableGroup;
 	private String tableType;
 	private String columnHash;
-	
+
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "rateTableDefinitionId")
 	private List<RateColumnDefinition> columns;
 
 	@Override
-	public String toString() {
-		return "RateTableDefinition [id=" + id + ", creatorOrgId=" + creatorOrgId + ", name=" + name + ", dateCreated="
-				+ dateCreated + ", tableGroup=" + tableGroup + ", tableType=" + tableType + ", columnHash=" + columnHash
-				+ ", columns=" + columns + "]";
+	public String toString()
+	{
+		return "RateTableDefinition [id=" + id + ", creatorOrgId=" + creatorOrgId + ", name=" + name + ", dateCreated=" + dateCreated + ", tableGroup=" + tableGroup + ", tableType="
+				+ tableType + ", columnHash=" + columnHash + ", columns=" + columns + "]";
 	}
 
 }

@@ -20,14 +20,16 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @Slf4j
 @RequestMapping("/rate/tables")
-public class RateTableController {
+public class RateTableController
+{
 
 	@Autowired
 	RateTableService rateTablesService;
 
-	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
+	@PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public RateTable createRateTablesDefinition(@RequestBody RateTable rateTable) {
+	public RateTable createRateTablesDefinition(@RequestBody RateTable rateTable)
+	{
 
 		log.info("***************Rate Tables Definition(PostRequest) ");
 		log.info("***************Rate Tables Definition Object ::::" + rateTable);
@@ -35,29 +37,39 @@ public class RateTableController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<RateTable> getRateTablesDefinition(@PathVariable String id) {
+	public ResponseEntity<RateTable> getRateTablesDefinition(@PathVariable String id)
+	{
 		log.info("***************Get Rate Tables Definition ");
 		HttpStatus returnStatus = HttpStatus.OK;
-		try {
+		try
+		{
 			RateTable getRateTableDetail = rateTablesService.getById(id);
 			log.info("***************Get Rate Table Object ::::" + getRateTableDetail);
-			if (getRateTableDetail != null) {
+			if (getRateTableDetail != null)
+			{
 				return new ResponseEntity<>(getRateTableDetail, returnStatus);
-			} else {
+			}
+			else
+			{
 				throw new ResourceNotFoundException("Rate Table Definition Id doesn't exist !");
 			}
-		} catch (ResourceNotFoundException e) {
+		}
+		catch (ResourceNotFoundException e)
+		{
 			log.error(e.getMessage());
 			returnStatus = HttpStatus.NOT_FOUND;
-		} catch (Exception e) {
+		}
+		catch (Exception e)
+		{
 			returnStatus = HttpStatus.INTERNAL_SERVER_ERROR;
 			log.error(e.getMessage());
 		}
 		return new ResponseEntity<>(returnStatus);
 	}
 
-	@RequestMapping(method = { RequestMethod.PUT, RequestMethod.PATCH })
-	public RateTable updateRateTablesDefinition(@RequestBody RateTable rateTablesDefinition) {
+	@RequestMapping(method = {RequestMethod.PUT, RequestMethod.PATCH})
+	public RateTable updateRateTablesDefinition(@RequestBody RateTable rateTablesDefinition)
+	{
 
 		log.info("***************Update Rate Tables Definition ");
 		return rateTablesService.update(rateTablesDefinition);

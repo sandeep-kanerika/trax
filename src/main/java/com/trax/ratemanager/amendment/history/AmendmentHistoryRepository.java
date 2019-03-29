@@ -5,6 +5,7 @@ import com.trax.ratemanager.jpa.AbstractJpaRepository;
 /**
  * Created by sudhakar.rao on 2/19/2019.
  */
-public interface AmendmentHistoryRepository extends AbstractJpaRepository<AmendmentHistory, String> {
-    AmendmentHistory getById(String id);
+public interface AmendmentHistoryRepository extends AbstractJpaRepository<AmendmentHistory, String>
+{
+	AmendmentHistory getById(String id);
 }

@@ -24,10 +24,11 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class RateRow {
+public class RateRow
+{
 
 	@Id
-	//@GeneratedValue(strategy = GenerationType.IDENTITY)
+	// @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String id;
 
 	private Integer amendmentType;
@@ -51,7 +52,7 @@ public class RateRow {
 
 	@JsonFormat(pattern = AppConstants.DEFAULT_ZONED_DATETIME_FORMAT)
 	private ZonedDateTime dateCreated;
-	
+
 	@JsonFormat(pattern = AppConstants.DEFAULT_ZONED_DATETIME_FORMAT)
 	private ZonedDateTime dateUpdated;
 
@@ -67,7 +68,7 @@ public class RateRow {
 
 	@JsonFormat(pattern = AppConstants.DEFAULT_DATE_FORMAT)
 	private Date effectiveDateFrom;
-	
+
 	@JsonFormat(pattern = AppConstants.DEFAULT_DATE_FORMAT)
 	private Date effectiveDateThru;
 

@@ -1,6 +1,7 @@
 package com.trax.ratemanager.orgnization;
 
-public enum OrganizationType {
+public enum OrganizationType
+{
 	BUYER, SELLER, UNKNOWN
 
 }

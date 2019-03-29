@@ -20,7 +20,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class OrganizationVo {
+public class OrganizationVo
+{
 
 	private String id;
 	private String orgName;
@@ -34,7 +35,8 @@ public class OrganizationVo {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "sellerOrg")
 	List<RateSetVo> seller;
 
-	public OrganizationVo(String id, String orgName, Enum<OrganizationType> orgType) {
+	public OrganizationVo(String id, String orgName, Enum<OrganizationType> orgType)
+	{
 		super();
 		this.id = id;
 		this.orgName = orgName;

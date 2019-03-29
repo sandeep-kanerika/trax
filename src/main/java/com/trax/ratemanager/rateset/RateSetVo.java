@@ -21,7 +21,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class RateSetVo {
+public class RateSetVo
+{
 
 	private String id;
 
@@ -70,7 +71,7 @@ public class RateSetVo {
 	private List<RateTableVo> tables;
 
 	private String createdBy;
-	
+
 	private String reviewedBy;
 
 	private String lastAssignedBy;
