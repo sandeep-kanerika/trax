@@ -41,6 +41,8 @@ public class OrganizationConverter
 		if (org != null)
 		{
 			orgVo.setId(org.getId());
+			orgVo.setOrgName(org.getOrgName());
+			orgVo.setOrgType(org.getOrgType());
 
 			// add remaining fields and remove this comment.
 		}

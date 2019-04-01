@@ -2,6 +2,7 @@ package com.trax.ratemanager.raterow;
 
 import java.time.ZonedDateTime;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,6 +34,7 @@ public class RateRow
 	@GeneratedValue(generator = "uuid")
 	@GenericGenerator(name = "uuid", strategy = "uuid2")
 	private String id;
+
 	private Integer amendmentType;
 	private String parentId;
 
