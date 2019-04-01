@@ -58,15 +58,9 @@ public class Amendment
 	// private String ratesetId;
 	private String ratesetReferenceId;
 
-	@JsonIgnoreProperties("buyer")
-	@NotFound(action = NotFoundAction.IGNORE)
-	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-	private Organization buyerOrg;
+	private String buyerOrgId;
 
-	@JsonIgnoreProperties("seller")
-	@NotFound(action = NotFoundAction.IGNORE)
-	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-	private Organization sellerOrg;
+	private String sellerOrgId;
 
 	private String ratesetName;
 	private String region;
