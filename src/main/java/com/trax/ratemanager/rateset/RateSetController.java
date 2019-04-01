@@ -39,13 +39,16 @@ public class RateSetController
 	@Autowired(required = true)
 	private OrganizationService organizationService;
 
+	@Autowired(required = true)
+	private RateSetsService rateSetService;
+	
 	@PostMapping(value = "/rate-sets", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<Object> createRateSets(@RequestBody RateSetVo rateSetVo) throws Exception
 	{
 		log.info("***************Create RateSet(PostRequest) ");
 		log.info("***************RateSetValue Object ::::" + rateSetVo);
 		RateSetConverter rateSetConverter = new RateSetConverter();
-		RateSet rateSet = rateSetConverter.convertToRateSet(rateSetVo, organizationService);
+		RateSet rateSet = rateSetConverter.convertToRateSet(rateSetVo, organizationService, null);
 		log.info("***************RateSet Object After VO--to-->BO ::::" + rateSet);
 		RateSet createdRateSet = null;
 		try
