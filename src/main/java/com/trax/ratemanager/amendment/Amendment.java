@@ -10,7 +10,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotEmpty;
@@ -21,10 +20,8 @@ import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.trax.ratemanager.config.AppConstants;
-import com.trax.ratemanager.orgnization.Organization;
 import com.trax.ratemanager.raterow.RateRow;
 import com.trax.ratemaneger.user.UserAuditor;
 
@@ -55,13 +52,10 @@ public class Amendment
 	private Integer type;
 	@NotEmpty
 	private String description;
-	// private String ratesetId;
+	private String ratesetId;
 	private String ratesetReferenceId;
-
 	private String buyerOrgId;
-
 	private String sellerOrgId;
-
 	private String ratesetName;
 	private String region;
 	private String mode;
