@@ -10,10 +10,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trax.ratemanager.exception.ResourceNotFoundException;
+import com.trax.ratemanager.rateset.RateSet;
+import com.trax.ratemanager.rateset.RateSetsService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,21 +26,38 @@ public class RateTableController
 
 	@Autowired
 	RateTableService rateTablesService;
+	
+	@Autowired
+	private RateSetsService rateSetsService;
+
 
 	@PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
-	@ResponseBody
-	public RateTable createRateTablesDefinition(@RequestBody RateTable rateTable)
+	public ResponseEntity<Object> createRateTables(@RequestBody RateTableVo rateTableVo) throws Exception
 	{
 
-		log.info("***************Rate Tables Definition(PostRequest) ");
-		log.info("***************Rate Tables Definition Object ::::" + rateTable);
-		return rateTablesService.create(rateTable);
+		log.info("***************Rate Tables (PostRequest) ");
+		log.info("***************Rate Tables  Object ::::" + rateTableVo);
+		RateTable rateTable = RateTableConverter.convertToRateTable(rateTableVo);
+		RateSet existingRateSet = rateSetsService.getById(rateTableVo.getRateSetId());
+		log.info("***************Rate Tables Object After VO--to-->BO ::::" + rateTable);
+		
+		try
+		{
+			existingRateSet.getTables().add(rateTable);
+			rateSetsService.create(existingRateSet);
+			return ResponseEntity.ok(existingRateSet);
+		}
+		catch (Exception ex)
+		{
+			log.error("Error occured:::" + ex.getMessage());
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResourceNotFoundException("error", ex));
+		}
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<RateTable> getRateTablesDefinition(@PathVariable String id)
+	public ResponseEntity<RateTable> getRateTables(@PathVariable String id)
 	{
-		log.info("***************Get Rate Tables Definition ");
+		log.info("***************Get Rate Tables  ");
 		HttpStatus returnStatus = HttpStatus.OK;
 		try
 		{
@@ -51,7 +69,7 @@ public class RateTableController
 			}
 			else
 			{
-				throw new ResourceNotFoundException("Rate Table Definition Id doesn't exist !");
+				throw new ResourceNotFoundException("Rate Table  Id doesn't exist !");
 			}
 		}
 		catch (ResourceNotFoundException e)
@@ -68,16 +86,16 @@ public class RateTableController
 	}
 
 	@RequestMapping(method = {RequestMethod.PUT, RequestMethod.PATCH})
-	public RateTable updateRateTablesDefinition(@RequestBody RateTable rateTablesDefinition)
+	public RateTable updateRateTables(@RequestBody RateTable rateTables)
 	{
 
-		log.info("***************Update Rate Tables Definition ");
-		return rateTablesService.update(rateTablesDefinition);
+		log.info("***************Update Rate Tables  ");
+		return rateTablesService.update(rateTables);
 	}
 
 	/*
 	 * @DeleteMapping(value = "/{id}") public RateTable
-	 * deleteRateTablesDefinition(@PathVariable String id) {
+	 * deleteRateTables(@PathVariable String id) {
 	 * 
 	 * LOGGER.info("deleteRateTable invoked"); return
 	 * rateTableService.delete(getRateTable(id)); }

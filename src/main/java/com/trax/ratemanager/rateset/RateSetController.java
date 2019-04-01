@@ -22,6 +22,7 @@ import com.trax.ratemanager.column.defination.RateColumnDefinitionService;
 import com.trax.ratemanager.column.defination.RateColumnDefinitionVo;
 import com.trax.ratemanager.exception.ResourceNotFoundException;
 import com.trax.ratemanager.orgnization.OrganizationService;
+import com.trax.ratemanager.ratetable.RateTableService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -30,25 +31,29 @@ import lombok.extern.slf4j.Slf4j;
 public class RateSetController
 {
 
-	@Autowired
+	@Autowired(required = true)
 	private RateSetsService rateSetsService;
 
-	@Autowired
+	@Autowired(required = true)
 	private RateColumnDefinitionService columnDefService;
 
 	@Autowired(required = true)
 	private OrganizationService organizationService;
-
+	
 	@Autowired(required = true)
 	private RateSetsService rateSetService;
 	
+	@Autowired(required = true)
+	private RateTableService rateTableService;
+
 	@PostMapping(value = "/rate-sets", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<Object> createRateSets(@RequestBody RateSetVo rateSetVo) throws Exception
 	{
 		log.info("***************Create RateSet(PostRequest) ");
 		log.info("***************RateSetValue Object ::::" + rateSetVo);
 		RateSetConverter rateSetConverter = new RateSetConverter();
-		RateSet rateSet = rateSetConverter.convertToRateSet(rateSetVo, organizationService, null);
+
+		RateSet rateSet = rateSetConverter.convertToRateSet(rateSetVo, organizationService, rateTableService);
 		log.info("***************RateSet Object After VO--to-->BO ::::" + rateSet);
 		RateSet createdRateSet = null;
 		try
@@ -83,7 +88,7 @@ public class RateSetController
 		}
 		else
 		{
-			throw new ResourceNotFoundException("Rate Set is not found with "+rateSetId);
+			throw new ResourceNotFoundException("Rate Set is not found with " + rateSetId);
 		}
 	}
 
@@ -119,7 +124,6 @@ public class RateSetController
 		return createRateSets(rateSetVo);
 	}
 
-	
 	@DeleteMapping(value = "/rate-sets/{id}")
 	public ResponseEntity<String> deleteRateSet(@PathVariable String id) throws Exception
 	{
@@ -132,17 +136,17 @@ public class RateSetController
 			{
 				rateSetsService.delete(rateSet);
 				log.info("Deleted the ratesetid from database ::::" + rateSet.getId());
-				return ResponseEntity.ok("Deleted RateSet Successfully: "+id);
+				return ResponseEntity.ok("Deleted RateSet Successfully: " + id);
 			}
 			catch (Exception ex)
 			{
-				throw new Exception("Error occured while deleting the RateSet "+id);
+				throw new Exception("Error occured while deleting the RateSet " + id);
 			}
 
 		}
 		else
 		{
-			throw new ResourceNotFoundException("RateSet with given ID is not present:"+id);
+			throw new ResourceNotFoundException("RateSet with given ID is not present:" + id);
 		}
 	}
 
