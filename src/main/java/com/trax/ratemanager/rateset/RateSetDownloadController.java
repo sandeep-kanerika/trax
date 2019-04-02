@@ -27,7 +27,7 @@ public class RateSetDownloadController
 	private static final Logger LOGGER = LoggerFactory.getLogger(RateSetDownloadController.class);
 
 	@GetMapping("/downloads/rate-sets/{rateSetId}")
-	public ResponseEntity<InputStreamResource> getRateSets(@PathVariable String rateSetId) throws IOException
+	public ResponseEntity<InputStreamResource> getRateSets(@PathVariable String rateSetId) throws Exception
 	{
 		log.info("getRateSets download invoked :::::-------------- " + rateSetId);
 		ByteArrayInputStream in = rateSetsSer.getRateSetInExcelFormat(rateSetId);
