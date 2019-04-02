@@ -7,22 +7,27 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.trax.ratemanager.jpa.RateManagerJpaRepositoryImpl;
 
 @SpringBootApplication
-@ComponentScan(basePackages = { "com.trax.*" })
+@ComponentScan(basePackages = {"com.trax.*"})
 @EntityScan("com.trax.*")
-@EnableJpaRepositories(repositoryBaseClass = RateManagerJpaRepositoryImpl.class, basePackages="com.trax")
+@EnableJpaRepositories(repositoryBaseClass = RateManagerJpaRepositoryImpl.class, basePackages = "com.trax")
 @Configuration
 @EnableTransactionManagement
 @EnableJpaAuditing
-public class RateManagerApplication {
+@EnableWebMvc
+@EnableScheduling
+public class RateManagerApplication
+{
 
-	public static void main(String[] args) {
+	public static void main(String[] args)
+	{
 		SpringApplication.run(RateManagerApplication.class, args);
 	}
 
 }
-		

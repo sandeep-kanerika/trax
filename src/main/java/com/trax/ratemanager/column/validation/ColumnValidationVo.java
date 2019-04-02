@@ -14,16 +14,14 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ColumnValidationVo {
-	
+public class ColumnValidationVo
+{
+
 	private String id;
-
 	private String tableId;
-
 	private String columnDefinitionId;
-
 	private String rateSetId;
-	
+
 	@OneToOne
 	private Validation validation;
 

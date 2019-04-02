@@ -5,7 +5,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class AmendmentWithMeta {
+public class AmendmentWithMeta
+{
 
 	private Amendment amendment;
 	private String meta;

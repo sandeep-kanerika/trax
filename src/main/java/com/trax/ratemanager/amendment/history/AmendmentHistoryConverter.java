@@ -3,22 +3,26 @@ package com.trax.ratemanager.amendment.history;
 import com.trax.ratemanager.orgnization.Organization;
 import com.trax.ratemanager.orgnization.OrganizationType;
 
-public class AmendmentHistoryConverter {
+import lombok.extern.slf4j.Slf4j;
 
-	public static AmendmentHistory convertToAmendmentHistory(AmendmentHistoryVo amendmentHistoryVo) throws Exception {
+@Slf4j
+public class AmendmentHistoryConverter
+{
+
+	public static AmendmentHistory convertToAmendmentHistory(AmendmentHistoryVo amendmentHistoryVo) throws Exception
+	{
 		AmendmentHistory amendmentHistory = null;
-		if (amendmentHistoryVo != null) {
+		if (amendmentHistoryVo != null)
+		{
 			amendmentHistory = new AmendmentHistory();
-			System.out.println("existing id:::" + amendmentHistoryVo.getId());
+			log.info("***************Amendment History id in convertor ::::" + amendmentHistoryVo.getId());
 
 			amendmentHistory.setId(amendmentHistoryVo.getId());
 			amendmentHistory.setAmendmentId(amendmentHistoryVo.getAmendmentId());
 			amendmentHistory.setActionType(amendmentHistoryVo.getActionType());
-			
-			amendmentHistory.setBuyerOrg(new Organization(amendmentHistoryVo.getBuyerOrgId(), amendmentHistoryVo.getBuyerOrgName(),
-					OrganizationType.BUYER));
-			amendmentHistory.setSellerOrg(new Organization(amendmentHistoryVo.getSellerOrgId(), amendmentHistoryVo.getSellerOrgName(),
-					OrganizationType.SELLER));
+
+			amendmentHistory.setBuyerOrg(new Organization(amendmentHistoryVo.getBuyerOrgId(), amendmentHistoryVo.getBuyerOrgName(), OrganizationType.BUYER));
+			amendmentHistory.setSellerOrg(new Organization(amendmentHistoryVo.getSellerOrgId(), amendmentHistoryVo.getSellerOrgName(), OrganizationType.SELLER));
 
 			amendmentHistory.setRatesetId(amendmentHistoryVo.getRatesetId());
 
@@ -33,7 +37,7 @@ public class AmendmentHistoryConverter {
 			amendmentHistory.setStatus(Integer.parseInt(amendmentHistoryVo.getStatus()));
 
 			amendmentHistory.setRateRows(amendmentHistoryVo.getRateRows());
-			
+
 			amendmentHistory.setDateRecorded(amendmentHistoryVo.getDateRecorded());
 			amendmentHistory.setCreatedBy(amendmentHistoryVo.getCreatedBy());
 			amendmentHistory.setDateCreated(amendmentHistoryVo.getDateCreated());
@@ -48,15 +52,19 @@ public class AmendmentHistoryConverter {
 			amendmentHistory.setApprovers(amendmentHistoryVo.getApprovers());
 			amendmentHistory.setCurrentApprover(amendmentHistoryVo.getCurrentApprover());
 
+			log.info("***************Amendment History Object in Amendment History Convert:::" + amendmentHistory);
 			return amendmentHistory;
 
-		} else {
+		}
+		else
+		{
 			throw new Exception("Problem with input");
 		}
 
 	}
 
-	public static AmendmentHistoryVo convertToRateSetVo(AmendmentHistory amendmentHistory) {
+	public static AmendmentHistoryVo convertToRateSetVo(AmendmentHistory amendmentHistory)
+	{
 		String id = amendmentHistory.getId();
 		AmendmentHistoryVo amendmentHistoryVo = new AmendmentHistoryVo();
 		amendmentHistoryVo.setId(id);

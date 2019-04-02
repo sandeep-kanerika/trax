@@ -7,20 +7,20 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotEmpty;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.trax.ratemanager.amendment.Amendment;
 import com.trax.ratemanager.config.AppConstants;
-import com.trax.ratemanager.orgnization.Organization;
 import com.trax.ratemanager.ratetable.RateTable;
 
 import lombok.AllArgsConstructor;
@@ -36,27 +36,19 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class RateSet {
-
+public class RateSet
+{
 	@Id
+	@GeneratedValue(generator = "uuid")
+	@GenericGenerator(name = "uuid", strategy = "uuid2")
 	private String id;
-
+	
 	private Integer status;
-
-	@JsonIgnoreProperties("buyer")
-	@NotFound(action = NotFoundAction.IGNORE)
-	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-	private Organization buyerOrg;
-
-	@JsonIgnoreProperties("seller")
-	@NotFound(action = NotFoundAction.IGNORE)
-	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-	private Organization sellerOrg;
-
+	private String buyerOrgId;
+	private String sellerOrgId;
+	@NotEmpty(message="RateSet name is required!")
 	private String name;
-
 	private String region;
-
 	private String mode;
 
 	@JsonFormat(pattern = AppConstants.DEFAULT_ZONED_DATETIME_FORMAT)
@@ -79,7 +71,7 @@ public class RateSet {
 
 	private String tableHash;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "rateSetId")
 	private List<RateTable> tables;
 
@@ -89,13 +81,8 @@ public class RateSet {
 	private List<Amendment> amendments;
 
 	private String createdBy;
-
 	private String reviewedBy;
-
 	private String lastAssignedBy;
-
 	private String lastUpdatedBy;
-
 	private String approvers;
-
 }

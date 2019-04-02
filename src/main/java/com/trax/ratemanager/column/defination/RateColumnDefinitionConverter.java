@@ -1,15 +1,21 @@
 package com.trax.ratemanager.column.defination;
 
-public class ColumnDefinitionConverter {
+import lombok.extern.slf4j.Slf4j;
 
-	public static RateColumnDefinition convertToRateColumnDefinition(ColumnDefinitionVo columnDefinitionVo) throws Exception{
-		
+@Slf4j
+public class RateColumnDefinitionConverter
+{
+
+	public static RateColumnDefinition convertToRateColumnDefinition(RateColumnDefinitionVo columnDefinitionVo) throws Exception
+	{
+
 		RateColumnDefinition rateColumnDefinition = null;
-		if(columnDefinitionVo != null) {
+		if (columnDefinitionVo != null)
+		{
 			rateColumnDefinition = new RateColumnDefinition();
-			
-			System.out.println("existing id:::" + columnDefinitionVo.getId());
-			
+
+			log.info("***************existing id in convertor ::::" + columnDefinitionVo.getId());
+
 			rateColumnDefinition.setId(columnDefinitionVo.getId());
 			rateColumnDefinition.setConcept(columnDefinitionVo.getConcept());
 			rateColumnDefinition.setName(columnDefinitionVo.getName());
@@ -26,17 +32,20 @@ public class ColumnDefinitionConverter {
 			rateColumnDefinition.setPivotCharge(columnDefinitionVo.getPivotCharge());
 			rateColumnDefinition.setDescription(columnDefinitionVo.getDescription());
 
+			log.info("***************Rate Column Definition Object in Rate Column Definition Convert:::" + rateColumnDefinition);
 			return rateColumnDefinition;
-		}else {
+		}
+		else
+		{
 			throw new Exception("Problem with input");
 		}
-		
+
 	}
-	
-	public static ColumnDefinitionVo convertToRateSetVo(RateColumnDefinition rateColumnDefinition) 
+
+	public static RateColumnDefinitionVo convertToRateSetVo(RateColumnDefinition rateColumnDefinition)
 	{
 		String id = rateColumnDefinition.getId();
-		ColumnDefinitionVo columnDefinitionVo = new ColumnDefinitionVo();
+		RateColumnDefinitionVo columnDefinitionVo = new RateColumnDefinitionVo();
 		columnDefinitionVo.setId(id);
 		return columnDefinitionVo;
 	}

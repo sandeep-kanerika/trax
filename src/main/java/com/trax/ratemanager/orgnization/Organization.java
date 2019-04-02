@@ -1,14 +1,12 @@
 package com.trax.ratemanager.orgnization;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.trax.ratemanager.rateset.RateSet;
+import org.hibernate.annotations.GenericGenerator;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,26 +20,17 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Organization {
-
+public class Organization
+{
 	@Id
+	@GeneratedValue(generator = "uuid")
+	@GenericGenerator(name = "uuid", strategy = "uuid2")
 	private String id;
+
+	@Size(min = 1, max = 200, message = "Valid organization name is required!")
+	@Column(unique = true)
 	private String orgName;
+
 	private Enum<OrganizationType> orgType;
-
-	@JsonIgnoreProperties("buyerOrg")
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "buyerOrg")
-	List<RateSet> buyer;
-
-	@JsonIgnoreProperties("sellerOrg")
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "sellerOrg")
-	List<RateSet> seller;
-
-	public Organization(String id, String orgName, Enum<OrganizationType> orgType) {
-		super();
-		this.id = id;
-		this.orgName = orgName;
-		// this.orgType = orgType;
-	}
 
 }

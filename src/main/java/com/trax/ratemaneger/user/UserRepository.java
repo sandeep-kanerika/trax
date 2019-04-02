@@ -8,6 +8,7 @@ import com.trax.ratemanager.jpa.AbstractJpaRepository;
  * Created by sudhakar.rao on 2/19/2019.
  */
 @Repository
-public interface UserRepository extends AbstractJpaRepository<UserAuditor, String> {
-	
+public interface UserRepository extends AbstractJpaRepository<UserAuditor, String>
+{
+
 }

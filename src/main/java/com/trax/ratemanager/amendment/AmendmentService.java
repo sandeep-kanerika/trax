@@ -18,58 +18,73 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Service
 @Slf4j
-public class AmendmentService extends AbstractJpaService<Amendment> {
+public class AmendmentService extends AbstractJpaService<Amendment>
+{
 
 	@Autowired
 	private AmendmentRepository amendmentsRepository;
 
 	@Override
-	public Amendment create(Amendment amendments) {
+	public Amendment create(Amendment amendments)
+	{
 		log.debug("inside create ammendments");
 
-		//User lastUpdateBy = amendments.getLastUpdatedBy();
+		// User lastUpdateBy = amendments.getLastUpdatedBy();
 		return save(amendments);
 	}
 
 	@Override
 	@Transactional
-	public Amendment update(Amendment _amendments) {
-		// Get the data from DB and update the fields and information from request data
+	public Amendment update(Amendment _amendments)
+	{
+		// Get the data from DB and update the fields and information from
+		// request data
 		Amendment amendments = getById(_amendments.getId());
-		if (amendments != null) {
+		if (amendments != null)
+		{
 			return save(amendments);
-		} else {
+		}
+		else
+		{
 			throw new ResourceNotFoundException("Amendment Id Not Found !");
 		}
 	}
 
-	public Amendment getById(String id) {
+	public Amendment getById(String id)
+	{
 		return amendmentsRepository.getById(id);
 	}
 
 	@Override
 	@Transactional
-	protected Amendment delete(Amendment amendments) {
+	public Amendment delete(Amendment amendments)
+	{
 		amendmentsRepository.delete(amendments);
 		return amendments;
 	}
 
-	public Boolean delete(String id) {
-		try {
+	public Boolean delete(String id)
+	{
+		try
+		{
 			amendmentsRepository.deleteById(id);
 			return true;
-		} catch (Exception ex) {
+		}
+		catch (Exception ex)
+		{
 			return false;
 		}
 	}
 
 	@Override
-	protected List<Amendment> search(Amendment amendments) {
+	public List<Amendment> search(Amendment amendments)
+	{
 		return amendmentsRepository.findAll();
 	}
 
 	@Override
-	protected AbstractJpaRepository<Amendment, String> getRepository() {
+	public AbstractJpaRepository<Amendment, String> getRepository()
+	{
 		return amendmentsRepository;
 	}
 }

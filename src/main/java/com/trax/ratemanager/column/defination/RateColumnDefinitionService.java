@@ -10,49 +10,59 @@ import com.trax.ratemanager.jpa.AbstractJpaRepository;
 import com.trax.ratemanager.jpa.AbstractJpaService;
 
 @Service
-public class ColumnDefinitionsService extends AbstractJpaService<RateColumnDefinition> {
+public class RateColumnDefinitionService extends AbstractJpaService<RateColumnDefinition>
+{
 
 	@Autowired
-	ColumnDefinitionsRepository columnDefinitionsrepository;
+	RateColumnDefinitionRepository columnDefinitionsrepository;
 
 	@Override
-	protected RateColumnDefinition create(RateColumnDefinition columndefinition) {
+	public RateColumnDefinition create(RateColumnDefinition columndefinition)
+	{
 		// TODO Auto-generated method stub
 		return save(columndefinition);
 	}
 
 	@Override
-	protected RateColumnDefinition update(RateColumnDefinition colDef) {
+	public RateColumnDefinition update(RateColumnDefinition colDef)
+	{
 		// TODO Auto-generated method stub
 		RateColumnDefinition columnDefinitions = getById(colDef.getId());
-		if(columnDefinitions != null) {
+		if (columnDefinitions != null)
+		{
 			return save(colDef);
-		}else {
+		}
+		else
+		{
 			throw new ResourceNotFoundException("ColumnDefinitions Id Doesn't Exists !");
 		}
 	}
 
 	@Override
-	protected RateColumnDefinition delete(RateColumnDefinition t) {
+	public RateColumnDefinition delete(RateColumnDefinition t)
+	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	protected List<RateColumnDefinition> search(RateColumnDefinition t) {
+	public List<RateColumnDefinition> search(RateColumnDefinition t)
+	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	protected AbstractJpaRepository<RateColumnDefinition, String> getRepository() {
+	public AbstractJpaRepository<RateColumnDefinition, String> getRepository()
+	{
 		// TODO Auto-generated method stub
 		return columnDefinitionsrepository;
 	}
-	
-    public RateColumnDefinition getById(String id) {
-//		return search(id);
-    	return columnDefinitionsrepository.getById(id);
-    }
+
+	public RateColumnDefinition getById(String id)
+	{
+		// return search(id);
+		return columnDefinitionsrepository.getById(id);
+	}
 
 }

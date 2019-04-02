@@ -1,6 +1,7 @@
 package com.trax.ratemanager.config;
 
-public class AppConstants {
+public class AppConstants
+{
 
 	// Date and time format constants
 	public static final String DEFAULT_DATETIME_FORMAT = "yyyy-MM-dd HH:mm:ss";

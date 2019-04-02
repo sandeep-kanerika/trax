@@ -10,50 +10,57 @@ import com.trax.ratemanager.jpa.AbstractJpaRepository;
 import com.trax.ratemanager.jpa.AbstractJpaService;
 
 @Service
-public class RateSetDefinitionService extends AbstractJpaService<RateSetDefinition> {
+public class RateSetDefinitionService extends AbstractJpaService<RateSetDefinition>
+{
 
 	@Autowired
-	RateSetDefinitionRepository rateSetsDefinitionRepository; 
-	
+	private RateSetDefinitionRepository rateSetsDefinitionRepository;
+
 	@Override
-	protected RateSetDefinition create(RateSetDefinition rateSetsDefinition) {
-		// TODO Auto-generated method stub
+	public RateSetDefinition create(RateSetDefinition rateSetsDefinition)
+	{
 		return save(rateSetsDefinition);
 	}
 
 	@Override
-	protected RateSetDefinition update(RateSetDefinition _rateSetsDefinition) {
-		// TODO Auto-generated method stub
-		RateSetDefinition rateSetsDefinition = getById(_rateSetsDefinition.getId());
-		if(rateSetsDefinition != null)
-			return save(_rateSetsDefinition);
-		else {
+	public RateSetDefinition update(RateSetDefinition rateSetDefination)
+	{
+		System.out.println("RateSetDefinitionService.update()--->" + rateSetDefination.getId());
+		RateSetDefinition rateSetsDefinition = getById(rateSetDefination.getId());
+		if (rateSetsDefinition != null) return save(rateSetDefination);
+		else
+		{
 			throw new ResourceNotFoundException("RateSetsDefinition Id Doesn't Exists !");
 		}
 	}
 
 	@Override
-	protected RateSetDefinition delete(RateSetDefinition rateSetsDefinition) {
-		// TODO Auto-generated method stub
+	public RateSetDefinition delete(RateSetDefinition rateSetsDefinition)
+	{
 		rateSetsDefinitionRepository.delete(rateSetsDefinition);
 		return rateSetsDefinition;
 	}
 
 	@Override
-	protected List<RateSetDefinition> search(RateSetDefinition rateSetsDefinition) {
-		// TODO Auto-generated method stub
+	public List<RateSetDefinition> search(RateSetDefinition rateSetsDefinition)
+	{
 		return null;
 	}
 
 	@Override
-	protected AbstractJpaRepository<RateSetDefinition, String> getRepository() {
-		// TODO Auto-generated method stub
+	public AbstractJpaRepository<RateSetDefinition, String> getRepository()
+	{
 		return rateSetsDefinitionRepository;
 	}
 
-	public RateSetDefinition getById(String id) {
-		// TODO Auto-generated method stub
+	public RateSetDefinition getById(String id)
+	{
 		return rateSetsDefinitionRepository.getById(id);
 	}
-	
+
+	public List<RateSetDefinition> findAll()
+	{
+		return rateSetsDefinitionRepository.findAll();
+	}
+
 }

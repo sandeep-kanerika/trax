@@ -13,7 +13,8 @@ import org.springframework.data.repository.NoRepositoryBean;
  */
 
 @NoRepositoryBean
-public interface AbstractJpaRepository<T, ID extends Serializable> extends JpaRepository<T, ID>, JpaSpecificationExecutor<T> {
-    void refresh(T t);
-    EntityManager getEntityManager();
+public interface AbstractJpaRepository<T, ID extends Serializable> extends JpaRepository<T, ID>, JpaSpecificationExecutor<T>
+{
+	void refresh(T t);
+	EntityManager getEntityManager();
 }

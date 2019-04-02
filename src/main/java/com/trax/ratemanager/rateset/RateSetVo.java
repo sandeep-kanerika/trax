@@ -21,20 +21,15 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class RateSetVo {
+public class RateSetVo
+{
 
 	private String id;
-
 	private String status;
-
 	private String name;
-
 	private String region;
-
 	private String mode;
-
 	private String meta;
-
 	private String type;
 
 	@JsonFormat(pattern = AppConstants.DEFAULT_ZONED_DATETIME_FORMAT)
@@ -56,27 +51,15 @@ public class RateSetVo {
 	private Date effectiveDateThru;
 
 	private String earliestExpirationDate;
-
 	private String buyerOrgId;
-
 	private String sellerOrgId;
-
 	private String buyerOrgName;
-
 	private String sellerOrgName;
-
 	private String tableHash;
-
 	private List<RateTableVo> tables;
-
 	private String createdBy;
-	
 	private String reviewedBy;
-
 	private String lastAssignedBy;
-
 	private String approvers;
-
 	private String lastUpdatedBy;
-
 }

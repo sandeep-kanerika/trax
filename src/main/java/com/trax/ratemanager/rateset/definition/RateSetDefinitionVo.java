@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -23,20 +22,14 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class RateSetDefinitionVo {
+public class RateSetDefinitionVo
+{
 
-	@Id
-	// @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String id;
-
-	private String status;
-
+	private Integer status;
 	private String creatorOrgId;
-
 	private String region;
-
 	private String mode;
-
 	private String name;
 
 	@JsonFormat(pattern = AppConstants.DEFAULT_ZONED_DATETIME_FORMAT)
@@ -47,6 +40,6 @@ public class RateSetDefinitionVo {
 
 	private String tableHash;
 
-	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<RateTableDefinition> tables;
 }

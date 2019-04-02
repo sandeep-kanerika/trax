@@ -1,19 +1,15 @@
 package com.trax.ratemanager.amendment.history;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trax.ratemanager.amendment.Amendment;
@@ -27,95 +23,80 @@ import lombok.extern.slf4j.Slf4j;
  */
 @RestController
 @Slf4j
-@RequestMapping("/amendments/history")
-public class AmendmentHistoryController {
+
+public class AmendmentHistoryController
+{
 
 	@Autowired
-	AmendmentHistoryService amendmentsHistorySer;
+	AmendmentHistoryService amendmenHistService;
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(AmendmentHistoryController.class);
+	@PostMapping(value = "/amendments/history", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
 
-	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
-	@ResponseBody
-	public ResponseEntity<Object> createAmendmentsHistory(@RequestBody AmendmentHistoryVo amendmentsHistoryVo)
-			throws Exception {
+	public ResponseEntity<Object> createAmendmentsHistory(@RequestBody AmendmentHistoryVo amendmentsHistoryVo) throws Exception
+	{
 
 		log.info("***************Create AmendmentsHistory(PostRequest) ");
-		log.info("***************AmendmentsHistoryValue Object:::" + amendmentsHistoryVo);
+		log.info("***************Amendments History Value Object :::" + amendmentsHistoryVo);
 		AmendmentHistory amendmentsHistory = AmendmentHistoryConverter.convertToAmendmentHistory(amendmentsHistoryVo);
-		log.info("***************AmendmentsHistory Object After VO--to-->BO:::" + amendmentsHistory);
+		log.info("***************Amendments History Object After VO--to-->BO :::" + amendmentsHistory);
 		AmendmentHistory createdAmendmentHistory = null;
-		try {
-			createdAmendmentHistory = amendmentsHistorySer.create(amendmentsHistory);
+		try
+		{
+			createdAmendmentHistory = amendmenHistService.create(amendmentsHistory);
 			return ResponseEntity.ok(createdAmendmentHistory);
-		} catch (Exception ex) {
+		}
+		catch (Exception ex)
+		{
 			log.error("Error occured:::" + ex.getMessage());
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-					.body(new ResourceNotFoundException("error", ex));
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResourceNotFoundException("error", ex));
 		}
 	}
 
-	@RequestMapping(method = { RequestMethod.PUT, RequestMethod.PATCH })
-	public ResponseEntity<Object> updateAmendmentsHistory(@RequestBody AmendmentHistoryVo amendmentsHistoryVo)
-			throws Exception {
-		log.info("updateAmandmentHistory invoked");
-		return createAmendmentsHistory(amendmentsHistoryVo);
-	}
-
-	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<AmendmentHistory> deleteAmendmentsHistory(@PathVariable String id) {
-
-		ResponseEntity<AmendmentHistory> responseEntity = null;
-		log.info("**************deleteAmendmentHistory invoked with id:::" + id);
-		AmendmentHistory amendmentHistory = amendmentsHistorySer.getById(id);
-		log.info("**************found the amendmentHistory id in DB:::" + amendmentHistory);
-		if (amendmentHistory != null) {
-			try {
-				amendmentsHistorySer.delete(amendmentHistory);
-				log.info("deleted the amendmentHistoryId from database..." + amendmentHistory.getId());
-				return ResponseEntity.ok(amendmentHistory);
-			} catch (Exception ex) {
-				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-			}
-
-		} else {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-		}
-	}
-
-	@GetMapping("/{id}")
-	public ResponseEntity<AmendmentHistory> getAmendmentsHistoryByTheId(@PathVariable String id) {
-		LOGGER.info("getAmandmentsHistory invoked");
+	@GetMapping("/amendments/history/{id}")
+	public ResponseEntity<AmendmentHistory> findAmendmentHistoryById(@PathVariable String id)
+	{
+		log.info("**************get Amandments History(GET REQUEST)");
 		HttpStatus returnStatus = HttpStatus.OK;
 
-		try {
-			AmendmentHistory getAmendmentHistoryDetail = amendmentsHistorySer.getById(id);
-			if (getAmendmentHistoryDetail != null) {
+		try
+		{
+			AmendmentHistory getAmendmentHistoryDetail = amendmenHistService.getById(id);
+			log.info("***************Get Amandments History Object ::::" + getAmendmentHistoryDetail);
+			if (getAmendmentHistoryDetail != null)
+			{
 				return new ResponseEntity<>(getAmendmentHistoryDetail, returnStatus);
-			} else {
-				throw new ResourceNotFoundException("AmendmentsHistory Id Doesn't Exists !");
 			}
-		} catch (ResourceNotFoundException e) {
-			LOGGER.error(e.getMessage());
+			else
+			{
+				throw new ResourceNotFoundException("Amendments History Id Doesn't Exists !");
+			}
+		}
+		catch (ResourceNotFoundException e)
+		{
+			log.error(e.getMessage());
 			returnStatus = HttpStatus.NOT_FOUND;
-		} catch (Exception e) {
+		}
+		catch (Exception e)
+		{
 			returnStatus = HttpStatus.INTERNAL_SERVER_ERROR;
-			LOGGER.error(e.getMessage());
+			log.error(e.getMessage());
 		}
 		return new ResponseEntity<>(returnStatus);
 	}
 
-	@GetMapping("/history")
-	public ResponseEntity<Amendment> getAmandmentHistory(@RequestBody AmendmentVo amendmentVo) {
-		System.out.println("---getAmandmentHistory---amendmentVo---->" + amendmentVo);
-
-		return null; // some response , need to be implemented.
+	@GetMapping("/amendments/history")
+	public ResponseEntity<List<AmendmentHistory>> getAmandmentHistory(@RequestBody AmendmentVo amendmentVo)
+	{
+		log.info("***************Get Amandment History ::::" + amendmentVo);
+		return null;
+		// some response , need to be implemented.
 
 	}
 
-	@GetMapping("/summary/submission-to-review")
-	public ResponseEntity<Amendment> getAmandmentSubmissionToReview(@PathVariable String id) {
-		System.out.println("---getAmandmentSubmissionToReview---ID---->" + id);
+	@GetMapping("/amendments/history/summary/submission-to-review")
+	public ResponseEntity<Amendment> getAmandmentHistorySubmissionToReview(@PathVariable String id)
+	{
+		log.info("***************Get Amandment History Submission Review ID ::::" + id);
 		return null;
 	}
 

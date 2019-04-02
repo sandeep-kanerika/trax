@@ -17,34 +17,37 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-//@RunWith(SpringRunner.class)
+// @RunWith(SpringRunner.class)
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @AutoConfigureMockMvc
 @SpringBootTest
-//@Import([IntegrationTestMockingConfig])
-public abstract class TestRateManagerMain/* extends Runner */{
+// @Import([IntegrationTestMockingConfig])
+public abstract class TestRateManagerMain
+/* extends Runner */ {
 
 	@Autowired
 	MockMvc mvc;
-	   
+
 	@Autowired
 	WebApplicationContext webApplicationContext;
 	/*
 	 * @Test public void contextLoads() { }
 	 */
-	protected void setUp() {
-	      mvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+	public void setUp()
+	{
+		mvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 	}
-	protected String mapToJson(Object obj) throws JsonProcessingException {
-	      ObjectMapper objectMapper = new ObjectMapper();
-	      return objectMapper.writeValueAsString(obj);
-	}
-	protected <T> T mapFromJson(String json, Class<T> clazz) 
-			throws JsonParseException, JsonMappingException, IOException {
-	      
+	public String mapToJson(Object obj) throws JsonProcessingException
+	{
 		ObjectMapper objectMapper = new ObjectMapper();
-      	return objectMapper.readValue(json, clazz);
+		return objectMapper.writeValueAsString(obj);
 	}
-	
+	public <T> T mapFromJson(String json, Class<T> clazz) throws JsonParseException, JsonMappingException, IOException
+	{
+
+		ObjectMapper objectMapper = new ObjectMapper();
+		return objectMapper.readValue(json, clazz);
+	}
+
 }

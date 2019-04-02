@@ -3,8 +3,6 @@ package com.trax.ratemanager.ratetable.definition;
 import java.time.ZonedDateTime;
 import java.util.List;
 
-import javax.persistence.Id;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.trax.ratemanager.column.defination.RateColumnDefinition;
 
@@ -20,15 +18,13 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @AllArgsConstructor
-public class RateTableDefinitionVo {
-
-	@Id
+public class RateTableDefinitionVo
+{
 	private String id;
 	private String creatorOrgId;
 	private String name;
-
+	private String rateSetDefinitionId;
 	private ZonedDateTime dateCreated;
-
 	private String tableGroup;
 	private String tableType;
 	private String columnHash;

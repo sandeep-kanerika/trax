@@ -9,7 +9,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class AmendmentWithRateRows {
+public class AmendmentWithRateRows
+{
 
 	private Amendment amendment;
 	private List<RateRowVo> rateRows;

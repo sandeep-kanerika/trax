@@ -1,7 +1,5 @@
 package com.trax.ratemanager.ratetable;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -12,60 +10,92 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trax.ratemanager.exception.ResourceNotFoundException;
+import com.trax.ratemanager.rateset.RateSet;
+import com.trax.ratemanager.rateset.RateSetsService;
+
+import lombok.extern.slf4j.Slf4j;
 
 @RestController
+@Slf4j
 @RequestMapping("/rate/tables")
-public class RateTableController {
+public class RateTableController
+{
 
 	@Autowired
 	RateTableService rateTablesService;
+	
+	@Autowired
+	private RateSetsService rateSetsService;
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(RateTableController.class);
 
-	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
-	@ResponseBody
-	public RateTable createRateTablesDefinition(@RequestBody RateTable rateTable) {
+	@PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<Object> createRateTables(@RequestBody RateTableVo rateTableVo) throws Exception
+	{
 
-		LOGGER.info("rateTablesDefinition invoked");
-		return rateTablesService.create(rateTable);
+		log.info("***************Rate Tables (PostRequest) ");
+		log.info("***************Rate Tables  Object ::::" + rateTableVo);
+		RateTable rateTable = RateTableConverter.convertToRateTable(rateTableVo);
+		RateSet existingRateSet = rateSetsService.getById(rateTableVo.getRateSetId());
+		log.info("***************Rate Tables Object After VO--to-->BO ::::" + rateTable);
+		
+		try
+		{
+			existingRateSet.getTables().add(rateTable);
+			rateSetsService.create(existingRateSet);
+			return ResponseEntity.ok(existingRateSet);
+		}
+		catch (Exception ex)
+		{
+			log.error("Error occured:::" + ex.getMessage());
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResourceNotFoundException("error", ex));
+		}
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<RateTable> getRateTablesDefinition(@PathVariable String id) {
-		LOGGER.info("getRateTablesDefinition invoked");
+	public ResponseEntity<RateTable> getRateTables(@PathVariable String id)
+	{
+		log.info("***************Get Rate Tables  ");
 		HttpStatus returnStatus = HttpStatus.OK;
-		try {
-			RateTable getAmendmentsDetail = rateTablesService.getById(id);
-
-			if (getAmendmentsDetail != null) {
-				return new ResponseEntity<>(getAmendmentsDetail, returnStatus);
-			} else {
-				throw new ResourceNotFoundException("RateTableDefinition Id doesn't exist !");
+		try
+		{
+			RateTable getRateTableDetail = rateTablesService.getById(id);
+			log.info("***************Get Rate Table Object ::::" + getRateTableDetail);
+			if (getRateTableDetail != null)
+			{
+				return new ResponseEntity<>(getRateTableDetail, returnStatus);
 			}
-		} catch (ResourceNotFoundException e) {
-			LOGGER.error(e.getMessage());
+			else
+			{
+				throw new ResourceNotFoundException("Rate Table  Id doesn't exist !");
+			}
+		}
+		catch (ResourceNotFoundException e)
+		{
+			log.error(e.getMessage());
 			returnStatus = HttpStatus.NOT_FOUND;
-		} catch (Exception e) {
+		}
+		catch (Exception e)
+		{
 			returnStatus = HttpStatus.INTERNAL_SERVER_ERROR;
-			LOGGER.error(e.getMessage());
+			log.error(e.getMessage());
 		}
 		return new ResponseEntity<>(returnStatus);
 	}
 
-	@RequestMapping(method = { RequestMethod.PUT, RequestMethod.PATCH })
-	public RateTable updateRateTablesDefinition(@RequestBody RateTable rateTablesDefinition) {
+	@RequestMapping(method = {RequestMethod.PUT, RequestMethod.PATCH})
+	public RateTable updateRateTables(@RequestBody RateTable rateTables)
+	{
 
-		LOGGER.info("updateRateTablesDefinition invoked");
-		return rateTablesService.update(rateTablesDefinition);
+		log.info("***************Update Rate Tables  ");
+		return rateTablesService.update(rateTables);
 	}
 
 	/*
 	 * @DeleteMapping(value = "/{id}") public RateTable
-	 * deleteRateTablesDefinition(@PathVariable String id) {
+	 * deleteRateTables(@PathVariable String id) {
 	 * 
 	 * LOGGER.info("deleteRateTable invoked"); return
 	 * rateTableService.delete(getRateTable(id)); }

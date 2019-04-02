@@ -6,9 +6,12 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -26,12 +29,14 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class RateTableDefinition {
+public class RateTableDefinition
+{
 
 	@Id
-	// @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(generator = "uuid")
+	@GenericGenerator(name = "uuid", strategy = "uuid2")
 	private String id;
-	
+
 	private String creatorOrgId;
 	private String name;
 
@@ -42,15 +47,15 @@ public class RateTableDefinition {
 	private String tableType;
 	private String columnHash;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "rateTableDefinitionId")
 	private List<RateColumnDefinition> columns;
 
 	@Override
-	public String toString() {
-		return "RateTableDefinition [id=" + id + ", creatorOrgId=" + creatorOrgId + ", name=" + name + ", dateCreated="
-				+ dateCreated + ", tableGroup=" + tableGroup + ", tableType=" + tableType + ", columnHash=" + columnHash
-				+ ", columns=" + columns + "]";
+	public String toString()
+	{
+		return "RateTableDefinition [id=" + id + ", creatorOrgId=" + creatorOrgId + ", name=" + name + ", dateCreated=" + dateCreated + ", tableGroup=" + tableGroup + ", tableType="
+				+ tableType + ", columnHash=" + columnHash + ", columns=" + columns + "]";
 	}
 
 }
