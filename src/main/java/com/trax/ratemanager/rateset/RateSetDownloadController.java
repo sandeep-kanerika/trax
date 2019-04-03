@@ -1,7 +1,6 @@
 package com.trax.ratemanager.rateset;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +10,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.extern.slf4j.Slf4j;
@@ -32,6 +30,7 @@ public class RateSetDownloadController
 		log.info("getRateSets download invoked :::::-------------- " + rateSetId);
 		ByteArrayInputStream in = rateSetsSer.getRateSetInExcelFormat(rateSetId);
 
+		System.out.println("we got byte input stream: size "+in.available());
 		HttpHeaders headers = new HttpHeaders();
 		String attachment = "attachment; filename=rateset_" + rateSetId + ".xlsx";
 		headers.add("Content-Disposition", attachment);

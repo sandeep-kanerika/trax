@@ -26,6 +26,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.trax.ratemanager.config.AppConstants;
 import com.trax.ratemanager.orgnization.Organization;
 import com.trax.ratemanager.raterow.RateRow;
+import com.trax.ratemanager.rateset.RateSet;
 import com.trax.ratemaneger.user.UserAuditor;
 
 import lombok.AllArgsConstructor;
@@ -55,24 +56,17 @@ public class Amendment
 	private Integer type;
 	@NotEmpty
 	private String description;
-	// private String ratesetId;
+	
+	@ManyToOne()
+    private RateSet rateset; 	
+	
 	private String ratesetReferenceId;
-
-	@JsonIgnoreProperties("buyer")
-	@NotFound(action = NotFoundAction.IGNORE)
-	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-	private Organization buyerOrg;
-
-	@JsonIgnoreProperties("seller")
-	@NotFound(action = NotFoundAction.IGNORE)
-	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-	private Organization sellerOrg;
 
 	private String ratesetName;
 	private String region;
 	private String mode;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "amendmentId")
 	private List<RateRow> rateRows;
 
@@ -84,21 +78,25 @@ public class Amendment
 
 	private String reviewedBy;
 
-	@NotFound(action = NotFoundAction.IGNORE)
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "createdById")
-	private UserAuditor createdBy;
-
-	@NotFound(action = NotFoundAction.IGNORE)
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "lastUpdatedById")
-	private UserAuditor lastUpdatedBy;
-
-	@NotFound(action = NotFoundAction.IGNORE)
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "lastAssignedById")
-	private UserAuditor lastAssignedBy;
-
+	/*
+	 * @NotFound(action = NotFoundAction.IGNORE)
+	 * 
+	 * @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	 * 
+	 * @JoinColumn(name = "createdById") private UserAuditor createdBy;
+	 * 
+	 * @NotFound(action = NotFoundAction.IGNORE)
+	 * 
+	 * @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	 * 
+	 * @JoinColumn(name = "lastUpdatedById") private UserAuditor lastUpdatedBy;
+	 * 
+	 * @NotFound(action = NotFoundAction.IGNORE)
+	 * 
+	 * @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	 * 
+	 * @JoinColumn(name = "lastAssignedById") private UserAuditor lastAssignedBy;
+	 */
 	// Need to implement list of approvers yet..
 
 	/*
@@ -108,10 +106,13 @@ public class Amendment
 	 * 
 	 * @JoinColumn(name = "approvers") private List<UserAuditor> approvers;
 	 */
-	@NotFound(action = NotFoundAction.IGNORE)
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "currentApproverId")
-	private UserAuditor currentApprover;
+	/*
+	 * @NotFound(action = NotFoundAction.IGNORE)
+	 * 
+	 * @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	 * 
+	 * @JoinColumn(name = "currentApproverId") private UserAuditor currentApprover;
+	 */
 
 	@JsonFormat(pattern = AppConstants.DEFAULT_ZONED_DATETIME_FORMAT)
 	private ZonedDateTime dateApproved;

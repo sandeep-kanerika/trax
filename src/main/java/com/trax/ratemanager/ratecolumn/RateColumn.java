@@ -39,8 +39,8 @@ public class RateColumn
 	private String name;
 	private String pivotCharge;
 	private String pivotField;
-	private String propertyName;
-	private Integer sortOrder;
+	private String propertyName; 
+	private Integer sortOrder;  
 	private String type;
 	private String hasAlias;
 	private String reference;

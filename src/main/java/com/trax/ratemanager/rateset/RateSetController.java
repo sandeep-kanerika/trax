@@ -15,11 +15,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.trax.ratemanager.amendment.Amendment;
+import com.trax.ratemanager.amendment.AmendmentConverter;
+import com.trax.ratemanager.amendment.AmendmentService;
 import com.trax.ratemanager.amendment.AmendmentVo;
 import com.trax.ratemanager.column.defination.RateColumnDefinition;
 import com.trax.ratemanager.column.defination.RateColumnDefinitionConverter;
 import com.trax.ratemanager.column.defination.RateColumnDefinitionService;
 import com.trax.ratemanager.column.defination.RateColumnDefinitionVo;
+import com.trax.ratemanager.config.AppConstants;
 import com.trax.ratemanager.exception.ResourceNotFoundException;
 import com.trax.ratemanager.orgnization.OrganizationService;
 import com.trax.ratemanager.ratetable.RateTableService;
@@ -45,6 +49,26 @@ public class RateSetController
 	
 	@Autowired(required = true)
 	private RateTableService rateTableService;
+	
+	@Autowired(required = true)
+	private AmendmentService amendmentService;
+	
+
+	@PostMapping(value = "/rate-sets-bulk", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
+	public Boolean createBulkRateSets(@RequestBody List<RateSetVo> rateSetVo) throws Exception
+	{
+		int count = 0;
+		log.info("***************Create RateSet(PostRequest) ");
+		try {
+		for(RateSetVo rateVo:rateSetVo) {
+			createRateSets(rateVo);
+		}
+		}catch(Exception ex) 
+		{
+			count++;
+		}
+		return count==0 ? true : false;
+	}
 
 	@PostMapping(value = "/rate-sets", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<Object> createRateSets(@RequestBody RateSetVo rateSetVo) throws Exception
@@ -69,7 +93,10 @@ public class RateSetController
 	}
 
 	@PostMapping(value = "/rates/submit/{rateSetId}", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<Object> operationsActiveRates(@PathVariable String rateSetId, @RequestParam("amendmentType") String amendmentType, @RequestParam("org") String orgId)
+	public ResponseEntity<Object> operationsActiveRates(
+			@PathVariable String rateSetId,
+			@RequestParam("amendmentType") String amendmentType,
+			@RequestParam("org") String orgId)
 			throws Exception
 	{
 		log.info("***************add Active Rate(PostRequest) ");
@@ -94,12 +121,17 @@ public class RateSetController
 
 	// find all rate sets
 	@GetMapping(value = {"/rates/active", "/rate-sets"})
-	public ResponseEntity<Object> findAllRateSets(@RequestParam(value = "org", required = false) String orgId) throws Exception
+	public ResponseEntity<Object> findAllRateSets(
+			@RequestParam(value = "org_id", required = false) String orgId,
+			@RequestParam(value = "status", required = false) String status,
+			@RequestParam(value = "name", required = false) String name,
+			@RequestParam(value = "page_token", required = false) String pageToken,
+			@RequestParam(value = "sory_by", required = false) String sortBy,
+			@RequestParam(value = "limit", required = false) String limit	) throws Exception
 	{
 		log.info("**************fetch all rate Set objects");
-		try
-		{
-			List<RateSet> allRateSets = rateSetsService.findAll();
+			//List<RateSet> allRateSets = (List<RateSet>) rateSetsService.findRateSetByCondition(orgId,status,name,pageToken,sortBy,limit);
+			List<RateSet> allRateSets = (List<RateSet>) rateSetsService.findAll();
 			if (allRateSets != null && !allRateSets.isEmpty())
 			{
 				return ResponseEntity.ok(allRateSets);
@@ -109,12 +141,6 @@ public class RateSetController
 				log.error("**********No object(s) found!!!");
 				throw new ResourceNotFoundException("No RateSet Found");
 			}
-		}
-		catch (Exception e)
-		{
-			log.error("**********Error occured:::" + e.getMessage());
-			throw new Exception("Problem occured while finding active rateset");
-		}
 	}
 
 	@PutMapping(value = "/rate-sets", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
@@ -151,27 +177,55 @@ public class RateSetController
 	}
 
 	@GetMapping(value = "/rate-sets/{rateSetId}/row-validations")
-	public Boolean getRateSetForRowValidation(@PathVariable String rateSetId)
+	public Boolean getRateSetForRowValidation(@PathVariable String rateSetId,
+			@RequestParam(value = "org_id", required = false) String orgId,
+			@RequestParam(value = "validated", required = false) String validated,
+			@RequestParam(value = "has_error", required = false) String hasError,
+			@RequestParam(value = "amendments_id", required = false) String amendmentId )
 	{
 		return false;
 	}
 
 	@GetMapping(value = "/rate-sets/{rateSetId}/rates-summary")
-	public Boolean getRateSetSummary(@PathVariable String rateSetId)
+	public Boolean getRateSetSummary(@PathVariable String rateSetId,
+			@RequestParam(value = "org_id", required = false) String orgId,
+			@RequestParam(value = "amendment_id", required = false) String status )
 	{
 		return false;
 	}
 
 	@PostMapping(value = "/rate-sets/{id}/save-as-draft", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
-	public Boolean saveRateSetAsDraft(@PathVariable String id, @RequestBody AmendmentVo amendmentVo)
+	public Boolean saveRateSetAsDraft(@PathVariable String id, @RequestBody AmendmentVo amendmentVo) throws Exception
 	{
-		return false;
+		RateSet rateSet = rateSetService.getById(id);
+		if(rateSet ==null)
+		{
+			throw new ResourceNotFoundException("RateSet is not available:"+id);
+		}
+		
+		Amendment amendment = AmendmentConverter.convertToAmendment(amendmentVo);
+		amendment.setStatus(AppConstants.AMENDMENT_DRAFT);
+		amendment.setRateset(rateSet);
+		amendmentService.create(amendment);
+		
+		return true;
 	}
 
 	@PostMapping(value = "/rate-sets/{id}/submit-for-approval", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
-	public Boolean submitRateSetForApproval(@PathVariable String id, @RequestBody AmendmentVo amendmentVo)
+	public Boolean submitRateSetForApproval(@PathVariable String id, @RequestBody AmendmentVo amendmentVo) throws Exception
 	{
-		return false;
+		RateSet rateSet = rateSetService.getById(id);
+		if(rateSet ==null)
+		{
+			throw new ResourceNotFoundException("RateSet is not available:"+id);
+		}
+		
+		Amendment amendment = AmendmentConverter.convertToAmendment(amendmentVo);
+		amendment.setStatus(AppConstants.AMENDMENT_ACTION_APPROVED);
+		amendment.setRateset(rateSet);
+		amendmentService.create(amendment);
+		
+		return true;
 	}
 
 	@PostMapping(value = "/rate-sets/{id}/approve-rates", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})

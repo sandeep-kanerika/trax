@@ -44,7 +44,7 @@ public class RateColumnController
 		}
 	}
 
-	@GetMapping("/{id}")
+	@GetMapping("/rate-column/{id}")
 	public ResponseEntity<RateColumn> getRateColumn(@PathVariable String id)
 	{
 		log.info("***************Get Rate Column(GETREQUEST) ");
@@ -75,7 +75,7 @@ public class RateColumnController
 		return new ResponseEntity<>(returnStatus);
 	}
 
-	@PutMapping(consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
+	@PutMapping(value="/rate-column", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<RateColumn> updateRateColumn(@RequestBody RateColumnVo rateColumnVo) throws Exception
 	{
 		RateColumn rateColumn = RateColumnConverter.convertToRateColumn(rateColumnVo);
@@ -83,7 +83,7 @@ public class RateColumnController
 		return new ResponseEntity<RateColumn>(rateColumnService.update(rateColumn), HttpStatus.OK);
 	}
 
-	@DeleteMapping(value = "/{id}")
+	@DeleteMapping(value = "/rate-column/{id}")
 	public ResponseEntity<RateColumn> deleteColumnValidations(@PathVariable String id)
 	{
 

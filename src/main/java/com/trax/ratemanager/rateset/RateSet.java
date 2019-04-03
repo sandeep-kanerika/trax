@@ -46,8 +46,10 @@ public class RateSet
 	private Integer status;
 	private String buyerOrgId;
 	private String sellerOrgId;
+	
 	@NotEmpty(message="RateSet name is required!")
 	private String name;
+	
 	private String region;
 	private String mode;
 
@@ -70,13 +72,18 @@ public class RateSet
 	private Date effectiveDateThru;
 
 	private String tableHash;
+	
+	@JsonFormat(pattern = AppConstants.DEFAULT_DATE_FORMAT)
+	private String earliestExpirationDate;
+	private String buyerOrgName;
+	private String sellerOrgName;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	@JoinColumn(name = "rateSetId")
 	private List<RateTable> tables;
 
 	@NotFound(action = NotFoundAction.IGNORE)
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	@JoinColumn(name = "rateSetId")
 	private List<Amendment> amendments;
 

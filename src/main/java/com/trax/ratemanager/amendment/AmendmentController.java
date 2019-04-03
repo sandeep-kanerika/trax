@@ -1,5 +1,7 @@
 package com.trax.ratemanager.amendment;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trax.ratemanager.exception.ResourceNotFoundException;
+import com.trax.ratemanager.raterow.RateRowVo;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -113,6 +116,9 @@ public class AmendmentController
 	{
 		log.info("**************Save Draft Amendment(PostRequest) ::::");
 		log.info("***************AmendmentsValue Object ::::" + amendmentWithRateRows);
+		Amendment amendment = amendmentWithRateRows.getAmendment();
+		List<RateRowVo> rateRows = amendmentWithRateRows.getRateRows();
+		
 		return null;
 		// some response , need to be implemented.
 	}
