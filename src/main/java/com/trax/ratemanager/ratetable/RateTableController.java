@@ -43,7 +43,7 @@ public class RateTableController
 		
 		try
 		{
-			existingRateSet.getTables().add(rateTable);
+//			existingRateSet.getTables().add(rateTable);
 			rateSetsService.create(existingRateSet);
 			return ResponseEntity.ok(existingRateSet);
 		}

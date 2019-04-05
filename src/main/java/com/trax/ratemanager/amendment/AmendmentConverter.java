@@ -1,8 +1,5 @@
 package com.trax.ratemanager.amendment;
 
-import com.trax.ratemanager.orgnization.Organization;
-import com.trax.ratemanager.orgnization.OrganizationType;
-
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -18,11 +15,10 @@ public class AmendmentConverter
 			log.info("***************Amendment id in convertor ::::" + amendmentVo.getId());
 
 			amendment.setId(amendmentVo.getId());
-
-			amendment.setBuyerOrg(new Organization(amendmentVo.getBuyerOrgId(), amendmentVo.getBuyerOrgName(), OrganizationType.BUYER));
+			amendment.setRatesetId(amendmentVo.getRatesetId());
+			amendment.setBuyerOrgId(amendmentVo.getBuyerOrgId());
+			amendment.setSellerOrgId(amendmentVo.getSellerOrgId());
 			amendment.setStatus(amendmentVo.getStatus());
-			amendment.setSellerOrg(new Organization(amendmentVo.getSellerOrgId(), amendmentVo.getSellerOrgName(), OrganizationType.SELLER));
-
 			amendment.setDescription(amendmentVo.getDescription());
 			amendment.setLastUpdatedBy(amendmentVo.getLastUpdatedBy());
 			amendment.setRatesetReferenceId(amendmentVo.getRatesetReferenceId());
@@ -52,7 +48,6 @@ public class AmendmentConverter
 
 			log.info("***************Amendment Object in Amendment Convert :::" + amendment);
 			return amendment;
-
 		}
 		else
 		{

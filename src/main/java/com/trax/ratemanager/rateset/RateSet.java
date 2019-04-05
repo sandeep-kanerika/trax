@@ -71,18 +71,12 @@ public class RateSet
 
 	private String tableHash;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "rateSetId")
-	private List<RateTable> tables;
-
-	@NotFound(action = NotFoundAction.IGNORE)
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "rateSetId")
-	private List<Amendment> amendments;
-
 	private String createdBy;
 	private String reviewedBy;
 	private String lastAssignedBy;
 	private String lastUpdatedBy;
 	private String approvers;
+	
+	@OneToMany
+	private List<RateTable> table;
 }

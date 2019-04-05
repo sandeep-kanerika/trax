@@ -1,5 +1,7 @@
 package com.trax.ratemanager.amendment;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -13,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trax.ratemanager.exception.ResourceNotFoundException;
+import com.trax.ratemanager.rateset.RateSet;
+import com.trax.ratemanager.rateset.RateSetsService;
+import com.trax.ratemaneger.utility.UUIDGenerator;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,15 +30,23 @@ public class AmendmentController
 {
 
 	@Autowired
-	AmendmentService amendmentService;
+	private AmendmentService amendmentService;
+
+	@Autowired
+	private RateSetsService rateSetService;
 
 	@PostMapping(path = "/amendments", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<Object> createAmandments(@RequestBody AmendmentVo amendmentVo) throws Exception
 	{
-
 		log.info("***************Create Amendments(PostRequest) ");
 		log.info("***************AmendmentsValue Object ::::" + amendmentVo);
-
+		String rateSetId = amendmentVo.getRatesetId();
+		System.out.println("rateSetId" + rateSetId);
+		RateSet rateSet = rateSetService.getById(rateSetId);
+		if (rateSet == null)
+		{
+			throw new ResourceNotFoundException("Rase Set is not found with id " + rateSetId);
+		}
 		Amendment amendment = AmendmentConverter.convertToAmendment(amendmentVo);
 		log.info("***************Amendments Object After VO--to-->BO ::::" + amendment);
 		Amendment createdAmendment = null;

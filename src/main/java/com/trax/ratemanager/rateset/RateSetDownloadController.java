@@ -11,7 +11,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.extern.slf4j.Slf4j;
@@ -41,10 +40,18 @@ public class RateSetDownloadController
 	}
 
 	@GetMapping("/downloads/rate-sets/{rateSetId}/rate-tables/{tableId}")
-	public ResponseEntity<RateSet> getRateSetsByTables(@PathVariable String rateSetId, @PathVariable String tableId)
+	public ResponseEntity<InputStreamResource> getRateSetsByTables(@PathVariable String rateSetId, @PathVariable String tableId) throws IOException
 	{
-		LOGGER.info("getRateSets invoked :::::-------------- " + rateSetId);
+		LOGGER.info("getRateSets with table invoked :::::-------------- " + rateSetId + "and ratetable id is " + tableId);
 		// get rateset and tables then convert into excel and return
-		return null;
+
+		log.info("getRateSets download invoked :::::-------------- " + rateSetId);
+		ByteArrayInputStream in = rateSetsSer.getRateSetAndTableInExcelFormat(rateSetId, tableId);
+
+		HttpHeaders headers = new HttpHeaders();
+		String attachment = "attachment; filename=rateset_" + rateSetId + ".xlsx";
+		headers.add("Content-Disposition", attachment);
+
+		return ResponseEntity.ok().headers(headers).body(new InputStreamResource(in));
 	}
 }

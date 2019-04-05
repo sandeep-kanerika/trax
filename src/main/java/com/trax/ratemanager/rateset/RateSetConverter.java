@@ -82,7 +82,7 @@ public class RateSetConverter
 				table.setRateSetId(rateSet.getId());
 				rateTables.add(table);
 			}
-			rateSet.setTables(rateTables);
+//			rateSet.setTables(rateTables);
 
 			rateSet.setCreatedBy(rateSetVo.getCreatedBy());
 			rateSet.setLastUpdatedBy(rateSetVo.getLastUpdatedBy());
